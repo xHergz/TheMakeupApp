@@ -1,4 +1,4 @@
-# TheMakeupApp :kiss:
+# TheMakeupApp :lips:
 Capstone project for Software Engineering Technology by Justin and Keith.
 ## What is it?
 The Makeup Application is a web app that will be used by makeup artists to create a dedicated portfolio and have a platform to provide their professional services. Artists will be able to sign up with information about the type of makeup services they provide and display a gallery of previous work to be found by potential customers. Artists will be able to provide 3 different types of service...
