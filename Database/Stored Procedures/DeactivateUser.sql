@@ -19,6 +19,8 @@ BEGIN
         WHERE
             User_Id = _userId;
 
+        CALL LogUserDeactivation(_sessionKey);
+        
         SET result = 0;
     END IF;
 

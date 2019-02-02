@@ -24,6 +24,8 @@ BEGIN
     WHERE
         Session_Id = sessionId;
 
+    CALL LogSessionDeactivation(sessionId);
+    
     SET result = 0;
 
     SELECT
