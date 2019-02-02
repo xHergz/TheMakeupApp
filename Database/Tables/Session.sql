@@ -1,0 +1,12 @@
+CREATE TABLE Session
+(
+    Session_Id INT NOT NULL AUTO_INCREMENT,
+    User_Id INT NOT NULL,
+    Session_Key VARCHAR(256) NOT NULL,
+    Created DATETIME NOT NULL,
+    Expires DATETIME,
+    Ip_Address VARCHAR(45) NOT NULL,
+    Active BOOLEAN NOT NULL DEFAULT TRUE,
+    PRIMARY KEY(Session_Id),
+    FOREIGN KEY(User_Id) REFERENCES User(User_Id)
+);
