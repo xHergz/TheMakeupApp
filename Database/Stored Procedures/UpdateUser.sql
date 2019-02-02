@@ -53,22 +53,27 @@ BEGIN
         -- Check if each value has changed or is null to determine if it needs to be updates
         IF (currentEmail != _email AND _email IS NOT NULL) THEN
             SET updateEmail = TRUE;
+            CALL LogUserUpdate(_sessionKey, 'Email', currentEmail, _email);
         END IF;
 
         IF (_passwordHash IS NOT NULL) THEN
             SET updatePassword = TRUE;
+            CALL LogUserUpdate(_sessionKey, 'Password_Hash', '(Redacted)', '(Redacted)');
         END IF;
 
         IF (currentDisplayName != _displayName AND _displayName IS NOT NULL) THEN
             SET updateDisplayName = TRUE;
+            CALL LogUserUpdate(_sessionKey, 'Display_Name', currentDisplayName, _displayName);
         END IF;
 
         IF (currentFirstName != _firstName AND _firstName IS NOT NULL) THEN
             SET updateFirstName = TRUE;
+            CALL LogUserUpdate(_sessionKey, 'First_Name', currentFirstName, _firstName);
         END IF;
 
         IF (currentLastName != _lastName AND _lastName IS NOT NULL) THEN
             SET updateLastName = TRUE;
+            CALL LogUserUpdate(_sessionKey, 'Last_Name', currentLastName, _lastName);
         END IF;
 
         -- Update the user info

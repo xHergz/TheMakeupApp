@@ -8,6 +8,7 @@ BEGIN
     DECLARE result SMALLINT;
     DECLARE defaultDaysUntilSessionExpires SMALLINT;
     DECLARE newSessionKey VARCHAR(256);
+    DECLARE newSessionId INT;
 
     -- Get the config value for session expiry
     SELECT
@@ -23,6 +24,10 @@ BEGIN
     SET newSessionKey = UUID();
     INSERT INTO Session (User_Id, Session_Key, Created, Expires, Ip_Address) VALUES
     (_userId, newSessionKey, CURRENT_TIMESTAMP, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL defaultDaysUntilSessionExpires DAY), _ipAddress);
+
+    SET newSessionId = LAST_INSERT_ID();
+    CALL LogSessionCreation(newSessionId);
+    
     SET result = 0;
 
     SELECT

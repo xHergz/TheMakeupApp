@@ -15,9 +15,14 @@ REM Create the Tables
 call:runMySqlFile "./Tables/SystemConfiguration.sql"
 call:runMySqlFile "./Tables/User.sql"
 call:runMySqlFile "./Tables/Session.sql"
+call:runMySqlFile "./Tables/SessionAction.sql"
+call:runMySqlFile "./Tables/SessionLog.sql"
+call:runMySqlFile "./Tables/UserAction.sql"
+call:runMySqlFile "./Tables/UserLog.sql"
 
 REM Create the Views
-REM call:runMySqlFile "./Views/View.sql"
+call:runMySqlFile "./Views/FullSessionLog.sql"
+call:runMySqlFile "./Views/FullUserLog.sql"
 
 REM Create the Functions
 call:runMySqlFile "./Functions/IsUserEmailAvailable.sql"
@@ -25,14 +30,21 @@ call:runMySqlFile "./Functions/IsUserDisplayNameAvailable.sql"
 call:runMySqlFile "./Functions/DoesSessionOwnUser.sql"
 
 REM Create the Stored Procedures
+call:runMySqlFile "./Stored Procedures/LogSessionCreation.sql"
+call:runMySqlFile "./Stored Procedures/LogSessionDeactivation.sql"
+call:runMySqlFile "./Stored Procedures/CreateSession.sql"
+call:runMySqlFile "./Stored Procedures/DeactivateSession.sql"
+call:runMySqlFile "./Stored Procedures/LogUserCreation.sql"
+call:runMySqlFile "./Stored Procedures/LogUserUpdate.sql"
+call:runMySqlFile "./Stored Procedures/LogUserDeactivation.sql"
 call:runMySqlFile "./Stored Procedures/CreateUser.sql"
 call:runMySqlFile "./Stored Procedures/UpdateUser.sql"
 call:runMySqlFile "./Stored Procedures/DeactivateUser.sql"
-call:runMySqlFile "./Stored Procedures/CreateSession.sql"
-call:runMySqlFile "./Stored Procedures/DeactivateSession.sql"
 
 REM Insert the initial data
 call:runMySqlFile "./Data/SystemConfigurationData.sql"
+call:runMySqlFile "./Data/UserActionData.sql"
+call:runMySqlFile "./Data/SessionActionData.sql"
 
 ECHO Press any key to close...
 SET /p closeWindow=
