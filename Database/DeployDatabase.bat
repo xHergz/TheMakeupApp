@@ -12,19 +12,27 @@ REM Create the database
 call:runMySqlCommand "CREATE DATABASE IF NOT EXISTS %databaseName%;"
 
 REM Create the Tables
-REM call:runMySqlFile "./Tables/Table.sql"
+call:runMySqlFile "./Tables/SystemConfiguration.sql"
+call:runMySqlFile "./Tables/User.sql"
+call:runMySqlFile "./Tables/Session.sql"
 
 REM Create the Views
 REM call:runMySqlFile "./Views/View.sql"
 
 REM Create the Functions
-REM cal:runMySqlFile "./Functions/Function.sql"
+call:runMySqlFile "./Functions/IsUserEmailAvailable.sql"
+call:runMySqlFile "./Functions/IsUserDisplayNameAvailable.sql"
+call:runMySqlFile "./Functions/DoesSessionOwnUser.sql"
 
 REM Create the Stored Procedures
-REM call:runMySqlFile "./Stored Procedures/StoredProcedure.sql"
+call:runMySqlFile "./Stored Procedures/CreateUser.sql"
+call:runMySqlFile "./Stored Procedures/UpdateUser.sql"
+call:runMySqlFile "./Stored Procedures/DeactivateUser.sql"
+call:runMySqlFile "./Stored Procedures/CreateSession.sql"
+call:runMySqlFile "./Stored Procedures/DeactivateSession.sql"
 
 REM Insert the initial data
-REM call:runMySqlFile "./Data/Data.sql"
+call:runMySqlFile "./Data/SystemConfigurationData.sql"
 
 ECHO Press any key to close...
 SET /p closeWindow=
