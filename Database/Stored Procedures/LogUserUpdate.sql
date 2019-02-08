@@ -7,7 +7,6 @@ CREATE PROCEDURE LogUserUpdate
     IN _newValue VARCHAR(256)
 )
 BEGIN
-    DECLARE result SMALLINT DEFAULT 0;
     DECLARE userUpdateAction SMALLINT DEFAULT 2;
     DECLARE sessionId INT;
 
@@ -22,9 +21,6 @@ BEGIN
 
     INSERT INTO User_Log (Session_Id, User_Action_Id, Timestamp, Message) VALUES
     (sessionId, userUpdateAction, CURRENT_TIMESTAMP, CONCAT('"', _columnName, '" has been changed from "', _oldValue, '" to "', _newValue, '".'));
-
-    SELECT
-        result AS Result;
 END
 $$
 DELIMITER ;

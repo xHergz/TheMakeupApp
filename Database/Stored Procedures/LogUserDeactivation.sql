@@ -4,7 +4,6 @@ CREATE PROCEDURE LogUserDeactivation
     IN _sessionKey INT
 )
 BEGIN
-    DECLARE result SMALLINT DEFAULT 0;
     DECLARE userDeactivateAction SMALLINT DEFAULT 3;
     DECLARE sessionId INT;
 
@@ -19,9 +18,6 @@ BEGIN
 
     INSERT INTO User_Log (Session_Id, User_Action_Id, Timestamp, Message) VALUES
     (sessionId, userDeactivateAction, CURRENT_TIMESTAMP, 'User deactivated.');
-
-    SELECT
-        result AS Result;
 END
 $$
 DELIMITER ;

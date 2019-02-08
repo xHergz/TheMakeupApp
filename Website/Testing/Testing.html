@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>Testing - The Makeup App</title>
+    </head>
+    <body>
+        <div class="test-case">
+            <h3>Sign Invalid Email</h3>
+            <form method="post" action="http://themakeupapp.localhost/signup">
+                <b>Email:</b><br>
+                <input type="text" name="email" value="test" hidden><br>
+                <b>Password:</b><br>
+                <input type="password" name="password" value="pass" hidden><br>
+                <b>Confirm Password:</b><br>
+                <input type="password" name="confirmPassword" value="asdfg" hidden><br>
+                <b>Display Name:</b><br>
+                <input type="text" name="displayName" value="Test!@#$" hidden><br>
+                <b>First Name:</b><br>
+                <input type="text" name="firstName" value="" hidden><br>
+                <b>Last Name:</b><br>
+                <input type="text" name="lastName" value="waaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaytoolonggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg" hidden><br><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        
+    </body>
+</html>
