@@ -11,6 +11,7 @@
     define("LAST_NAME_INVALID_MESSAGE", "Last name is invalid");
     define("EMAIL_UNAVAILABLE_MESSAGE", "Email Unavailable");
     define("DISPLAY_NAME_UNAVAILABLE_MESSAGE", "Display Name Unavailable");
+    define("EMAIL_DOES_NOT_EXIST_MESSAGE", "Email Does Not Exist");
 
     class Errors {
         public const DATABASE_INITIALIZATION_ERROR = -2;
@@ -24,6 +25,7 @@
         public const LAST_NAME_INVALID = 16;
         public const EMAIL_UNAVAILABLE = 1001;
         public const DISPLAY_NAME_UNAVAILABLE = 1002;
+        public const EMAIL_DOES_NOT_EXIST = 1003;
 
         public static function GetErrorMessage($errorCode) {
             switch($errorCode) {
@@ -49,6 +51,8 @@
                     return self::ConstructMessage($errorCode, EMAIL_UNAVAILABLE_MESSAGE);
                 case self::DISPLAY_NAME_UNAVAILABLE:
                     return self::ConstructMessage($errorCode, DISPLAY_NAME_UNAVAILABLE_MESSAGE);
+                case self::EMAIL_DOES_NOT_EXIST:
+                    return self::ConstructMessage($errorCode, EMAIL_DOES_NOT_EXIST_MESSAGE);
                 default:
                     return self::ConstructMessage($errorCode, UNKNOWN_ERROR_MESSAGE);
             }   

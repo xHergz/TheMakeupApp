@@ -2,3 +2,4 @@ RewriteEngine On
 RewriteRule ^/?$ /pages/TheMakeupApp.php [NC,L]
 RewriteRule ^signup?$ /pages/SignUp.php [NC,L]
 RewriteRule ^logout?$ /pages/Logout.php [NC,L]
+RewriteRule ^login?$ /pages/Login.php [NC,L]
