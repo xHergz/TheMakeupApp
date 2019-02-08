@@ -1,27 +1,41 @@
 <?php
+    require '../../private/Api/Common/Utilities.php';
+    require '../../private/Api/Data/Errors.php';
+    require '../../private/Api/Data/User.php';
     require '../../private/Api/DataAccessLayer/UserDal.php';
+    
 
+    $user = new User();
     $errorList = array();
 
-    if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirmPassword"]) && isset($_POST["displayName"])
-        && isset($_POST["firstName"]) && isset($_POST["lastName"])) {
-        $email = $_POST["email"];
-        $password = $_POST["password"];
-        $confirmPassword = $_POST["confirmPassword"];
-        $displayName = $_POST["displayName"];
-        $firstName = $_POST["firstName"];
-        $lastName = $_POST["lastName"];
+    if ($user->IsSignUpInfoAvailable()) {
+        $user->GetSignUpInfo();
 
-        if ($password == $confirmPassword) {
+        if ($user->PasswordIsConfirmed()) {
             $userDal = new UserDal();
             if($userDal->Initialize()){
-                $createUserResponse = $userDal->CreateUser($email, $password, $displayName, $firstName, $lastName);
+                // Add the user to the db
+                $passwordHash = password_hash($user->Password, PASSWORD_DEFAULT);
+                $createUserResponse = $userDal->CreateUser($user->Email, $passwordHash, $user->DisplayName, $user->FirstName, $user->LastName);
                 var_dump($createUserResponse);
+                if ($createUserResponse['Result'] == Errors::SUCCESS) {
+                    // Create a session for the user and redirect to the homepage
+                    $createSessionResponse = $userDal->CreateSession($createUserResponse['New_User_Id'], GetClientIp());
+                    var_dump($createSessionResponse);
+                    if ($createSessionResponse['Result'] == Errors::SUCCESS) {
+                        SetSessionKey($createSessionResponse['New_Session_Key']);
+                        Redirect('/');
+                    }
+                }
+                else {
+                    array_push($errorList, Errors::GetErrorMessage($createUserResponse['Result']));
+                }
             }
-            else{
+            else {
                 array_push($errorList, "Could not initialize the database connection.");
             }
-        } else {
+        }
+        else {
             array_push($errorList, "Passwords don't match.");
         }
     }

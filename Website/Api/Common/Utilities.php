@@ -34,4 +34,12 @@
         }
         return $_COOKIE[SessionCookie];
     }
+
+    function SetSessionKey($sessionKey) {
+        setcookie(SessionCookie, $sessionKey, time()+86400, "/");
+    }
+
+    function Redirect($url) {
+        header('Location: ' . $url, true);
+    }
 ?>

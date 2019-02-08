@@ -1,7 +1,7 @@
 <?php
     require_once __DIR__. "/Utilities.php";    
 
-    define("WindowsLogDirectory", "C:\Program Files\HerWal\TheMakeupApp\Logs");
+    define("WindowsLogDirectory", "C:\\xampp\apache\logs");
     define("LinuxLogDirectory", "/etc/HerWal/TheMakeupApp/Config/DatabaseConnection.config");
     define("FileName", "TheMakeupAppApi");
 
@@ -40,7 +40,7 @@
 
         private static function CheckIfFolderExists() {
             $directory = self::GetDirectory();
-            if(!file_exists($directory)) {
+            if(!file_exists($directory) && is_dir($directory)) {
                 mkdir($directory, 0755, true);
             }
         }

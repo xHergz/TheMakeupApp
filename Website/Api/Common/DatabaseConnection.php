@@ -106,7 +106,7 @@
 			$numberOfParameters = count($parameters);
 			// Get a string of '?' for the parameters
 			$parameterString = $this->CreateParameterString($numberOfParameters);
-			$statement = $this->_mysqlConnection->prepare("CALL {$procedureName}({$parameterString});");
+			$statement = $this->_mysqlConnection->prepare("CALL {$procedureName}({$parameterString});", array(PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL));
 			// Bind the parameters given to the statement
 			for($paramPos = 0; $paramPos < $numberOfParameters; $paramPos++){
 				// Add 1 to the param pos because the statement paramters are 1 indexed
@@ -144,9 +144,13 @@
 			if (!$statement->execute()) {
 				Log::LogError('Failed to execute PDO Statement: '.implode(" | ", $statement->errorInfo()));
 			}
-
+			echo $statement->debugDumpParams() . "<br/>";
+			echo $statement->columnCount() . "<br/>";
+			echo $statement->rowCount() . "<br/>";
 			if ($statement->rowCount() == 1) {
-				return $statement->fetch(PDO::FETCH_ASSOC);
+				$results = $statement->fetch(PDO::FETCH_ASSOC);
+				print_r($this->_mysqlConnection->errorInfo());
+				return $results;
 			}
 			return $statement->fetchAll(PDO::FETCH_ASSOC);
 		}
