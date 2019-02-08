@@ -2,6 +2,7 @@
     require_once __DIR__.'/../Common/DataAccessLayer.php';
 
     define("CreateUser", "CreateUser");
+    define("GetUsersPasswordHash", "GetUsersPasswordHash");
     define("CreateSession", "CreateSession");
     define("DeactivateSession", "DeactivateSession");
     define("LogUserCreation", "LogUserCreation");
@@ -16,6 +17,13 @@
                 new DatabaseParameter($lastName, PDO::PARAM_STR)
             );
             return $this->_connectionInfo->ExecuteStoredProcedureWithStatus(CreateUser, $parameterArray);
+        }
+
+        public function GetUsersPasswordHash($email) {
+            $parameterArray = array(
+                new DatabaseParameter($email, PDO::PARAM_STR)
+            );
+            return $this->_connectionInfo->ExecuteStoredProcedureWithStatus(GetUsersPasswordHash, $parameterArray);
         }
 
         public function CreateSession($userId, $ipAddress) {

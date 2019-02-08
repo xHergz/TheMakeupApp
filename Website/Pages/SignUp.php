@@ -12,7 +12,7 @@
     if ($user->IsSignUpInfoAvailable()) {
         $user->GetSignUpInfo();
 
-        if ($user->IsValid()) {
+        if ($user->IsValidForSignUp()) {
             $userDal = new UserDal();
             if($userDal->Initialize()){
                 // Add the user to the db
@@ -37,7 +37,7 @@
             }
         }
         else {
-            $errorList->AddErrors($user->GetErrors());
+            $errorList->AddErrors($user->GetSignUpErrors());
         }
     }
 ?>

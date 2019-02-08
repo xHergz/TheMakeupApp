@@ -50,11 +50,25 @@
             $this->LastName = $_POST[self::LAST_NAME_INPUT];
         }
 
-        public function IsValid() {
+        public function IsValidForSignUp() {
+            return $this->IsEmailValid() && $this->IsPasswordValid() && $this->IsPasswordConfirmed() && $this->IsDisplayNameValid()
+                && $this->IsFirstNameValid() && $this->IsLastNameValid();
+        }
+
+        public function IsLoginInfoAvailable() {
+            return isset($_POST[self::EMAIL_INPUT]) && isset($_POST[self::PASSWORD_INPUT]);
+        }
+
+        public function GetLoginInfo() {
+            $this->Email = $_POST[self::EMAIL_INPUT];
+            $this->Password = $_POST[self::PASSWORD_INPUT];
+        }
+
+        public function IsValidForLogin() {
             return $this->IsEmailValid();
         }
 
-        public function GetErrors() {
+        public function GetSignUpErrors() {
             $errorCodes = array();
 
             if (!$this->IsEmailValid()) {
@@ -79,6 +93,16 @@
 
             if (!$this->IsLastNameValid()) {
                 array_push($errorCodes, Errors::LAST_NAME_INVALID);
+            }
+
+            return $errorCodes;
+        }
+
+        public function GetLoginErrors() {
+            $errorCodes = array();
+
+            if (!$this->IsEmailValid()) {
+                array_push($errorCodes, Errors::EMAIL_INVALID);
             }
 
             return $errorCodes;
