@@ -3,6 +3,8 @@
 
     define("CreateUser", "CreateUser");
     define("CreateSession", "CreateSession");
+    define("DeactivateSession", "DeactivateSession");
+    define("LogUserCreation", "LogUserCreation");
 
     class UserDal extends DataAccessLayer {
         public function CreateUser($email, $password, $displayName, $firstName, $lastName) {
@@ -22,6 +24,20 @@
                 new DatabaseParameter($ipAddress, PDO::PARAM_STR)
             );
             return $this->_connectionInfo->ExecuteStoredProcedureWithStatus(CreateSession, $parameterArray);
+        }
+
+        public function DeactivateSession($sessionKey) {
+            $parameterArray = array(
+                new DatabaseParameter($sessionKey, PDO::PARAM_STR)
+            );
+            return $this->_connectionInfo->ExecuteStoredProcedureWithStatus(DeactivateSession, $parameterArray);
+        }
+
+        public function LogUserCreation($sessionKey) {
+            $parameterArray = array(
+                new DatabaseParameter($sessionKey, PDO::PARAM_STR)
+            );
+            return $this->_connectionInfo->ExecuteStoredProcedureWithStatus(LogUserCreation, $parameterArray);
         }
     }
 ?>

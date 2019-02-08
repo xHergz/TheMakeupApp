@@ -144,13 +144,8 @@
 			if (!$statement->execute()) {
 				Log::LogError('Failed to execute PDO Statement: '.implode(" | ", $statement->errorInfo()));
 			}
-			echo $statement->debugDumpParams() . "<br/>";
-			echo $statement->columnCount() . "<br/>";
-			echo $statement->rowCount() . "<br/>";
 			if ($statement->rowCount() == 1) {
-				$results = $statement->fetch(PDO::FETCH_ASSOC);
-				print_r($this->_mysqlConnection->errorInfo());
-				return $results;
+				return $statement->fetch(PDO::FETCH_ASSOC);
 			}
 			return $statement->fetchAll(PDO::FETCH_ASSOC);
 		}

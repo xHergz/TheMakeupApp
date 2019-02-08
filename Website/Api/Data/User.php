@@ -1,4 +1,7 @@
 <?php
+    require_once __DIR__.'/../Common/Validation.php';
+    require_once __DIR__.'/Errors.php';
+
     class User {
         public const EMAIL_INPUT = 'email';
 
@@ -47,11 +50,65 @@
             $this->LastName = $_POST[self::LAST_NAME_INPUT];
         }
 
-        public function PasswordIsConfirmed() {
+        public function IsValid() {
+            return $this->IsEmailValid();
+        }
+
+        public function GetErrors() {
+            $errorCodes = array();
+
+            if (!$this->IsEmailValid()) {
+                array_push($errorCodes, Errors::EMAIL_INVALID);
+            }
+
+            if (!$this->IsPasswordValid()) {
+                array_push($errorCodes, Errors::PASSWORD_INVALID);
+            }
+
+            if (!$this->IsPasswordConfirmed()) {
+                array_push($errorCodes, Errors::PASSWORD_NOT_CONFIRMED);
+            }
+
+            if (!$this->IsDisplayNameValid()) {
+                array_push($errorCodes, Errors::DISPLAY_NAME_INVALID);
+            }
+
+            if (!$this->IsFirstNameValid()) {
+                array_push($errorCodes, Errors::FIRST_NAME_INVALID);
+            }
+
+            if (!$this->IsLastNameValid()) {
+                array_push($errorCodes, Errors::LAST_NAME_INVALID);
+            }
+
+            return $errorCodes;
+        }
+
+        private function IsEmailValid() {
+            return Validation::ValidateEmail($this->Email);
+        }
+
+        private function IsPasswordValid() {
+            return Validation::ValidatePassword($this->Password);
+        }
+
+        private function IsPasswordConfirmed() {
             if ($this->Password != null && $this->ConfirmPassword != null && $this->Password == $this->ConfirmPassword) {
                 return true;
             }
             return false;
+        }
+
+        private function IsDisplayNameValid() {
+            return Validation::ValidateDisplayName($this->DisplayName);
+        }
+
+        private function IsFirstNameValid() {
+            return Validation::ValidateName($this->FirstName);
+        }
+
+        private function IsLastNameValid() {
+            return Validation::ValidateName($this->LastName);
         }
     }
 ?>
