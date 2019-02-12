@@ -1,0 +1,14 @@
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #222;
+    color: white;
+}
+
+.site-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}

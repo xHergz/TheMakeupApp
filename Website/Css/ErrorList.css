@@ -2,3 +2,21 @@
     display: flex;
     flex-direction: column;
 }
+
+.error {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: lightpink;
+    border: 1px solid red;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.dismiss-error {
+    font-size: 24px;
+}
+
+.dismiss-error:hover {
+    cursor: pointer;
+}

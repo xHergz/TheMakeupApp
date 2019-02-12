@@ -40,6 +40,7 @@ call:runMySqlFile "./Stored Procedures/LogUserDeactivation.sql"
 call:runMySqlFile "./Stored Procedures/CreateUser.sql"
 call:runMySqlFile "./Stored Procedures/UpdateUser.sql"
 call:runMySqlFile "./Stored Procedures/DeactivateUser.sql"
+call:runMySqlFile "./Stored Procedures/GetUsersPasswordHash.sql"
 
 REM Insert the initial data
 call:runMySqlFile "./Data/SystemConfigurationData.sql"
