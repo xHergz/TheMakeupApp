@@ -62,13 +62,13 @@
                 Password:<br>
                 <input id="passwordInput" type="password" name="password" onchange="isPasswordValid()"><br>
                 Confirm Password:<br>
-                <input type="password" name="confirmPassword" onchange="isPasswordConfirmed()"><br>
+                <input id="confirmPasswordInput" type="password" name="confirmPassword" onchange="isPasswordConfirmed()"><br>
                 Display Name:<br>
-                <input type="text" name="displayName" onchange="isDisplayNameValid()"><br>
+                <input id="displayNameInput" type="text" name="displayName" onchange="isDisplayNameValid()"><br>
                 First Name:<br>
-                <input type="text" name="firstName" onchange="isFirstNameValid()"><br>
+                <input id="firstNameInput"  type="text" name="firstName" onchange="isFirstNameValid()"><br>
                 Last Name:<br>
-                <input type="text" name="lastName" onchange="isLastNameValid()"><br><br>
+                <input id="lastNameInput" type="text" name="lastName" onchange="isLastNameValid()"><br><br>
                 <input type="submit" value="Sign Up">
             </form>
             <div class="existing-user-message">

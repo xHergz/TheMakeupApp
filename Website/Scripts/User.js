@@ -19,6 +19,11 @@ function isPasswordValid() {
     return isInputValid(validatePassword, passwordInput);
 }
 
+function isPasswordEntered() {
+    var passwordInput = document.getElementById("passwordInput");
+    return isInputValid(validateRequiredInput, passwordInput);
+}
+
 function isPasswordConfirmed() {
     var passwordInput = document.getElementById("passwordInput");
     var confirmPasswordInput = document.getElementById("confirmPasswordInput");
@@ -39,7 +44,7 @@ function isDisplayNameValid() {
 
 function isFirstNameValid() {
     var firstNameInput = document.getElementById("firstNameInput");
-    return isInputValid(validateName, lastNameInput);
+    return isInputValid(validateName, firstNameInput);
 }
 
 function isLastNameValid() {
@@ -58,7 +63,7 @@ function submitSignUp() {
 }
 
 function submitLogin() {
-    var formIsValid = isEmailValid();
+    var formIsValid = isEmailValid() && isPasswordEntered();
     if (formIsValid) {
         console.log("Login Submitted");
         return true;

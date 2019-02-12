@@ -36,6 +36,10 @@ function validateName(name) {
     return name !== null && checkLength(name, NAME_MIN_LENGTH, NAME_MAX_LENGTH);
 }
 
+function validateRequiredInput(input) {
+    return input !== null && input.length > 0;
+}
+
 function checkLength(string, min, max) {
     return string.length >= min && string.length <= max;
 }
