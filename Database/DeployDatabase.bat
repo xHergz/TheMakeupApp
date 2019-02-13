@@ -19,6 +19,9 @@ call:runMySqlFile "./Tables/SessionAction.sql"
 call:runMySqlFile "./Tables/SessionLog.sql"
 call:runMySqlFile "./Tables/UserAction.sql"
 call:runMySqlFile "./Tables/UserLog.sql"
+call:runMySqlFile "./Tables/HairColour.sql"
+call:runMySqlFile "./Tables/EyeColour.sql"
+call:runMySqlFile "./Tables/SkinTone.sql"
 
 REM Create the Views
 call:runMySqlFile "./Views/FullSessionLog.sql"
@@ -46,6 +49,9 @@ REM Insert the initial data
 call:runMySqlFile "./Data/SystemConfigurationData.sql"
 call:runMySqlFile "./Data/UserActionData.sql"
 call:runMySqlFile "./Data/SessionActionData.sql"
+call:runMySqlFile "./Data/HairColourData.sql"
+call:runMySqlFile "./Data/EyeColourData.sql"
+call:runMySqlFile "./Data/SkinToneData.sql"
 
 ECHO Press any key to close...
 SET /p closeWindow=
