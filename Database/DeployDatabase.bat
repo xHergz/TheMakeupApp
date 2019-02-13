@@ -1,12 +1,9 @@
 @ECHO off
 
+SET cnfFile=./TheMakeupApp.cnf
 SET databaseName=TheMakeupApp
-SET mysqlUsername=themakeupapp
-SET hostname=localhost
+ECHO CNF File: %cnfFile%
 ECHO Database: %databaseName%
-ECHO Username: %mysqlUsername%
-SET /p mysqlPassword="Password: "
-cls
 
 REM Create the database
 call:runMySqlCommand "CREATE DATABASE IF NOT EXISTS %databaseName%;"
@@ -22,6 +19,13 @@ call:runMySqlFile "./Tables/UserLog.sql"
 call:runMySqlFile "./Tables/HairColour.sql"
 call:runMySqlFile "./Tables/EyeColour.sql"
 call:runMySqlFile "./Tables/SkinTone.sql"
+call:runMySqlFile "./Tables/ClientProfile.sql"
+call:runMySqlFile "./Tables/HeadshotType.sql"
+call:runMySqlFile "./Tables/ClientHeadshot.sql"
+call:runMySqlFile "./Tables/AllergySensitivity.sql"
+call:runMySqlFile "./Tables/ClientAllergySensitivity.sql"
+call:runMySqlFile "./Tables/ProductPreference.sql"
+call:runMySqlFile "./Tables/ClientProductPreference.sql"
 
 REM Create the Views
 call:runMySqlFile "./Views/FullSessionLog.sql"
@@ -52,6 +56,9 @@ call:runMySqlFile "./Data/SessionActionData.sql"
 call:runMySqlFile "./Data/HairColourData.sql"
 call:runMySqlFile "./Data/EyeColourData.sql"
 call:runMySqlFile "./Data/SkinToneData.sql"
+call:runMySqlFile "./Data/HeadshotTypeData.sql"
+call:runMySqlFile "./Data/AllergySensitivityData.sql"
+call:runMySqlFile "./Data/ProductPreferenceData.sql"
 
 ECHO Press any key to close...
 SET /p closeWindow=
@@ -60,10 +67,10 @@ goto:eof
 
 :runMySqlCommand
 ECHO Executing command: %~1
-mysql -h %hostname% -u %mysqlUsername% -p"%mysqlPassword%" -e "%~1"
+mysql --defaults-extra-file=%cnfFile% -e "%~1"
 goto:eof
 
 :runMySqlFile
 ECHO Running file: %~1
-mysql -h %hostname% -u %mysqlUsername% -p"%mysqlPassword%" %databaseName% < "%~1"
+mysql --defaults-extra-file=%cnfFile% %databaseName% < "%~1"
 goto:eof

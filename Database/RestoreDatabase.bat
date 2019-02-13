@@ -1,15 +1,13 @@
 @ECHO off
 
+SET cnfFile=./TheMakeupApp.cnf
 SET databaseName=TheMakeupApp
-SET mysqlUsername=themakeupapp
-SET hostname=localhost
 SET backupPath=C:\HerWal\TheMakeupApp\Database Backups\
-ECHO Host: %hostname%
+ECHO CNF File: %cnfFile%
 ECHO Database: %databaseName%
-ECHO Username: %mysqlUsername%
 SET /p backupDate="Backup Date (YYYY-MM-DD): "
 
-mysql -u %mysqlUsername% -p -h %hostname% < "%backupPath%%databaseName%_%backupDate%.sql"
+mysql --defaults-extra-file=%cnfFile% < "%backupPath%%databaseName%_%backupDate%.sql"
 
 ECHO Press any key to close...
 SET /p closeWindow=
