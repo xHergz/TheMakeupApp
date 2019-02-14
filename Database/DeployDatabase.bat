@@ -35,6 +35,13 @@ call:runMySqlFile "./Tables/SanitizationQuizSubmission.sql"
 call:runMySqlFile "./Tables/MakeoverType.sql"
 call:runMySqlFile "./Tables/ServiceType.sql"
 call:runMySqlFile "./Tables/ConsultationType.sql"
+call:runMySqlFile "./Tables/ArtistPortfolio.sql"
+call:runMySqlFile "./Tables/ArtistMakeoverOffered.sql"
+call:runMySqlFile "./Tables/ArtistService.sql"
+call:runMySqlFile "./Tables/ArtistServiceConsultation.sql"
+call:runMySqlFile "./Tables/ArtistServiceAddon.sql"
+call:runMySqlFile "./Tables/ArtistQualification.sql"
+call:runMySqlFile "./Tables/ArtistPortfolioPicture.sql"
 
 REM Create the Views
 call:runMySqlFile "./Views/FullSessionLog.sql"
