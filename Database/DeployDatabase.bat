@@ -44,6 +44,10 @@ call:runMySqlFile "./Tables/ArtistQualification.sql"
 call:runMySqlFile "./Tables/ArtistPortfolioPicture.sql"
 call:runMySqlFile "./Tables/MakeoverAppointment.sql"
 call:runMySqlFile "./Tables/MakeoverAppointmentAddon.sql"
+call:runMySqlFile "./Tables/ArtistReview.sql"
+call:runMySqlFile "./Tables/ArtistReviewReply.sql"
+call:runMySqlFile "./Tables/ArtistReviewPictureLink.sql"
+call:runMySqlFile "./Tables/ClientReview.sql"
 
 REM Create the Views
 call:runMySqlFile "./Views/FullSessionLog.sql"
