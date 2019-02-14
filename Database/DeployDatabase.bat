@@ -48,6 +48,8 @@ call:runMySqlFile "./Tables/ArtistReview.sql"
 call:runMySqlFile "./Tables/ArtistReviewReply.sql"
 call:runMySqlFile "./Tables/ArtistReviewPictureLink.sql"
 call:runMySqlFile "./Tables/ClientReview.sql"
+call:runMySqlFile "./Tables/NotificationType.sql"
+call:runMySqlFile "./Tables/Notification.sql"
 
 REM Create the Views
 call:runMySqlFile "./Views/FullSessionLog.sql"
@@ -86,6 +88,7 @@ call:runMySqlFile "./Data/SanitizationQuizAnswerData.sql"
 call:runMySqlFile "./Data/MakeoverTypeData.sql"
 call:runMySqlFile "./Data/ServiceTypeData.sql"
 call:runMySqlFile "./Data/ConsultationTypeData.sql"
+call:runMySqlFile "./Data/NotificationTypeData.sql"
 
 ECHO Press any key to close...
 SET /p closeWindow=
