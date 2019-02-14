@@ -1,0 +1,22 @@
+.active-nav-bar-link > a, .inactive-nav-bar-link > a {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 10px;
+}
+
+.active-nav-bar-link > a:hover, .inactive-nav-bar-link > a:hover {
+    text-decoration: none;
+    background-color: #333;
+}
+
+.active-nav-bar-link > a {
+    color: #FFF;
+    background-color: #333;
+}
+
+.inactive-nav-bar-link > a {
+    color: white;
+}

@@ -14,6 +14,7 @@
         <title>The Makeup App</title>
     </head>
     <body>
-        <a href="/signup">Sign Up</a> | <a href="/login">Login</a> | <a href="/logout">Logout</a>
+        <div id="root" />
+        <script src="/dist/TheMakeupApp.js" type="text/javascript"></script>
     </body>
 </html>

@@ -1,0 +1,32 @@
+.tab-header {
+    display: flex;
+    flex-direction: row;
+    background-color: black;
+}
+
+.active-tab-header-item, .inactive-tab-header-item {
+    flex: 1;
+    padding: 5px;
+}
+
+.active-tab-header-item {
+    color: black;
+    background-color: lightskyblue;
+}
+
+.inactive-tab-header-item {
+    color: white;
+    background-color: black;
+}
+
+.inactive-tab-header-item:hover { 
+    color: lightskyblue;
+    cursor: pointer;
+}
+
+.tab-content {
+    border-top: 5px solid lightskyblue;
+    border-left: 3px solid black;
+    border-right: 3px solid black;
+    border-bottom: 3px solid black;
+}
