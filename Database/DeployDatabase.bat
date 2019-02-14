@@ -26,6 +26,12 @@ call:runMySqlFile "./Tables/AllergySensitivity.sql"
 call:runMySqlFile "./Tables/ClientAllergySensitivity.sql"
 call:runMySqlFile "./Tables/ProductPreference.sql"
 call:runMySqlFile "./Tables/ClientProductPreference.sql"
+call:runMySqlFile "./Tables/ArtistApplication.sql"
+call:runMySqlFile "./Tables/ArtistCredential.sql"
+call:runMySqlFile "./Tables/ExistingPortfolioLink.sql"
+call:runMySqlFile "./Tables/SanitizationQuizQuestion.sql"
+call:runMySqlFile "./Tables/SanitizationQuizAnswer.sql"
+call:runMySqlFile "./Tables/SanitizationQuizSubmission.sql"
 
 REM Create the Views
 call:runMySqlFile "./Views/FullSessionLog.sql"
@@ -59,6 +65,8 @@ call:runMySqlFile "./Data/SkinToneData.sql"
 call:runMySqlFile "./Data/HeadshotTypeData.sql"
 call:runMySqlFile "./Data/AllergySensitivityData.sql"
 call:runMySqlFile "./Data/ProductPreferenceData.sql"
+call:runMySqlFile "./Data/SanitizationQuizQuestionData.sql"
+call:runMySqlFile "./Data/SanitizationQuizAnswerData.sql"
 
 ECHO Press any key to close...
 SET /p closeWindow=
