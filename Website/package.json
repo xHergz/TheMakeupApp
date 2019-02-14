@@ -1,0 +1,51 @@
+{
+  "name": "themakeupapp",
+  "version": "1.0.0",
+  "description": "The React portion of The Makeup App",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack -d -w",
+    "build": "webpack -p",
+    "lint": "eslint ./React/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xHergz/TheMakeupApp.git"
+  },
+  "author": "J. Hergott, K. Wallace",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xHergz/TheMakeupApp/issues"
+  },
+  "homepage": "https://github.com/xHergz/TheMakeupApp#readme",
+  "dependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-free-brands": "^5.0.13",
+    "@fortawesome/fontawesome-free-solid": "^5.0.13",
+    "@fortawesome/react-fontawesome": "^0.1.4",
+    "babel-loader": "^8.0.5",
+    "css-loader": "^2.1.0",
+    "eslint": "^5.13.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.1",
+    "react-bootstrap": "^1.0.0-beta.5",
+    "react-dom": "^16.8.1",
+    "react-redux": "^6.0.0",
+    "react-router-dom": "^4.3.1",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.2",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4"
+  }
+}

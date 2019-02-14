@@ -1,0 +1,12 @@
+.confirmation-buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+.confirmation-separation {
+    flex: 2;
+}
+
+.confirmation-content {
+    padding-bottom: 15px;
+}

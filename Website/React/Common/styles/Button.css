@@ -1,0 +1,30 @@
+.enabled-button, .disabled-button {
+    color: white;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-radius: 5px;
+    border: 2px solid #222;
+    width: 100%;
+}
+
+.enabled-button {
+    background-color: #3b5bb3;
+}
+
+.enabled-button:hover {
+    /*
+        5f7ac4
+        5571bb
+        3d67d5
+    */
+    background-color: #3d67d5;
+    color: white;
+    cursor: pointer;
+    border: 2px solid #222;
+}
+
+.disabled-button {
+    background-color: lightgray;
+}
