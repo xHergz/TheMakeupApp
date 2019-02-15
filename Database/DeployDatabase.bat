@@ -59,6 +59,9 @@ REM Create the Functions
 call:runMySqlFile "./Functions/IsUserEmailAvailable.sql"
 call:runMySqlFile "./Functions/IsUserDisplayNameAvailable.sql"
 call:runMySqlFile "./Functions/DoesSessionOwnUser.sql"
+call:runMySqlFile "./Functions/IsSessionAuthorizedForSession.sql"
+call:runMySqlFile "./Functions/IsSessionKeyValid.sql"
+call:runMySqlFile "./Functions/IsUserArtist.sql"
 
 REM Create the Stored Procedures
 call:runMySqlFile "./Stored Procedures/LogSessionCreation.sql"
@@ -72,6 +75,7 @@ call:runMySqlFile "./Stored Procedures/CreateUser.sql"
 call:runMySqlFile "./Stored Procedures/UpdateUser.sql"
 call:runMySqlFile "./Stored Procedures/DeactivateUser.sql"
 call:runMySqlFile "./Stored Procedures/GetUsersPasswordHash.sql"
+call:runMySqlFile "./Stored Procedures/GetSessionInfo.sql"
 
 REM Insert the initial data
 call:runMySqlFile "./Data/SystemConfigurationData.sql"
