@@ -116,6 +116,22 @@
 			return $this->ExecutePdoStatement($statement);
 		}
 
+		// Execute a function
+		public function ExecuteFunction($functionName, $parameters) {
+			$numberOfParameters = count($parameters);
+			// Get a string of '?' for the parameters
+			$parameterString = $this->CreateParameterString($numberOfParameters);
+			$statement = $this->_mysqlConnection->prepare("SELECT {$functionName}({$parameterString});");
+			// Bind the parameters given to the statement
+			for($paramPos = 0; $paramPos < $numberOfParameters; $paramPos++){
+				// Add 1 to the param pos because the statement paramters are 1 indexed
+				$statement->bindParam($paramPos + 1, $parameters[$paramPos]->Value, $parameters[$paramPos]->Type);
+			}
+			Log::LogInformation('Executing function with parameters: '.$statement->queryString);
+			$response = $this->ExecutePdoStatement($statement);
+			return end($response);
+		}
+
 		// Create a database response object to indicate a general error
 		public function CreateDatabaseErrorResponse() {
 			Log::LogError('Database Error');

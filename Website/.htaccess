@@ -1,4 +1,21 @@
 RewriteEngine On
+
+RewriteCond %{HTTP_HOST} ^[^.]+\.[^.]+$
+RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [L]
+
+# Redirect any api.<url>/<endpoint> to the /pages/ApiEntry.php file with the appropriate end point argument
+RewriteCond %{HTTP_HOST} ^api\.(.*)$
+RewriteCond %{REQUEST_URI} !^/pages/
+RewriteCond %{REQUEST_URI} ^\/([\w|-][^\/]+)$
+RewriteRule ^(.*)$ /pages/ApiEntry.php?endpoint=$1 [QSA,L]
+
+#  Redirect any api.<url>/<endpoint>/<unique identifier> /pages/ApiEntry.php file with the appropriate end point argument
+RewriteCond %{HTTP_HOST} ^api\.(.*)$
+RewriteCond %{REQUEST_URI} !^/pages/
+RewriteRule ^([^\/]+)/([^\/]+)$ /pages/ApiEntry.php?endpoint=$1&uid=$2 [L]
+
+# Redirection of pages
+RewriteCond %{HTTP_HOST} ^www\.(.*)$
 RewriteRule ^/?$ /pages/TheMakeupApp.php [NC,L]
 RewriteRule ^signup?$ /pages/SignUp.php [NC,L]
 RewriteRule ^logout?$ /pages/Logout.php [NC,L]
