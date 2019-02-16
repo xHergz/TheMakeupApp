@@ -25,6 +25,7 @@
     "@fortawesome/fontawesome": "^1.1.8",
     "@fortawesome/fontawesome-free-brands": "^5.0.13",
     "@fortawesome/fontawesome-free-solid": "^5.0.13",
+    "@fortawesome/fontawesome-svg-core": "^1.2.15",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "babel-loader": "^8.0.5",
     "css-loader": "^2.1.0",
@@ -45,7 +46,6 @@
   "devDependencies": {
     "@babel/plugin-proposal-object-rest-spread": "^7.3.2",
     "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4"
   }
 }

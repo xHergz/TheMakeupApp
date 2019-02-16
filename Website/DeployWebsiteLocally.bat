@@ -15,3 +15,4 @@ IF %ERRORLEVEL%==0 (
     echo NPM Build Failed. Website Not Deployed.
 )
 
+pause

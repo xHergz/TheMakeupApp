@@ -1,11 +1,15 @@
-
+import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 import {
     Switch,
     Route,
     withRouter
 } from 'react-router-dom';
 
+import { getCurrentSessionInfo } from '../actions/SessionActions';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 import PAGES from '../constants/Pages';
 import Account from './Account';
 import AppointmentInfo from './AppointmentInfo';
@@ -23,15 +27,24 @@ import NotFound from './NotFound';
 import Notifications from './Notifications';
 import Schedule from './Schedule';
 
+import '../../../Css/TheMakeupApp.css';
+
 class TheMakeupApp extends React.Component {
     static test() {
         return <h1>Basic React App</h1>;
     }
 
+    componentDidMount() {
+        this.props.getCurrentSessionInfo();
+    }
+
     render() {
         return (
             <div>
-                <div className="themakeupapp-content">
+                <Header
+                    displayName={this.props.currentSession.displayName}
+                />
+                <div className="page-content">
                     <Switch>
                         <Route exact path="/" component={HomePage} />
                         <Route exact path={PAGES.ACCOUNT.LINK} component={Account} />
@@ -50,9 +63,31 @@ class TheMakeupApp extends React.Component {
                         <Route component={NotFound} />
                     </Switch>
                 </div>
+                <Footer />
             </div>
         );
     }
 }
 
-export default TheMakeupApp;
+function mapStateToProps(state) {
+    return {
+        currentSession: state.sessionReducer.currentSession
+    };
+}
+
+TheMakeupApp.propTypes = {
+    getCurrentSessionInfo: PropTypes.func.isRequired,
+    currentSession: PropTypes.shape({
+        displayName: PropTypes.string.isRequired,
+        firstName: PropTypes.string.isRequired,
+        lastName: PropTypes.string.isRequired,
+        isArtist: PropTypes.bool.isRequired
+    }).isRequired
+};
+
+export default withRouter(connect(
+    mapStateToProps,
+    {
+        getCurrentSessionInfo
+    }
+)(TheMakeupApp));

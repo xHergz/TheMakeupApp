@@ -4,6 +4,42 @@ body {
     font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
+h1 {
+    font-size: 36px;
+    margin: 0px;
+    font-weight: bolder;
+}
+
+h2 {
+    font-size: 36px;
+    margin: 0px;
+    font-weight: normal;
+}
+
+h3 {
+    font-size: 24px;
+    margin: 0px;
+    font-weight: bolder;
+}
+
+h4 {
+    font-size: 24px;
+    margin: 0px;
+    font-weight: normal;
+}
+
+h5 {
+    font-size: 16px;
+    margin: 0px;
+    font-weight: bolder;
+}
+
+h6 {
+    font-size: 16px;
+    margin: 0px;
+    font-weight: normal;
+}
+
 .page-content {
     background: #EEE;
     padding: 10px;

@@ -1,22 +1,81 @@
+.active-nav-bar-link, .inactive-nav-bar-link  {
+    flex: 1;
+}
+
 .active-nav-bar-link > a, .inactive-nav-bar-link > a {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    text-decoration: none;
     padding: 10px;
 }
 
-.active-nav-bar-link > a:hover, .inactive-nav-bar-link > a:hover {
-    text-decoration: none;
-    background-color: #333;
+.active-nav-bar-link > a > h5, .inactive-nav-bar-link > a > h5 {
+    padding: 0px 10px;
 }
 
-.active-nav-bar-link > a {
-    color: #FFF;
-    background-color: #333;
+.active-nav-bar-link > a:hover, .inactive-nav-bar-link > a:hover {
+    cursor: pointer;
+}
+
+.active-nav-bar-link:nth-child(1) > a, .inactive-nav-bar-link:nth-child(1) > a:hover {
+    background-color: #FFE3CC;
+}
+
+.active-nav-bar-link:nth-child(2) > a, .inactive-nav-bar-link:nth-child(2) > a:hover {
+    background-color: #F2CFB3; /* FFE3CC - D1419 */
+}
+
+.active-nav-bar-link:nth-child(3) > a, .inactive-nav-bar-link:nth-child(3) > a:hover {
+    background-color: #E5BB99; /* F2CFB3 - D141A */
+}
+
+.active-nav-bar-link:nth-child(4) > a, .inactive-nav-bar-link:nth-child(4) > a:hover {
+    background-color: #D9A880; /* E5BB99 - C1319 */
+}
+
+.active-nav-bar-link:nth-child(5) > a, .inactive-nav-bar-link:nth-child(5) > a:hover {
+    background-color: #CC9466; /* D9A880 - D141A */
+}
+
+.active-nav-bar-link:nth-child(6) > a, .inactive-nav-bar-link:nth-child(6) > a:hover {
+    background-color: #BF804C; /* CC9466 - D141A */
+}
+
+.active-nav-bar-link > a, .inactive-nav-bar-link > a:hover {
+    color: #000;
 }
 
 .inactive-nav-bar-link > a {
     color: white;
+}
+
+
+/* Smallest devices (phones, Below 600px) */
+@media only screen and (max-width: 599px) {
+    
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .active-nav-bar-link > a, .inactive-nav-bar-link > a {
+        padding: 0px;
+        height: 100%;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    
 }

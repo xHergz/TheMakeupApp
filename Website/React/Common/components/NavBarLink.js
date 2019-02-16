@@ -1,3 +1,5 @@
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -12,6 +14,15 @@ class NavBarLink extends React.Component {
         return 'inactive-nav-bar-link';
     }
 
+    renderIcon() {
+        if (this.props.icon === null) {
+            return null;
+        }
+        return (
+            <FontAwesomeIcon icon={this.props.icon} size="md" />
+        );
+    }
+
     render() {
         return (
             <div className={NavBarLink.getClassName(this.props.isActive)}>
@@ -19,7 +30,8 @@ class NavBarLink extends React.Component {
                     href={this.props.linkTo}
                     className="plain-link"
                 >
-                    <h6>{this.props.label}</h6>
+                    {this.renderIcon()}
+                    <h5>{this.props.label}</h5>
                 </a>
             </div>
         );
@@ -29,11 +41,13 @@ class NavBarLink extends React.Component {
 NavBarLink.propTypes = {
     linkTo: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
-    isActive: PropTypes.bool
+    isActive: PropTypes.bool,
+    icon: PropTypes.instanceOf(IconDefinition)
 };
 
 NavBarLink.defaultProps = {
-    isActive: false
+    isActive: false,
+    icon: null
 };
 
 export default NavBarLink;

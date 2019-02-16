@@ -34,6 +34,15 @@
         }
 
         public function EncodeResponse($response) {
+            if (is_array($response)) {
+                // Convert all keys with Some_Key case to someKey for javascript
+                $newArray = array();
+                foreach($response as $key => $value) {
+                    $newKey = lcfirst(str_replace("_", "", $key));
+                    $newArray[$newKey] = $value;
+                }
+                return json_encode($newArray, JSON_NUMERIC_CHECK);
+            }
             return json_encode($response, JSON_NUMERIC_CHECK);
         }
     }

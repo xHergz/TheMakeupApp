@@ -1,11 +1,15 @@
 <?php
     require_once "../../private/Api/Common/Utilities.php";
+    require_once "../../private/Api/Data/ErrorList.php";
+    require_once "../../private/Api/Data/Errors.php";
+    require_once '../../private/Api/Helpers/UserMethods.php';
 
+    $errorList = new ErrorList();
     $sessionKey = GetSessionKey();
-    if ($sessionKey == null) {
-        echo "Session Key Not Set";
-    } else {
-        echo "Session Key: ".$sessionKey;
+    $authorizeUserResponse = AuthorizeUser($sessionKey);
+    if ($authorizeUserResponse != Errors::SUCCESS) {
+        $errorList->AddError($authorizeUserResponse);
+        Redirect('/login');
     }
 ?>
 <html>

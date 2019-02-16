@@ -25,49 +25,54 @@ const PAGES = {
         LABEL: 'Find a Book'
     },
     ASAP_MAKEOVER_SEARCH: {
-        KEY: 'NEW_BOOK',
-        LINK: '/books/new',
-        LABEL: 'New Book'
+        KEY: 'ASAP_MAKEOVER_SEARCH',
+        LINK: '/asap-makeover',
+        LABEL: 'ASAP Makeover Search'
     },
     BROWSE_ARTISTS: {
-        KEY: 'BOOK',
-        LINK: '/books/:id',
-        LABEL: 'Book Information'
+        KEY: 'BROWSE_ARTISTS',
+        LINK: '/browse-artists',
+        LABEL: 'Browse Artists'
     },
     CLIENT_PROFILE: {
-        KEY: 'FIND_A_COURSE',
-        LINK: '/courses',
-        LABEL: 'Find a Course'
+        KEY: 'CLIENT_PROFILE',
+        LINK: '/profile/:displayName',
+        LABEL: 'Client Profile'
     },
     CONSULTATION: {
-        KEY: 'NEW_COURSE',
-        LINK: '/courses/new',
-        LABEL: 'New Course'
+        KEY: 'CONSULTATION',
+        LINK: '/consultation/:consultationId',
+        LABEL: 'Consultation'
     },
     FUTURE_APPOINTMENT_SEARCH: {
-        KEY: 'ADD_OFFICIAL_BOOK',
-        LINK: '/official',
-        LABEL: 'Add Official Book'
+        KEY: 'FUTURE_APPOINTMENT_SEARCH',
+        LINK: '/future-appointment',
+        LABEL: 'Future Appointment Search'
     },
     HOME_PAGE: {
-        KEY: 'FIND_AN_AUTHOR',
-        LINK: '/authors',
-        LABEL: 'Find an Author'
+        KEY: 'HOME_PAGE',
+        LINK: '/',
+        LABEL: 'Home'
     },
     INSTANT_CONSULTATION_SEARCH: {
-        KEY: 'NEW_AUTHOR',
-        LINK: '/authors/new',
-        LABEL: 'New Author'
+        KEY: 'INSTANT_CONSULTATION_SEARCH',
+        LINK: '/instant-consultation',
+        LABEL: 'Instant Consultation Search'
+    },
+    LOGOUT: {
+        KEY: 'LOGOUT',
+        LINK: '/logout',
+        LABEL: 'Logout'
     },
     NOTIFICATIONS: {
-        KEY: 'FIND_A_PUBLISHER',
-        LINK: '/publishers',
-        LABEL: 'Find a Publisher'
+        KEY: 'NOTIFICATIONS',
+        LINK: '/notifications',
+        LABEL: 'Notifications'
     },
     SCHEDULE: {
-        KEY: 'NEW_PUBLISHER',
-        LINK: '/publishers/new',
-        LABEL: 'New Publisher'
+        KEY: 'SCHEDULE',
+        LINK: '/schedule',
+        LABEL: 'Schedule'
     },
     NOT_FOUND: {
         KEY: 'NOT_FOUND',
