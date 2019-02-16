@@ -1,11 +1,14 @@
 
+import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 import {
     Switch,
     Route,
     withRouter
 } from 'react-router-dom';
 
+import { getCurrentSessionInfo } from '../actions/SessionActions';
 import PAGES from '../constants/Pages';
 import Account from './Account';
 import AppointmentInfo from './AppointmentInfo';
@@ -26,6 +29,10 @@ import Schedule from './Schedule';
 class TheMakeupApp extends React.Component {
     static test() {
         return <h1>Basic React App</h1>;
+    }
+
+    componentDidMount() {
+        this.props.getCurrentSessionInfo();
     }
 
     render() {
@@ -55,4 +62,17 @@ class TheMakeupApp extends React.Component {
     }
 }
 
-export default TheMakeupApp;
+function mapStateToProps(state) {
+    return { };
+}
+
+TheMakeupApp.propTypes = {
+    getCurrentSessionInfo: PropTypes.func.isRequired
+};
+
+export default withRouter(connect(
+    mapStateToProps,
+    {
+        getCurrentSessionInfo
+    }
+)(TheMakeupApp));
