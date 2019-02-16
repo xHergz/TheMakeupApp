@@ -1,4 +1,3 @@
-
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
@@ -42,7 +41,9 @@ class TheMakeupApp extends React.Component {
     render() {
         return (
             <div>
-                <Header />
+                <Header
+                    displayName={this.props.currentSession.displayName}
+                />
                 <div className="page-content">
                     <Switch>
                         <Route exact path="/" component={HomePage} />
@@ -69,11 +70,19 @@ class TheMakeupApp extends React.Component {
 }
 
 function mapStateToProps(state) {
-    return { };
+    return {
+        currentSession: state.sessionReducer.currentSession
+    };
 }
 
 TheMakeupApp.propTypes = {
-    getCurrentSessionInfo: PropTypes.func.isRequired
+    getCurrentSessionInfo: PropTypes.func.isRequired,
+    currentSession: PropTypes.shape({
+        displayName: PropTypes.string.isRequired,
+        firstName: PropTypes.string.isRequired,
+        lastName: PropTypes.string.isRequired,
+        isArtist: PropTypes.bool.isRequired
+    }).isRequired
 };
 
 export default withRouter(connect(
