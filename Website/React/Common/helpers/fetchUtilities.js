@@ -3,7 +3,7 @@ export function getRequest(url, authenticationToken = '') {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${authenticationToken}`,
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/json'
         }
     });
 }

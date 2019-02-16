@@ -1,8 +1,11 @@
 <?php
     require_once '../../private/Api/Common/ApiUtilities.php';
     require_once '../../private/Api/Common/Log.php';
+    require_once '../../private/Api/Data/Errors.php';
+    require_once '../../private/Api/Data/HttpStatus.php';
     require_once '../../private/Api/DataAccessLayer/UserDal.php';
-    require_once '../../private/Api/EndPoints/SessionEndPoint.php';
+    require_once '../../private/Api/Endpoints/SessionEndPoint.php';
+    require_once '../../private/Api/Helpers/UserMethods.php';
 
     header('Access-Control-Allow-Origin: *');
     //header('Access-Control-Allow-Methods: GET,POST,PUT,DELETE,OPTIONS');
@@ -38,19 +41,19 @@
 
     switch($httpMethod) {
         case 'GET':
-            AuthorizeUser($sessionKey);
+            AuthorizeApiUser($sessionKey);
             $selectedEndpoint->get();
             break;
         case 'POST':
-            AuthorizeUser($sessionKey);
+            AuthorizeApiUser($sessionKey);
             $selectedEndpoint->post();
             break;
         case 'PUT':
-            AuthorizeUser($sessionKey);
+            AuthorizeApiUser($sessionKey);
             $selectedEndpoint->put();
             break;
         case 'DELETE':
-            AuthorizeUser($sessionKey);
+            AuthorizeApiUser($sessionKey);
             $selectedEndpoint->delete();
             break;
         case 'OPTIONS': {
@@ -62,24 +65,19 @@
             BadRequest(501);
     }
 
-    function AuthorizeUser($sessionKey) {
-        if ($sessionKey == null) {
-            Log::LogError('(401) API Request failed because session key is null.');
-            BadRequest(401);
+    function AuthorizeApiUser($sessionKey) {
+        $authorizeUserResponse = AuthorizeUser($sessionKey);
+        if ($authorizeUserResponse != Errors::SUCCESS) {
+            switch($authorizeUserResponse) {
+                case Errors::NO_SESSION_KEY:
+                case Errors::INVALID_SESSION_KEY:
+                    $httpStatus = HttpStatus::NOT_AUTHORIZED;
+                    break;
+                default:
+                    $httpStatus = HttpStatus::INTERNAL_SERVER_ERROR;
+            }
+            Log::LogError('(' . $httpStatus . ') API Request Failed: ' . Errors::GetErrorMessage($authorizeUserResponse));
+            BadRequest($httpStatus);
         }
-
-        $userDal = new UserDal();
-        if (!$userDal->Initialize()) {
-            Log::LogError('(500) API Request failed because database connection could not be initialized.');
-            $userDal->Close();
-            BadRequest(500);
-        }
-
-        if ($userDal->IsSessionKeyValid($sessionKey) != 0) {
-            Log::LogError('(401) API Request failed because session key \'' . $sessionKey . '\' is invalid.');
-            $userDal->Close();
-            BadRequest(401);
-        }
-        $userDal->Close();
     }
 ?>

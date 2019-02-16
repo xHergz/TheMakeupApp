@@ -9,6 +9,8 @@ import {
 } from 'react-router-dom';
 
 import { getCurrentSessionInfo } from '../actions/SessionActions';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 import PAGES from '../constants/Pages';
 import Account from './Account';
 import AppointmentInfo from './AppointmentInfo';
@@ -26,6 +28,8 @@ import NotFound from './NotFound';
 import Notifications from './Notifications';
 import Schedule from './Schedule';
 
+import '../../../Css/TheMakeupApp.css';
+
 class TheMakeupApp extends React.Component {
     static test() {
         return <h1>Basic React App</h1>;
@@ -38,7 +42,8 @@ class TheMakeupApp extends React.Component {
     render() {
         return (
             <div>
-                <div className="themakeupapp-content">
+                <Header />
+                <div className="page-content">
                     <Switch>
                         <Route exact path="/" component={HomePage} />
                         <Route exact path={PAGES.ACCOUNT.LINK} component={Account} />
@@ -57,6 +62,7 @@ class TheMakeupApp extends React.Component {
                         <Route component={NotFound} />
                     </Switch>
                 </div>
+                <Footer />
             </div>
         );
     }

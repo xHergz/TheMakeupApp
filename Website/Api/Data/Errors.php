@@ -9,6 +9,8 @@
     define("DISPLAY_NAME_INVALID_MESSAGE", "Display name is invalid");
     define("FIRST_NAME_INVALID_MESSAGE", "First name is invalid");
     define("LAST_NAME_INVALID_MESSAGE", "Last name is invalid");
+    define("NO_SESSION_KEY_MESSAGE", "No session key set");
+    define("INVALID_SESSION_KEY_MESSAGE", "Session key is invalid");
     define("EMAIL_UNAVAILABLE_MESSAGE", "Email Unavailable");
     define("DISPLAY_NAME_UNAVAILABLE_MESSAGE", "Display Name Unavailable");
     define("EMAIL_DOES_NOT_EXIST_MESSAGE", "Email Does Not Exist");
@@ -23,6 +25,8 @@
         public const DISPLAY_NAME_INVALID = 14;
         public const FIRST_NAME_INVALID = 15;
         public const LAST_NAME_INVALID = 16;
+        public const NO_SESSION_KEY = 21;
+        public const INVALID_SESSION_KEY = 22;
         public const EMAIL_UNAVAILABLE = 1001;
         public const DISPLAY_NAME_UNAVAILABLE = 1002;
         public const EMAIL_DOES_NOT_EXIST = 1003;
@@ -47,6 +51,10 @@
                     return self::ConstructMessage($errorCode, FIRST_NAME_INVALID_MESSAGE);
                 case self::LAST_NAME_INVALID:
                     return self::ConstructMessage($errorCode, LAST_NAME_INVALID_MESSAGE);
+                case self::NO_SESSION_KEY:
+                    return self::ConstructMessage($errorCode, NO_SESSION_KEY_MESSAGE);
+                case self::INVALID_SESSION_KEY:
+                    return self::ConstructMessage($errorCode, INVALID_SESSION_KEY_MESSAGE);
                 case self::EMAIL_UNAVAILABLE:
                     return self::ConstructMessage($errorCode, EMAIL_UNAVAILABLE_MESSAGE);
                 case self::DISPLAY_NAME_UNAVAILABLE:

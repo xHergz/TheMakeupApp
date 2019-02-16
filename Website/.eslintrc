@@ -1,6 +1,7 @@
 {
     "extends": "airbnb",
     "rules": {
+        "arrow-body-style": ["error", "always"],
 		"brace-style": ["error", "stroustrup"],
         "comma-dangle": ["error", "never"],
         "function-paren-newline": ["error", "consistent"],
@@ -12,10 +13,13 @@
             "ObjectPattern": { "multiline": true, "minProperties": 1 },
             "ImportDeclaration": { "multiline": true, "minProperties": 2 }
         }],
-		"react/destructuring-assignment": [<enabled>, "always", { "ignoreClassFields": <boolean> }],
+		"react/destructuring-assignment": [true, "always", { "ignoreClassFields": true }],
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "react/jsx-indent":  ["error", 4],
-        "react/jsx-indent-props": ["error", 4]
+        "react/jsx-indent-props": ["error", 4],
+        "react/jsx-one-expression-per-line": [true, { "allow": "literal" }],
+        "jsx-a11y/click-events-have-key-events": "off",
+        "jsx-a11y/no-static-element-interactions": "off"
     },
     "env": {
         "browser": true
