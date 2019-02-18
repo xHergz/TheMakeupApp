@@ -23,16 +23,6 @@
             $this->_connectionInfo->Close();
         }
 
-        // Get a general error database response object
-        public function GetDatabaseError() {
-            return $this->_connectionInfo->CreateDatabaseErrorResponse();
-        }
-
-        // Get a parameter error database response object
-        public function GetParameterError() {
-            return $this->_connectionInfo->CreateParameterErrorResponse();
-        }
-
         public function EncodeResponse($response) {
             if (is_array($response)) {
                 // Convert all keys with Some_Key case to someKey for javascript

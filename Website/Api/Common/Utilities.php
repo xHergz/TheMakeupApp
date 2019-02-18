@@ -46,4 +46,12 @@
     function Redirect($url) {
         header('Location: ' . $url, true);
     }
+
+    function str_replace_first($find, $replace, $string) {
+        $pos = strpos($string, $find);
+        if ($pos !== false) {
+            return substr_replace($string, $replace, $pos, strlen($find));
+        }
+        return $string;
+    }
 ?>
