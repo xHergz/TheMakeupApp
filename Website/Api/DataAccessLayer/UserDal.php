@@ -81,7 +81,7 @@
                 new DatabaseParameter(Status, PDO::PARAM_STR, '_status', ParameterDirection::OUT)
             );
             $procResponse =  $this->_connectionInfo->ExecuteStoredProcedure(GetSessionInfo, 'SessionDto', $parameterArray);
-            return new GetSessionInfoResponse($procResponse->Outputs[Status], $procResponse->Results);
+            return new GetSessionInfoResponse($procResponse->Outputs[Status], $procResponse->GetSingleRow());
         }
     }
 ?>

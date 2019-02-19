@@ -33,14 +33,12 @@ export function getCurrentSessionInfo() {
                         dispatch(addErrorMessage(errorMessage));
                         Promise.reject(new Error(errorMessage));
                     }
-                    else if (json.result !== 0) {
+                    else if (json.status !== 0) {
                         const errorMessage = `Error calling 'getCurrentSessionInfo': Result = ${json.result}`;
                         dispatch(addErrorMessage(errorMessage));
                         Promise.reject(new Error(errorMessage));
                     }
-                    const sessionInfo = json;
-                    delete sessionInfo.result;
-                    dispatch(receivedSessionInfo(sessionInfo));
+                    dispatch(receivedSessionInfo(json.session));
                 })
                 .catch(error => console.error(error));
         }
