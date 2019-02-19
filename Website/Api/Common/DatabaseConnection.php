@@ -13,14 +13,14 @@
 	define("OutputParameterMarker", "!");
 	
 	class DatabaseConnection{
-		const STATUS_SUCCESS = 0;
-		const STATUS_ERROR = -101;
-		const STATUS_INVALID_PARAMETERS = -102;
-
 		private $_server;
+
 		private $_username;
+
 		private $_password;
+
 		private $_database;
+
 		private $_mysqlConnection;
 		
 		public $IsConnected;
@@ -40,43 +40,40 @@
 
 			Log::LogInformation('Parsing Database Connection Information from \''.$connectionConfigPath.'\'');
 			$connectionInfo = simplexml_load_file($connectionConfigPath) or die("Unable to open connection info file");
-			
-			if (isset($connectionInfo->Server)) {
-				$this->_server = (string)$connectionInfo->Server;
 
-				if (isset($connectionInfo->Username)) {
-					$this->_username = $connectionInfo->Username;
-
-					if (isset($connectionInfo->Password)) {
-						$this->_password = $connectionInfo->Password;
-
-						if (isset($connectionInfo->Database)) {
-							$this->_database = $connectionInfo->Database;
-						}
-						else {
-							Log::LogError('No database tag present');
-						}
-					}
-					else {
-						Log::LogError('No password tag present');
-					}
-				}
-				else {
-					Log::LogError('No username tag present');
-				}
-			}
-			else {
+			if (!isset($connectionInfo->Server)) {
 				Log::LogError('No server tag present');
+				return false;
 			}
-			
+			else if(!isset($connectionInfo->Username)) {
+				Log::LogError('No username tag present');
+				return false;
+			}
+			else if(!isset($connectionInfo->Password)) {
+				Log::LogError('No password tag present');
+				return false;
+			}
+			else if(!isset($connectionInfo->Database)) {
+				Log::LogError('No database tag present');
+				return false;
+			}
+
+			$this->_server = $connectionInfo->Server;
+			$this->_username = $connectionInfo->Username;
+			$this->_password = $connectionInfo->Password;
+			$this->_database = $connectionInfo->Database;
+			return true;
 		}
 		
 		// Initializes the database connection
 		public function Initialize(){
 			//Get the connection info
-			$this->ParseConnectionInfo();
+			if (!$this->ParseConnectionInfo()) {
+				Log::LogError('Parsing database connection info failed');
+				return false;
+			}
+			
 			Log::LogInformation("Initializing Database Connection with mysql:host={$this->_server};dbname={$this->_database};username={$this->_username};");
-
 			try {
 				$this->_mysqlConnection = new PDO("mysql:host={$this->_server};dbname={$this->_database};", $this->_username, $this->_password);
 			}
@@ -101,15 +98,8 @@
 		public function ExecuteStoredProcedure($procedureName, $dtoClass, $parameters = array()) {
 			$inputParameters = array_filter($parameters, [$this, 'FilterInputParameters']);
 			$outputParameters = array_filter($parameters, [$this, 'FilterOutputParameters']);
-			echo 'Input Parameters: ';
-			print_r($inputParameters);
-			echo 'Output Parameters: ';
-			print_r($outputParameters);
-			echo '<br>';
 			$parameterString = $this->CreateParameterString($inputParameters, $outputParameters);
-			echo 'P.String Before Bind: ' . $parameterString . '<br>';
 			$this->BindOutputParameters($parameterString, $outputParameters);
-			echo 'P.String After Bind: ' . $parameterString . '<br>';
 			$statement = $this->_mysqlConnection->prepare("CALL {$procedureName}({$parameterString});");
 			$this->BindInputParameters($statement, $inputParameters);
 			Log::LogInformation('Executing stored procedure: '.$statement->queryString);
@@ -119,32 +109,11 @@
 			return new ProcedureResponse($outputs, $results);
 		}
 
-		// Execute a stored prodcedure with parameters
-		public function ExecuteStoredProcedureWithStatus($procedureName, $parameters) {
-			$numberOfParameters = count($parameters);
-			// Get a string of '?' for the parameters
-			$parameterString = $this->CreateParameterString($numberOfParameters);
-			$statement = $this->_mysqlConnection->prepare("CALL {$procedureName}({$parameterString});");
-			// Bind the parameters given to the statement
-			for($paramPos = 0; $paramPos < $numberOfParameters; $paramPos++){
-				// Add 1 to the param pos because the statement paramters are 1 indexed
-				$statement->bindParam($paramPos + 1, $parameters[$paramPos]->Value, $parameters[$paramPos]->Type);
-			}
-			Log::LogInformation('Executing stored procedure with parameters: '.$statement->queryString);
-			return $this->ExecutePdoStatement($statement);
-		}
-
 		// Execute a function
 		public function ExecuteFunction($functionName, $parameters) {
-			$numberOfParameters = count($parameters);
-			// Get a string of '?' for the parameters
-			$parameterString = $this->CreateParameterString($numberOfParameters);
+			$parameterString = $this->CreateParameterString($parameters);
 			$statement = $this->_mysqlConnection->prepare("SELECT {$functionName}({$parameterString});");
-			// Bind the parameters given to the statement
-			for($paramPos = 0; $paramPos < $numberOfParameters; $paramPos++){
-				// Add 1 to the param pos because the statement paramters are 1 indexed
-				$statement->bindParam($paramPos + 1, $parameters[$paramPos]->Value, $parameters[$paramPos]->Type);
-			}
+			$this->BindInputParameters($statement, $parameters);
 			Log::LogInformation('Executing function with parameters: '.$statement->queryString);
 			$response = $this->ExecutePdoStatement($statement);
 			return end($response);

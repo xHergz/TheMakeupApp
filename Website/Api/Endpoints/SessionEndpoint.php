@@ -25,7 +25,7 @@
             $queriedSessionKey = GetUniqueId();
             Log::LogInformation('Session GET Request with Requester Session Key \'' . $requesterSessionKey . 
                 '\' and Queried Session Key \'' . $queriedSessionKey . '\'.');
-            $response = $userDal->GetSessionInfo($requesterSessionKey, $queriedSessionKey);
+            $response = $userDal->GetSessionInfo($queriedSessionKey);
             $jsonResponse = $userDal->EncodeResponse($response);
             Log::LogInformation('Session GET Response: ' . $jsonResponse);
             echo $jsonResponse;

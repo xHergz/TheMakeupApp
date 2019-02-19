@@ -1,5 +1,7 @@
 <?php
     require_once __DIR__.'/../Common/DataAccessLayer.php';
+    require_once __DIR__.'/Dto/User.php';
+    require_once __DIR__.'/Response/DalResponse.php';
 
     define("CreateUser", "CreateUser");
     define("GetUsersPasswordHash", "GetUsersPasswordHash");
@@ -18,14 +20,16 @@
                 new DatabaseParameter($firstName, PDO::PARAM_STR),
                 new DatabaseParameter($lastName, PDO::PARAM_STR)
             );
-            return $this->_connectionInfo->ExecuteStoredProcedureWithStatus(CreateUser, $parameterArray);
+            $procResponse = $this->_connectionInfo->ExecuteStoredProcedure(CreateUser, null, $parameterArray);
+            return $procResponse->Results;
         }
 
         public function GetUsersPasswordHash($email) {
             $parameterArray = array(
                 new DatabaseParameter($email, PDO::PARAM_STR)
             );
-            return $this->_connectionInfo->ExecuteStoredProcedureWithStatus(GetUsersPasswordHash, $parameterArray);
+            $procResponse =  $this->_connectionInfo->ExecuteStoredProcedure(GetUsersPasswordHash, null, $parameterArray);
+            return $procResponse->Results;
         }
 
         public function CreateSession($userId, $ipAddress) {
@@ -33,21 +37,24 @@
                 new DatabaseParameter($userId, PDO::PARAM_INT),
                 new DatabaseParameter($ipAddress, PDO::PARAM_STR)
             );
-            return $this->_connectionInfo->ExecuteStoredProcedureWithStatus(CreateSession, $parameterArray);
+            $procResponse =  $this->_connectionInfo->ExecuteStoredProcedure(CreateSession, null, $parameterArray);
+            return $procResponse->Results;
         }
 
         public function DeactivateSession($sessionKey) {
             $parameterArray = array(
                 new DatabaseParameter($sessionKey, PDO::PARAM_STR)
             );
-            return $this->_connectionInfo->ExecuteStoredProcedureWithStatus(DeactivateSession, $parameterArray);
+            $procResponse =  $this->_connectionInfo->ExecuteStoredProcedure(DeactivateSession, null, $parameterArray);
+            return $procResponse->Results;
         }
 
         public function LogUserCreation($sessionKey) {
             $parameterArray = array(
                 new DatabaseParameter($sessionKey, PDO::PARAM_STR)
             );
-            return $this->_connectionInfo->ExecuteStoredProcedureWithStatus(LogUserCreation, $parameterArray);
+            $procResponse =  $this->_connectionInfo->ExecuteStoredProcedure(LogUserCreation, null, $parameterArray);
+            return $procResponse->Results;
         }
 
         public function IsSessionKeyValid($sessionKey) {
@@ -57,12 +64,13 @@
             return $this->_connectionInfo->ExecuteFunction(IsSessionKeyValid, $parameterArray);
         }
 
-        public function GetSessionInfo($requesterSessionKey, $queriedSessionKey) {
+        public function GetSessionInfo($sessionKey) {
             $parameterArray = array(
-                new DatabaseParameter($requesterSessionKey, PDO::PARAM_STR),
-                new DatabaseParameter($queriedSessionKey, PDO::PARAM_STR)
+                new DatabaseParameter($sessionKey, PDO::PARAM_STR, '_sessionKey', ParameterDirection::IN),
+                new DatabaseParameter('@status', PDO::PARAM_STR, '_status', ParameterDirection::OUT)
             );
-            return $this->_connectionInfo->ExecuteStoredProcedureWithStatus(GetSessionInfo, $parameterArray);
+            $procResponse =  $this->_connectionInfo->ExecuteStoredProcedure(GetSessionInfo, 'User', $parameterArray);
+            return new DalResponse($procResponse->Outputs['@status'], $procResponse->Results);
         }
     }
 ?>

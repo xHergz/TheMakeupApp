@@ -1,7 +1,7 @@
 DELIMITER $$
 CREATE PROCEDURE LogUserUpdate
 (
-    IN _sessionKey INT,
+    IN _sessionKey VARCHAR(256),
     IN _columnName VARCHAR(100),
     IN _oldValue VARCHAR(256),
     IN _newValue VARCHAR(256)

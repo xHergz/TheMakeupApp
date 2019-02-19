@@ -1,7 +1,7 @@
 DELIMITER $$
 CREATE PROCEDURE LogUserCreation
 (
-    IN _sessionKey INT
+    IN _sessionKey VARCHAR(256)
 )
 BEGIN
     DECLARE userCreateAction SMALLINT DEFAULT 1;

@@ -26,14 +26,23 @@
         public function EncodeResponse($response) {
             if (is_array($response)) {
                 // Convert all keys with Some_Key case to someKey for javascript
-                $newArray = array();
-                foreach($response as $key => $value) {
-                    $newKey = lcfirst(str_replace("_", "", $key));
-                    $newArray[$newKey] = $value;
-                }
-                return json_encode($newArray, JSON_NUMERIC_CHECK);
+                $convertedResponse = $this->ConvertArrayKeys($response);
+                return json_encode($convertedResponse, JSON_NUMERIC_CHECK);
             }
-            return json_encode($response, JSON_NUMERIC_CHECK);
+            return $this->EncodeResponse(json_decode(json_encode($response), true));
+        }
+
+        private function ConvertArrayKeys($array) {
+            // Convert all array keys to lower camelCase for nicer json output
+            $newArray = array();
+            foreach($array as $key => $value) {
+                if (is_array($value)) {
+                    $value = $this->ConvertArrayKeys($value);
+                }
+                $newKey = lcfirst(str_replace("_", "", $key));
+                $newArray[$newKey] = $value;
+            }
+            return $newArray;
         }
     }
 ?>

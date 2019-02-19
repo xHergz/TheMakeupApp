@@ -1,7 +1,7 @@
 DELIMITER $$
 CREATE PROCEDURE LogUserDeactivation
 (
-    IN _sessionKey INT
+    IN _sessionKey VARCHAR(256)
 )
 BEGIN
     DECLARE userDeactivateAction SMALLINT DEFAULT 3;
