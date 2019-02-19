@@ -1,16 +1,17 @@
-import HTTP_STATUS from '../../Common/constants/HttpStatus';
 import { getCookie } from '../../Common/helpers/browserUtilities';
 import { getRequest } from '../../Common/helpers/fetchUtilities';
-import { addErrorMessage } from './MessageActions';
+
 import {
     API_ENDPOINTS,
     GetUidApiUrl
 } from '../constants/ApiInfo';
+import ApiRequest from '../constants/ApiRequest';
 import {
     setSessionKey,
     requestSessionInfo,
     receivedSessionInfo
 } from '../reducers/SessionReducer';
+import { addErrorMessage } from './MessageActions';
 
 export function getCurrentSessionInfo() {
     return (dispatch) => {
@@ -18,37 +19,15 @@ export function getCurrentSessionInfo() {
         const sessionKey = getCookie('tma_session_key');
         dispatch(setSessionKey(sessionKey));
         if (sessionKey != null) {
-            return getRequest(GetUidApiUrl(API_ENDPOINTS.SESSION, sessionKey), sessionKey)
-                .then((response) => {
-                    if (response.status !== HTTP_STATUS.OK) {
-                        const errorMessage = `Error calling 'getCurrentSessionInfo': HTTP Status = ${response.status}`;
-                        dispatch(addErrorMessage(errorMessage));
-                        Promise.reject(new Error(errorMessage));
-                        return;
-                    }
-                    return response.json();
-                })
+            return ApiRequest(getRequest(GetUidApiUrl(API_ENDPOINTS.SESSION, sessionKey), sessionKey), 'getCurrentSessionInfo')
                 .then((json) => {
-                    if (json === null || json === undefined) {
-                        const errorMessage = 'Error calling \'getCurrentSessionInfo\': JSON is null or undefined';
-                        dispatch(addErrorMessage(errorMessage));
-                        Promise.reject(new Error(errorMessage));
-                        return;
-                    }
-                    else if (json.status !== 0) {
-                        const errorMessage = `Error calling 'getCurrentSessionInfo': Status = ${json.status}`;
-                        dispatch(addErrorMessage(errorMessage));
-                        Promise.reject(new Error(errorMessage));
-                        return;
-                    }
-                    console.log('Got here');
-                    return json.session;
-                })
-                .then((session) => {
                     console.log('Got here2');
-                    dispatch(receivedSessionInfo(session));
+                    dispatch(receivedSessionInfo(json.session));
                 })
-                .catch(error => console.error(error));
+                .catch((error) => {
+                    console.log(error.message);
+                    dispatch(addErrorMessage(error.message));
+                });
         }
         console.error('Session Key Cookie Not Set');
         return null;

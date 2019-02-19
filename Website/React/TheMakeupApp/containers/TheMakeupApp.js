@@ -7,6 +7,9 @@ import {
     withRouter
 } from 'react-router-dom';
 
+import ErrorList from '../components/ErrorList';
+
+import { dismissMessage } from '../actions/MessageActions';
 import { getCurrentSessionInfo } from '../actions/SessionActions';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
@@ -43,8 +46,13 @@ class TheMakeupApp extends React.Component {
             <div>
                 <Header
                     displayName={this.props.currentSession.displayName}
+                    currentPageKey={this.props.currentPageKey}
                 />
                 <div className="page-content">
+                    <ErrorList
+                        dismissMessage={this.props.dismissMessage}
+                        messages={this.props.messages}
+                    />
                     <Switch>
                         <Route exact path="/" component={HomePage} />
                         <Route exact path={PAGES.ACCOUNT.LINK} component={Account} />
@@ -71,23 +79,29 @@ class TheMakeupApp extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        currentSession: state.sessionReducer.currentSession
+        currentSession: state.sessionReducer.currentSession,
+        messages: state.messageReducer.messages,
+        currentPageKey: state.siteReducer.currentPageKey
     };
 }
 
 TheMakeupApp.propTypes = {
     getCurrentSessionInfo: PropTypes.func.isRequired,
+    dismissMessage: PropTypes.func.isRequired,
     currentSession: PropTypes.shape({
         displayName: PropTypes.string.isRequired,
         firstName: PropTypes.string.isRequired,
         lastName: PropTypes.string.isRequired,
         isArtist: PropTypes.bool.isRequired
-    }).isRequired
+    }).isRequired,
+    messages: PropTypes.arrayOf(PropTypes.object).isRequired,
+    currentPageKey: PropTypes.string.isRequired
 };
 
 export default withRouter(connect(
     mapStateToProps,
     {
+        dismissMessage,
         getCurrentSessionInfo
     }
 )(TheMakeupApp));
