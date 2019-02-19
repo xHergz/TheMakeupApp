@@ -24,6 +24,7 @@ export function getCurrentSessionInfo() {
                         const errorMessage = `Error calling 'getCurrentSessionInfo': HTTP Status = ${response.status}`;
                         dispatch(addErrorMessage(errorMessage));
                         Promise.reject(new Error(errorMessage));
+                        return;
                     }
                     return response.json();
                 })
@@ -32,13 +33,20 @@ export function getCurrentSessionInfo() {
                         const errorMessage = 'Error calling \'getCurrentSessionInfo\': JSON is null or undefined';
                         dispatch(addErrorMessage(errorMessage));
                         Promise.reject(new Error(errorMessage));
+                        return;
                     }
                     else if (json.status !== 0) {
-                        const errorMessage = `Error calling 'getCurrentSessionInfo': Result = ${json.result}`;
+                        const errorMessage = `Error calling 'getCurrentSessionInfo': Status = ${json.status}`;
                         dispatch(addErrorMessage(errorMessage));
                         Promise.reject(new Error(errorMessage));
+                        return;
                     }
-                    dispatch(receivedSessionInfo(json.session));
+                    console.log('Got here');
+                    return json.session;
+                })
+                .then((session) => {
+                    console.log('Got here2');
+                    dispatch(receivedSessionInfo(session));
                 })
                 .catch(error => console.error(error));
         }
