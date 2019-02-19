@@ -8,5 +8,12 @@
             $this->Outputs = $outputs;
             $this->Results = $results;
         }
+
+        public function GetSingleRow() {
+            if (empty($this->Results)) {
+                return null;
+            }
+            return $this->Results[0];
+        }
     }
 ?>

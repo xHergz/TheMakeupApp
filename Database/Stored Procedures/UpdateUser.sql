@@ -7,10 +7,13 @@ CREATE PROCEDURE UpdateUser
     IN _passwordHash VARCHAR(256),
     IN _displayName VARCHAR(50),
     IN _firstName VARCHAR(100),
-    IN _lastName VARCHAR(100)
+    IN _lastName VARCHAR(100),
+    OUT _status SMALLINT
 )
 BEGIN
-    DECLARE result SMALLINT;
+    DECLARE EMAIL_NOT_AVAILABLE SMALLINT DEFAULT 1001;
+    DECLARE DISPLAY_NAME_NOT_AVAILABLE SMALLINT DEFAULT 1002;
+
     DECLARE currentEmail VARCHAR(256);
     DECLARE currentPassword VARCHAR(256);
     DECLARE currentDisplayName VARCHAR(50);
@@ -22,16 +25,19 @@ BEGIN
     DECLARE updateFirstName BOOLEAN DEFAULT FALSE;
     DECLARE updateLastName BOOLEAN DEFAULT FALSE;
 
-    -- Check if the session owns the user
-    IF (!DoesSessionOwnUser(_sessionKey, _userId)) THEN
-        SET result = 1011;
-    -- Check if the email is given and not available
-    ELSEIF (_email IS NOT NULL AND !IsUserEmailAvailable(_email)) THEN
-        SET result = 1001;
-    -- Check if the display name is given and not available
-    ELSEIF (_displayName IS NOT NULL AND !IsUserDisplayNameAvailable(_displayName)) THEN
-        SET result = 1002;
-    ELSE
+    UpdateUser:BEGIN
+        -- Check if the email is given and not available
+        IF (_email IS NOT NULL AND !IsUserEmailAvailable(_email)) THEN
+            SET _status = 1001;
+            LEAVE UpdateUser;
+        END IF;
+
+        -- Check if the display name is given and not available
+        IF (_displayName IS NOT NULL AND !IsUserDisplayNameAvailable(_displayName)) THEN
+            SET _status = 1002;
+            LEAVE UpdateUser;
+        END IF;
+
         -- Get the current values
         SELECT
             Email,
@@ -88,11 +94,8 @@ BEGIN
         WHERE
             User_Id = _userId;
 
-        SET result = 0;
-    END IF;
-
-    SELECT
-        result AS Result;
+        SET _status = 0;
+    END;
 END
 $$
 DELIMITER ;

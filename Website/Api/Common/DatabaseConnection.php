@@ -116,7 +116,7 @@
 			$this->BindInputParameters($statement, $parameters);
 			Log::LogInformation('Executing function with parameters: '.$statement->queryString);
 			$response = $this->ExecutePdoStatement($statement);
-			return end($response);
+			return end($response[0]);
 		}
 
 		public function ExecuteQuery($queryString) {
@@ -178,14 +178,7 @@
 				Log::LogError('Failed to execute PDO Statement: '.implode(" | ", $statement->errorInfo()));
 			}
 			if ($dtoClass == null) {
-				if ($statement->rowCount() == 1) {
-					return $statement->fetch(PDO::FETCH_ASSOC);
-				}
 				return $statement->fetchAll(PDO::FETCH_ASSOC);
-			}
-			if ($statement->rowCount() == 1) {
-				$statement->setFetchMode(PDO::FETCH_CLASS, $dtoClass);
-				return $statement->fetch();
 			}
 			return $statement->fetchAll(PDO::FETCH_CLASS, $dtoClass);
 		}
@@ -195,7 +188,7 @@
 				return array();
 			}
 			$queryString = "SELECT " . join(', ', array_column($outputParameters, 'Value')) . ";";
-			return $this->ExecuteQuery($queryString);
+			return $this->ExecuteQuery($queryString)[0];
 		}
 	}
 ?>

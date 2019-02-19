@@ -2,30 +2,23 @@ DELIMITER $$
 CREATE PROCEDURE DeactivateUser
 (
     IN _sessionKey VARCHAR(256),
-    IN _userId INT
+    IN _displayName VARCHAR(50),
+    OUT _status SMALLINT
 )
 BEGIN
-    DECLARE result SMALLINT;
-
-    -- Check if the session owns the user
-    IF (!DoesSessionOwnUser(_sessionKey, _userId)) THEN
-        SET result = 1011;
-    ELSE
+    DeactivateUser:BEGIN
         -- Update the user info
         UPDATE
             User
         SET
             Active = FALSE
         WHERE
-            User_Id = _userId;
+            Display_Name = _displayName;
 
         CALL LogUserDeactivation(_sessionKey);
         
-        SET result = 0;
-    END IF;
-
-    SELECT
-        result AS Result;
+        SET _status = 0;
+    END;
 END
 $$
 DELIMITER ;
