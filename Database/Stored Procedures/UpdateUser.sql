@@ -27,13 +27,13 @@ BEGIN
 
     UpdateUser:BEGIN
         -- Check if the email is given and not available
-        IF (_email IS NOT NULL AND !IsUserEmailAvailable(_email)) THEN
+        IF (_email IS NOT NULL AND DoesUserEmailExist(_email)) THEN
             SET _status = 1001;
             LEAVE UpdateUser;
         END IF;
 
         -- Check if the display name is given and not available
-        IF (_displayName IS NOT NULL AND !IsUserDisplayNameAvailable(_displayName)) THEN
+        IF (_displayName IS NOT NULL AND DoesUserDisplayNameExist(_displayName)) THEN
             SET _status = 1002;
             LEAVE UpdateUser;
         END IF;

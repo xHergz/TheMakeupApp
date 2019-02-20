@@ -2,60 +2,66 @@ DELIMITER $$
 CREATE PROCEDURE GetUserNotifications
 (
     IN _displayName VARCHAR(50),
-    IN _lastNotificationId INT
+    IN _lastNotificationId INT,
+    OUT _status SMALLINT
 )
 BEGIN
-    DECLARE INVALID_USER_NAME SMALLINT DEFAULT 1031;
+    DECLARE DISPLAY_NAME_DOES_NOT_EXIST SMALLINT DEFAULT 1004;
 
-    DECLARE result SMALLINT DEFAULT 0;
     DECLARE userId INT DEFAULT NULL;
 
-    GetSessionInfo:BEGIN
-		IF (IsSessionKeyValid(_requesterSessionKey) != 0) THEN
-			SET result = INVALID_REQUESTER_KEY;
-			LEAVE GetSessionInfo;
+    GetUserNotifications:BEGIN
+        -- Check if the display name exists
+		IF (!DoesUserDisplayNameExist(_displayName)) THEN
+			SET _status = DISPLAY_NAME_DOES_NOT_EXIST;
+			LEAVE GetUserNotifications;
 		END IF;
 
-        IF (IsSessionKeyValid(_queriedSessionKey) != 0) THEN
-			SET result = INVALID_QUERIED_KEY;
-			LEAVE GetSessionInfo;
-		END IF;
+        SET userId = GetUserIdByDisplayName(_displayName);
 
-        IF (!IsSessionAuthorizedForSession(_requesterSessionKey, _queriedSessionKey)) THEN
-            SET result = SESSION_NOT_AUTHORIZED;
-			LEAVE GetSessionInfo;
-        END IF;
-
-        -- Get the user id of the queried session to return the info
-        SELECT
-            User_Id
-        INTO
-            userId
-        FROM
-            Session
-        WHERE
-            Session_Key = _queriedSessionKey;
+        SET _status = 0;
     END;
 
-	IF (userId IS NULL) THEN
-		SELECT
-			result AS Result,
-            NULL AS Display_Name,
-            NULL AS First_Name,
-            NULL AS Last_Name,
-            NULL AS Is_Artist;
-    ELSE
-		SELECT
-			result as Result,
-			Display_Name,
-			First_Name,
-			Last_Name,
-            IsUserArtist(userId) AS Is_Artist
-		FROM
-			User
-		WHERE
-			User_Id = userId;
-	END IF;
+    (
+        SELECT
+            Notification_Id,
+            Notification_Type_Id,
+            Timestamp,
+            Message,
+            Action_Url,
+            Received
+        FROM
+            Notification
+        WHERE
+            User_Id = userId
+            AND Received = FALSE
+            AND (Notification_Id < _lastNotificationId OR _lastNotificationId IS NULL)
+        ORDER BY
+            Notification_Id DESC
+    )
+    UNION ALL
+    (
+        SELECT
+            Notification_Id,
+            Notification_Type_Id,
+            Timestamp,
+            Message,
+            Action_Url,
+            Received
+        FROM
+            Notification
+        WHERE
+            User_Id = userId
+            AND Received = TRUE
+            AND (Notification_Id < _lastNotificationId OR _lastNotificationId IS NULL)
+        ORDER BY
+            Notification_Id DESC
+        LIMIT 10
+    )
+    ORDER BY
+            Timestamp DESC;
+    
+
 END
 $$
 DELIMITER ;

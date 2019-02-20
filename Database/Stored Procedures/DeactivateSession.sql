@@ -9,14 +9,7 @@ BEGIN
 
     DeactivateSession:BEGIN
         -- Get the sessions id
-        SELECT
-            Session_Id
-        INTO
-            sessionId
-        FROM
-            Session
-        WHERE
-            Session_Key = _sessionKey;
+        SET sessionId = GetSessionIdBySessionKey(_sessionKey);
 
         -- Deactivate the session
         UPDATE

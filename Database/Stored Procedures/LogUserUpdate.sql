@@ -12,14 +12,7 @@ BEGIN
     DECLARE sessionId INT;
 
     LogUserUpdate:BEGIN
-        SELECT
-            Session_Id
-        INTO
-            sessionId
-        FROM
-            Session
-        WHERE
-            Session_Key = _sessionKey;
+        SET sessionId = GetSessionIdBySessionKey(_sessionKey);
 
         INSERT INTO User_Log (Session_Id, User_Action_Id, Timestamp, Message) VALUES
         (sessionId, userUpdateAction, CURRENT_TIMESTAMP, CONCAT('"', _columnName, '" has been changed from "', _oldValue, '" to "', _newValue, '".'));

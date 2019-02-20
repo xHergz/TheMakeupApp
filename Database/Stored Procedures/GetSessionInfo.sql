@@ -16,14 +16,7 @@ BEGIN
 		END IF;
 
         -- Get the user id of the queried session to return the info
-        SELECT
-            User_Id
-        INTO
-            userId
-        FROM
-            Session
-        WHERE
-            Session_Key = _sessionKey;
+        SET userId = GetUserIdBySessionKey(_sessionKey);
 
         SET _status = 0;
     END;

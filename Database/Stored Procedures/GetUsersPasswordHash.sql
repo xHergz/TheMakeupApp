@@ -12,7 +12,7 @@ BEGIN
 
     GetUsersPasswordHash:BEGIN
         -- Check if the email exists
-        IF (IsUserEmailAvailable(_email)) THEN
+        IF (!DoesUserEmailExist(_email)) THEN
             SET _status = EMAIL_DOES_NOT_EXIST;
             LEAVE GetUsersPasswordHash;
         END IF;

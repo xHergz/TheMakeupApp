@@ -16,13 +16,13 @@ BEGIN
 
     CreateUser:BEGIN
         -- Check if the email already exists
-        IF (!IsUserEmailAvailable(_email)) THEN
+        IF (DoesUserEmailExist(_email)) THEN
             SET _status = EMAIL_NOT_AVAILABLE;
             LEAVE CreateUser;
         END IF;
 
         -- Check if the display name already exists
-        IF (!IsUserDisplayNameAvailable(_displayName)) THEN
+        IF (DoesUserDisplayNameExist(_displayName)) THEN
             SET _status = DISPLAY_NAME_NOT_AVAILABLE;
             LEAVE CreateUser;
         END IF;
