@@ -7,7 +7,6 @@
     require_once __DIR__.'/Response/GetUsersPasswordHashResponse.php';
     require_once __DIR__.'/Response/StatusResponse.php';
 
-    define("Status", "@status");
     define("CreateUser", "CreateUser");
     define("GetUsersPasswordHash", "GetUsersPasswordHash");
     define("CreateSession", "CreateSession");
@@ -15,6 +14,8 @@
     define("LogUserCreation", "LogUserCreation");
     define("IsSessionKeyValid", "IsSessionKeyValid");
     define("GetSessionInfo", "GetSessionInfo");
+    define("IsSessionAuthorizedForSession", "IsSessionAuthorizedForSession");
+    define("DoesSessionOwnUser", "DoesSessionOwnUser");
 
     class UserDal extends DataAccessLayer {
         public function CreateUser($email, $password, $displayName, $firstName, $lastName) {
@@ -82,6 +83,22 @@
             );
             $procResponse =  $this->_connectionInfo->ExecuteStoredProcedure(GetSessionInfo, 'SessionDto', $parameterArray);
             return new GetSessionInfoResponse($procResponse->Outputs[Status], $procResponse->GetSingleRow());
+        }
+
+        public function IsSessionAuthorizedForSession($requesterSessionKey, $queriedSessionKey) {
+            $parameterArray = array(
+                new DatabaseParameter($requesterSessionKey, PDO::PARAM_STR, '_requesterSessionKey', ParameterDirection::IN),
+                new DatabaseParameter($queriedSessionKey, PDO::PARAM_STR, '_queriedSessionKey', ParameterDirection::IN)
+            );
+            return $this->_connectionInfo->ExecuteFunction(IsSessionAuthorizedForSession, $parameterArray);
+        }
+
+        public function DoesSessionOwnUser($sessionKey, $displayName) {
+            $parameterArray = array(
+                new DatabaseParameter($sessionKey, PDO::PARAM_STR, '_sessionKey', ParameterDirection::IN),
+                new DatabaseParameter($displayName, PDO::PARAM_STR, '_displayName', ParameterDirection::IN)
+            );
+            return $this->_connectionInfo->ExecuteFunction(DoesSessionOwnUser, $parameterArray);
         }
     }
 ?>

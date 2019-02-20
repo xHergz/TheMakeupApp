@@ -4,6 +4,7 @@
     require_once '../../private/Api/Data/Errors.php';
     require_once '../../private/Api/Data/HttpStatus.php';
     require_once '../../private/Api/DataAccessLayer/UserDal.php';
+    require_once '../../private/Api/Endpoints/NotificationsEndPoint.php';
     require_once '../../private/Api/Endpoints/SessionEndPoint.php';
     require_once '../../private/Api/Helpers/UserMethods.php';
 
@@ -14,7 +15,8 @@
 
     // Register Endpoints
     $registeredEndpoints = [
-        "session" => new SessionEndPoint(),
+        "notifications" => new NotificationsEndpoint(),
+        "session" => new SessionEndPoint()
     ];
     
     $queryString = $_SERVER['QUERY_STRING'];

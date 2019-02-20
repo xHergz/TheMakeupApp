@@ -90,4 +90,20 @@
         $userDal->Close();
         return Errors::SUCCESS;
     }
+
+    function AuthorizeSessionForUser($sessionKey, $displayName) {
+        $userDal = new UserDal();
+        if (!$userDal->Initialize()) {
+            $userDal->Close();
+            return Errors::DATABASE_INITIALIZATION_ERROR;
+        }
+
+        if (!$userDal->DoesSessionOwnUser($sessionKey, $displayName)) {
+            $userDal->Close();
+            return Errors::USER_DOES_NOT_BELONG_TO_SESSION;
+        }
+
+        $userDal->Close();
+        return Errors::SUCCESS;
+    }
 ?>

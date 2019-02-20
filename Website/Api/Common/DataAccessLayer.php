@@ -2,6 +2,8 @@
     require_once __DIR__.'/DatabaseConnection.php';
     require_once __DIR__.'/DatabaseParameter.php';
 
+    define("Status", "@status");
+
     class DataAccessLayer {
         protected $_connectionInfo;
         

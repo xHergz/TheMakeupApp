@@ -38,11 +38,11 @@ function GetBearerToken() {
 }
 
 function GetRequestIsEmpty() {
-    return count($_GET) == 0;
+    return GetNumberOfGetParams() == 0;
 }
 
 function GetRequestIsForUniqueId() {
-    return count($_GET) == 2 && isset($_GET['uid']) && isset($_GET['endpoint']);
+    return GetNumberOfGetParams() == 2 && isset($_GET['uid']) && isset($_GET['endpoint']);
 }
 
 function GetUniqueId() {
@@ -50,6 +50,10 @@ function GetUniqueId() {
         return $_GET['uid'];
     }
     return null;
+}
+
+function GetNumberOfGetParams() {
+    return count($_GET);
 }
 
 ?>
