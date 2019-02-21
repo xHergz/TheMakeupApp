@@ -4,7 +4,7 @@
   "description": "The React portion of The Makeup App",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack -d -w",
+    "dev": "webpack -d",
     "build": "webpack -p",
     "lint": "eslint ./React/"
   },

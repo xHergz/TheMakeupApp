@@ -37,6 +37,11 @@ function GetBearerToken() {
     return null;
 }
 
+function GetJsonInput() {
+    $rest_json = file_get_contents("php://input");
+    return json_decode($rest_json, true);
+}
+
 function GetRequestIsEmpty() {
     return GetNumberOfGetParams() == 0;
 }

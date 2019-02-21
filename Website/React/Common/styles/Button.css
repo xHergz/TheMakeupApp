@@ -1,28 +1,21 @@
 .enabled-button, .disabled-button {
-    color: white;
-    padding: 10px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
-    border-radius: 5px;
-    border: 2px solid #222;
-    width: 100%;
+    color: #FFF;
+    height: 45px;
+    border: 1px solid #555;
+    font-size: 14px;
+    font-weight: bolder;
 }
 
 .enabled-button {
-    background-color: #3b5bb3;
+    background-color: deeppink;
 }
 
 .enabled-button:hover {
-    /*
-        5f7ac4
-        5571bb
-        3d67d5
-    */
-    background-color: #3d67d5;
-    color: white;
+    background-color: mediumvioletred;
     cursor: pointer;
-    border: 2px solid #222;
 }
 
 .disabled-button {

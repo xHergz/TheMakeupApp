@@ -11,7 +11,7 @@ class Button extends React.Component {
                 onClick={this.props.onClickHandler}
                 disabled={this.props.disabled}
             >
-                <h5>{this.props.label}</h5>
+                {this.props.label}
             </button>
         );
     }

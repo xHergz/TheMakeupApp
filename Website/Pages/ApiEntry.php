@@ -42,6 +42,7 @@
             break;
         case 'POST':
             AuthorizeApiUser($sessionKey);
+            $_POST = GetJsonInput();
             $selectedEndpoint->post();
             break;
         case 'PUT':

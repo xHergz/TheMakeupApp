@@ -7,13 +7,14 @@ import {
     withRouter
 } from 'react-router-dom';
 
-import ErrorList from '../components/ErrorList';
-
+import Loader from '../../Common/components/Loader';
 import { dismissMessage } from '../actions/MessageActions';
 import { getNumberOfNewNotifications } from '../actions/NotificationActions';
-import { getCurrentSessionInfo } from '../actions/SessionActions';
+import { getSessionInfo } from '../actions/SessionActions';
+import ErrorList from '../components/ErrorList';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import { GetSessionKey } from '../constants/ApiInfo';
 import PAGES from '../constants/Pages';
 import Account from './Account';
 import AppointmentInfo from './AppointmentInfo';
@@ -43,10 +44,11 @@ class TheMakeupApp extends React.Component {
     }
 
     componentDidMount() {
-        this.props.getCurrentSessionInfo();
-        this.refreshNewNotifications();
+        this.props.getSessionInfo(GetSessionKey());
         const intervalId = window.setInterval(this.refreshNewNotifications, 5000);
-        this.setState({refreshNewNotificationsId: intervalId});
+        this.setState({
+            refreshNewNotificationsId: intervalId
+        });
     }
 
     componentWillUnmount() {
@@ -54,10 +56,22 @@ class TheMakeupApp extends React.Component {
     }
 
     refreshNewNotifications() {
-        this.props.getNumberOfNewNotifications(this.props.sessionKey, this.props.currentSession.displayName);
+        this.props.getNumberOfNewNotifications(GetSessionKey(), this.props.currentSession.displayName);
     }
 
     render() {
+        if (!this.props.isFetchingCurrentSession && this.props.currentSession === null) {
+            return null;
+        }
+
+        if (this.props.isFetchingCurrentSession) {
+            return (
+                <div className="page-loading">
+                    <Loader />
+                </div>
+            );
+        }
+
         return (
             <div>
                 <Header
@@ -98,33 +112,38 @@ function mapStateToProps(state) {
     return {
         currentPageKey: state.siteReducer.currentPageKey,
         currentSession: state.sessionReducer.currentSession,
+        isFetchingCurrentSession: state.sessionReducer.isFetchingCurrentSession,
         messages: state.messageReducer.messages,
-        newNotifications: state.notificationReducer.newNotifications,
-        sessionKey: state.sessionReducer.sessionKey
+        newNotifications: state.notificationReducer.newNotifications
     };
 }
 
 TheMakeupApp.propTypes = {
-    currentPageKey: PropTypes.string.isRequired,
+    currentPageKey: PropTypes.string,
     currentSession: PropTypes.shape({
-        displayName: PropTypes.string.isRequired,
-        firstName: PropTypes.string.isRequired,
-        lastName: PropTypes.string.isRequired,
-        isArtist: PropTypes.bool.isRequired
-    }).isRequired,
+        displayName: PropTypes.string,
+        firstName: PropTypes.string,
+        lastName: PropTypes.string,
+        isArtist: PropTypes.bool
+    }),
     dismissMessage: PropTypes.func.isRequired,
-    getCurrentSessionInfo: PropTypes.func.isRequired,
+    getSessionInfo: PropTypes.func.isRequired,
     getNumberOfNewNotifications: PropTypes.func.isRequired,
+    isFetchingCurrentSession: PropTypes.bool.isRequired,
     messages: PropTypes.arrayOf(PropTypes.object).isRequired,
-    newNotifications: PropTypes.number.isRequired,
-    sessionKey: PropTypes.string.isRequired
+    newNotifications: PropTypes.number.isRequired
+};
+
+TheMakeupApp.defaultProps = {
+    currentPageKey: PAGES.HOME_PAGE.KEY,
+    currentSession: null
 };
 
 export default withRouter(connect(
     mapStateToProps,
     {
         dismissMessage,
-        getCurrentSessionInfo,
+        getSessionInfo,
         getNumberOfNewNotifications
     }
 )(TheMakeupApp));

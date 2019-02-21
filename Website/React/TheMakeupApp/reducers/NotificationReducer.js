@@ -3,8 +3,8 @@ import { createReducerObject } from '../../Common/helpers/reducerUtilities';
 const NOTIFICATION_ACTIONS = {
     REQUEST_NOTIFICATIONS: 'REQUEST_NOTIFICATIONS',
     RECEIVED_NOTIFICATIONS: 'RECEIVED_NOTIFICATIONS',
-    REQUEST_MORE_NOTIFICATIONS: 'REQUEST_NOTIFICATIONS',
-    RECEIVED_MORE_NOTIFICATIONS: 'RECEIVED_NOTIFICATIONS',
+    REQUEST_MORE_NOTIFICATIONS: 'REQUEST_MORE_NOTIFICATIONS',
+    RECEIVED_MORE_NOTIFICATIONS: 'RECEIVED_MORE_NOTIFICATIONS',
     RECEIVED_NEW_NOTIFICATIONS: 'RECEIVED_NEW_NOTIFICATIONS',
     ACKNOWLEDGE_NOTIFICATIONS: 'ACKNOWLEDGE_NOTIFICATIONS'
 };
@@ -12,13 +12,16 @@ const NOTIFICATION_ACTIONS = {
 const initialState = {
     notifications: [],
     newNotifications: 0,
-    canFetchMoreNotifications: false,
+    canFetchMoreNotifications: true,
     isFetchingNotifications: false,
     isFetchingMoreNotifications: false
 };
 
 function appendNotificationsToList(notifications, moreNotifications) {
-    return notifications.push(...moreNotifications);
+    return [
+        ...notifications,
+        ...moreNotifications
+    ];
 }
 
 export default function notificationReducer(state = initialState, action) {
@@ -48,7 +51,7 @@ export default function notificationReducer(state = initialState, action) {
                 ...state,
                 notifications: appendNotificationsToList(state.notifications, action.payload),
                 isFetchingMoreNotifications: false,
-                canFetchMoreNotifications: (Array.isArray(action.payload) && action.payload.length)
+                canFetchMoreNotifications: Array.isArray(action.payload) && action.payload.length !== 0
             };
         }
         case NOTIFICATION_ACTIONS.RECEIVED_NEW_NOTIFICATIONS: {

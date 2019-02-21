@@ -55,7 +55,7 @@ class Header extends React.Component {
             <span className="notification-badge">
                 {this.props.newNotifications}
             </span>
-        )
+        );
     }
 
     renderHamburger() {
@@ -143,7 +143,6 @@ class Header extends React.Component {
     }
 
     render() {
-        console.log(`New Notifications: ${this.props.newNotifications}`);
         return (
             <div className="header">
                 <div className="header-main">
@@ -161,8 +160,12 @@ class Header extends React.Component {
 
 Header.propTypes = {
     displayName: PropTypes.string.isRequired,
-    currentPageKey: PropTypes.string.isRequired,
+    currentPageKey: PropTypes.string,
     newNotifications: PropTypes.number.isRequired
+};
+
+Header.defaultProps = {
+    currentPageKey: null
 };
 
 export default Header;
