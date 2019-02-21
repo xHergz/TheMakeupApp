@@ -15,7 +15,7 @@ BEGIN
 
     CreateSession:BEGIN
         -- Get the config value for session expiry
-        SET defaultDaysUntilSessionExpires = CAST(GetSystemConfigValue(DAYS_UNTIL_SESSION_EXPIRES_KEY));
+        SET defaultDaysUntilSessionExpires = CAST(GetSystemConfigValue(DAYS_UNTIL_SESSION_EXPIRES_KEY) AS UNSIGNED);
 
         -- Check if the config value was found
         IF (defaultDaysUntilSessionExpires IS NULL) THEN
