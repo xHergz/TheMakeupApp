@@ -2,24 +2,19 @@ DELIMITER $$
 CREATE FUNCTION DoesSessionOwnUser
 (
 	_sessionKey VARCHAR(256),
-    _userId INT
+    _displayName VARCHAR(50)
 )
 RETURNS SMALLINT
 READS SQL DATA
 NOT DETERMINISTIC
 BEGIN
     DECLARE userIdLinkedToSession INT;
+    DECLARE userIdLinkedToDisplayName INT;
 
-    SELECT
-        User_Id
-    INTO
-        userIdLinkedToSession
-    FROM
-        Session
-    WHERE
-        Session_Key = _sessionKey;
+    SET userIdLinkedToSession = GetUserIdBySessionKey(_sessionKey);
+    SET userIdLinkedToDisplayName = GetUserIdByDisplayName(_displayName);
 
-    IF (userIdLinkedToSession = _userId) THEN
+    IF (userIdLinkedToSession = userIdLinkedToDisplayName) THEN
         RETURN TRUE;
     END IF;
 

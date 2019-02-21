@@ -3,43 +3,34 @@
     require_once '../../private/Api/Data/ErrorList.php';
     require_once '../../private/Api/Data/Errors.php';
     require_once '../../private/Api/Data/User.php';
-    require_once '../../private/Api/DataAccessLayer/UserDal.php';
-    
+    require_once '../../private/Api/Helpers/UserMethods.php';
 
-    $user = new User();
-    $errorList = new ErrorList();
+    function SignUpPage() {
+        $user = new User();
+        $errorList = new ErrorList();
 
-    if ($user->IsSignUpInfoAvailable()) {
+        // Check if the form is filled out for creating a user
+        if (!$user->IsSignUpInfoAvailable()) {
+            return $errorList;
+        }
+
         $user->GetSignUpInfo();
-
-        if ($user->IsValidForSignUp()) {
-            $userDal = new UserDal();
-            if($userDal->Initialize()){
-                // Add the user to the db
-                $passwordHash = password_hash($user->Password, PASSWORD_DEFAULT);
-                $createUserResponse = $userDal->CreateUser($user->Email, $passwordHash, $user->DisplayName, $user->FirstName, $user->LastName);
-                if ($createUserResponse['Result'] == Errors::SUCCESS) {
-                    // Create a session for the user and redirect to the homepage
-                    $createSessionResponse = $userDal->CreateSession($createUserResponse['New_User_Id'], GetClientIp());
-                    if ($createSessionResponse['Result'] == Errors::SUCCESS) {
-                        $newSessionKey = $createSessionResponse['New_Session_Key'];
-                        $userDal->LogUserCreation($newSessionKey);
-                        SetSessionKey($newSessionKey);
-                        Redirect('/');
-                    }
-                }
-                else {
-                    $errorList->AddError($createUserResponse['Result']);
-                }
-            }
-            else {
-                $errorList->AddError(Errors::DATABASE_INITIALIZATION_ERROR);
-            }
-        }
-        else {
+        if (!$user->IsValidForSignUp()) {
             $errorList->AddErrors($user->GetSignUpErrors());
+            return $errorList;
         }
+        
+        $createUserStatus = CreateUser($user);
+        if ($createUserStatus != Errors::SUCCESS) {
+            $errorList->AddError($createUserStatus);
+            return $errorList;
+        }
+        
+        Redirect('/');
+        return $errorList;
     }
+    
+    $errorList = SignUpPage();
 ?>
 <html>
     <head>

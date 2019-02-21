@@ -1,4 +1,3 @@
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -19,7 +18,7 @@ class NavBarLink extends React.Component {
             return null;
         }
         return (
-            <FontAwesomeIcon icon={this.props.icon} size="md" />
+            <FontAwesomeIcon icon={this.props.icon} size="lg" />
         );
     }
 
@@ -31,7 +30,10 @@ class NavBarLink extends React.Component {
                     className="plain-link"
                 >
                     {this.renderIcon()}
-                    <h5>{this.props.label}</h5>
+                    <h5>
+                        {this.props.label}
+                        {this.props.children}
+                    </h5>
                 </a>
             </div>
         );
@@ -39,13 +41,15 @@ class NavBarLink extends React.Component {
 }
 
 NavBarLink.propTypes = {
+    children: PropTypes.shape(),
     linkTo: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     isActive: PropTypes.bool,
-    icon: PropTypes.instanceOf(IconDefinition)
+    icon: PropTypes.shape()
 };
 
 NavBarLink.defaultProps = {
+    children: null,
     isActive: false,
     icon: null
 };

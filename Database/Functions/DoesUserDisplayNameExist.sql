@@ -1,7 +1,7 @@
 DELIMITER $$
-CREATE FUNCTION IsUserEmailAvailable
+CREATE FUNCTION DoesUserDisplayNameExist
 (
-	_email VARCHAR(256)
+	_displayName VARCHAR(50)
 )
 RETURNS SMALLINT
 READS SQL DATA
@@ -12,17 +12,17 @@ BEGIN
         NOT EXISTS
         (
             SELECT
-                Email
+                Display_Name
             FROM
                 User
             WHERE
-                Email = _email
+                Display_Name = _displayName
         )
     ) THEN 
-        RETURN TRUE;
+        RETURN FALSE;
     END IF;
 
-    RETURN FALSE;
+    RETURN TRUE;
 END
 $$
 DELIMITER ;

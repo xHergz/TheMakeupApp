@@ -11,8 +11,11 @@ import NavBarLink from '../../Common/components/NavBarLink';
 import PAGES from '../constants/Pages';
 import {
     GetAccountUrl,
+    GetAccountPageKey,
     GetPortfolioUrl,
-    GetProfileUrl
+    GetPortfolioPageKey,
+    GetProfileUrl,
+    GetProfilePageKey
 } from '../constants/UrlInfo';
 
 import '../../../Css/Header.css';
@@ -24,6 +27,8 @@ class Header extends React.Component {
             mobileNavigationOpen: false
         };
         this.toggleMobileNavigation = this.toggleMobileNavigation.bind(this);
+        this.isPageActive = this.isPageActive.bind(this);
+        this.renderNotificationBadge = this.renderNotificationBadge.bind(this);
         this.renderHamburger = this.renderHamburger.bind(this);
         this.renderNavigation = this.renderNavigation.bind(this);
         this.renderDesktopNavigation = this.renderDesktopNavigation.bind(this);
@@ -35,6 +40,22 @@ class Header extends React.Component {
         this.setState({
             mobileNavigationOpen: !currentlyOpen
         });
+    }
+
+    isPageActive(pageKey) {
+        return this.props.currentPageKey === pageKey;
+    }
+
+    renderNotificationBadge() {
+        if (this.props.newNotifications === 0) {
+            return null;
+        }
+
+        return (
+            <span className="notification-badge">
+                {this.props.newNotifications}
+            </span>
+        );
     }
 
     renderHamburger() {
@@ -56,6 +77,7 @@ class Header extends React.Component {
                 <div className="hamburger-line light-line" />
                 <div className="hamburger-line medium-line" />
                 <div className="hamburger-line dark-line" />
+                {this.renderNotificationBadge()}
             </div>
         );
     }
@@ -66,37 +88,39 @@ class Header extends React.Component {
                 <NavBarLink
                     linkTo={PAGES.HOME_PAGE.LINK}
                     label={PAGES.HOME_PAGE.LABEL}
-                    isActive
+                    isActive={this.isPageActive(PAGES.HOME_PAGE.KEY)}
                     icon={faHome}
                 />
                 <NavBarLink
                     linkTo={PAGES.NOTIFICATIONS.LINK}
                     label="My Notifications"
-                    isActive={false}
+                    isActive={this.isPageActive(PAGES.NOTIFICATIONS.KEY)}
                     icon={faBell}
-                />
+                >
+                    {this.renderNotificationBadge()}
+                </NavBarLink>
                 <NavBarLink
                     linkTo={GetProfileUrl(this.props.displayName)}
                     label="My Profile"
-                    isActive={false}
+                    isActive={this.isPageActive(GetProfilePageKey(this.props.displayName))}
                     icon={faUser}
                 />
                 <NavBarLink
                     linkTo={GetPortfolioUrl(this.props.displayName)}
                     label="My Portfolio"
-                    isActive={false}
+                    isActive={this.isPageActive(GetPortfolioPageKey(this.props.displayName))}
                     icon={faFolder}
                 />
                 <NavBarLink
                     linkTo={GetAccountUrl(this.props.displayName)}
                     label="My Account"
-                    isActive={false}
+                    isActive={this.isPageActive(GetAccountPageKey(this.props.displayName))}
                     icon={faCog}
                 />
                 <NavBarLink
                     linkTo={PAGES.LOGOUT.LINK}
                     label={`${PAGES.LOGOUT.LABEL} ${this.props.displayName}`}
-                    isActive={false}
+                    isActive={this.isPageActive(PAGES.LOGOUT.KEY)}
                     icon={faSignOutAlt}
                 />
             </div>
@@ -135,7 +159,13 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
-    displayName: PropTypes.string.isRequired
+    displayName: PropTypes.string.isRequired,
+    currentPageKey: PropTypes.string,
+    newNotifications: PropTypes.number.isRequired
+};
+
+Header.defaultProps = {
+    currentPageKey: null
 };
 
 export default Header;

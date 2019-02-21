@@ -1,51 +1,48 @@
 <?php
     require_once '../../private/Api/Common/ApiUtilities.php';
     require_once '../../private/Api/Common/Log.php';
+    require_once '../../private/Api/Data/ApiRequest.php';
     require_once '../../private/Api/Data/Errors.php';
     require_once '../../private/Api/Data/HttpStatus.php';
     require_once '../../private/Api/DataAccessLayer/UserDal.php';
+    require_once '../../private/Api/Endpoints/NotificationsEndPoint.php';
     require_once '../../private/Api/Endpoints/SessionEndPoint.php';
     require_once '../../private/Api/Helpers/UserMethods.php';
 
     header('Access-Control-Allow-Origin: *');
-    //header('Access-Control-Allow-Methods: GET,POST,PUT,DELETE,OPTIONS');
     header('Access-Control-Allow-Headers: Authorization, Content-Type');
     header('Content-type: application/json');
 
     // Register Endpoints
     $registeredEndpoints = [
-        "session" => new SessionEndPoint(),
+        "notifications" => new NotificationsEndpoint(),
+        "session" => new SessionEndPoint()
     ];
     
-    $queryString = $_SERVER['QUERY_STRING'];
-    $httpMethod = $_SERVER['REQUEST_METHOD'];
-    Log::LogInformation('API \'' . $httpMethod . '\' Request made with query string: ' . $queryString);
+    $apiRequest = new ApiRequest($_GET, 'API Entry');
 
     // Check if the endpoint parameter is set
-    if (!isset($_GET['endpoint'])) {
-        Log::LogError('(404) API Request failed because \'endpoint\' was not set.');
-        BadRequest(404);
+    if ($apiRequest->GetEndpoint() == null) {
+        $apiRequest->EndRequest(HttpStatus::NOT_FOUND, '\'endpoint\' was not set.');
     }
-
-    $requestedEndpoint = $_GET['endpoint'];
 
     // Check if the endpoint exists
-    if (!array_key_exists($_GET['endpoint'], $registeredEndpoints)) {
-        Log::LogError('(404) API Request failed because ' . $requestedEndpoint . ' is not a registered endpoint.');
-        BadRequest(404);
+    if (!array_key_exists($apiRequest->GetEndpoint(), $registeredEndpoints)) {
+        $apiRequest->EndRequest(HttpStatus::NOT_FOUND, '\'' . $apiRequest->GetEndpoint() . '\' is not a registered endpoint.');
     }
     
-    $selectedEndpoint = $registeredEndpoints[$requestedEndpoint];
+    $selectedEndpoint = $registeredEndpoints[$apiRequest->GetEndpoint()];
     $sessionKey = GetBearerToken();
-    Log::LogInformation('API Endpoint \''. $requestedEndpoint .'\' called with session key: ' . $sessionKey);
+    Log::LogInformation('API Endpoint \''. $apiRequest->GetEndpoint() .'\' called with session key: ' . $sessionKey);
 
-    switch($httpMethod) {
+    switch($apiRequest->GetHttpMethod()) {
         case 'GET':
             AuthorizeApiUser($sessionKey);
             $selectedEndpoint->get();
             break;
         case 'POST':
             AuthorizeApiUser($sessionKey);
+            $_POST = GetJsonInput();
             $selectedEndpoint->post();
             break;
         case 'PUT':
@@ -61,8 +58,7 @@
             break;
         }
         default:
-            Log::LogError('(501) API Request failed because HTTP Method \'' . $httpMethod . '\' is not supported.');
-            BadRequest(501);
+            $apiRequest->EndRequest(HttpStatus::NOT_IMPLEMENTED, 'HTTP Method \'' . $apiRequest->GetHttpMethod() . '\' is not supported.');
     }
 
     function AuthorizeApiUser($sessionKey) {
@@ -71,7 +67,7 @@
             switch($authorizeUserResponse) {
                 case Errors::NO_SESSION_KEY:
                 case Errors::INVALID_SESSION_KEY:
-                    $httpStatus = HttpStatus::NOT_AUTHORIZED;
+                    $httpStatus = HttpStatus::UNAUTHORIZED;
                     break;
                 default:
                     $httpStatus = HttpStatus::INTERNAL_SERVER_ERROR;

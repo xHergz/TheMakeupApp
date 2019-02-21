@@ -1,10 +1,20 @@
-import { createQueryString } from '../../Common/helpers/browserUtilities';
+import {
+    createQueryString,
+    getCookie
+} from '../../Common/helpers/browserUtilities';
 
 const API_URL = 'http://api.themakeupapp.localhost';
 
+const SESSION_KEY_COOKIE = 'tma_session_key';
+
 export const API_ENDPOINTS = {
+    NOTIFICATION: 'notifications',
     SESSION: 'session'
 };
+
+export function GetSessionKey() {
+    return getCookie(SESSION_KEY_COOKIE);
+}
 
 export function GetApiUrl(endpoint) {
     return `${API_URL}/${endpoint}`;

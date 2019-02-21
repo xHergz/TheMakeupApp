@@ -4,7 +4,7 @@
   "description": "The React portion of The Makeup App",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack -d -w",
+    "dev": "webpack -d",
     "build": "webpack -p",
     "lint": "eslint ./React/"
   },
@@ -46,6 +46,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-object-rest-spread": "^7.3.2",
     "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4"
   }
 }

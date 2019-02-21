@@ -66,7 +66,6 @@ export function validatePrice(price) {
 
 export function validateDate(date, format = DEFAULT_DATE_FORMAT) {
     const test = moment(date, format);
-    console.log(test);
     return createValidationObject(moment(date, format).isValid());
 }
 

@@ -56,12 +56,16 @@ call:runMySqlFile "./Views/FullSessionLog.sql"
 call:runMySqlFile "./Views/FullUserLog.sql"
 
 REM Create the Functions
-call:runMySqlFile "./Functions/IsUserEmailAvailable.sql"
-call:runMySqlFile "./Functions/IsUserDisplayNameAvailable.sql"
+call:runMySqlFile "./Functions/DoesUserEmailExist.sql"
+call:runMySqlFile "./Functions/DoesUserDisplayNameExist.sql"
 call:runMySqlFile "./Functions/DoesSessionOwnUser.sql"
 call:runMySqlFile "./Functions/IsSessionAuthorizedForSession.sql"
 call:runMySqlFile "./Functions/IsSessionKeyValid.sql"
 call:runMySqlFile "./Functions/IsUserArtist.sql"
+call:runMySqlFile "./Functions/GetSessionIdBySessionKey.sql"
+call:runMySqlFile "./Functions/GetSystemConfigValue.sql"
+call:runMySqlFile "./Functions/GetUserIdByDisplayName.sql"
+call:runMySqlFile "./Functions/GetUserIdBySessionKey.sql"
 
 REM Create the Stored Procedures
 call:runMySqlFile "./Stored Procedures/LogSessionCreation.sql"
@@ -76,6 +80,11 @@ call:runMySqlFile "./Stored Procedures/UpdateUser.sql"
 call:runMySqlFile "./Stored Procedures/DeactivateUser.sql"
 call:runMySqlFile "./Stored Procedures/GetUsersPasswordHash.sql"
 call:runMySqlFile "./Stored Procedures/GetSessionInfo.sql"
+call:runMySqlFile "./Stored Procedures/GetUserNotifications.sql"
+call:runMySqlFile "./Stored Procedures/GetNumberOfNewUserNotifications.sql"
+call:runMySqlFile "./Stored Procedures/AddAlertUserNotification.sql"
+call:runMySqlFile "./Stored Procedures/AddTaskUserNotification.sql"
+call:runMySqlFile "./Stored Procedures/AcknowledgeUserNotifications.sql"
 
 REM Insert the initial data
 call:runMySqlFile "./Data/SystemConfigurationData.sql"

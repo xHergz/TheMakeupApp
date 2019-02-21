@@ -37,12 +37,17 @@ function GetBearerToken() {
     return null;
 }
 
+function GetJsonInput() {
+    $rest_json = file_get_contents("php://input");
+    return json_decode($rest_json, true);
+}
+
 function GetRequestIsEmpty() {
-    return count($_GET) == 0;
+    return GetNumberOfGetParams() == 0;
 }
 
 function GetRequestIsForUniqueId() {
-    return count($_GET) == 2 && isset($_GET['uid']) && isset($_GET['endpoint']);
+    return GetNumberOfGetParams() == 2 && isset($_GET['uid']) && isset($_GET['endpoint']);
 }
 
 function GetUniqueId() {
@@ -50,6 +55,10 @@ function GetUniqueId() {
         return $_GET['uid'];
     }
     return null;
+}
+
+function GetNumberOfGetParams() {
+    return count($_GET);
 }
 
 ?>

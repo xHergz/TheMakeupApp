@@ -3,43 +3,34 @@
     require_once '../../private/Api/Data/ErrorList.php';
     require_once '../../private/Api/Data/Errors.php';
     require_once '../../private/Api/Data/User.php';
-    require_once '../../private/Api/DataAccessLayer/UserDal.php';
+    require_once '../../private/Api/Helpers/UserMethods.php';
 
-    $user = new User();
-    $errorList = new ErrorList();
+    function LoginPage() {
+        $user = new User();
+        $errorList = new ErrorList();
 
-    if ($user->IsLoginInfoAvailable()) {
+        // Check if the form is filled out for creating a user
+        if (!$user->IsLoginInfoAvailable()) {
+            return $errorList;
+        }
+
         $user->GetLoginInfo();
-
-        if ($user->IsValidForLogin()) {
-            $userDal = new UserDal();
-            if($userDal->Initialize()){
-                $getUserswordHashResponse = $userDal->GetUsersPasswordHash($user->Email);
-                if ($getUserswordHashResponse['Result'] == Errors::SUCCESS) {
-                    if (password_verify($user->Password, $getUserswordHashResponse['Password_Hash'])) {
-                        $createSessionResponse = $userDal->CreateSession($getUserswordHashResponse['User_Id'], GetClientIp());
-                        if ($createSessionResponse['Result'] == Errors::SUCCESS) {
-                            $newSessionKey = $createSessionResponse['New_Session_Key'];
-                            SetSessionKey($newSessionKey);
-                            Redirect('/');
-                        }
-                    }
-                    else {
-                        $errorList->AddError(Errors::PASSWORD_INVALID);
-                    }
-                }
-                else {
-                    $errorList->AddError($getUserswordHashResponse['Result']);
-                }
-            }
-            else {
-                $errorList->AddError(Errors::DATABASE_INITIALIZATION_ERROR);
-            }
-        }
-        else {
+        if (!$user->IsValidForLogin()) {
             $errorList->AddErrors($user->GetLoginErrors());
+            return $errorList;
         }
+        
+        $loginUserStatus = LoginUser($user);
+        if ($loginUserStatus != Errors::SUCCESS) {
+            $errorList->AddError($loginUserStatus);
+            return $errorList;
+        }
+        
+        Redirect('/');
+        return $errorList;
     }
+    
+    $errorList = LoginPage();
 ?>
 <html>
     <head>

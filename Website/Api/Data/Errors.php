@@ -14,6 +14,10 @@
     define("EMAIL_UNAVAILABLE_MESSAGE", "Email Unavailable");
     define("DISPLAY_NAME_UNAVAILABLE_MESSAGE", "Display Name Unavailable");
     define("EMAIL_DOES_NOT_EXIST_MESSAGE", "Email Does Not Exist");
+    define("USER_DOES_NOT_BELONG_TO_SESSION_MESSAGE", "User does not belong to session");
+    define("REQUESTER_SESSION_KEY_INVALID_MESSAGE", "Requester session key is invalid");
+    define("QUERIED_SESSION_KEY_INVALID_MESSAGE", "Queried session key is invalid");
+    define("SESSION_KEY_NOT_AUTHORIZED_FOR_SESSION_MESSAGE", "Session key not authorized for session");
 
     class Errors {
         public const DATABASE_INITIALIZATION_ERROR = -2;
@@ -30,6 +34,10 @@
         public const EMAIL_UNAVAILABLE = 1001;
         public const DISPLAY_NAME_UNAVAILABLE = 1002;
         public const EMAIL_DOES_NOT_EXIST = 1003;
+        public const USER_DOES_NOT_BELONG_TO_SESSION = 1011;
+        public const REQUESTER_SESSION_KEY_INVALID = 1021;
+        public const QUERIED_SESSION_KEY_INVALID = 1022;
+        public const SESSION_KEY_NOT_AUTHORIZED_FOR_SESSION = 1023;
 
         public static function GetErrorMessage($errorCode) {
             switch($errorCode) {
@@ -61,6 +69,14 @@
                     return self::ConstructMessage($errorCode, DISPLAY_NAME_UNAVAILABLE_MESSAGE);
                 case self::EMAIL_DOES_NOT_EXIST:
                     return self::ConstructMessage($errorCode, EMAIL_DOES_NOT_EXIST_MESSAGE);
+                case self::USER_DOES_NOT_BELONG_TO_SESSION:
+                    return self::ConstructMessage($errorCode, USER_DOES_NOT_BELONG_TO_SESSION_MESSAGE);
+                case self::REQUESTER_SESSION_KEY_INVALID:
+                    return self::ConstructMessage($errorCode, REQUESTER_SESSION_KEY_INVALID_MESSAGE);
+                case self::QUERIED_SESSION_KEY_INVALID:
+                    return self::ConstructMessage($errorCode, QUERIED_SESSION_KEY_INVALID_MESSAGE);
+                case self::SESSION_KEY_NOT_AUTHORIZED_FOR_SESSION:
+                    return self::ConstructMessage($errorCode, SESSION_KEY_NOT_AUTHORIZED_FOR_SESSION_MESSAGE);
                 default:
                     return self::ConstructMessage($errorCode, UNKNOWN_ERROR_MESSAGE);
             }   

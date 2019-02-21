@@ -1,23 +1,23 @@
 <?php
     require_once '../../private/Api/Common/Utilities.php';
     require_once '../../private/Api/Data/ErrorList.php';
-    require_once '../../private/Api/DataAccessLayer/UserDal.php';
+    require_once '../../private/Api/Helpers/UserMethods.php';
+
+    function LogoutPage() {
+        $errorList = new ErrorList();
+
+        // Log out the user
+        $logoutUseStatus = LogoutUser();
+        if ($logoutUseStatus != Errors::SUCCESS) {
+            $errorList->AddError($logoutUseStatus);
+            return $errorList;
+        }
+
+        Redirect('/');
+        return $errorList;
+    }
     
-    $errorList = new ErrorList();
-    $userDal = new UserDal();
-    if($userDal->Initialize()){
-        $deactivateSessionResponse = $userDal->DeactivateSession(GetSessionKey());
-        if ($deactivateSessionResponse['Result'] == Errors::SUCCESS) {
-            EndSession();
-            Redirect('/');
-        }
-        else {
-            $errorList->AddError($deactivateSessionResponse['Result']);
-        }
-    }
-    else {
-        $errorList->AddError(Errors::DATABASE_INITIALIZATION_ERROR);
-    }
+    $errorList = LogoutPage();
 ?>
 <html>
     <head>

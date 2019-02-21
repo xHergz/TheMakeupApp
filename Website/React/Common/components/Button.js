@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import '../styles/Button.css'
+import '../styles/Button.css';
 
 class Button extends React.Component {
     render() {
@@ -11,7 +11,7 @@ class Button extends React.Component {
                 onClick={this.props.onClickHandler}
                 disabled={this.props.disabled}
             >
-                <h5>{this.props.label}</h5>
+                {this.props.label}
             </button>
         );
     }

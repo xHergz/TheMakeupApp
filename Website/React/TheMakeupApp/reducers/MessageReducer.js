@@ -10,26 +10,41 @@ const initialState = {
     messages: []
 };
 
+function addMessageToList(messages, newMessage) {
+    return [
+        ...messages,
+        {
+            id: messages.length + 1,
+            message: newMessage.message,
+            type: newMessage.type
+        }
+    ];
+}
+
+function removeMessageFromList(messages, idToRemove) {
+    return messages.filter((message) => {
+        return message.id !== idToRemove;
+    });
+}
+
 export default function messageReducer(state = initialState, action) {
     switch (action.type) {
         case MESSAGE_ACTIONS.ADD_PAGE_MESSAGE: {
             return {
                 ...state,
-                isFetchingCurrentSession: true
+                messages: addMessageToList(state.messages, action.payload)
             };
         }
         case MESSAGE_ACTIONS.DISMISS_PAGE_MESSAGE: {
             return {
                 ...state,
-                currentSession: action.payload,
-                isFetchingCurrentSession: false
+                messages: removeMessageFromList(state.messages, action.payload)
             };
         }
         case MESSAGE_ACTIONS.CLEAR_PAGE_MESSAGES: {
             return {
                 ...state,
-                currentSession: action.payload,
-                isFetchingCurrentSession: false
+                messages: []
             };
         }
         default:

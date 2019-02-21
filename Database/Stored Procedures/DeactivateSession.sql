@@ -1,35 +1,28 @@
 DELIMITER $$
 CREATE PROCEDURE DeactivateSession
 (
-    IN _sessionKey VARCHAR(256)
+    IN _sessionKey VARCHAR(256),
+    OUT _status SMALLINT
 )
 BEGIN
-    DECLARE result SMALLINT;
-    DECLARE sessionId INT;
+    DECLARE sessionId INT DEFAULT NULL;
 
-    SELECT
-        Session_Id
-    INTO
-        sessionId
-    FROM
-        Session
-    WHERE
-        Session_Key = _sessionKey;
+    DeactivateSession:BEGIN
+        -- Get the sessions id
+        SET sessionId = GetSessionIdBySessionKey(_sessionKey);
 
-    -- Deactivate the session
-    UPDATE
-        Session
-    SET
-        Active = FALSE
-    WHERE
-        Session_Id = sessionId;
+        -- Deactivate the session
+        UPDATE
+            Session
+        SET
+            Active = FALSE
+        WHERE
+            Session_Id = sessionId;
 
-    CALL LogSessionDeactivation(sessionId);
-    
-    SET result = 0;
-
-    SELECT
-        result AS Result;
+        CALL LogSessionDeactivation(sessionId);
+        
+        SET _status = 0;
+    END;
 END
 $$
 DELIMITER ;

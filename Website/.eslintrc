@@ -2,7 +2,7 @@
     "extends": "airbnb",
     "rules": {
         "arrow-body-style": ["error", "always"],
-		"brace-style": ["error", "stroustrup"],
+		"brace-style": ["error", "stroustrup", { "allowSingleLine": true }],
         "comma-dangle": ["error", "never"],
         "function-paren-newline": ["error", "consistent"],
         "indent": ["error", 4, { "SwitchCase": 1 }],

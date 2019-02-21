@@ -1,23 +1,19 @@
 DELIMITER $$
 CREATE PROCEDURE LogUserCreation
 (
-    IN _sessionKey INT
+    IN _sessionKey VARCHAR(256)
 )
 BEGIN
-    DECLARE userCreateAction SMALLINT DEFAULT 1;
+    DECLARE USER_CREATE_ACTION SMALLINT DEFAULT 1;
+
     DECLARE sessionId INT;
 
-    SELECT
-        Session_Id
-    INTO
-        sessionId
-    FROM
-        Session
-    WHERE
-        Session_Key = _sessionKey;
+    LogUserCreation:BEGIN
+        SET sessionId = GetSessionIdBySessionKey(_sessionKey);
 
-    INSERT INTO User_Log (Session_Id, User_Action_Id, Timestamp, Message) VALUES
-    (sessionId, userCreateAction, CURRENT_TIMESTAMP, 'User created.');
+        INSERT INTO User_Log (Session_Id, User_Action_Id, Timestamp, Message) VALUES
+        (sessionId, USER_CREATE_ACTION, CURRENT_TIMESTAMP, 'User created.');
+    END;
 END
 $$
 DELIMITER ;

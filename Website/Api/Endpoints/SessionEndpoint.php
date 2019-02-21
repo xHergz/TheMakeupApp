@@ -1,31 +1,37 @@
 <?php
     require_once __DIR__. "/../Common/ApiUtilities.php";
     require_once __DIR__. "/../Common/Log.php";
+    require_once __DIR__. "/../Data/ApiRequest.php";
+    require_once __DIR__. "/../Data/HttpStatus.php";
     require_once __DIR__. "/../DataAccessLayer/UserDal.php";
     require_once 'IApiEndpoint.php';
 
     class SessionEndPoint implements IApiEndpoint {
         public function get() {
+            $apiRequest = new ApiRequest($_GET, 'Session');
             // This method only supports being called by unique id
-            if (GetRequestIsEmpty()) {
-                Log::LogError('(404) Session GET Request failed because GET request is empty.');
-                BadRequest(404);
+            if ($apiRequest->IsEmpty()) {
+                $apiRequest->EndRequest(HttpStatus::NOT_FOUND, 'Request is empty');
             }
-            if (!GetRequestIsForUniqueId()) {
-                Log::LogError('(404) Session GET Request failed because it\'s not being called by Unique ID.');
-                BadRequest(404);
+            if (!$apiRequest->IsForUniqueId()) {
+                $apiRequest->EndRequest(HttpStatus::NOT_FOUND, 'Request is not for unique id');
             }
 
             $userDal = new UserDal();
             if (!$userDal->Initialize()) {
-                Log::LogError('(404) Session GET Request failed because the database connection could not be initialized.');
-                BadRequest(500);
+                $apiRequest->EndRequest(HttpStatus::INTERNAL_SERVER_ERROR, 'Database connection could not be initialized');
             }
+            
             $requesterSessionKey = GetBearerToken();
             $queriedSessionKey = GetUniqueId();
-            Log::LogInformation('Session GET Request with Requester Session Key \'' . $requesterSessionKey . 
-                '\' and Queried Session Key \'' . $queriedSessionKey . '\'.');
-            $response = $userDal->GetSessionInfo($requesterSessionKey, $queriedSessionKey);
+            $apiRequest->LogRequest();
+
+            // Check if requester session is authorized to access queried session
+            if (!$userDal->IsSessionAuthorizedForSession($requesterSessionKey, $queriedSessionKey)) {
+                $apiRequest->EndRequest(HttpStatus::UNAUTHORIZED, 'Requester session key is not authorized for queried session key');
+            }
+            
+            $response = $userDal->GetSessionInfo($queriedSessionKey);
             $jsonResponse = $userDal->EncodeResponse($response);
             Log::LogInformation('Session GET Response: ' . $jsonResponse);
             echo $jsonResponse;

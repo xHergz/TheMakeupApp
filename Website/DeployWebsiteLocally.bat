@@ -1,4 +1,4 @@
-call npm run build
+call npm run dev
 
 IF %ERRORLEVEL%==0 (
     rd "C:\xampp\htdocs\TheMakeupApp\private" /s /q
