@@ -28,6 +28,7 @@ class Header extends React.Component {
         };
         this.toggleMobileNavigation = this.toggleMobileNavigation.bind(this);
         this.isPageActive = this.isPageActive.bind(this);
+        this.renderNotificationBadge = this.renderNotificationBadge.bind(this);
         this.renderHamburger = this.renderHamburger.bind(this);
         this.renderNavigation = this.renderNavigation.bind(this);
         this.renderDesktopNavigation = this.renderDesktopNavigation.bind(this);
@@ -43,6 +44,18 @@ class Header extends React.Component {
 
     isPageActive(pageKey) {
         return this.props.currentPageKey === pageKey;
+    }
+
+    renderNotificationBadge() {
+        if (this.props.newNotifications === 0) {
+            return null;
+        }
+
+        return (
+            <span className="notification-badge">
+                {this.props.newNotifications}
+            </span>
+        )
     }
 
     renderHamburger() {
@@ -64,6 +77,7 @@ class Header extends React.Component {
                 <div className="hamburger-line light-line" />
                 <div className="hamburger-line medium-line" />
                 <div className="hamburger-line dark-line" />
+                {this.renderNotificationBadge()}
             </div>
         );
     }
@@ -82,7 +96,9 @@ class Header extends React.Component {
                     label="My Notifications"
                     isActive={this.isPageActive(PAGES.NOTIFICATIONS.KEY)}
                     icon={faBell}
-                />
+                >
+                    {this.renderNotificationBadge()}
+                </NavBarLink>
                 <NavBarLink
                     linkTo={GetProfileUrl(this.props.displayName)}
                     label="My Profile"
@@ -127,6 +143,7 @@ class Header extends React.Component {
     }
 
     render() {
+        console.log(`New Notifications: ${this.props.newNotifications}`);
         return (
             <div className="header">
                 <div className="header-main">
@@ -144,7 +161,8 @@ class Header extends React.Component {
 
 Header.propTypes = {
     displayName: PropTypes.string.isRequired,
-    currentPageKey: PropTypes.string.isRequired
+    currentPageKey: PropTypes.string.isRequired,
+    newNotifications: PropTypes.number.isRequired
 };
 
 export default Header;

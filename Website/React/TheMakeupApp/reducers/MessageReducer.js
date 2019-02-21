@@ -30,21 +30,18 @@ function removeMessageFromList(messages, idToRemove) {
 export default function messageReducer(state = initialState, action) {
     switch (action.type) {
         case MESSAGE_ACTIONS.ADD_PAGE_MESSAGE: {
-            console.log(`Reducing message ${action.payload}`);
             return {
                 ...state,
                 messages: addMessageToList(state.messages, action.payload)
             };
         }
         case MESSAGE_ACTIONS.DISMISS_PAGE_MESSAGE: {
-            console.log('dismissing');
             return {
                 ...state,
                 messages: removeMessageFromList(state.messages, action.payload)
             };
         }
         case MESSAGE_ACTIONS.CLEAR_PAGE_MESSAGES: {
-            console.log('Clearing');
             return {
                 ...state,
                 messages: []

@@ -18,7 +18,6 @@ export function addWarningMessage(message) {
 }
 
 export function addErrorMessage(message) {
-    console.log(`Adding error: ${message}`);
     return (dispatch) => {
         dispatch(addPageMessage(MESSAGE_TYPE.ERROR, message));
     };

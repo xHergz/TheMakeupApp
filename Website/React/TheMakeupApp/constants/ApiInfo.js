@@ -3,6 +3,7 @@ import { createQueryString } from '../../Common/helpers/browserUtilities';
 const API_URL = 'http://api.themakeupapp.localhost';
 
 export const API_ENDPOINTS = {
+    NOTIFICATION: 'notifications',
     SESSION: 'session'
 };
 

@@ -47,7 +47,6 @@ class ErrorList extends React.Component {
     }
 
     render() {
-        console.log(this.props.messages);
         if (this.props.messages.length === 0) {
             return null;
         }

@@ -31,7 +31,10 @@ class NavBarLink extends React.Component {
                     className="plain-link"
                 >
                     {this.renderIcon()}
-                    <h5>{this.props.label}</h5>
+                    <h5>
+                        {this.props.label}
+                        {this.props.children}
+                    </h5>
                 </a>
             </div>
         );
@@ -39,6 +42,9 @@ class NavBarLink extends React.Component {
 }
 
 NavBarLink.propTypes = {
+    children: PropTypes.arrayOf(
+        PropTypes.element
+    ),
     linkTo: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     isActive: PropTypes.bool,
@@ -46,6 +52,7 @@ NavBarLink.propTypes = {
 };
 
 NavBarLink.defaultProps = {
+    children: null,
     isActive: false,
     icon: null
 };

@@ -10,6 +10,7 @@ import {
 import ErrorList from '../components/ErrorList';
 
 import { dismissMessage } from '../actions/MessageActions';
+import { getNumberOfNewNotifications } from '../actions/NotificationActions';
 import { getCurrentSessionInfo } from '../actions/SessionActions';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
@@ -33,12 +34,27 @@ import Schedule from './Schedule';
 import '../../../Css/TheMakeupApp.css';
 
 class TheMakeupApp extends React.Component {
-    static test() {
-        return <h1>Basic React App</h1>;
+    constructor(props) {
+        super(props);
+        this.state = {
+            refreshNewNotificationsId: null
+        };
+        this.refreshNewNotifications = this.refreshNewNotifications.bind(this);
     }
 
     componentDidMount() {
         this.props.getCurrentSessionInfo();
+        this.refreshNewNotifications();
+        const intervalId = window.setInterval(this.refreshNewNotifications, 5000);
+        this.setState({refreshNewNotificationsId: intervalId});
+    }
+
+    componentWillUnmount() {
+        window.clearInterval(this.state.refreshNewNotificationsId);
+    }
+
+    refreshNewNotifications() {
+        this.props.getNumberOfNewNotifications(this.props.sessionKey, this.props.currentSession.displayName);
     }
 
     render() {
@@ -47,6 +63,7 @@ class TheMakeupApp extends React.Component {
                 <Header
                     displayName={this.props.currentSession.displayName}
                     currentPageKey={this.props.currentPageKey}
+                    newNotifications={this.props.newNotifications}
                 />
                 <div className="page-content">
                     <ErrorList
@@ -79,29 +96,35 @@ class TheMakeupApp extends React.Component {
 
 function mapStateToProps(state) {
     return {
+        currentPageKey: state.siteReducer.currentPageKey,
         currentSession: state.sessionReducer.currentSession,
         messages: state.messageReducer.messages,
-        currentPageKey: state.siteReducer.currentPageKey
+        newNotifications: state.notificationReducer.newNotifications,
+        sessionKey: state.sessionReducer.sessionKey
     };
 }
 
 TheMakeupApp.propTypes = {
-    getCurrentSessionInfo: PropTypes.func.isRequired,
-    dismissMessage: PropTypes.func.isRequired,
+    currentPageKey: PropTypes.string.isRequired,
     currentSession: PropTypes.shape({
         displayName: PropTypes.string.isRequired,
         firstName: PropTypes.string.isRequired,
         lastName: PropTypes.string.isRequired,
         isArtist: PropTypes.bool.isRequired
     }).isRequired,
+    dismissMessage: PropTypes.func.isRequired,
+    getCurrentSessionInfo: PropTypes.func.isRequired,
+    getNumberOfNewNotifications: PropTypes.func.isRequired,
     messages: PropTypes.arrayOf(PropTypes.object).isRequired,
-    currentPageKey: PropTypes.string.isRequired
+    newNotifications: PropTypes.number.isRequired,
+    sessionKey: PropTypes.string.isRequired
 };
 
 export default withRouter(connect(
     mapStateToProps,
     {
         dismissMessage,
-        getCurrentSessionInfo
+        getCurrentSessionInfo,
+        getNumberOfNewNotifications
     }
 )(TheMakeupApp));

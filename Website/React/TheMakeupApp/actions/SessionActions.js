@@ -21,11 +21,10 @@ export function getCurrentSessionInfo() {
         if (sessionKey != null) {
             return ApiRequest(getRequest(GetUidApiUrl(API_ENDPOINTS.SESSION, sessionKey), sessionKey), 'getCurrentSessionInfo')
                 .then((json) => {
-                    console.log('Got here2');
                     dispatch(receivedSessionInfo(json.session));
                 })
                 .catch((error) => {
-                    console.log(error.message);
+                    console.error(error);
                     dispatch(addErrorMessage(error.message));
                 });
         }

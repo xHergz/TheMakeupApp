@@ -22,7 +22,6 @@ export default function ApiRequest(request, methodName) {
                     reject(new Error(errorMessage));
                     return;
                 }
-                console.log('Got here');
                 resolve(json);
             });
     });
