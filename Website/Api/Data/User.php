@@ -34,7 +34,16 @@
             $this->DisplayName = null;
             $this->FirstName = null;
             $this->LastName = null;
-		}
+        }
+        
+        public function SetInfo($email, $password, $confirmPassword, $displayName, $firstName, $lastName) {
+            $this->Email = $email == '' ? null : $email;
+            $this->Password = $password == '' ? null : $password;
+            $this->ConfirmPassword = $confirmPassword == '' ? null : $confirmPassword;
+            $this->DisplayName = $displayName == '' ? null : $displayName;
+            $this->FirstName = $firstName == '' ? null : $firstName;
+            $this->LastName = $lastName == '' ? null : $lastName;
+        }
 
         public function IsSignUpInfoAvailable() {
             return isset($_POST[self::EMAIL_INPUT]) && isset($_POST[self::PASSWORD_INPUT]) && isset($_POST[self::CONFIRM_PASSWORD_INPUT])
@@ -103,6 +112,36 @@
 
             if (!$this->IsEmailValid()) {
                 array_push($errorCodes, Errors::EMAIL_INVALID);
+            }
+
+            return $errorCodes;
+        }
+
+        public function GetUpdateErrors() {
+            $errorCodes = array();
+
+            if ($this->Email != null && !$this->IsEmailValid()) {
+                array_push($errorCodes, Errors::EMAIL_INVALID);
+            }
+
+            if ($this->Password != null && !$this->IsPasswordValid()) {
+                array_push($errorCodes, Errors::PASSWORD_INVALID);
+            }
+
+            if ($this->Password != null && !$this->IsPasswordConfirmed()) {
+                array_push($errorCodes, Errors::PASSWORD_NOT_CONFIRMED);
+            }
+
+            if ($this->DisplayName != null && !$this->IsDisplayNameValid()) {
+                array_push($errorCodes, Errors::DISPLAY_NAME_INVALID);
+            }
+
+            if ($this->FirstName != null && !$this->IsFirstNameValid()) {
+                array_push($errorCodes, Errors::FIRST_NAME_INVALID);
+            }
+
+            if ($this->LastName != null && !$this->IsLastNameValid()) {
+                array_push($errorCodes, Errors::LAST_NAME_INVALID);
             }
 
             return $errorCodes;

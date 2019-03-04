@@ -91,14 +91,31 @@
         return Errors::SUCCESS;
     }
 
-    function AuthorizeSessionForUser($sessionKey, $displayName) {
+    function AuthorizeSessionForDisplayName($sessionKey, $displayName) {
         $userDal = new UserDal();
         if (!$userDal->Initialize()) {
             $userDal->Close();
             return Errors::DATABASE_INITIALIZATION_ERROR;
         }
 
-        if (!$userDal->DoesSessionOwnUser($sessionKey, $displayName)) {
+        $userId = $userDal->GetUserIdByDisplayName($displayName);
+        if ($userId == null) {
+            $userDal->Close();
+            return Errors::DISPLAY_NAME_DOES_NOT_EXIST;
+        }
+
+        $userDal->Close();
+        return AuthorizeSessionForUser($sessionKey, $userId);
+    }
+
+    function AuthorizeSessionForUser($sessionKey, $userId) {
+        $userDal = new UserDal();
+        if (!$userDal->Initialize()) {
+            $userDal->Close();
+            return Errors::DATABASE_INITIALIZATION_ERROR;
+        }
+
+        if (!$userDal->DoesSessionOwnUser($sessionKey, $userId)) {
             $userDal->Close();
             return Errors::USER_DOES_NOT_BELONG_TO_SESSION;
         }

@@ -10,9 +10,6 @@
         public function get() {
             $apiRequest = new ApiRequest($_GET, 'Session');
             // This method only supports being called by unique id
-            if ($apiRequest->IsEmpty()) {
-                $apiRequest->EndRequest(HttpStatus::NOT_FOUND, 'Request is empty');
-            }
             if (!$apiRequest->IsForUniqueId()) {
                 $apiRequest->EndRequest(HttpStatus::NOT_FOUND, 'Request is not for unique id');
             }
@@ -23,7 +20,7 @@
             }
             
             $requesterSessionKey = GetBearerToken();
-            $queriedSessionKey = GetUniqueId();
+            $queriedSessionKey = $apiRequest->GetUniqueId();
             $apiRequest->LogRequest();
 
             // Check if requester session is authorized to access queried session

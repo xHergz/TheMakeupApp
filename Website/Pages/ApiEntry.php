@@ -7,6 +7,7 @@
     require_once '../../private/Api/DataAccessLayer/UserDal.php';
     require_once '../../private/Api/Endpoints/NotificationsEndPoint.php';
     require_once '../../private/Api/Endpoints/SessionEndPoint.php';
+    require_once '../../private/Api/Endpoints/UserEndPoint.php';
     require_once '../../private/Api/Helpers/UserMethods.php';
 
     header('Access-Control-Allow-Origin: *');
@@ -16,7 +17,8 @@
     // Register Endpoints
     $registeredEndpoints = [
         "notifications" => new NotificationsEndpoint(),
-        "session" => new SessionEndPoint()
+        "session" => new SessionEndPoint(),
+        "user" => new UserEndPoint()
     ];
     
     $apiRequest = new ApiRequest($_GET, 'API Entry');
@@ -42,7 +44,7 @@
             break;
         case 'POST':
             AuthorizeApiUser($sessionKey);
-            $_POST = GetJsonInput();
+            $_POST = empty($_POST) ? GetJsonInput() : $_POST;
             $selectedEndpoint->post();
             break;
         case 'PUT':
