@@ -66,6 +66,7 @@ call:runMySqlFile "./Functions/GetSessionIdBySessionKey.sql"
 call:runMySqlFile "./Functions/GetSystemConfigValue.sql"
 call:runMySqlFile "./Functions/GetUserIdByDisplayName.sql"
 call:runMySqlFile "./Functions/GetUserIdBySessionKey.sql"
+call:runMySqlFile "./Functions/DoesUserIdExist.sql"
 
 REM Create the Stored Procedures
 call:runMySqlFile "./Stored Procedures/LogSessionCreation.sql"
@@ -85,6 +86,7 @@ call:runMySqlFile "./Stored Procedures/GetNumberOfNewUserNotifications.sql"
 call:runMySqlFile "./Stored Procedures/AddAlertUserNotification.sql"
 call:runMySqlFile "./Stored Procedures/AddTaskUserNotification.sql"
 call:runMySqlFile "./Stored Procedures/AcknowledgeUserNotifications.sql"
+call:runMySqlFile "./Stored Procedures/GetUser.sql"
 
 REM Insert the initial data
 call:runMySqlFile "./Data/SystemConfigurationData.sql"

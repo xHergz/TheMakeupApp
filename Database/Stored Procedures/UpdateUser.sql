@@ -13,6 +13,7 @@ CREATE PROCEDURE UpdateUser
 BEGIN
     DECLARE EMAIL_NOT_AVAILABLE SMALLINT DEFAULT 1001;
     DECLARE DISPLAY_NAME_NOT_AVAILABLE SMALLINT DEFAULT 1002;
+    DECLARE USER_ID_DOES_NOT_EXIST SMALLINT DEFAULT 1005;
 
     DECLARE currentEmail VARCHAR(256);
     DECLARE currentPassword VARCHAR(256);
@@ -26,15 +27,21 @@ BEGIN
     DECLARE updateLastName BOOLEAN DEFAULT FALSE;
 
     UpdateUser:BEGIN
+        -- Check if the User Id given exists
+        IF (_userId IS NULL OR !DoesUserIdExist(_userId)) THEN
+            SET _status = USER_ID_DOES_NOT_EXIST;
+            LEAVE UpdateUser;
+        END IF;
+
         -- Check if the email is given and not available
         IF (_email IS NOT NULL AND DoesUserEmailExist(_email)) THEN
-            SET _status = 1001;
+            SET _status = EMAIL_NOT_AVAILABLE;
             LEAVE UpdateUser;
         END IF;
 
         -- Check if the display name is given and not available
         IF (_displayName IS NOT NULL AND DoesUserDisplayNameExist(_displayName)) THEN
-            SET _status = 1002;
+            SET _status = DISPLAY_NAME_NOT_AVAILABLE;
             LEAVE UpdateUser;
         END IF;
 
