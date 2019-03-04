@@ -10,6 +10,8 @@
 
         private $_endpoint;
 
+        private $_uniqueId;
+
         private $_httpMethod;
 
         private $_queryString;
@@ -18,12 +20,17 @@
 
         public function __construct($request, $identifier) {
             $this->_apiRequest = $request;
-            $this->_endpoint = $this->GetKey(EndpointKey);
             $this->_httpMethod = $_SERVER['REQUEST_METHOD'];
             $this->_queryString = $_SERVER['QUERY_STRING'];
+            // Endpoint and unique id will always come from the query string
+            $queryStringVars = ParseQueryString($this->_queryString);
+            $this->_endpoint = isset($queryStringVars[EndpointKey]) ? $queryStringVars[EndpointKey] : null;
+            $this->_uniqueId = isset($queryStringVars[UniqueIdKey]) ? $queryStringVars[UniqueIdKey] : null;
             $this->_identifier = $identifier;
-            $this->RemoveKey(EndpointKey);
+            unset($_GET[EndpointKey]);
+            unset($_GET[UniqueIdKey]);
             Log::LogInformation($this->_identifier . ' \'' . $this->_httpMethod . '\' Request made with query string: ' . $this->_queryString);
+            Log::LogInformation('End Point: ' . $this->_endpoint . ' UID: ' . $this->_uniqueId);
         }
 
         public function IsKeySet($key) {
@@ -46,11 +53,11 @@
         }
 
         public function IsForUniqueId() {
-            return $this->IsKeySet(UniqueIdKey) && $this->NumberOfParameters() == 1;
+            return $this->_uniqueId != null;
         }
 
         public function GetUniqueId() {
-            return $this->GetKey(UniqueIdKey);
+            return $this->_uniqueId;
         }
 
         public function GetEndpoint() {

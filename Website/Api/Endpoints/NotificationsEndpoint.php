@@ -135,7 +135,9 @@
         }
 
         private function IsSessionAuthorizedForNotifications($displayName) {
-            $doesSessionOwnUserResponse = AuthorizeSessionForUser(GetBearerToken(), $displayName);
+            Log::LogInformation("Session Authorized for Display Name: " . $displayName);
+            $doesSessionOwnUserResponse = AuthorizeSessionForDisplayName(GetBearerToken(), $displayName);
+            Log::LogInformation("Session Authorized for Display Name Response: " . $doesSessionOwnUserResponse);
             if ($doesSessionOwnUserResponse != Errors::SUCCESS) {
                 switch ($doesSessionOwnUserResponse) {
                     case Errors::USER_DOES_NOT_BELONG_TO_SESSION:
