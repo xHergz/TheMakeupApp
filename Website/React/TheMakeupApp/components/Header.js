@@ -10,7 +10,6 @@ import React from 'react';
 import NavBarLink from '../../Common/components/NavBarLink';
 import PAGES from '../constants/Pages';
 import {
-    GetAccountUrl,
     GetAccountPageKey,
     GetPortfolioUrl,
     GetPortfolioPageKey,
@@ -112,7 +111,7 @@ class Header extends React.Component {
                     icon={faFolder}
                 />
                 <NavBarLink
-                    linkTo={GetAccountUrl(this.props.displayName)}
+                    linkTo={PAGES.ACCOUNT.LINK}
                     label="My Account"
                     isActive={this.isPageActive(GetAccountPageKey(this.props.displayName))}
                     icon={faCog}

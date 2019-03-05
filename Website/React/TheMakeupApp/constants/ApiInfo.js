@@ -9,7 +9,8 @@ const SESSION_KEY_COOKIE = 'tma_session_key';
 
 export const API_ENDPOINTS = {
     NOTIFICATION: 'notifications',
-    SESSION: 'session'
+    SESSION: 'session',
+    USER: 'user'
 };
 
 export function GetSessionKey() {

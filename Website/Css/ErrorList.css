@@ -3,14 +3,27 @@
     flex-direction: column;
 }
 
-.error {
+.error, .success, .warning {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: lightpink;
-    border: 1px solid red;
     padding: 5px;
     margin-bottom: 5px;
+}
+
+.error {
+    background-color: lightpink;
+    border: 1px solid red;
+}
+
+.success {
+    background-color: lightgreen;
+    border: 1px solid green;
+}
+
+.warning {
+    background-color: lightgoldenrodyellow;
+    border: 1px solid yellow;
 }
 
 .dismiss-error {

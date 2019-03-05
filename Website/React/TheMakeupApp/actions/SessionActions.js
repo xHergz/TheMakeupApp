@@ -2,7 +2,8 @@ import { getRequest } from '../../Common/helpers/fetchUtilities';
 
 import {
     API_ENDPOINTS,
-    GetUidApiUrl
+    GetUidApiUrl,
+    GetSessionKey
 } from '../constants/ApiInfo';
 import ApiRequest from '../constants/ApiRequest';
 import {
@@ -11,7 +12,8 @@ import {
 } from '../reducers/SessionReducer';
 import { addErrorMessage } from './MessageActions';
 
-export function getSessionInfo(sessionKey) {
+export function getSessionInfo() {
+    const sessionKey = GetSessionKey();
     return (dispatch) => {
         dispatch(requestSessionInfo());
         return ApiRequest(getRequest(GetUidApiUrl(API_ENDPOINTS.SESSION, sessionKey), sessionKey), 'getCurrentSessionInfo')

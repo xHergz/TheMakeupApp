@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import isNullOrWhiteSpace from '../helpers/stringUtilities';
 
-import '../styles/Input.css'
+import '../styles/Input.css';
 
 class TextInput extends React.Component {
     constructor(props) {
@@ -13,12 +13,76 @@ class TextInput extends React.Component {
             currentValue: props.defaultValue,
             errorMessage: ''
         };
+        this.onInputChanged = this.onInputChanged.bind(this);
+        this.getValue = this.getValue.bind(this);
+        this.updateValidation = this.updateValidation.bind(this);
+        this.changeValidity = this.changeValidity.bind(this);
+        this.changeValue = this.changeValue.bind(this);
+        this.isValid = this.isValid.bind(this);
+        this.isEmpty = this.isEmpty.bind(this);
         this.renderInputLabel = this.renderInputLabel.bind(this);
         this.renderInput = this.renderInput.bind(this);
-        this.onInputChanged = this.onInputChanged.bind(this);
-        this.updateValidation = this.updateValidation.bind(this);
-        this.getValue = this.getValue.bind(this);
-        this.isValid = this.isValid.bind(this);
+    }
+
+    onInputChanged(event) {
+        const inputValue = event.target.value;
+        this.updateValidation(inputValue);
+    }
+
+    getValue() {
+        return this.state.currentValue;
+    }
+
+    updateValidation(value = this.state.currentValue) {
+        const validation = this.props.onValidate(value, this.props.isRequired);
+        if (isNullOrWhiteSpace(value) && this.props.isRequired) {
+            this.changeValidity(false);
+            this.changeValue(value);
+            this.setState({
+                errorMessage: 'Input is Required'
+            });
+        }
+        else if (!validation.isValid) {
+            this.changeValidity(false);
+            this.changeValue(value);
+            this.setState({
+                errorMessage: validation.message
+            });
+        }
+        else if (isNullOrWhiteSpace(value) && !this.props.isRequired) {
+            this.changeValidity(true);
+            this.changeValue(value);
+            this.setState({
+                errorMessage: ''
+            });
+        }
+        else {
+            this.changeValidity(true);
+            this.changeValue(value);
+            this.setState({
+                errorMessage: ''
+            });
+        }
+    }
+
+    changeValidity(valid) {
+        this.setState({
+            isValid: valid
+        }, this.props.onValidityChanged);
+    }
+
+    changeValue(value) {
+        this.setState({
+            currentValue: value
+        }, this.props.onValueChanged);
+    }
+
+    isValid() {
+        return this.state.isValid;
+    }
+
+    isEmpty() {
+        return isNullOrWhiteSpace(this.state.currentValue);
     }
 
     renderInputLabel() {
@@ -29,77 +93,21 @@ class TextInput extends React.Component {
     renderInput() {
         const inputClass = this.state.isValid ? 'input-input' : 'input-input invalid-input';
         const inputType = this.props.maskInput ? 'password' : 'text';
-        return(
-            <input 
+        return (
+            <input
                 className={inputClass}
                 type={inputType}
                 onChange={this.onInputChanged}
                 value={this.state.currentValue}
+                placeholder={this.props.placeholderText}
             />
-        ); 
-    }
-
-    onInputChanged(event) {
-        const inputValue = event.target.value;
-        this.updateValidation(inputValue);
-    }
-
-    updateValidation(value = this.state.currentValue) {
-        const validation = this.props.onValidate(value);
-        if (isNullOrWhiteSpace(value) && this.props.isRequired) {
-            this.setState({
-                isValid: false,
-                errorMessage: 'Input is Required',
-                currentValue: value
-            })
-        }
-        else if (isNullOrWhiteSpace(value) && !this.props.isRequired) {
-            this.setState({
-                isValid: true,
-                errorMessage: '',
-                currentValue: value
-            })
-        }
-        else if (!validation.isValid) {
-            this.setState({
-                isValid: false,
-                errorMessage: validation.message,
-                currentValue: value
-            })
-        }
-        else {
-            this.setState({
-                isValid: true,
-                errorMessage: '',
-                currentValue: value
-            })
-        }
-    }
-
-    getValue() {
-        return this.state.currentValue;
-    }
-
-    //
-    // FUNCTION		: isValid
-    // DESCRIPTION	:
-    //		This function determines if the input is valid
-    // PARAMETERS	:
-    //		None/Void
-    // RETURNS		:
-    //		bool    : true if valid, false if not
-    //
-    isValid() {
-        if (this.props.isRequired && isNullOrWhiteSpace(this.state.currentValue)){
-            return false;
-        }
-        return this.state.isValid;
+        );
     }
 
     render() {
-        return(
+        return (
             <div className="input-container">
-                <h4>{this.renderInputLabel()}</h4>
+                <h3>{this.renderInputLabel()}</h3>
                 {this.renderInput()}
                 <div className="input-error">
                     <h6>{this.state.errorMessage}</h6>
@@ -117,15 +125,24 @@ TextInput.propTypes = {
     defaultValue: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number
-    ])
+    ]),
+    placeholderText: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]),
+    onValidityChanged: PropTypes.func,
+    onValueChanged: PropTypes.func
 };
 
 TextInput.defaultProps = {
     label: '',
     maskInput: false,
     isRequired: false,
-    onValidate: (value) => { return { isValid: true }; },
-    defaultValue: ''
-}
+    onValidate: () => { return { isValid: true }; },
+    defaultValue: '',
+    placeholderText: '',
+    onValidityChanged: () => {},
+    onValueChanged: () => {}
+};
 
 export default TextInput;

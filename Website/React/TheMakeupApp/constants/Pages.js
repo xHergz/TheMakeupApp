@@ -1,7 +1,7 @@
 const PAGES = {
     ACCOUNT: {
         KEY: 'ACCOUNT',
-        LINK: '/account/:displayName',
+        LINK: '/account',
         LABEL: 'My Account'
     },
     APPOINTMENT_INFO: {
