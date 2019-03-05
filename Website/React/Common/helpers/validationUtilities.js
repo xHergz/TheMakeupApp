@@ -1,8 +1,10 @@
 import moment from 'moment';
 
-const NAME_MAX_LENGTH = 50;
+const NAME_MAX_LENGTH = 100;
 
-const PASSWORD_MIN_LENGTH = 10;
+const USERNAME_MAX_LENGTH = 50;
+
+const PASSWORD_MIN_LENGTH = 8;
 
 const PASSWORD_MAX_LENGTH = 50;
 
@@ -21,6 +23,14 @@ export function validateEmail(email) {
     const emailRegex = new RegExp(/^.+@.+\..+$/);
     if (!emailRegex.test(email)) {
         return createValidationObject(false, 'Must be a valid email address.');
+    }
+    return createValidationObject(true);
+}
+
+export function validateUsername(username) {
+    const usernameRegex = new RegExp(/^([A-Za-z0-9\-\_]+)$/);
+    if (!usernameRegex.test(username)) {
+        return createValidationObject(false, 'Must be a valid username');
     }
     return createValidationObject(true);
 }

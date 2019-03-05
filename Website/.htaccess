@@ -23,7 +23,7 @@ RewriteRule ^login?$ /pages/Login.php [NC,L]
 RewriteRule ^terms-of-service?$ /pages/TermsOfService.php [NC,L]
 RewriteRule ^privacy-policy?$ /pages/PrivacyPolicy.php [NC,L]
 # Redirection of React pages
-RewriteRule ^account/([A-Za-z0-9\-\_]+)?$ /pages/TheMakeupApp.php [NC,L]
+RewriteRule ^account$ /pages/TheMakeupApp.php [NC,L]
 RewriteRule ^appointment/([0-9]+)?$ /pages/TheMakeupApp.php [NC,L]
 RewriteRule ^appointment-setup?$ /pages/TheMakeupApp.php [NC,L]
 RewriteRule ^apply?$ /pages/TheMakeupApp.php [NC,L]

@@ -12,6 +12,7 @@
 
     header('Access-Control-Allow-Origin: *');
     header('Access-Control-Allow-Headers: Authorization, Content-Type');
+    header('Access-Control-Allow-Methods: DELETE,GET,OPTION,POST,PUT');
     header('Content-type: application/json');
 
     // Register Endpoints

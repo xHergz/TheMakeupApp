@@ -123,7 +123,7 @@
         }
 
         public function delete() {
-            $apiRequest = new ApiRequest($_DELETE, 'User');
+            $apiRequest = new ApiRequest($_GET, 'User');
             // This method only supports being called by unique id: ../user/(user_id)
             if (!$apiRequest->IsForUniqueId()) {
                 $apiRequest->EndRequest(HttpStatus::NOT_FOUND, 'Request is not for unique id');

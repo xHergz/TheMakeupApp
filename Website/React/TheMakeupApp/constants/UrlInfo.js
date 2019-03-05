@@ -16,10 +16,6 @@ export function GetPortfolioPageKey(displayName) {
     return `${PAGES.ARTIST_PORTFOLIO.KEY}/${displayName}`;
 }
 
-export function GetAccountUrl(displayName) {
-    return PAGES.ACCOUNT.LINK.replace(':displayName', displayName);
-}
-
 export function GetAccountPageKey(displayName) {
     return `${PAGES.ACCOUNT.KEY}/${displayName}`;
 }

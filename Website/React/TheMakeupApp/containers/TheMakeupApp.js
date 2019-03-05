@@ -44,11 +44,11 @@ class TheMakeupApp extends React.Component {
     }
 
     componentDidMount() {
-        this.props.getSessionInfo(GetSessionKey());
-        const intervalId = window.setInterval(this.refreshNewNotifications, 5000);
-        this.setState({
-            refreshNewNotificationsId: intervalId
-        });
+        this.props.getSessionInfo();
+        //const intervalId = window.setInterval(this.refreshNewNotifications, 5000);
+        //this.setState({
+            //refreshNewNotificationsId: intervalId
+        //});
     }
 
     componentWillUnmount() {
