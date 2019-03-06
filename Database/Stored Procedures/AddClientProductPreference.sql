@@ -24,7 +24,7 @@ BEGIN
 		END IF;
 
         -- Check if the client product preference already exists
-		IF (!DoesClientHaveProductPreference(_clientProfileId, _productPreferenceId)) THEN
+		IF (DoesClientHaveProductPreference(_clientProfileId, _productPreferenceId)) THEN
 			SET _status = CLIENT_PRODUCT_PREFERENCE_ALREADY_EXISTS;
 			LEAVE AddClientProductPreference;
 		END IF;

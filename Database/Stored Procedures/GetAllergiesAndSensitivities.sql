@@ -1,24 +1,30 @@
 DELIMITER $$
-CREATE PROCEDURE AddCustomAllergySensitivity
+CREATE PROCEDURE GetAllergiesAndSensitivities
 (
     IN _clientProfileId INT,
-    IN _description VARCHAR(100),
     OUT _status SMALLINT
 )
 BEGIN
     DECLARE CLIENT_PROFILE_DOES_NOT_EXIST SMALLINT DEFAULT 1035;
 
-    AddCustomAllergySensitivity:BEGIN
+    GetAllergiesAndSensitivities:BEGIN
         -- Check if the client profile exists
 		IF (!DoesClientProfileIdExist(_clientProfileId)) THEN
 			SET _status = CLIENT_PROFILE_DOES_NOT_EXIST;
-			LEAVE AddCustomAllergySensitivity;
+			LEAVE GetAllergiesAndSensitivities;
 		END IF;
 
-        INSERT INTO Allergy_Sensitivity(Description, Client_Profile_Id) VALUES
-        (_description, _clientProfileId);
         SET _status = 0;
     END;
+
+    SELECT
+        Allergy_Sensitivity_Id,
+        Description
+    FROM
+        Allergy_Sensitivity
+    WHERE
+        Client_Profile_Id = _clientProfileId
+        OR Client_Profile_Id IS NULL;
 END
 $$
 DELIMITER ;

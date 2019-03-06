@@ -22,16 +22,14 @@ BEGIN
 
     SELECT
         Client_Headshot.Client_Headshot_Id,
-        Client_Headshot.Headshot_Type_Id,
+        Headshot_Type.Headshot_Type_Id,
         Headshot_Type.Description,
         Client_Headshot.Client_Profile_Id,
-        Client_Headshot.Image_Path
+        Client_Headshot.Image_Url
     FROM
-        Client_Headshot
-        INNER JOIN Headshot_Type ON Headshot_Type.Headshot_Type_Id = Client_Headshot.Headshot_Type_Id
-    WHERE
-        Client_Headshot.Client_Profile_Id = clientProfileId;    
-
+        Headshot_Type
+        LEFT JOIN Client_Headshot ON Headshot_Type.Headshot_Type_Id = Client_Headshot.Headshot_Type_Id
+            AND client_headshot.Client_Headshot_Id = clientProfileId;
 END
 $$
 DELIMITER ;

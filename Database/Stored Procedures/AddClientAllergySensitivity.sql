@@ -24,7 +24,7 @@ BEGIN
 		END IF;
 
         -- Check if the client allergy sensitivity already exists
-		IF (!DoesClientHaveAllergySensitivity(_clientProfileId, _allergySensitivityId)) THEN
+		IF (DoesClientHaveAllergySensitivity(_clientProfileId, _allergySensitivityId)) THEN
 			SET _status = CLIENT_ALLERGY_SENSITIVITY_ALREADY_EXISTS;
 			LEAVE AddClientAllergySensitivity;
 		END IF;

@@ -18,7 +18,7 @@ BEGIN
 
     CreateClientProfile:BEGIN
         -- Check if the user exists
-        IF (DoesUserIdExist(_userId)) THEN
+        IF (!DoesUserIdExist(_userId)) THEN
             SET _status = USER_ID_DOES_NOT_EXIST;
             LEAVE CreateClientProfile;
         END IF;
@@ -30,19 +30,19 @@ BEGIN
         END IF;
 
         -- Check if the eye colour exists
-        IF (DoesEyeColourIdExist(_eyeColourId)) THEN
+        IF (!DoesEyeColourIdExist(_eyeColourId)) THEN
             SET _status = EYE_COLOUR_ID_DOES_NOT_EXIST;
             LEAVE CreateClientProfile;
         END IF;
 
         -- Check if the hair colour exists
-        IF (DoesHairColourIdExist(_hairColourId)) THEN
+        IF (!DoesHairColourIdExist(_hairColourId)) THEN
             SET _status = HAIR_COLOUR_ID_DOES_NOT_EXIST;
             LEAVE CreateClientProfile;
         END IF;
 
         -- Check if the skin tone exists
-        IF (DoesSkinToneIdExist(_skinToneId)) THEN
+        IF (!DoesSkinToneIdExist(_skinToneId)) THEN
             SET _status = SKIN_TONE_ID_DOES_NOT_EXIST;
             LEAVE CreateClientProfile;
         END IF;

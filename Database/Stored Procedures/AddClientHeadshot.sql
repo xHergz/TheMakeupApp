@@ -25,12 +25,12 @@ BEGIN
 		END IF;
 
         -- Check if the client headshot already exists
-		IF (!DoesClientHaveHeadshotType(_clientProfileId, _headshotTypeId)) THEN
+		IF (DoesClientHaveHeadshotType(_clientProfileId, _headshotTypeId)) THEN
 			SET _status = CLIENT_HEADSHOT_ALREADY_EXISTS;
 			LEAVE AddClientHeadshot;
 		END IF;
 
-        INSERT INTO Client_Headshot(Client_Headshot_Type_Id, Client_Profile_Id, Image_Path) VALUES
+        INSERT INTO Client_Headshot(Headshot_Type_Id, Client_Profile_Id, Image_Url) VALUES
         (_headshotTypeId, _clientProfileId, _imagePath);
         SET _status = 0;
     END;

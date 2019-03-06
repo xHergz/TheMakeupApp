@@ -21,14 +21,14 @@ BEGIN
     END;
 
     SELECT
-        Client_Profile_Id,
-        Profile_Picture,
-        Biography,
-        Eye_Colour_Id,
+        Client_Profile.Client_Profile_Id,
+        Client_Profile.Profile_Picture_Url,
+        Client_Profile.Biography,
+        Client_Profile.Eye_Colour_Id,
         Eye_Colour.Description,
-        Hair_Colour_Id,
+        Client_Profile.Hair_Colour_Id,
         Hair_Colour.Description,
-        Skin_Tone_Id,
+        Client_Profile.Skin_Tone_Id,
         Skin_Tone.Description
     FROM
         Client_Profile
