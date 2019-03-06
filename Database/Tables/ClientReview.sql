@@ -6,6 +6,7 @@ CREATE TABLE Client_Review
     Makeover_Appointment_Id INT,
     Rating TINYINT NOT NULL,
     Review VARCHAR(1000) NOT NULL,
+    Date_Posted DATETIME NOT NULL,
     PRIMARY KEY(Client_Review_Id),
     FOREIGN KEY(Client_Profile_Id) REFERENCES Client_Profile(Client_Profile_Id),
     FOREIGN KEY(Artist_Portfolio_Id) REFERENCES Artist_Portfolio(Artist_Portfolio_Id),
