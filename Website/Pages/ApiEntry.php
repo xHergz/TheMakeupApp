@@ -8,7 +8,7 @@
     require_once '../../private/Api/Endpoints/NotificationsEndPoint.php';
     require_once '../../private/Api/Endpoints/SessionEndPoint.php';
     require_once '../../private/Api/Endpoints/UserEndPoint.php';
-    require_once '../../private/Api/Helpers/UserMethods.php';
+    require_once '../../private/Api/Helpers/AuthorizationMethods.php';
 
     header('Access-Control-Allow-Origin: *');
     header('Access-Control-Allow-Headers: Authorization, Content-Type');
@@ -65,9 +65,9 @@
     }
 
     function AuthorizeApiUser($sessionKey) {
-        $authorizeUserResponse = AuthorizeUser($sessionKey);
-        if ($authorizeUserResponse != Errors::SUCCESS) {
-            switch($authorizeUserResponse) {
+        $authorizeSessionResponse = AuthorizeSession($sessionKey);
+        if ($authorizeSessionResponse != Errors::SUCCESS) {
+            switch($authorizeSessionResponse) {
                 case Errors::NO_SESSION_KEY:
                 case Errors::INVALID_SESSION_KEY:
                     $httpStatus = HttpStatus::UNAUTHORIZED;
@@ -75,7 +75,7 @@
                 default:
                     $httpStatus = HttpStatus::INTERNAL_SERVER_ERROR;
             }
-            Log::LogError('(' . $httpStatus . ') API Request Failed: ' . Errors::GetErrorMessage($authorizeUserResponse));
+            Log::LogError('(' . $httpStatus . ') API Request Failed: ' . Errors::GetErrorMessage($authorizeSessionResponse));
             BadRequest($httpStatus);
         }
     }

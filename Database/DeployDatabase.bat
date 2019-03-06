@@ -82,6 +82,8 @@ call:runMySqlFile "./Functions/DoesSkinToneIdExist.sql"
 call:runMySqlFile "./Functions/DoesUserHaveClientProfile.sql"
 call:runMySqlFile "./Functions/DoesClientReviewIdExist.sql"
 call:runMySqlFile "./Functions/DoesClientHeadshotIdExist.sql"
+call:runMySqlFile "./Functions/GetClientProfileBySessionKey.sql"
+call:runMySqlFile "./Functions/DoesSessionOwnClientProfile.sql"
 
 REM Create the Stored Procedures
 call:runMySqlFile "./Stored Procedures/LogSessionCreation.sql"

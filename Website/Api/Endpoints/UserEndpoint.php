@@ -5,6 +5,7 @@
     require_once __DIR__. "/../Data/HttpStatus.php";
     require_once __DIR__. "/../Data/User.php";
     require_once __DIR__. "/../DataAccessLayer/UserDal.php";
+    require_once __DIR__. "/../Helpers/AuthorizationMethods.php";
     require_once 'IApiEndpoint.php';
 
     class UserEndPoint implements IApiEndpoint {

@@ -14,10 +14,7 @@
     define("CreateSession", "CreateSession");
     define("DeactivateSession", "DeactivateSession");
     define("LogUserCreation", "LogUserCreation");
-    define("IsSessionKeyValid", "IsSessionKeyValid");
     define("GetSessionInfo", "GetSessionInfo");
-    define("IsSessionAuthorizedForSession", "IsSessionAuthorizedForSession");
-    define("DoesSessionOwnUser", "DoesSessionOwnUser");
     define("GetUserIdByDisplayName", "GetUserIdByDisplayName");
     define("GetUser", "GetUser");
     define("UpdateUser", "UpdateUser");
@@ -75,13 +72,6 @@
             $this->_connectionInfo->ExecuteStoredProcedure(LogUserCreation, null, $parameterArray);
         }
 
-        public function IsSessionKeyValid($sessionKey) {
-            $parameterArray = array(
-                new DatabaseParameter($sessionKey, PDO::PARAM_STR, '_sessionKey', ParameterDirection::IN)
-            );
-            return $this->_connectionInfo->ExecuteFunction(IsSessionKeyValid, $parameterArray);
-        }
-
         public function GetSessionInfo($sessionKey) {
             $parameterArray = array(
                 new DatabaseParameter($sessionKey, PDO::PARAM_STR, '_sessionKey', ParameterDirection::IN),
@@ -89,22 +79,6 @@
             );
             $procResponse =  $this->_connectionInfo->ExecuteStoredProcedure(GetSessionInfo, 'SessionDto', $parameterArray);
             return new GetSessionInfoResponse($procResponse->Outputs[Status], $procResponse->GetSingleRow());
-        }
-
-        public function IsSessionAuthorizedForSession($requesterSessionKey, $queriedSessionKey) {
-            $parameterArray = array(
-                new DatabaseParameter($requesterSessionKey, PDO::PARAM_STR, '_requesterSessionKey', ParameterDirection::IN),
-                new DatabaseParameter($queriedSessionKey, PDO::PARAM_STR, '_queriedSessionKey', ParameterDirection::IN)
-            );
-            return $this->_connectionInfo->ExecuteFunction(IsSessionAuthorizedForSession, $parameterArray);
-        }
-
-        public function DoesSessionOwnUser($sessionKey, $userId) {
-            $parameterArray = array(
-                new DatabaseParameter($sessionKey, PDO::PARAM_STR, '_sessionKey', ParameterDirection::IN),
-                new DatabaseParameter($userId, PDO::PARAM_INT, '_userId', ParameterDirection::IN)
-            );
-            return $this->_connectionInfo->ExecuteFunction(DoesSessionOwnUser, $parameterArray);
         }
 
         public function GetUserIdByDisplayName($displayName) {

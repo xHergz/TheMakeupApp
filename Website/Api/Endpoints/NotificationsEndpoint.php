@@ -4,7 +4,7 @@
     require_once __DIR__. "/../Data/ApiRequest.php";
     require_once __DIR__. "/../Data/HttpStatus.php";
     require_once __DIR__. "/../DataAccessLayer/NotificationsDal.php";
-    require_once __DIR__. "/../Helpers/UserMethods.php";
+    require_once __DIR__. "/../Helpers/AuthorizationMethods.php";
     require_once 'IApiEndpoint.php';
 
     class NotificationsEndPoint implements IApiEndpoint {
