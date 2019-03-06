@@ -1,0 +1,30 @@
+DELIMITER $$
+CREATE PROCEDURE GetProductPreferences
+(
+    IN _clientProfileId INT,
+    OUT _status SMALLINT
+)
+BEGIN
+    DECLARE CLIENT_PROFILE_DOES_NOT_EXIST SMALLINT DEFAULT 1035;
+
+    GetProductPreferences:BEGIN
+        -- Check if the client profile exists
+		IF (!DoesClientProfileIdExist(_clientProfileId)) THEN
+			SET _status = CLIENT_PROFILE_DOES_NOT_EXIST;
+			LEAVE GetProductPreferences;
+		END IF;
+
+        SET _status = 0;
+    END;
+
+    SELECT
+        Product_Preference_Id,
+        Description
+    FROM
+        Product_Preference
+    WHERE
+        Client_Profile_Id = _clientProfileId
+        OR Client_Profile_Id IS NULL;
+END
+$$
+DELIMITER ;
