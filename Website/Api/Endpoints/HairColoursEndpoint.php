@@ -9,7 +9,23 @@
 
     class HairColoursEndpoint implements IApiEndpoint {
         public function get() {
-            BadRequest(405);
+            // Only empty request is valid
+            $apiRequest = new ApiRequest($_GET, "HairColours");
+            if (!$apiRequest->IsEmpty()) {
+                $apiRequest->EndRequest(HttpStatus::NOT_FOUND, "Request is not empty");
+            }
+
+            $clientProfileDal = new ClientProfileDal();
+            if (!$clientProfileDal->Initialize()) {
+                $apiRequest->EndRequest(HttpStatus::INTERNAL_SERVER_ERROR, 'Database connection could not be initialized');
+            }
+
+            $apiRequest->LogRequest();
+            $response = $clientProfileDal->GetHairColours();
+            $jsonResponse = $clientProfileDal->EncodeResponse($response);
+            Log::LogInformation('HairColours GET Response: ' . $jsonResponse);
+            echo $jsonResponse;
+            $clientProfileDal->Close();
         }
 
         public function post() {

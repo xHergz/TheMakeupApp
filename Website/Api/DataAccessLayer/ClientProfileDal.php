@@ -13,7 +13,7 @@
     define("CreateClientProfile", "CreateClientProfile");
     define("GetClientProfile", "GetClientProfile");
     define("UpdateClientProfile", "UpdateClientProfile");
-    define("GetClientProfileByDisplayName", "GetClientProfileByDisplayName");
+    define("GetClientProfileIdByDisplayName", "GetClientProfileIdByDisplayName");
     define("GetEyeColours", "GetEyeColours");
     define("GetHairColours", "GetHairColours");
     define("GetSkinTones", "GetSkinTones");
@@ -56,11 +56,11 @@
             return new StatusResponse($procResponse->Outputs[Status]);
         }
 
-        public function GetClientProfileByDisplayName($displayName) {
+        public function GetClientProfileIdByDisplayName($displayName) {
             $parameterArray = array(
                 new DatabaseParameter($displayName, PDO::PARAM_STR, '_displayName', ParameterDirection::IN)
             );
-            return $this->_connectionInfo->ExecuteFunction(GetClientProfileByDisplayName, $parameterArray);
+            return $this->_connectionInfo->ExecuteFunction(GetClientProfileIdByDisplayName, $parameterArray);
         }
 
         public function GetEyeColours() {

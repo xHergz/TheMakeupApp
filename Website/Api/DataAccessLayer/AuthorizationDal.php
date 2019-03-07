@@ -5,7 +5,10 @@
     define("IsSessionAuthorizedForSession", "IsSessionAuthorizedForSession");
     define("DoesSessionOwnUser", "DoesSessionOwnUser");
     define("DoesSessionOwnClientProfile", "DoesSessionOwnClientProfile");
+    define("DoesSessionOwnClientHeadshot", "DoesSessionOwnClientHeadshot");
+    define("DoesSessionOwnClientReview", "DoesSessionOwnClientReview");
     define("GetUserIdBySessionKey", "GetUserIdBySessionKey");
+    define("GetClientProfileIdBySessionKey", "GetClientProfileIdBySessionKey");
     define("IsUserArtist", "IsUserArtist");
 
     class AuthorizationDal extends DataAccessLayer {
@@ -40,11 +43,34 @@
             return $this->_connectionInfo->ExecuteFunction(DoesSessionOwnClientProfile, $parameterArray);
         }
 
+        public function DoesSessionOwnClientHeadshot($sessionKey, $clientHeadshotId) {
+            $parameterArray = array(
+                new DatabaseParameter($sessionKey, PDO::PARAM_STR, '_sessionKey', ParameterDirection::IN),
+                new DatabaseParameter($clientHeadshotId, PDO::PARAM_INT, '_clientHeadshotId', ParameterDirection::IN)
+            );
+            return $this->_connectionInfo->ExecuteFunction(DoesSessionOwnClientHeadshot, $parameterArray);
+        }
+
+        public function DoesSessionOwnClientReview($sessionKey, $clientReviewId) {
+            $parameterArray = array(
+                new DatabaseParameter($sessionKey, PDO::PARAM_STR, '_sessionKey', ParameterDirection::IN),
+                new DatabaseParameter($clientReviewId, PDO::PARAM_INT, '_clientReviewId', ParameterDirection::IN)
+            );
+            return $this->_connectionInfo->ExecuteFunction(DoesSessionOwnClientReview, $parameterArray);
+        }
+
         public function GetUserIdBySessionKey($sessionKey) {
             $parameterArray = array(
                 new DatabaseParameter($sessionKey, PDO::PARAM_STR, '_sessionKey', ParameterDirection::IN)
             );
             return $this->_connectionInfo->ExecuteFunction(GetUserIdBySessionKey, $parameterArray);
+        }
+
+        public function GetClientProfileIdBySessionKey($sessionKey) {
+            $parameterArray = array(
+                new DatabaseParameter($sessionKey, PDO::PARAM_STR, '_sessionKey', ParameterDirection::IN)
+            );
+            return $this->_connectionInfo->ExecuteFunction(GetClientProfileIdBySessionKey, $parameterArray);
         }
 
         public function IsUserArtist($userId) {

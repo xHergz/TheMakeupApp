@@ -7,6 +7,11 @@
         return UploadImage($imageData, $uploadPath);
     }
 
+    function UploadClientHeadshotImage($imageData, $userId) {
+        $uploadPath = "/images/users/${userId}/headshots/";
+        return UploadImage($imageData, $uploadPath);
+    }
+
     function UploadImage($imageData, $path) {
         $image = new Base64ImageUpload($imageData);
         Log::LogInformation("Attempting to upload an image with Type '" . $image->Type . "' to path '" . $path . "'");

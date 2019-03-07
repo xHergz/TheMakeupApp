@@ -1,6 +1,7 @@
 <?php
     require_once __DIR__.'/../Data/Errors.php';
     require_once __DIR__.'/../DataAccessLayer/AuthorizationDal.php';
+    require_once __DIR__.'/../DataAccessLayer/ClientProfileDal.php';
     require_once __DIR__.'/../DataAccessLayer/UserDal.php';
 
     function AuthorizeSession($sessionKey) {
@@ -72,6 +73,47 @@
         return Errors::SUCCESS;
     }
 
+    function GetUserIdBySessionKey($sessionKey) {
+        $authorizationDal = new AuthorizationDal();
+        if (!$authorizationDal->Initialize()) {
+            $authorizationDal->Close();
+            return null;
+        }
+
+        $userId = $authorizationDal->GetUserIdBySessionKey($sessionKey);
+        $authorizationDal->Close();
+        return $userId;
+    }
+
+    function GetClientProfileIdBySessionKey($sessionKey) {
+        $authorizationDal = new AuthorizationDal();
+        if (!$authorizationDal->Initialize()) {
+            $authorizationDal->Close();
+            return null;
+        }
+
+        $clientProfileId = $authorizationDal->GetClientProfileIdBySessionKey($sessionKey);
+        $authorizationDal->Close();
+        return $clientProfileId;
+    }
+
+    function AuthorizeSessionForClientProfileByDisplayName($sessionKey, $displayName) {
+        $clientProfileDal = new ClientProfileDal();
+        if (!$clientProfileDal->Initialize()) {
+            $clientProfileDal->Close();
+            return Errors::DATABASE_INITIALIZATION_ERROR;
+        }
+
+        $clientProfileId = $clientProfileDal->GetClientProfileIdByDisplayName($displayName);
+        if ($clientProfileId == null) {
+            $clientProfileDal->Close();
+            return Errors::DISPLAY_NAME_DOES_NOT_EXIST;
+        }
+
+        $clientProfileDal->Close();
+        return AuthorizeSessionForClientProfile($sessionKey, $clientProfileId);
+    }
+
     function AuthorizeSessionForClientProfile($sessionKey, $clientProfileId) {
         $authorizationDal = new AuthorizationDal();
         if (!$authorizationDal->Initialize()) {
@@ -82,6 +124,38 @@
         if (!$authorizationDal->DoesSessionOwnClientProfile($sessionKey, $clientProfileId)) {
             $authorizationDal->Close();
             return Errors::CLIENT_PROFILE_DOES_NOT_BELONG_TO_SESSION;
+        }
+
+        $authorizationDal->Close();
+        return Errors::SUCCESS;
+    }
+
+    function AuthorizeSessionForClientHeadshot($sessionKey, $clientHeadshotId) {
+        $authorizationDal = new AuthorizationDal();
+        if (!$authorizationDal->Initialize()) {
+            $authorizationDal->Close();
+            return Errors::DATABASE_INITIALIZATION_ERROR;
+        }
+
+        if (!$authorizationDal->DoesSessionOwnClientHeadshot($sessionKey, $clientHeadshotId)) {
+            $authorizationDal->Close();
+            return Errors::CLIENT_HEADSHOT_DOES_NOT_BELONG_TO_SESSION;
+        }
+
+        $authorizationDal->Close();
+        return Errors::SUCCESS;
+    }
+
+    function AuthorizeSessionForClientReview($sessionKey, $clientReviewId) {
+        $authorizationDal = new AuthorizationDal();
+        if (!$authorizationDal->Initialize()) {
+            $authorizationDal->Close();
+            return Errors::DATABASE_INITIALIZATION_ERROR;
+        }
+
+        if (!$authorizationDal->DoesSessionOwnClientReview($sessionKey, $clientReviewId)) {
+            $authorizationDal->Close();
+            return Errors::CLIENT_REVIEW_DOES_NOT_BELONG_TO_SESSION;
         }
 
         $authorizationDal->Close();

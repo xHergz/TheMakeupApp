@@ -6,7 +6,7 @@
 
     define("AddClientProductPreference", "AddClientProductPreference");
     define("GetClientProductPreferences", "GetClientProductPreferences");
-    define("DeleteClientProductPreferences", "DeleteClientProductPreferences");
+    define("DeleteClientProductPreference", "DeleteClientProductPreference");
 
     class ClientProductPreferenceDal extends DataAccessLayer {
         public function AddClientProductPreference($clientProfileId, $productPreferenceId) {
@@ -28,13 +28,13 @@
             return new GetClientProductPreferencesResponse($procResponse->Outputs[Status], $procResponse->Results);
         }
 
-        public function DeleteClientProductPreferences($clientProfileId, $productPreferenceId) {
+        public function DeleteClientProductPreference($clientProfileId, $productPreferenceId) {
             $parameterArray = array(
                 new DatabaseParameter($clientProfileId, PDO::PARAM_INT, '_clientProfileId', ParameterDirection::IN),
                 new DatabaseParameter($productPreferenceId, PDO::PARAM_INT, '_productPreferenceId', ParameterDirection::IN),
                 new DatabaseParameter(Status, PDO::PARAM_STR, '_status', ParameterDirection::OUT)
             );
-            $procResponse =  $this->_connectionInfo->ExecuteStoredProcedure(DeleteClientProductPreferences, null, $parameterArray);
+            $procResponse =  $this->_connectionInfo->ExecuteStoredProcedure(DeleteClientProductPreference, null, $parameterArray);
             return new StatusResponse($procResponse->Outputs[Status]);
         }
     }

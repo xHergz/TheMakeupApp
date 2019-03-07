@@ -1,5 +1,5 @@
 <?php
-    class GetAllergiesAndSensitivitiesResponse {
+    class GetProductPreferencesResponse {
         public $Status;
 
         public $ProductPreferences;

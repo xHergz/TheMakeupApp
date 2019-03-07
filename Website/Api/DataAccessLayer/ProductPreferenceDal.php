@@ -1,6 +1,6 @@
 <?php
     require_once __DIR__.'/../Common/DataAccessLayer.php';
-    require_once __DIR__.'/Dto/ProductPreference.php';
+    require_once __DIR__.'/Dto/ProductPreferenceDto.php';
     require_once __DIR__.'/Response/GetProductPreferencesResponse.php';
     require_once __DIR__.'/Response/StatusResponse.php';
 
@@ -23,7 +23,7 @@
                 new DatabaseParameter($displayName, PDO::PARAM_STR, '_displayName', ParameterDirection::IN),
                 new DatabaseParameter(Status, PDO::PARAM_STR, '_status', ParameterDirection::OUT)
             );
-            $procResponse =  $this->_connectionInfo->ExecuteStoredProcedure(GetProductPreferences, 'ProductPreference', $parameterArray);
+            $procResponse =  $this->_connectionInfo->ExecuteStoredProcedure(GetProductPreferences, 'ProductPreferenceDto', $parameterArray);
             return new GetProductPreferencesResponse($procResponse->Outputs[Status], $procResponse->Results);
         }
     }

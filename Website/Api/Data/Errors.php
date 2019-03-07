@@ -39,6 +39,8 @@
         public const EYE_COLOUR_ID_INVALID = 32;
         public const HAIR_COLOUR_ID_INVALID = 33;
         public const SKIN_TONE_ID_INVALID = 34;
+        public const RATING_INVALID = 35;
+        public const REVIEW_INVALID = 36;
         public const EMAIL_UNAVAILABLE = 1001;
         public const DISPLAY_NAME_UNAVAILABLE = 1002;
         public const EMAIL_DOES_NOT_EXIST = 1003;
@@ -47,6 +49,8 @@
         public const USER_DOES_NOT_BELONG_TO_SESSION = 1011;
         public const CLIENT_PROFILE_DOES_NOT_BELONG_TO_SESSION = 1012;
         public const USER_IS_NOT_ARTIST = 1013;
+        public const CLIENT_HEADSHOT_DOES_NOT_BELONG_TO_SESSION = 1014;
+        public const CLIENT_REVIEW_DOES_NOT_BELONG_TO_SESSION = 1015;
         public const REQUESTER_SESSION_KEY_INVALID = 1021;
         public const QUERIED_SESSION_KEY_INVALID = 1022;
         public const SESSION_KEY_NOT_AUTHORIZED_FOR_SESSION = 1023;

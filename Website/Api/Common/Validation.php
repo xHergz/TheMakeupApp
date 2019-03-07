@@ -20,6 +20,14 @@
 
         public const BIOGRAPHY_MAX_LENGTH = 500;
 
+        public const RATING_MIN = 0;
+
+        public const RATING_MAX = 5;
+
+        public const REVIEW_MIN_LENGTH = 1;
+
+        public const REVIEW_MAX_LENGTH = 1000;
+
         public static function ValidateEmail($email) {
             return $email != null && self::CheckLength($email, self::EMAIL_MIN_LENGTH, self::EMAIL_MAX_LENGTH) && preg_match("/^.+@.+\..+$/", $email);
         }
@@ -44,6 +52,14 @@
 
         public static function ValidateNumber($number) {
             return $number != null && is_numeric($number);
+        }
+
+        public static function ValidateRating($rating) {
+            return $rating >= self::RATING_MIN && $rating <= self::RATING_MAX;
+        }
+
+        public static function ValidateReview($review) {
+            return $review != null && self::CheckLength($review, self::REVIEW_MIN_LENGTH, self::REVIEW_MAX_LENGTH);
         }
 
         private static function CheckLength($string, $min, $max) {
