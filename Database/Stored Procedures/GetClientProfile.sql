@@ -25,11 +25,11 @@ BEGIN
         Client_Profile.Profile_Picture_Url,
         Client_Profile.Biography,
         Client_Profile.Eye_Colour_Id,
-        Eye_Colour.Description,
+        Eye_Colour.Description AS Eye_Colour_Description,
         Client_Profile.Hair_Colour_Id,
-        Hair_Colour.Description,
+        Hair_Colour.Description AS Hair_Colour_Description,
         Client_Profile.Skin_Tone_Id,
-        Skin_Tone.Description
+        Skin_Tone.Description AS Skin_Tone_Description
     FROM
         Client_Profile
         INNER JOIN Eye_Colour ON Eye_Colour.Eye_Colour_Id = Client_Profile.Eye_Colour_Id

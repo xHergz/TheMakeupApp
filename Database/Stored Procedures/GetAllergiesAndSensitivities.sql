@@ -19,7 +19,7 @@ BEGIN
 
     SELECT
         Allergy_Sensitivity_Id,
-        Description
+        Description AS Allergy_Sensitivity_Description
     FROM
         Allergy_Sensitivity
     WHERE

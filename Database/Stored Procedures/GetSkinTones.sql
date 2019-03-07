@@ -10,7 +10,7 @@ BEGIN
 
     SELECT
         Skin_Tone_Id,
-        Description
+        Description AS Skin_Tone_Description
     FROM
         Skin_Tone;
 END

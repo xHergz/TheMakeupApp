@@ -26,7 +26,7 @@
             }
             
             $apiRequest->LogRequest();
-            $response = $userDal->GetSessionInfo($queriedSessionKey);
+            $response = $userDal->GetSessionInfo($apiRequest->GetUniqueId());
             $jsonResponse = $userDal->EncodeResponse($response);
             Log::LogInformation('Session GET Response: ' . $jsonResponse);
             echo $jsonResponse;

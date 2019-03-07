@@ -4,6 +4,9 @@
     define("IsSessionKeyValid", "IsSessionKeyValid");
     define("IsSessionAuthorizedForSession", "IsSessionAuthorizedForSession");
     define("DoesSessionOwnUser", "DoesSessionOwnUser");
+    define("DoesSessionOwnClientProfile", "DoesSessionOwnClientProfile");
+    define("GetUserIdBySessionKey", "GetUserIdBySessionKey");
+    define("IsUserArtist", "IsUserArtist");
 
     class AuthorizationDal extends DataAccessLayer {
         public function IsSessionKeyValid($sessionKey) {
@@ -27,6 +30,28 @@
                 new DatabaseParameter($userId, PDO::PARAM_INT, '_userId', ParameterDirection::IN)
             );
             return $this->_connectionInfo->ExecuteFunction(DoesSessionOwnUser, $parameterArray);
+        }
+
+        public function DoesSessionOwnClientProfile($sessionKey, $clientProfileId) {
+            $parameterArray = array(
+                new DatabaseParameter($sessionKey, PDO::PARAM_STR, '_sessionKey', ParameterDirection::IN),
+                new DatabaseParameter($clientProfileId, PDO::PARAM_INT, '_clientProfileId', ParameterDirection::IN)
+            );
+            return $this->_connectionInfo->ExecuteFunction(DoesSessionOwnClientProfile, $parameterArray);
+        }
+
+        public function GetUserIdBySessionKey($sessionKey) {
+            $parameterArray = array(
+                new DatabaseParameter($sessionKey, PDO::PARAM_STR, '_sessionKey', ParameterDirection::IN)
+            );
+            return $this->_connectionInfo->ExecuteFunction(GetUserIdBySessionKey, $parameterArray);
+        }
+
+        public function IsUserArtist($userId) {
+            $parameterArray = array(
+                new DatabaseParameter($userId, PDO::PARAM_STR, '_userId', ParameterDirection::IN)
+            );
+            return $this->_connectionInfo->ExecuteFunction(IsUserArtist, $parameterArray);
         }
     }
 ?>

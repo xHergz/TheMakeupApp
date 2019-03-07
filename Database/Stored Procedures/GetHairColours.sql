@@ -10,7 +10,7 @@ BEGIN
 
     SELECT
         Hair_Colour_Id,
-        Description
+        Description AS Hair_Colour_Description
     FROM
         Hair_Colour;
 END

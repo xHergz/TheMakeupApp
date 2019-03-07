@@ -23,7 +23,7 @@ BEGIN
     SELECT
         Client_Headshot.Client_Headshot_Id,
         Headshot_Type.Headshot_Type_Id,
-        Headshot_Type.Description,
+        Headshot_Type.Description AS Headshot_Type_Description,
         Client_Headshot.Client_Profile_Id,
         Client_Headshot.Image_Url
     FROM
