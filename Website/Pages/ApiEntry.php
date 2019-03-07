@@ -5,8 +5,18 @@
     require_once '../../private/Api/Data/Errors.php';
     require_once '../../private/Api/Data/HttpStatus.php';
     require_once '../../private/Api/DataAccessLayer/UserDal.php';
+    require_once '../../private/Api/Endpoints/AllergySensitivityEndpoint.php';
+    require_once '../../private/Api/Endpoints/ClientAllergySensitivityEndpoint.php';
+    require_once '../../private/Api/Endpoints/ClientHeadshotEndpoint.php';
+    require_once '../../private/Api/Endpoints/ClientProductPreferenceEndpoint.php';
+    require_once '../../private/Api/Endpoints/ClientProfileEndpoint.php';
+    require_once '../../private/Api/Endpoints/ClientReviewsEndpoint.php';
+    require_once '../../private/Api/Endpoints/EyeColoursEndpoint.php';
+    require_once '../../private/Api/Endpoints/HairColoursEndpoint.php';
     require_once '../../private/Api/Endpoints/NotificationsEndPoint.php';
+    require_once '../../private/Api/Endpoints/ProductPreferenceEndpoint.php';
     require_once '../../private/Api/Endpoints/SessionEndPoint.php';
+    require_once '../../private/Api/Endpoints/SkinTonesEndpoint.php';
     require_once '../../private/Api/Endpoints/UserEndPoint.php';
     require_once '../../private/Api/Helpers/AuthorizationMethods.php';
 
@@ -17,8 +27,18 @@
 
     // Register Endpoints
     $registeredEndpoints = [
+        "allergy-sensitivity" => new AllergySensitivityEndpoint(),
+        "client-allergy-sensitivity" => new ClientAllergySensitivityEndpoint(),
+        "client-headshot" => new ClientHeadshotEndpoint(),
+        "client-product-preference" => new ClientProductPreferenceEndpoint(),
+        "client-profile" => new ClientProfileEndpoint(),
+        "client-reviews" => new ClientReviewsEndpoint(),
+        "eye-colours" => new EyeColoursEndpoint(),
+        "hair-colours" => new HairColoursEndpoint(),
         "notifications" => new NotificationsEndpoint(),
+        "product-preference" => new ProductPreferenceEndpoint(),
         "session" => new SessionEndPoint(),
+        "skin-tones" => new SkinTonesEndpoint(),
         "user" => new UserEndPoint()
     ];
     
