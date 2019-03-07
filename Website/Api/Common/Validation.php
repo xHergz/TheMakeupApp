@@ -16,6 +16,10 @@
 
         public const NAME_MAX_LENGTH = 100;
 
+        public const BIOGRAPHY_MIN_LENGTH = 0;
+
+        public const BIOGRAPHY_MAX_LENGTH = 500;
+
         public static function ValidateEmail($email) {
             return $email != null && self::CheckLength($email, self::EMAIL_MIN_LENGTH, self::EMAIL_MAX_LENGTH) && preg_match("/^.+@.+\..+$/", $email);
         }
@@ -32,6 +36,14 @@
 
         public static function ValidateName($name) {
             return $name != null && self::CheckLength($name, self::NAME_MIN_LENGTH, self::NAME_MAX_LENGTH);
+        }
+
+        public static function ValidateBiography($biography) {
+            return $biography != null && self::CheckLength($biography, self::BIOGRAPHY_MIN_LENGTH, self::BIOGRAPHY_MAX_LENGTH);
+        }
+
+        public static function ValidateNumber($number) {
+            return $number != null && is_numeric($number);
         }
 
         private static function CheckLength($string, $min, $max) {

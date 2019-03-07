@@ -29,7 +29,7 @@
                 new DatabaseParameter($skinToneId, PDO::PARAM_INT, '_skinToneId', ParameterDirection::IN),
                 new DatabaseParameter(Status, PDO::PARAM_STR, '_status', ParameterDirection::OUT)
             );
-            $procResponse =  $this->_connectionInfo->ExecuteStoredProcedure(DeactivateSession, null, $parameterArray);
+            $procResponse =  $this->_connectionInfo->ExecuteStoredProcedure(CreateClientProfile, null, $parameterArray);
             return new StatusResponse($procResponse->Outputs[Status]);
         }
 

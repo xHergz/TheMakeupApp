@@ -35,6 +35,10 @@
         public const LAST_NAME_INVALID = 16;
         public const NO_SESSION_KEY = 21;
         public const INVALID_SESSION_KEY = 22;
+        public const BIOGRAPHY_INVALID = 31;
+        public const EYE_COLOUR_ID_INVALID = 32;
+        public const HAIR_COLOUR_ID_INVALID = 33;
+        public const SKIN_TONE_ID_INVALID = 34;
         public const EMAIL_UNAVAILABLE = 1001;
         public const DISPLAY_NAME_UNAVAILABLE = 1002;
         public const EMAIL_DOES_NOT_EXIST = 1003;

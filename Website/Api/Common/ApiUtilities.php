@@ -42,6 +42,12 @@ function GetJsonInput() {
     return json_decode($rest_json, true);
 }
 
+function GetPutInput() {
+    $input = file_get_contents('php://input');
+    parse_str($input, $parsed);
+    return $parsed;
+}
+
 function GetRequestIsEmpty() {
     return GetNumberOfGetParams() == 0;
 }
