@@ -121,6 +121,7 @@ function mapStateToProps(state) {
 TheMakeupApp.propTypes = {
     currentPageKey: PropTypes.string,
     currentSession: PropTypes.shape({
+        userId: PropTypes.number.isRequired,
         displayName: PropTypes.string,
         firstName: PropTypes.string,
         lastName: PropTypes.string,

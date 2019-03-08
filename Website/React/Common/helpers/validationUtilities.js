@@ -12,6 +12,10 @@ const LONG_TEXT_MAX_LENGTH = 250;
 
 const DEFAULT_DATE_FORMAT = 'YYYY-MM-DD';
 
+const BIOGRAPHY_MIN_LENGTH = 10;
+
+const BIOGRAPHY_MAX_LENGTH = 100;
+
 function createValidationObject(isValid, message = '') {
     return {
         isValid: isValid,
@@ -89,5 +93,15 @@ export function validateFutureDate(date) {
 }
 
 export function validateIsbn(isbn) {
+    return createValidationObject(true);
+}
+
+export function validateBiography(biography) {
+    if (biography.length < PASSWORD_MIN_LENGTH) {
+        return createValidationObject(false, `Must be more than ${BIOGRAPHY_MIN_LENGTH} characters.`);
+    }
+    if (biography.length > PASSWORD_MAX_LENGTH) {
+        return createValidationObject(false, `Must be ${BIOGRAPHY_MAX_LENGTH} characters or less.`);
+    }
     return createValidationObject(true);
 }

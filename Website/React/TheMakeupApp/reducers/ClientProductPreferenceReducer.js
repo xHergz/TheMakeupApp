@@ -147,10 +147,10 @@ export function receivedAddCustomProductPreference() {
     return createReducerObject(CLIENT_PRODUCT_PREFERENCE_ACTIONS.RECEIVED_ADD_CUSTOM_PRODUCT_PREFERENCE);
 }
 
-export function enableEditingclientProductPreferences() {
+export function enableEditingClientProductPreferences() {
     return createReducerObject(CLIENT_PRODUCT_PREFERENCE_ACTIONS.ENABLED_EDITING_CLIENT_PRODUCT_PREFERENCES);
 }
 
-export function disableEditingclientProductPreferences() {
+export function disableEditingClientProductPreferences() {
     return createReducerObject(CLIENT_PRODUCT_PREFERENCE_ACTIONS.DISABLED_EDIITING_CLIENT_PRODUCT_PREFERENCES);
 }

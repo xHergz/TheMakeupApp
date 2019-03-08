@@ -99,6 +99,7 @@ Notifications.propTypes = {
     acknowledgeAllNotifications: PropTypes.func.isRequired,
     canFetchMoreNotifications: PropTypes.bool.isRequired,
     currentSession: PropTypes.shape({
+        userId: PropTypes.number.isRequired,
         displayName: PropTypes.string.isRequired,
         firstName: PropTypes.string.isRequired,
         lastName: PropTypes.string.isRequired,

@@ -18,7 +18,7 @@ const CLIENT_PROFILE_ACTIONS = {
 };
 
 const initialState = {
-    currentClientProfile: {},
+    currentClientProfile: null,
     fetchingClientProfile: false,
     fetchingCreateClientProfile: false,
     fetchingUpdateClientProfile: false,

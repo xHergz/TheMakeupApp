@@ -6,33 +6,31 @@ import EditAccountInfo from './EditAccountInfo';
 
 import '../../../Css/Account.css';
 
-class AccountInfo extends React.Component {
-    render() {
-        if (this.props.editingUser) {
-            return (
-                <div className="account-info-container">
-                    <EditAccountInfo
-                        currentUser={this.props.currentUser}
-                        fetchingUpdateUser={this.props.fetchingUpdateUser}
-                        onCancelEditUser={this.props.onCancelEditUser}
-                        onUpdateUser={this.props.onUpdateUser}
-                    />
-                </div>
-            );
-        }
-
+const AccountInfo = (props) => {
+    if (props.editingUser) {
         return (
             <div className="account-info-container">
-                <DisplayAccountInfo
-                    currentUser={this.props.currentUser}
-                    fetchingDeactivateUser={this.props.fetchingDeactivateUser}
-                    onDeactivateUser={this.props.onDeactivateUser}
-                    onEditUser={this.props.onEditUser}
+                <EditAccountInfo
+                    currentUser={props.currentUser}
+                    fetchingUpdateUser={props.fetchingUpdateUser}
+                    onCancelEditUser={props.onCancelEditUser}
+                    onUpdateUser={props.onUpdateUser}
                 />
             </div>
         );
     }
-}
+
+    return (
+        <div className="account-info-container">
+            <DisplayAccountInfo
+                currentUser={props.currentUser}
+                fetchingDeactivateUser={props.fetchingDeactivateUser}
+                onDeactivateUser={props.onDeactivateUser}
+                onEditUser={props.onEditUser}
+            />
+        </div>
+    );
+};
 
 AccountInfo.propTypes = {
     currentUser: PropTypes.shape({

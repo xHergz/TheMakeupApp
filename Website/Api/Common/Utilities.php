@@ -64,4 +64,10 @@
         $len = strpos($string, $end, $ini) - $ini;
         return substr($string, $ini, $len);
     }
+
+    // Source: https://stackoverflow.com/a/6041773/8070411
+    function is_json($string) {
+        json_decode($string);
+        return (json_last_error() == JSON_ERROR_NONE);
+    }
 ?>

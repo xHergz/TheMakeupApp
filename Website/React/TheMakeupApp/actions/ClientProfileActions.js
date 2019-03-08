@@ -48,9 +48,10 @@ export function getClientProfile(displayName) {
     };
 }
 
-export function createClientProfile(profilePicture, biography, eyeColourId, hairColourId, skinToneId) {
+export function createClientProfile(userId, profilePicture, biography, eyeColourId, hairColourId, skinToneId, displayName) {
     const sessionKey = GetSessionKey();
     const queryData = {
+        userId,
         profilePicture,
         biography,
         eyeColourId,
@@ -63,6 +64,7 @@ export function createClientProfile(profilePicture, biography, eyeColourId, hair
             .then((json) => {
                 dispatch(receivedCreateClientProfile());
                 dispatch(addSuccessMessage('Successfully Created Client Profile'));
+                dispatch(getClientProfile(displayName));
             })
             .catch((error) => {
                 console.error(error);
@@ -72,7 +74,7 @@ export function createClientProfile(profilePicture, biography, eyeColourId, hair
     };
 }
 
-export function updateClientProfile(clientProfileId, profilePicture, biography, eyeColourId, hairColourId, skinToneId) {
+export function updateClientProfile(clientProfileId, profilePicture, biography, eyeColourId, hairColourId, skinToneId, displayName) {
     const sessionKey = GetSessionKey();
     const queryData = {
         profilePicture,
@@ -86,7 +88,9 @@ export function updateClientProfile(clientProfileId, profilePicture, biography, 
         return ApiRequest(postRequest(GetUidApiUrl(API_ENDPOINTS.CLIENT_PROFILE, clientProfileId), queryData, sessionKey), 'updateClientProfile')
             .then((json) => {
                 dispatch(receivedUpdateClientProfile());
+                dispatch(disableEditingClientProfile());
                 dispatch(addSuccessMessage('Successfully Updated Client Profile'));
+                dispatch(getClientProfile(displayName));
             })
             .catch((error) => {
                 console.error(error);
