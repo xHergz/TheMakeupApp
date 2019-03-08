@@ -78,7 +78,7 @@
             // Check if session key is valid and owns the user id its updating the profile of
             $authorizationResponse = AuthorizeSessionForClientProfile(GetBearerToken(), $clientProfile->ClientProfileId);
             if ($authorizationResponse != Errors::SUCCESS) {
-                $apiRequest->EndRequest(HttpStatus::UNAUTHORIZED, Errors::GetErrorMessage($authorizationStatus));
+                $apiRequest->EndRequest(HttpStatus::UNAUTHORIZED, Errors::GetErrorMessage($authorizationResponse));
             }
 
             $clientProfileDal = new ClientProfileDal();
