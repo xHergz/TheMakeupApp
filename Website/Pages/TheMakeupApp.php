@@ -2,13 +2,13 @@
     require_once "../../private/Api/Common/Utilities.php";
     require_once "../../private/Api/Data/ErrorList.php";
     require_once "../../private/Api/Data/Errors.php";
-    require_once '../../private/Api/Helpers/UserMethods.php';
+    require_once '../../private/Api/Helpers/AuthorizationMethods.php';
 
     $errorList = new ErrorList();
     $sessionKey = GetSessionKey();
-    $authorizeUserResponse = AuthorizeUser($sessionKey);
-    if ($authorizeUserResponse != Errors::SUCCESS) {
-        $errorList->AddError($authorizeUserResponse);
+    $authorizeSessionResponse = AuthorizeSession($sessionKey);
+    if ($authorizeSessionResponse != Errors::SUCCESS) {
+        $errorList->AddError($authorizeSessionResponse);
         Redirect('/login');
     }
 ?>

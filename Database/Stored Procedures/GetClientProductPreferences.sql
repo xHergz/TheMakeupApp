@@ -22,7 +22,7 @@ BEGIN
 
     SELECT
         Client_Product_Preference.Product_Preference_Id,
-        Product_Preference.Description,
+        Product_Preference.Description AS Product_Preference_Description,
         Client_Product_Preference.Client_Profile_Id
     FROM
         Client_Product_Preference

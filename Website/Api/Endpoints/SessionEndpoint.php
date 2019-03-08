@@ -4,6 +4,7 @@
     require_once __DIR__. "/../Data/ApiRequest.php";
     require_once __DIR__. "/../Data/HttpStatus.php";
     require_once __DIR__. "/../DataAccessLayer/UserDal.php";
+    require_once __DIR__. "/../Helpers/AuthorizationMethods.php";
     require_once 'IApiEndpoint.php';
 
     class SessionEndPoint implements IApiEndpoint {
@@ -19,16 +20,13 @@
                 $apiRequest->EndRequest(HttpStatus::INTERNAL_SERVER_ERROR, 'Database connection could not be initialized');
             }
             
-            $requesterSessionKey = GetBearerToken();
-            $queriedSessionKey = $apiRequest->GetUniqueId();
-            $apiRequest->LogRequest();
-
-            // Check if requester session is authorized to access queried session
-            if (!$userDal->IsSessionAuthorizedForSession($requesterSessionKey, $queriedSessionKey)) {
-                $apiRequest->EndRequest(HttpStatus::UNAUTHORIZED, 'Requester session key is not authorized for queried session key');
+            $authorizationStatus = $this->IsSessionAuthorizedForSession($apiRequest->GetUniqueId());
+            if ($authorizationStatus != HttpStatus::OK) {
+                $apiRequest->EndRequest($authorizationStatus, 'Authorization failed');
             }
             
-            $response = $userDal->GetSessionInfo($queriedSessionKey);
+            $apiRequest->LogRequest();
+            $response = $userDal->GetSessionInfo($apiRequest->GetUniqueId());
             $jsonResponse = $userDal->EncodeResponse($response);
             Log::LogInformation('Session GET Response: ' . $jsonResponse);
             echo $jsonResponse;
@@ -49,6 +47,19 @@
 
         public function options() {
             header('Allow: GET, OPTIONS');
+        }
+
+        private function IsSessionAuthorizedForSession($sessionKey) {
+            $authorizeSessionForSessionResponse = AuthorizeSessionForSession(GetBearerToken(), $sessionKey);
+            if ($authorizeSessionForSessionResponse != Errors::SUCCESS) {
+                switch ($authorizeSessionForSessionResponse) {
+                    case Errors::SESSION_KEY_NOT_AUTHORIZED_FOR_SESSION:
+                        return HttpStatus::UNAUTHORIZED;
+                    default:
+                        return HttpStatus::INTERNAL_SERVER_ERROR;
+                }
+            }
+            return HttpStatus::OK;
         }
     }
 ?>

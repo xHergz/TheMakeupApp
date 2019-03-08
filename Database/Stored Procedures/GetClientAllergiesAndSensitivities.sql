@@ -22,7 +22,7 @@ BEGIN
 
     SELECT
         Client_Allergy_Sensitivity.Allergy_Sensitivity_Id,
-        Allergy_Sensitivity.Description,
+        Allergy_Sensitivity.Description AS Allergy_Sensitivity_Description,
         Client_Allergy_Sensitivity.Client_Profile_Id
     FROM
         Client_Allergy_Sensitivity

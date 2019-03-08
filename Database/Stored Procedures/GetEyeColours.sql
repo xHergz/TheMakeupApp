@@ -10,7 +10,7 @@ BEGIN
 
     SELECT
         Eye_Colour_Id,
-        Description
+        Description AS Eye_Colour_Description
     FROM
         Eye_Colour;
 END

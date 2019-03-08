@@ -17,6 +17,8 @@
     define("DISPLAY_NAME_DOES_NOT_EXIST_MESSAGE", "Display Name Does Not Exist");
     define("USER_ID_DOES_NOT_EXIST_MESSAGE", "User Id Does Not Exist");
     define("USER_DOES_NOT_BELONG_TO_SESSION_MESSAGE", "User does not belong to session");
+    define("CLIENT_PROFILE_DOES_NOT_BELONG_TO_SESSION_MESSAGE", "Client does not belong to session");
+    define("USER_IS_NOT_ARTIST_MESSAGE", "User is not artist");
     define("REQUESTER_SESSION_KEY_INVALID_MESSAGE", "Requester session key is invalid");
     define("QUERIED_SESSION_KEY_INVALID_MESSAGE", "Queried session key is invalid");
     define("SESSION_KEY_NOT_AUTHORIZED_FOR_SESSION_MESSAGE", "Session key not authorized for session");
@@ -33,12 +35,22 @@
         public const LAST_NAME_INVALID = 16;
         public const NO_SESSION_KEY = 21;
         public const INVALID_SESSION_KEY = 22;
+        public const BIOGRAPHY_INVALID = 31;
+        public const EYE_COLOUR_ID_INVALID = 32;
+        public const HAIR_COLOUR_ID_INVALID = 33;
+        public const SKIN_TONE_ID_INVALID = 34;
+        public const RATING_INVALID = 35;
+        public const REVIEW_INVALID = 36;
         public const EMAIL_UNAVAILABLE = 1001;
         public const DISPLAY_NAME_UNAVAILABLE = 1002;
         public const EMAIL_DOES_NOT_EXIST = 1003;
         public const DISPLAY_NAME_DOES_NOT_EXIST = 1004;
         public const USER_ID_DOES_NOT_EXIST = 1005;
         public const USER_DOES_NOT_BELONG_TO_SESSION = 1011;
+        public const CLIENT_PROFILE_DOES_NOT_BELONG_TO_SESSION = 1012;
+        public const USER_IS_NOT_ARTIST = 1013;
+        public const CLIENT_HEADSHOT_DOES_NOT_BELONG_TO_SESSION = 1014;
+        public const CLIENT_REVIEW_DOES_NOT_BELONG_TO_SESSION = 1015;
         public const REQUESTER_SESSION_KEY_INVALID = 1021;
         public const QUERIED_SESSION_KEY_INVALID = 1022;
         public const SESSION_KEY_NOT_AUTHORIZED_FOR_SESSION = 1023;
@@ -79,6 +91,10 @@
                     return self::ConstructMessage($errorCode, USER_ID_DOES_NOT_EXIST_MESSAGE);
                 case self::USER_DOES_NOT_BELONG_TO_SESSION:
                     return self::ConstructMessage($errorCode, USER_DOES_NOT_BELONG_TO_SESSION_MESSAGE);
+                case self::CLIENT_PROFILE_DOES_NOT_BELONG_TO_SESSION:
+                    return self::ConstructMessage($errorCode, CLIENT_PROFILE_DOES_NOT_BELONG_TO_SESSION_MESSAGE);
+                case self::USER_IS_NOT_ARTIST:
+                    return self::ConstructMessage($errorCode, USER_IS_NOT_ARTIST_MESSAGE);
                 case self::REQUESTER_SESSION_KEY_INVALID:
                     return self::ConstructMessage($errorCode, REQUESTER_SESSION_KEY_INVALID_MESSAGE);
                 case self::QUERIED_SESSION_KEY_INVALID:
