@@ -7,53 +7,64 @@ import FormInfoDisplay from './FormInfoDisplay';
 
 import '../../../Css/BeautyBio.css';
 
-const DisplayBeautyBio = (props) => {
-    if (props.currentClientProfile === null) {
+class DisplayBeautyBio extends React.Component {
+    renderEditButton() {
+        if (!this.props.ownsClientProfile) {
+            return null;
+        }
         return (
-            <h1>No Client Profile</h1>
+            <Button
+                label="Edit"
+                onClickHandler={this.props.onEditClientProfile}
+            />
         );
     }
 
-    return (
-        <div>
-            <div className="account-info-actions">
-                <div className="account-info-action">
-                    <h1>Beauty Bio</h1>
+    render() {
+        if (this.props.currentClientProfile === null) {
+            return (
+                <h1>No Client Profile</h1>
+            );
+        }
+
+        return (
+            <div>
+                <div className="account-info-actions">
+                    <div className="account-info-action">
+                        <h1>Beauty Bio</h1>
+                    </div>
+                    <div className="account-info-action-spacer" />
+                    <div className="account-info-action">
+                        {this.renderEditButton()}
+                    </div>
                 </div>
-                <div className="account-info-action-spacer" />
-                <div className="account-info-action">
-                    <Button
-                        label="Edit"
-                        onClickHandler={props.onEditClientProfile}
+                <FormInfoDisplay>
+                    <img
+                        className="profile-picture"
+                        src={this.props.currentClientProfile.profilePictureUrl}
+                        alt="Profile Pic"
                     />
-                </div>
+                    <FormInfoBlock
+                        label="Biography:"
+                        value={this.props.currentClientProfile.biography}
+                    />
+                    <FormInfoBlock
+                        label="Eye Colour:"
+                        value={this.props.currentClientProfile.eyeColourDescription}
+                    />
+                    <FormInfoBlock
+                        label="Hair Colour:"
+                        value={this.props.currentClientProfile.hairColourDescription}
+                    />
+                    <FormInfoBlock
+                        label="Skin Tone:"
+                        value={this.props.currentClientProfile.skinToneDescription}
+                    />
+                </FormInfoDisplay>
             </div>
-            <FormInfoDisplay>
-                <img
-                    className="profile-picture"
-                    src={props.currentClientProfile.profilePictureUrl}
-                    alt="Profile Pic"
-                />
-                <FormInfoBlock
-                    label="Biography:"
-                    value={props.currentClientProfile.biography}
-                />
-                <FormInfoBlock
-                    label="Eye Colour:"
-                    value={props.currentClientProfile.eyeColourDescription}
-                />
-                <FormInfoBlock
-                    label="Hair Colour:"
-                    value={props.currentClientProfile.hairColourDescription}
-                />
-                <FormInfoBlock
-                    label="Skin Tone:"
-                    value={props.currentClientProfile.skinToneDescription}
-                />
-            </FormInfoDisplay>
-        </div>
-    );
-};
+        );
+    }
+}
 
 DisplayBeautyBio.propTypes = {
     currentClientProfile: PropTypes.shape({
@@ -67,12 +78,14 @@ DisplayBeautyBio.propTypes = {
         skinToneId: PropTypes.number,
         skinToneDescription: PropTypes.string
     }),
-    onEditClientProfile: PropTypes.func
+    onEditClientProfile: PropTypes.func,
+    ownsClientProfile: PropTypes.bool
 };
 
 DisplayBeautyBio.defaultProps = {
     currentClientProfile: null,
-    onEditClientProfile: () => {}
+    onEditClientProfile: () => {},
+    ownsClientProfile: false
 };
 
 export default DisplayBeautyBio;

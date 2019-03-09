@@ -1,3 +1,18 @@
+.form-info-actions {
+    display: flex;
+    flex-direction: row;
+}
+
+.form-info-action {
+    display: flex;
+    flex-direction: column;
+    flex: 3;
+}
+
+.form-info-action-spacer {
+    flex: 1;
+}
+
 .form-info-display {
     display: flex;
     flex-direction: column;

@@ -56,6 +56,7 @@
 
         public function put() {
             $apiRequest = new ApiRequest(GetPutInput(), 'ClientHeadshot');
+            $apiRequest->LogRequest();
             // Request if only available for ../client-headshot
             if (!$apiRequest->HasOnlySpecifiedKeys(self::CLIENT_PROFILE_ID_KEY, self::HEADSHOT_TYPE_ID_KEY, self::PICTURE_KEY)) {
                 $apiRequest->EndRequest(HttpStatus::BAD_REQUEST, "Invalid parameter combination");
@@ -75,7 +76,6 @@
                 $apiRequest->EndRequest(HttpStatus::INTERNAL_SERVER_ERROR, 'Database connection could not be initialized');
             }
 
-            $apiRequest->LogRequest();
             // Upload the headshot picture
             $userId = GetUserIdBySessionKey(GetBearerToken());
             $imagePath = UploadClientHeadshotImage($picture, $userId);

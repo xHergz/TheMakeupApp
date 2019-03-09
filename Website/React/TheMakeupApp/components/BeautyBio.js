@@ -40,6 +40,7 @@ const BeautyBio = (props) => {
         <DisplayBeautyBio
             currentClientProfile={props.currentClientProfile}
             onEditClientProfile={props.onEditClientProfile}
+            ownsClientProfile={props.ownsClientProfile}
         />
     );
 };

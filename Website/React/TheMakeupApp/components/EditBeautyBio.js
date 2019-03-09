@@ -42,13 +42,6 @@ class EditBeautyBio extends React.Component {
 
     updateClientProfile() {
         if (this.state.canUpdate) {
-            console.log('Client Profile Id: ', this.props.currentSession.userId);
-            console.log('Profile Pic: ', this.profilePictureInput.current.getValue());
-            console.log('Bio: ', this.biographyInput.current.getValue());
-            console.log('Eye Colour: ', this.eyeColourInput.current.getValue());
-            console.log('Hair Colour: ', this.hairColourInput.current.getValue());
-            console.log('Skin Tone: ', this.skinToneInput.current.getValue());
-            console.log('Display Name: ', this.props.currentSession.displayName);
             this.props.onUpdateClientProfile(this.props.currentClientProfile.clientProfileId, this.profilePictureInput.current.getValue(),
                 this.biographyInput.current.getValue(), this.eyeColourInput.current.getValue(), this.hairColourInput.current.getValue(),
                 this.skinToneInput.current.getValue(), this.props.currentSession.displayName);

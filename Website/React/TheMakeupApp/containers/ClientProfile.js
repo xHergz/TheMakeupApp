@@ -50,6 +50,7 @@ import {
 import setCurrentPage from '../actions/SiteActions';
 import BeautyBio from '../components/BeautyBio';
 import { GetProfilePageKey } from '../constants/UrlInfo';
+import Headshots from '../components/Headshots';
 
 class ClientProfile extends React.Component {
     constructor(props) {
@@ -64,6 +65,9 @@ class ClientProfile extends React.Component {
         this.props.getEyeColours();
         this.props.getHairColours();
         this.props.getSkinTones();
+        if (this.currentSessionOwnsClientProfile() || this.props.currentSession.isArtist) {
+            this.props.getClientHeadshots(displayName);
+        }
     }
 
     currentSessionOwnsClientProfile() {
@@ -76,6 +80,7 @@ class ClientProfile extends React.Component {
             || this.props.fetchingEyeColours
             || this.props.fetchingHairColours
             || this.props.fetchingSkinTones
+            || this.props.fetchingClientHeadshots
         );
     }
 
@@ -100,6 +105,18 @@ class ClientProfile extends React.Component {
                     onCreateClientProfile={this.props.createClientProfile}
                     onEditClientProfile={this.props.enableClientProfileEditing}
                     onUpdateClientProfile={this.props.updateClientProfile}
+                    ownsClientProfile={this.currentSessionOwnsClientProfile()}
+                />
+                <Headshots
+                    currentSession={this.props.currentSession}
+                    clientHeadshots={this.props.clientHeadshots}
+                    fetchingAddClientHeadshot={this.props.fetchingAddClientHeadshot}
+                    fetchingRemoveClientHeadshot={this.props.fetchingRemoveClientHeadshot}
+                    editingClientHeadshots={this.props.editingClientHeadshots}
+                    onAddClientHeadshot={this.props.addClientHeadshot}
+                    onDisableClientHeadshotEditing={this.props.disableClientHeadshotEditing}
+                    onEnableClientHeadshotEditing={this.props.enableClientHeadshotEditing}
+                    onRemoveClientHeadshot={this.props.removeClientHeadshot}
                     ownsClientProfile={this.currentSessionOwnsClientProfile()}
                 />
             </div>

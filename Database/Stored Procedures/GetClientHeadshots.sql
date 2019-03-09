@@ -7,7 +7,7 @@ CREATE PROCEDURE GetClientHeadshots
 BEGIN
     DECLARE DISPLAY_NAME_DOES_NOT_EXIST SMALLINT DEFAULT 1004;
 
-    DECLARE clientProfileId INT;
+    DECLARE clientProfileId INT DEFAULT NULL;
 
     GetClientHeadshots:BEGIN
         -- Check if the display name exists
@@ -24,7 +24,7 @@ BEGIN
         Client_Headshot.Client_Headshot_Id,
         Headshot_Type.Headshot_Type_Id,
         Headshot_Type.Description AS Headshot_Type_Description,
-        Client_Headshot.Client_Profile_Id,
+        clientProfileId AS Client_Profile_Id,
         Client_Headshot.Image_Url
     FROM
         Headshot_Type

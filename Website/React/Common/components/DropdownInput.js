@@ -17,9 +17,6 @@ class DropdownInput extends React.Component {
             isValid: true,
             errorMessage: ''
         };
-        console.log('Initial Value: ', this.state.currentValue);
-        console.log('Should Be: ', firstValue);
-        console.log('Initial Props: ', props);
         this.onSelectionChanged = this.onSelectionChanged.bind(this);
         this.getValue = this.getValue.bind(this);
         this.updateValidation = this.updateValidation.bind(this);
