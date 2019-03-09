@@ -51,6 +51,7 @@ import setCurrentPage from '../actions/SiteActions';
 import AllergiesAndSensitivities from '../components/AllergiesAndSensitivities';
 import BeautyBio from '../components/BeautyBio';
 import Headshots from '../components/Headshots';
+import ProductPreferences from '../components/ProductPreferences';
 import { GetProfilePageKey } from '../constants/UrlInfo';
 
 class ClientProfile extends React.Component {
@@ -70,6 +71,8 @@ class ClientProfile extends React.Component {
             this.props.getClientHeadshots(displayName);
             this.props.getClientAllergiesAndSensitivities(displayName);
             this.props.getAllergiesAndSensitivities(displayName);
+            this.props.getClientProductPreferences(displayName);
+            this.props.getProductPreferences(displayName);
         }
     }
 
@@ -139,6 +142,22 @@ class ClientProfile extends React.Component {
                     onDisableClientAllergySensitivityEditing={this.props.disableClientAllergySensitivityEditing}
                     onEnableClientAllergySensitivityEditing={this.props.enableClientAllergySensitivityEditing}
                     onRemoveClientAllergySensitivity={this.props.removeClientAllergySensitivity}
+                    ownsClientProfile={this.currentSessionOwnsClientProfile()}
+                />
+                <ProductPreferences
+                    currentSession={this.props.currentSession}
+                    clientProfileId={clientProfileId}
+                    clientProductPreferences={this.props.clientProductPreferences}
+                    productPreferences={this.props.productPreferences}
+                    fetchingAddClientProductPreference={this.props.fetchingAddClientProductPreference}
+                    fetchingRemoveClientProductPreference={this.props.fetchingRemoveClientProductPreference}
+                    fetchingAddCustomProductPreference={this.props.fetchingAddCustomProductPreference}
+                    editingClientProductPreferences={this.props.editingClientProductPreferences}
+                    onAddClientProductPreference={this.props.addClientProductPreference}
+                    onAddCustomProductPreference={this.props.addCustomProductPreference}
+                    onDisableClientProductPreferenceEditing={this.props.disableClientProductPreferenceEditing}
+                    onEnableClientProductPreferenceEditing={this.props.enableClientProductPreferenceEditing}
+                    onRemoveClientProductPreference={this.props.removeClientProductPreference}
                     ownsClientProfile={this.currentSessionOwnsClientProfile()}
                 />
             </div>

@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import DisplayAllergiesAndSensitivities from './DisplayAllergiesAndSensitivities';
-import EditAllergiesAndSensitivities from './EditAllergiesAndSensitivities';
-
-import '../../../Css/AllergiesAndSensitivities.css';
+import DisplayUserCustomizableProperties from './DisplayUserCustomizableProperties';
+import EditUserCustomizableProperties from './EditUserCustomizableProperties';
 
 const AllergiesAndSensitivities = (props) => {
     if (!props.ownsClientProfile && !props.currentSession.isArtist) {
@@ -13,27 +11,35 @@ const AllergiesAndSensitivities = (props) => {
 
     if (props.editingClientAllergiesAndSensitivities) {
         return (
-            <EditAllergiesAndSensitivities
+            <EditUserCustomizableProperties
                 currentSession={props.currentSession}
-                clientProfileId={props.clientProfileId}
-                clientAllergiesAndSensitivities={props.clientAllergiesAndSensitivities}
-                allergiesAndSensitivities={props.allergiesAndSensitivities}
-                fetchingAddClientAllergySensitivity={props.fetchingAddClientAllergySensitivity}
-                fetchingAddCustomAllergySensitivity={props.fetchingAddCustomAllergySensitivity}
-                fetchingRemoveClientAllergySensitivity={props.fetchingRemoveClientAllergySensitivity}
-                onAddClientAllergySensitivity={props.onAddClientAllergySensitivity}
-                onAddCustomAllergySensitivity={props.onAddCustomAllergySensitivity}
-                onDisableClientAllergySensitivityEditing={props.onDisableClientAllergySensitivityEditing}
-                onRemoveClientAllergySensitivity={props.onRemoveClientAllergySensitivity}
+                label="Edit Allergies &amp; Sensitivities"
+                dropdownLabel="Allergy/Sensitivity"
+                textboxLabel="Custom Allergy Sensitivity"
+                userIdentifierKey="clientProfileId"
+                propertyIdentifierKey="allergySensitivityId"
+                propertyDescriptionKey="allergySensitivityDescription"
+                userIdentifier={props.clientProfileId}
+                userProperties={props.clientAllergiesAndSensitivities}
+                properties={props.allergiesAndSensitivities}
+                fetchingAddProperty={props.fetchingAddClientAllergySensitivity}
+                fetchingRemoveProperty={props.fetchingRemoveClientAllergySensitivity}
+                fetchingAddCustomProperty={props.fetchingAddCustomAllergySensitivity}
+                onAddProperty={props.onAddClientAllergySensitivity}
+                onAddCustomProperty={props.onAddCustomAllergySensitivity}
+                onDisableEditing={props.onDisableClientAllergySensitivityEditing}
+                onRemoveProperty={props.onRemoveClientAllergySensitivity}
             />
         );
     }
 
     return (
-        <DisplayAllergiesAndSensitivities
-            clientAllergiesAndSensitivities={props.clientAllergiesAndSensitivities}
-            onEnableClientAllergySensitivityEditing={props.onEnableClientAllergySensitivityEditing}
-            ownsClientProfile={props.ownsClientProfile}
+        <DisplayUserCustomizableProperties
+            label="Allergies &amp; Sensitivities"
+            properties={props.clientAllergiesAndSensitivities}
+            descriptionKey="allergySensitivityDescription"
+            onEnableEditing={props.onEnableClientAllergySensitivityEditing}
+            ownsProperties={props.ownsClientProfile}
         />
     );
 };
