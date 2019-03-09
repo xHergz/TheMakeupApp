@@ -87,6 +87,10 @@ call:runMySqlFile "./Functions/DoesSessionOwnClientProfile.sql"
 call:runMySqlFile "./Functions/DoesSessionOwnClientHeadshot.sql"
 call:runMySqlFile "./Functions/DoesSessionOwnClientReview.sql"
 call:runMySqlFile "./Functions/GetArtistPortfolioIdBySessionKey.sql"
+call:runMySqlFile "./Functions/DoesArtistApplicationIdExist.sql"
+call:runMySqlFile "./Functions/DoesSanitizationQuizAnswerBelongToQuestion.sql"
+call:runMySqlFile "./Functions/DoesSanitizationQuizAnswerIdExist.sql"
+call:runMySqlFile "./Functions/DoesSanitizationQuizQuestionIdExist.sql"
 
 REM Create the Stored Procedures
 call:runMySqlFile "./Stored Procedures/LogSessionCreation.sql"
@@ -130,6 +134,12 @@ call:runMySqlFile "./Stored Procedures/DeleteClientAllergySensitivity.sql"
 call:runMySqlFile "./Stored Procedures/DeleteClientHeadshot.sql"
 call:runMySqlFile "./Stored Procedures/DeleteClientProductPreference.sql"
 call:runMySqlFile "./Stored Procedures/DeleteClientReview.sql"
+call:runMySqlFile "./Stored Procedures/AddExistingPortfolioLink.sql"
+call:runMySqlFile "./Stored Procedures/AddSanitizationQuizSubmission.sql"
+call:runMySqlFile "./Stored Procedures/CreateArtistApplication.sql"
+call:runMySqlFile "./Stored Procedures/GetSanitizationQuizAnswers.sql"
+call:runMySqlFile "./Stored Procedures/GetSanitizationQuizQuestion.sql"
+call:runMySqlFile "./Stored Procedures/GetSanitizationQuizQuestionIds.sql"
 
 REM Insert the initial data
 call:runMySqlFile "./Data/SystemConfigurationData.sql"
