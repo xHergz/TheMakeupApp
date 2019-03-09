@@ -9,7 +9,7 @@ class ImageInput extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentValue: null
+            currentValue: ''
         };
         this.getValue = this.getValue.bind(this);
         this.previewImage = this.previewImage.bind(this);

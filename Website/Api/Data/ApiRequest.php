@@ -95,7 +95,8 @@
                 if ($parameterString != '') {
                     $parameterString .= ', ';
                 }
-                $parameterString .= "{$paramKey}: '{$paramValue}'";
+                $valueOut = ($paramValue == null) ? 'null' : $paramValue;
+                $parameterString .= "{$paramKey}: '{$valueOut}'";
             }
             Log::LogInformation("{$this->_identifier} {$this->_httpMethod} Request with {$parameterString}");
         }

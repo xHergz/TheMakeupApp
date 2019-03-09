@@ -18,13 +18,13 @@
         public $SkinToneId;
 
         public function __construct($clientProfileId, $userId, $profilePictureUrl, $biography, $eyeColourId, $hairColourId, $skinToneId) {
-            $this->ClientProfileId = $clientProfileId;
-            $this->UserId = $userId;
-            $this->ProfilePictureUrl = $profilePictureUrl;
-            $this->Biography = $biography;
-            $this->EyeColourId = $eyeColourId;
-            $this->HairColourId = $hairColourId;
-            $this->SkinToneId = $skinToneId;
+            $this->ClientProfileId = $clientProfileId == '' ? null : $clientProfileId;
+            $this->UserId = $userId == '' ? null : $userId;
+            $this->ProfilePictureUrl = $profilePictureUrl == '' ? null : $profilePictureUrl;
+            $this->Biography = $biography == '' ? null : $biography;
+            $this->EyeColourId = $eyeColourId == '' ? null : $eyeColourId;
+            $this->HairColourId = $hairColourId == '' ? null : $hairColourId;
+            $this->SkinToneId = $skinToneId == '' ? null : $skinToneId;
         }
 
         public function GetCreateErrors() {
