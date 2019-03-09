@@ -22,6 +22,7 @@ BEGIN
     END;
 
     SELECT
+        User_Id,
         Display_Name,
         First_Name,
         Last_Name,

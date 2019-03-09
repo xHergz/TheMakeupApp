@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__.'/Utilities.php';
 
 function BadRequest($httpStatus) {
     http_response_code($httpStatus);
@@ -44,6 +45,9 @@ function GetJsonInput() {
 
 function GetPutInput() {
     $input = file_get_contents('php://input');
+    if (is_json($input)) {
+        return json_decode($input, true);
+    }
     parse_str($input, $parsed);
     return $parsed;
 }

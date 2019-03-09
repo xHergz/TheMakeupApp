@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import Button from '../../Common/components/Button';
 import Loader from '../../Common/components/Loader';
 
+import FormInfoBlock from './FormInfoBlock';
+import FormInfoDisplay from './FormInfoDisplay';
+
 import '../../../Css/Account.css';
 
 class DisplayAccountInfo extends React.Component {
@@ -43,32 +46,24 @@ class DisplayAccountInfo extends React.Component {
                         />
                     </div>
                 </div>
-                <div className="account-info-display">
-                    <div className="account-info-block">
-                        <h3>Email:</h3>
-                        <div>
-                            <h4>{this.props.currentUser.email}</h4>
-                        </div>
-                    </div>
-                    <div className="account-info-block">
-                        <h3>Display Name:</h3>
-                        <div>
-                            <h4>{this.props.currentUser.displayName}</h4>
-                        </div>
-                    </div>
-                    <div className="account-info-block">
-                        <h3>First Name:</h3>
-                        <div>
-                            <h4>{this.props.currentUser.firstName}</h4>
-                        </div>
-                    </div>
-                    <div className="account-info-block">
-                        <h3>Last Name:</h3>
-                        <div>
-                            <h4>{this.props.currentUser.lastName}</h4>
-                        </div>
-                    </div>
-                </div>
+                <FormInfoDisplay>
+                    <FormInfoBlock
+                        label="Email:"
+                        value={this.props.currentUser.email}
+                    />
+                    <FormInfoBlock
+                        label="Display Name:"
+                        value={this.props.currentUser.displayName}
+                    />
+                    <FormInfoBlock
+                        label="First Name:"
+                        value={this.props.currentUser.firstName}
+                    />
+                    <FormInfoBlock
+                        label="Last Name:"
+                        value={this.props.currentUser.lastName}
+                    />
+                </FormInfoDisplay>
                 <div className="account-info-action">
                     {this.renderDeactivateButton()}
                 </div>

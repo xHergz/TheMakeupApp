@@ -1,5 +1,7 @@
 <?php
     class SessionDto {
+        public $User_Id;
+        
         public $Display_Name;
 
         public $First_Name;

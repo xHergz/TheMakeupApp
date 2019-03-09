@@ -84,7 +84,6 @@ class EditAccountInfo extends React.Component {
     }
 
     render() {
-        console.log('Fetching Update: ', this.props.fetchingUpdateUser);
         return (
             <div className="account-info">
                 <div className="account-info-actions">

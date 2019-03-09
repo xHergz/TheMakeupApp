@@ -1,0 +1,53 @@
+.headshots-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.headshot-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.headshot-container > h4 {
+    text-align: center;
+}
+
+.headshot-image {
+    object-fit: cover;
+    object-position: 50% 50%;
+    width: 250px;
+    height: 250px;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/* Smallest devices (phones, Below 600px) */
+@media only screen and (max-width: 599px) {
+    
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .headshots-container {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+}

@@ -3,22 +3,82 @@ import PropTypes from 'prop-types';
 
 import isNullOrWhiteSpace from '../helpers/stringUtilities';
 
-import '../styles/Input.css'
+import '../styles/Input.css';
 
 class DropdownInput extends React.Component {
     constructor(props) {
         super(props);
+        let firstValue = (props.options[0] === undefined) ? null : props.options[0][props.valueKey];
+        if (props.defaultValue !== null) {
+            firstValue = props.defaultValue;
+        }
         this.state = {
-            currentValue: props.defaultValue,
+            currentValue: props.startsEmpty ? null : firstValue,
             isValid: true,
             errorMessage: ''
         };
+        this.onSelectionChanged = this.onSelectionChanged.bind(this);
+        this.getValue = this.getValue.bind(this);
+        this.updateValidation = this.updateValidation.bind(this);
+        this.changeValidity = this.changeValidity.bind(this);
+        this.changeValue = this.changeValue.bind(this);
+        this.isValid = this.isValid.bind(this);
+        this.isEmpty = this.isEmpty.bind(this);
         this.renderOption = this.renderOption.bind(this);
         this.renderInputLabel = this.renderInputLabel.bind(this);
-        this.onSelectionChanged = this.onSelectionChanged.bind(this);
-        this.isValid = this.isValid.bind(this);
-        this.updateValidation = this.updateValidation.bind(this);
-        this.getValue = this.getValue.bind(this);
+    }
+
+    onSelectionChanged(event) {
+        const newValue = event.target.value;
+        this.updateValidation(newValue);
+    }
+
+    getValue() {
+        return this.state.currentValue;
+    }
+
+    updateValidation(value = this.state.currentValue) {
+        if (isNullOrWhiteSpace(value) && this.props.isRequired) {
+            this.changeValidity(false);
+            this.changeValue(value);
+            this.setState({
+                errorMessage: 'Input is Required'
+            });
+        }
+        else if (isNullOrWhiteSpace(value) && !this.props.isRequired) {
+            this.changeValidity(true);
+            this.changeValue(value);
+            this.setState({
+                errorMessage: ''
+            });
+        }
+        else {
+            this.changeValidity(true);
+            this.changeValue(value);
+            this.setState({
+                errorMessage: ''
+            });
+        }
+    }
+
+    changeValidity(valid) {
+        this.setState({
+            isValid: valid
+        }, this.props.onValidityChanged);
+    }
+
+    changeValue(value) {
+        this.setState({
+            currentValue: value
+        }, this.props.onValueChanged);
+    }
+
+    isValid() {
+        return this.state.isValid;
+    }
+
+    isEmpty() {
+        return isNullOrWhiteSpace(this.state.currentValue);
     }
 
     renderOption(option) {
@@ -27,50 +87,12 @@ class DropdownInput extends React.Component {
             <option key={value} value={value}>
                 {option[this.props.labelKey]}
             </option>
-        )
+        );
     }
 
     renderInputLabel() {
         const requiredMark = this.props.isRequired ? '*' : '';
         return `${this.props.label}${requiredMark}:`;
-    }
-
-    onSelectionChanged(event) {
-        const newValue = event.target.value;
-        this.updateValidation(newValue);        
-        this.props.onChangeHandler(newValue);
-    }
-
-    isValid() {
-        return this.state.isValid;
-    }
-
-    updateValidation(value = this.state.currentValue) {
-        if (isNullOrWhiteSpace(value) && this.props.isRequired) {
-            this.setState({
-                isValid: false,
-                errorMessage: 'Input is Required',
-                currentValue: value
-            })
-        }
-        else if (isNullOrWhiteSpace(value) && !this.props.isRequired) {
-            this.setState({
-                isValid: true,
-                errorMessage: '',
-                currentValue: value
-            })
-        }
-        else {
-            this.setState({
-                isValid: true,
-                errorMessage: '',
-                currentValue: value
-            })
-        }
-    }
-
-    getValue() {
-        return this.state.currentValue;
     }
 
     render() {
@@ -79,16 +101,16 @@ class DropdownInput extends React.Component {
             defaultOption = <option value="" default hidden />;
         }
         const selectClass = this.state.isValid ? 'input-input valid-input' : 'input-input invalid-input';
-        return(
+        return (
             <div className="input-container">
-                <h5>{this.renderInputLabel()}</h5>
+                <h3>{this.renderInputLabel()}</h3>
                 <select
                     className={selectClass}
                     onChange={this.onSelectionChanged}
                     defaultValue={this.props.defaultValue}
                 >
                     {defaultOption}
-                    {this.props.options.map(option => this.renderOption(option))}
+                    {this.props.options.map((option) => { return this.renderOption(option); })}
                 </select>
                 <div className="input-error">
                     <h6>{this.state.errorMessage}</h6>
@@ -99,24 +121,27 @@ class DropdownInput extends React.Component {
 }
 
 DropdownInput.propTypes = {
-    label: PropTypes.string.isRequired,
     options: PropTypes.arrayOf(PropTypes.object).isRequired,
     valueKey: PropTypes.string.isRequired,
     labelKey: PropTypes.string.isRequired,
-    onChangeHandler: PropTypes.func,
-    startsEmpty: PropTypes.bool,
+    label: PropTypes.string,
+    isRequired: PropTypes.bool,
     defaultValue: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number
     ]),
-    isRequired: PropTypes.bool
+    startsEmpty: PropTypes.bool,
+    onValidityChanged: PropTypes.func,
+    onValueChanged: PropTypes.func
 };
 
 DropdownInput.defaultProps = {
-    onChangeHandler: () => {},
+    label: '',
+    isRequired: false,
+    defaultValue: null,
     startsEmpty: false,
-    defaultValue: '',
-    isRequired: false
-}
+    onValidityChanged: () => {},
+    onValueChanged: () => {}
+};
 
 export default DropdownInput;

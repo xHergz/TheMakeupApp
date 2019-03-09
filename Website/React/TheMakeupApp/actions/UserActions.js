@@ -76,7 +76,6 @@ export function updateUser(userId, email, password, confirmPassword, displayName
                 dispatch(cancelUserEditing());
                 dispatch(addSuccessMessage('User information successfully updated'));
                 dispatch(getSessionInfo());
-                dispatch(getUserInfo(displayName));
             })
             .catch((error) => {
                 console.error(error);

@@ -56,6 +56,7 @@ function mapStateToProps(state) {
 Account.propTypes = {
     cancelUserEditing: PropTypes.func.isRequired,
     currentSession: PropTypes.shape({
+        userId: PropTypes.number.isRequired,
         displayName: PropTypes.string.isRequired,
         firstName: PropTypes.string.isRequired,
         lastName: PropTypes.string.isRequired,

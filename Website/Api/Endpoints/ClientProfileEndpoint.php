@@ -59,6 +59,7 @@
 
         public function post() {
             $apiRequest = new ApiRequest($_POST, 'ClientProfile');
+            $apiRequest->LogRequest();
             
             // This method only accepts calls for unique ids
             if (!$apiRequest->IsForUniqueId()) {
@@ -86,8 +87,6 @@
                 $apiRequest->EndRequest(HttpStatus::INTERNAL_SERVER_ERROR, 'Database connection could not be initialized');
             }
 
-            $apiRequest->LogRequest();
-            $response = null;
             // Validate Client Profile Information
             if (!empty($clientProfile->GetUpdateErrors())) {
                 $apiRequest->EndRequest(HttpStatus::BAD_REQUEST, 'Invalid Parameters: ' . implode(', ', $clientProfile->GetUpdateErrors()));
@@ -108,6 +107,7 @@
 
         public function put() {
             $apiRequest = new ApiRequest(GetPutInput(), 'ClientProfile');
+            $apiRequest->LogRequest();
 
             // Make sure all the fields are set
             if (!$apiRequest->HasOnlySpecifiedKeys(self::USER_ID_KEY, self::PROFILE_PICTURE_KEY, self::BIOGRAPHY_KEY, self::EYE_COLOUR_ID_KEY,
@@ -130,8 +130,6 @@
                 $apiRequest->EndRequest(HttpStatus::INTERNAL_SERVER_ERROR, 'Database connection could not be initialized');
             }
 
-            $apiRequest->LogRequest();
-            $response = null;
             // Validate Client Profile Information
             if (!empty($clientProfile->GetCreateErrors())) {
                 $apiRequest->EndRequest(HttpStatus::BAD_REQUEST, 'Invalid Parameters: ' . implode(', ', $clientProfile->GetCreateErrors()));
