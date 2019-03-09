@@ -103,7 +103,7 @@ class DropdownInput extends React.Component {
         const selectClass = this.state.isValid ? 'input-input valid-input' : 'input-input invalid-input';
         return (
             <div className="input-container">
-                <h5>{this.renderInputLabel()}</h5>
+                <h3>{this.renderInputLabel()}</h3>
                 <select
                     className={selectClass}
                     onChange={this.onSelectionChanged}

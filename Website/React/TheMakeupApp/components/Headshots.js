@@ -7,7 +7,6 @@ import EditHeadshots from './EditHeadshots';
 import '../../../Css/Headshots.css';
 
 const Headshots = (props) => {
-    console.log(props.clientHeadshots);
     if (!props.ownsClientProfile && !props.currentSession.isArtist) {
         return null;
     }

@@ -48,9 +48,10 @@ import {
     updateClientReview
 } from '../actions/ClientReviewsActions';
 import setCurrentPage from '../actions/SiteActions';
+import AllergiesAndSensitivities from '../components/AllergiesAndSensitivities';
 import BeautyBio from '../components/BeautyBio';
-import { GetProfilePageKey } from '../constants/UrlInfo';
 import Headshots from '../components/Headshots';
+import { GetProfilePageKey } from '../constants/UrlInfo';
 
 class ClientProfile extends React.Component {
     constructor(props) {
@@ -67,6 +68,8 @@ class ClientProfile extends React.Component {
         this.props.getSkinTones();
         if (this.currentSessionOwnsClientProfile() || this.props.currentSession.isArtist) {
             this.props.getClientHeadshots(displayName);
+            this.props.getClientAllergiesAndSensitivities(displayName);
+            this.props.getAllergiesAndSensitivities(displayName);
         }
     }
 
@@ -81,10 +84,13 @@ class ClientProfile extends React.Component {
             || this.props.fetchingHairColours
             || this.props.fetchingSkinTones
             || this.props.fetchingClientHeadshots
+            || this.props.fetchingClientAllergiesAndSensitivities
+            || this.props.fetchingAllergiesAndSensitivities
         );
     }
 
     render() {
+        const clientProfileId = (this.props.currentClientProfile === null) ? null : this.props.currentClientProfile.clientProfileId;
         if (this.isFetchingData()) {
             return <Loader />;
         }
@@ -117,6 +123,22 @@ class ClientProfile extends React.Component {
                     onDisableClientHeadshotEditing={this.props.disableClientHeadshotEditing}
                     onEnableClientHeadshotEditing={this.props.enableClientHeadshotEditing}
                     onRemoveClientHeadshot={this.props.removeClientHeadshot}
+                    ownsClientProfile={this.currentSessionOwnsClientProfile()}
+                />
+                <AllergiesAndSensitivities
+                    currentSession={this.props.currentSession}
+                    clientProfileId={clientProfileId}
+                    clientAllergiesAndSensitivities={this.props.clientAllergiesAndSensitivities}
+                    allergiesAndSensitivities={this.props.allergiesAndSensitivities}
+                    fetchingAddClientAllergySensitivity={this.props.fetchingAddClientAllergySensitivity}
+                    fetchingRemoveClientAllergySensitivity={this.props.fetchingRemoveClientAllergySensitivity}
+                    fetchingAddCustomAllergySensitivity={this.props.fetchingAddCustomAllergySensitivity}
+                    editingClientAllergiesAndSensitivities={this.props.editingClientAllergiesAndSensitivities}
+                    onAddClientAllergySensitivity={this.props.addClientAllergySensitivity}
+                    onAddCustomAllergySensitivity={this.props.addCustomAllergySensitivity}
+                    onDisableClientAllergySensitivityEditing={this.props.disableClientAllergySensitivityEditing}
+                    onEnableClientAllergySensitivityEditing={this.props.enableClientAllergySensitivityEditing}
+                    onRemoveClientAllergySensitivity={this.props.removeClientAllergySensitivity}
                     ownsClientProfile={this.currentSessionOwnsClientProfile()}
                 />
             </div>
