@@ -125,7 +125,10 @@ TheMakeupApp.propTypes = {
         displayName: PropTypes.string,
         firstName: PropTypes.string,
         lastName: PropTypes.string,
-        isArtist: PropTypes.bool
+        isArtist: PropTypes.bool,
+        isClient: PropTypes.bool.isRequired,
+        clientProfileId: PropTypes.number,
+        artistPortfolioId: PropTypes.number
     }),
     dismissMessage: PropTypes.func.isRequired,
     getSessionInfo: PropTypes.func.isRequired,

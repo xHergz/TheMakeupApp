@@ -103,7 +103,10 @@ Notifications.propTypes = {
         displayName: PropTypes.string.isRequired,
         firstName: PropTypes.string.isRequired,
         lastName: PropTypes.string.isRequired,
-        isArtist: PropTypes.bool.isRequired
+        isArtist: PropTypes.bool.isRequired,
+        isClient: PropTypes.bool.isRequired,
+        clientProfileId: PropTypes.number,
+        artistPortfolioId: PropTypes.number
     }).isRequired,
     getMoreNotifications: PropTypes.func.isRequired,
     getNotifications: PropTypes.func.isRequired,

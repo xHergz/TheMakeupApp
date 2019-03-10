@@ -255,7 +255,10 @@ ClientProfile.propTypes = {
         displayName: PropTypes.string.isRequired,
         firstName: PropTypes.string.isRequired,
         lastName: PropTypes.string.isRequired,
-        isArtist: PropTypes.bool.isRequired
+        isArtist: PropTypes.bool.isRequired,
+        isClient: PropTypes.bool.isRequired,
+        clientProfileId: PropTypes.number,
+        artistPortfolioId: PropTypes.number
     }).isRequired,
     clientAllergiesAndSensitivities: PropTypes.arrayOf(PropTypes.object).isRequired,
     allergiesAndSensitivities: PropTypes.arrayOf(PropTypes.object).isRequired,

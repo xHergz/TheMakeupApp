@@ -55,6 +55,10 @@
     background-color: #CC9466;
 }
 
+.home-page-tile:nth-child(6) {
+    background-color: #Bf804C;
+}
+
 /* Smallest devices (phones, Below 600px) */
 @media only screen and (max-width: 599px) {
     

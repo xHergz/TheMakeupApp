@@ -22,6 +22,18 @@
     resize: none;
 }
 
+.radio-button-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    padding: 5px;
+    align-items: center;
+}
+
+.radio-button-input > input {
+    margin-right: 10px;
+}
+
 textarea {
     height: auto !important;
     resize: none;

@@ -26,7 +26,10 @@ BEGIN
         Display_Name,
         First_Name,
         Last_Name,
-        IsUserArtist(userId) AS Is_Artist
+        IsUserArtist(userId) AS Is_Artist,
+        IsUserClient(userId) AS Is_Client,
+        GetClientProfileIdByDisplayName(Display_Name) AS Client_Profile_Id,
+        GetArtistPortfolioIdByDisplayName(Display_Name) AS Artist_Portfolio_Id
     FROM
         User
     WHERE
