@@ -25,6 +25,18 @@
             $this->_connectionInfo->Close();
         }
 
+        public function BeginTransaction() {
+			return $this->_connectionInfo->BeginTransaction();
+		}
+
+		public function CommitTransaction() {
+			return $this->_connectionInfo->CommitTransaction();
+		}
+
+		public function RollBackTransaction() {
+			return $this->_connectionInfo->RollBackTransaction();
+		}
+
         public function EncodeResponse($response) {
             if (is_array($response)) {
                 // Convert all keys with Some_Key case to someKey for javascript
