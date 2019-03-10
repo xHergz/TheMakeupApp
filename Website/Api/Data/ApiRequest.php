@@ -96,6 +96,9 @@
                     $parameterString .= ', ';
                 }
                 $valueOut = ($paramValue == null) ? 'null' : $paramValue;
+                if (is_array($valueOut)) {
+                    $valueOut = "[" . implode(", ", $valueOut) . "]";
+                }
                 $parameterString .= "{$paramKey}: '{$valueOut}'";
             }
             Log::LogInformation("{$this->_identifier} {$this->_httpMethod} Request with {$parameterString}");

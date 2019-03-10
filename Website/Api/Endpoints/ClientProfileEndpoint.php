@@ -7,7 +7,7 @@
     require_once __DIR__. "/../Data/HttpStatus.php";
     require_once __DIR__. "/../DataAccessLayer/ClientProfileDal.php";
     require_once __DIR__. "/../Helpers/AuthorizationMethods.php";
-    require_once __DIR__. "/../Helpers/ImageMethods.php";
+    require_once __DIR__. "/../Helpers/FileMethods.php";
     require_once 'IApiEndpoint.php';
 
     class ClientProfileEndpoint implements IApiEndpoint {

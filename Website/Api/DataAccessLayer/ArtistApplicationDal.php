@@ -1,5 +1,6 @@
 <?php
     require_once __DIR__.'/../Common/DataAccessLayer.php';
+    require_once __DIR__.'/Response/CreateArtistApplicationResponse.php';
     require_once __DIR__.'/Response/StatusResponse.php';
 
     define("AddExistingPortfolioLink", "AddExistingPortfolioLink");
@@ -36,7 +37,7 @@
                 new DatabaseParameter(Status, PDO::PARAM_STR, '_status', ParameterDirection::OUT)
             );
             $procResponse =  $this->_connectionInfo->ExecuteStoredProcedure(CreateArtistApplication, null, $parameterArray);
-            return new StatusResponse($procResponse->Outputs[Status]);
+            return new CreateArtistApplicationResponse($procResponse->Outputs[Status], $procResponse->GetSingleRow()['New_Application_Id']);
         }
     }
 ?>
