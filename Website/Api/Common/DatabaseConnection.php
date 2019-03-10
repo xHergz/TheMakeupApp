@@ -125,6 +125,30 @@
 			return $this->ExecutePdoStatement($statement);
 		}
 
+		public function BeginTransaction() {
+			if (!$this->IsConnected) {
+				return false;
+			}
+
+			return $this->_mysqlConnection->beginTransaction();
+		}
+
+		public function CommitTransaction() {
+			if (!$this->IsConnected) {
+				return false;
+			}
+
+			return $this->_mysqlConnection->commit();
+		}
+
+		public function RollBackTransaction() {
+			if (!$this->IsConnected) {
+				return false;
+			}
+
+			return $this->_mysqlConnection->rollBack();
+		}
+
 		private function FilterInputParameters($parameter) {
 			if (isset($parameter->Direction) && $parameter->Direction == ParameterDirection::IN) {
 				return true;
