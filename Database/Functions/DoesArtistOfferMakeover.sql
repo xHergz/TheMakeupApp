@@ -1,5 +1,5 @@
 DELIMITER $$
-CREATE FUNCTION DoesArtistOfferMakeoverIdExist
+CREATE FUNCTION DoesArtistOfferMakeover
 (
 	_artistPortfolioId INT,
     _makeoverTypeId INT
