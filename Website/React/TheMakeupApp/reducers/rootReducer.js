@@ -23,6 +23,9 @@ import sessionReducer from './SessionReducer';
 import setupMakeoverAppointmentReducer from './SetupMakeoverAppointmentReducer';
 import siteReducer from './SiteReducer';
 import userReducer from './UserReducer';
+import audioReducer from './AudioReducer';
+import videoReducer from './VideoReducer';
+import roomReducer from './RoomReducer';
 
 const rootReducer = combineReducers({
     artistApplicationReducer,
