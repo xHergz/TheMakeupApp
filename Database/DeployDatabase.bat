@@ -106,6 +106,13 @@ call:runMySqlFile "./Functions/DoesServiceTypeIdExist.sql"
 call:runMySqlFile "./Functions/DoesArtistMakeoverOfferedHaveService.sql"
 call:runMySqlFile "./Functions/DoesArtistServiceHaveConsultation.sql"
 call:runMySqlFile "./Functions/DoesUserHaveArtistPortfolio.sql"
+call:runMySqlFile "./Functions/DoesSessionOwnArtistPortfolio.sql"
+call:runMySqlFile "./Functions/DoesSessionOwnArtistPortfolioPicture.sql"
+call:runMySqlFile "./Functions/DoesSessionOwnArtistQualification.sql"
+call:runMySqlFile "./Functions/DoesSessionOwnArtistMakeoverOffered.sql"
+call:runMySqlFile "./Functions/DoesSessionOwnArtistService.sql"
+call:runMySqlFile "./Functions/DoesSessionOwnArtistServiceAddon.sql"
+call:runMySqlFile "./Functions/DoesSessionOwnArtistServiceConsultation.sql"
 
 REM Create the Stored Procedures
 call:runMySqlFile "./Stored Procedures/LogSessionCreation.sql"
