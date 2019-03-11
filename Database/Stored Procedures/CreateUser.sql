@@ -31,6 +31,7 @@ BEGIN
         INSERT INTO User (Email, Password_Hash, Display_Name, First_Name, Last_Name) VALUES
         (_email, _passwordHash, _displayName, _firstName, _lastName);
         SET newUserId = LAST_INSERT_ID();
+        CALL AddTaskUserNotification(_displayName, 'Welcome to The Makeup Application! Click here to set up your client profile.', CONCAT('http://themakeupapp.localhost/profile/', _displayName), @status);
         SET _status = 0;
     END;
 

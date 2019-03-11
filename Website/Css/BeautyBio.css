@@ -4,6 +4,15 @@
     justify-content: center;
 }
 
+.client-profile-container > div {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.client-profile-container > h1 {
+    text-align: center;
+}
+
 .client-profile-display {
     display: flex;
     flex-direction: column;

@@ -5,31 +5,6 @@ import { withRouter } from 'react-router-dom';
 
 import Loader from '../../Common/components/Loader';
 import {
-    addClientAllergySensitivity,
-    addCustomAllergySensitivity,
-    disableClientAllergySensitivityEditing,
-    enableClientAllergySensitivityEditing,
-    getAllergiesAndSensitivities,
-    getClientAllergiesAndSensitivities,
-    removeClientAllergySensitivity
-} from '../actions/ClientAllergySensitivityActions';
-import {
-    addClientHeadshot,
-    disableClientHeadshotEditing,
-    enableClientHeadshotEditing,
-    getClientHeadshots,
-    removeClientHeadshot
-} from '../actions/ClientHeadshotActions';
-import {
-    addClientProductPreference,
-    addCustomProductPreference,
-    disableClientProductPreferenceEditing,
-    enableClientProductPreferenceEditing,
-    getClientProductPreferences,
-    getProductPreferences,
-    removeClientProductPreference
-} from '../actions/ClientProductPreferenceActions';
-import {
     createClientProfile,
     disableClientProfileEditing,
     enableClientProfileEditing,
@@ -67,13 +42,6 @@ class ClientProfile extends React.Component {
         this.props.getEyeColours();
         this.props.getHairColours();
         this.props.getSkinTones();
-        if (this.currentSessionOwnsClientProfile() || this.props.currentSession.isArtist) {
-            this.props.getClientHeadshots(displayName);
-            this.props.getClientAllergiesAndSensitivities(displayName);
-            this.props.getAllergiesAndSensitivities(displayName);
-            this.props.getClientProductPreferences(displayName);
-            this.props.getProductPreferences(displayName);
-        }
     }
 
     currentSessionOwnsClientProfile() {
@@ -86,21 +54,17 @@ class ClientProfile extends React.Component {
             || this.props.fetchingEyeColours
             || this.props.fetchingHairColours
             || this.props.fetchingSkinTones
-            || this.props.fetchingClientHeadshots
-            || this.props.fetchingClientAllergiesAndSensitivities
-            || this.props.fetchingAllergiesAndSensitivities
         );
     }
 
     render() {
-        const clientProfileId = (this.props.currentClientProfile === null) ? null : this.props.currentClientProfile.clientProfileId;
         if (this.isFetchingData()) {
             return <Loader />;
         }
 
         return (
             <div className="client-profile-container">
-                <h1>ClientProfile: {this.props.match.params.displayName}</h1>
+                <h1>{this.props.match.params.displayName}&#39;s Client Profile</h1>
                 <BeautyBio
                     currentSession={this.props.currentSession}
                     currentClientProfile={this.props.currentClientProfile}
@@ -117,47 +81,18 @@ class ClientProfile extends React.Component {
                     ownsClientProfile={this.currentSessionOwnsClientProfile()}
                 />
                 <Headshots
-                    currentSession={this.props.currentSession}
-                    clientHeadshots={this.props.clientHeadshots}
-                    fetchingAddClientHeadshot={this.props.fetchingAddClientHeadshot}
-                    fetchingRemoveClientHeadshot={this.props.fetchingRemoveClientHeadshot}
-                    editingClientHeadshots={this.props.editingClientHeadshots}
-                    onAddClientHeadshot={this.props.addClientHeadshot}
-                    onDisableClientHeadshotEditing={this.props.disableClientHeadshotEditing}
-                    onEnableClientHeadshotEditing={this.props.enableClientHeadshotEditing}
-                    onRemoveClientHeadshot={this.props.removeClientHeadshot}
+                    clientDisplayName={this.props.match.params.displayName}
+                    currentClientProfile={this.props.currentClientProfile}
                     ownsClientProfile={this.currentSessionOwnsClientProfile()}
                 />
                 <AllergiesAndSensitivities
-                    currentSession={this.props.currentSession}
-                    clientProfileId={clientProfileId}
-                    clientAllergiesAndSensitivities={this.props.clientAllergiesAndSensitivities}
-                    allergiesAndSensitivities={this.props.allergiesAndSensitivities}
-                    fetchingAddClientAllergySensitivity={this.props.fetchingAddClientAllergySensitivity}
-                    fetchingRemoveClientAllergySensitivity={this.props.fetchingRemoveClientAllergySensitivity}
-                    fetchingAddCustomAllergySensitivity={this.props.fetchingAddCustomAllergySensitivity}
-                    editingClientAllergiesAndSensitivities={this.props.editingClientAllergiesAndSensitivities}
-                    onAddClientAllergySensitivity={this.props.addClientAllergySensitivity}
-                    onAddCustomAllergySensitivity={this.props.addCustomAllergySensitivity}
-                    onDisableClientAllergySensitivityEditing={this.props.disableClientAllergySensitivityEditing}
-                    onEnableClientAllergySensitivityEditing={this.props.enableClientAllergySensitivityEditing}
-                    onRemoveClientAllergySensitivity={this.props.removeClientAllergySensitivity}
+                    clientDisplayName={this.props.match.params.displayName}
+                    currentClientProfile={this.props.currentClientProfile}
                     ownsClientProfile={this.currentSessionOwnsClientProfile()}
                 />
                 <ProductPreferences
-                    currentSession={this.props.currentSession}
-                    clientProfileId={clientProfileId}
-                    clientProductPreferences={this.props.clientProductPreferences}
-                    productPreferences={this.props.productPreferences}
-                    fetchingAddClientProductPreference={this.props.fetchingAddClientProductPreference}
-                    fetchingRemoveClientProductPreference={this.props.fetchingRemoveClientProductPreference}
-                    fetchingAddCustomProductPreference={this.props.fetchingAddCustomProductPreference}
-                    editingClientProductPreferences={this.props.editingClientProductPreferences}
-                    onAddClientProductPreference={this.props.addClientProductPreference}
-                    onAddCustomProductPreference={this.props.addCustomProductPreference}
-                    onDisableClientProductPreferenceEditing={this.props.disableClientProductPreferenceEditing}
-                    onEnableClientProductPreferenceEditing={this.props.enableClientProductPreferenceEditing}
-                    onRemoveClientProductPreference={this.props.removeClientProductPreference}
+                    clientDisplayName={this.props.match.params.displayName}
+                    currentClientProfile={this.props.currentClientProfile}
                     ownsClientProfile={this.currentSessionOwnsClientProfile()}
                 />
             </div>
@@ -168,27 +103,6 @@ class ClientProfile extends React.Component {
 function mapStateToProps(state) {
     return {
         currentSession: state.sessionReducer.currentSession,
-        clientAllergiesAndSensitivities: state.clientAllergySensitivityReducer.clientAllergiesAndSensitivities,
-        allergiesAndSensitivities: state.clientAllergySensitivityReducer.allergiesAndSensitivities,
-        fetchingClientAllergiesAndSensitivities: state.clientAllergySensitivityReducer.fetchingClientAllergiesAndSensitivities,
-        fetchingAllergiesAndSensitivities: state.clientAllergySensitivityReducer.fetchingAllergiesAndSensitivities,
-        fetchingAddClientAllergySensitivity: state.clientAllergySensitivityReducer.fetchingAddClientAllergySensitivity,
-        fetchingRemoveClientAllergySensitivity: state.clientAllergySensitivityReducer.fetchingRemoveClientAllergySensitivity,
-        fetchingAddCustomAllergySensitivity: state.clientAllergySensitivityReducer.fetchingAddCustomAllergySensitivity,
-        editingClientAllergiesAndSensitivities: state.clientAllergySensitivityReducer.editingClientAllergiesAndSensitivities,
-        clientHeadshots: state.clientHeadshotReducer.clientHeadshots,
-        fetchingClientHeadshots: state.clientHeadshotReducer.fetchingClientHeadshots,
-        fetchingAddClientHeadshot: state.clientHeadshotReducer.fetchingAddClientHeadshot,
-        fetchingRemoveClientHeadshot: state.clientHeadshotReducer.fetchingRemoveClientHeadshot,
-        editingClientHeadshots: state.clientHeadshotReducer.editingClientHeadshots,
-        clientProductPreferences: state.clientProductPreferenceReducer.clientProductPreferences,
-        productPreferences: state.clientProductPreferenceReducer.productPreferences,
-        fetchingClientProductPreferences: state.clientProductPreferenceReducer.fetchingClientProductPreferences,
-        fetchingProductPreferences: state.clientProductPreferenceReducer.fetchingProductPreferences,
-        fetchingAddClientProductPreference: state.clientProductPreferenceReducer.fetchingAddClientProductPreference,
-        fetchingRemoveClientProductPreference: state.clientProductPreferenceReducer.fetchingRemoveClientProductPreference,
-        fetchingAddCustomProductPreference: state.clientProductPreferenceReducer.fetchingAddCustomProductPreference,
-        editingClientProductPreferences: state.clientProductPreferenceReducer.editingClientProductPreferences,
         currentClientProfile: state.clientProfileReducer.currentClientProfile,
         fetchingClientProfile: state.clientProfileReducer.fetchingClientProfile,
         fetchingCreateClientProfile: state.clientProfileReducer.fetchingCreateClientProfile,
@@ -211,25 +125,6 @@ function mapStateToProps(state) {
 }
 
 ClientProfile.propTypes = {
-    addClientAllergySensitivity: PropTypes.func.isRequired,
-    addCustomAllergySensitivity: PropTypes.func.isRequired,
-    disableClientAllergySensitivityEditing: PropTypes.func.isRequired,
-    enableClientAllergySensitivityEditing: PropTypes.func.isRequired,
-    getAllergiesAndSensitivities: PropTypes.func.isRequired,
-    getClientAllergiesAndSensitivities: PropTypes.func.isRequired,
-    removeClientAllergySensitivity: PropTypes.func.isRequired,
-    addClientHeadshot: PropTypes.func.isRequired,
-    disableClientHeadshotEditing: PropTypes.func.isRequired,
-    enableClientHeadshotEditing: PropTypes.func.isRequired,
-    getClientHeadshots: PropTypes.func.isRequired,
-    removeClientHeadshot: PropTypes.func.isRequired,
-    addClientProductPreference: PropTypes.func.isRequired,
-    addCustomProductPreference: PropTypes.func.isRequired,
-    disableClientProductPreferenceEditing: PropTypes.func.isRequired,
-    enableClientProductPreferenceEditing: PropTypes.func.isRequired,
-    getClientProductPreferences: PropTypes.func.isRequired,
-    getProductPreferences: PropTypes.func.isRequired,
-    removeClientProductPreference: PropTypes.func.isRequired,
     createClientProfile: PropTypes.func.isRequired,
     disableClientProfileEditing: PropTypes.func.isRequired,
     enableClientProfileEditing: PropTypes.func.isRequired,
@@ -260,27 +155,6 @@ ClientProfile.propTypes = {
         clientProfileId: PropTypes.number,
         artistPortfolioId: PropTypes.number
     }).isRequired,
-    clientAllergiesAndSensitivities: PropTypes.arrayOf(PropTypes.object).isRequired,
-    allergiesAndSensitivities: PropTypes.arrayOf(PropTypes.object).isRequired,
-    fetchingClientAllergiesAndSensitivities: PropTypes.bool.isRequired,
-    fetchingAllergiesAndSensitivities: PropTypes.bool.isRequired,
-    fetchingAddClientAllergySensitivity: PropTypes.bool.isRequired,
-    fetchingRemoveClientAllergySensitivity: PropTypes.bool.isRequired,
-    fetchingAddCustomAllergySensitivity: PropTypes.bool.isRequired,
-    editingClientAllergiesAndSensitivities: PropTypes.bool.isRequired,
-    clientHeadshots: PropTypes.arrayOf(PropTypes.object).isRequired,
-    fetchingClientHeadshots: PropTypes.bool.isRequired,
-    fetchingAddClientHeadshot: PropTypes.bool.isRequired,
-    fetchingRemoveClientHeadshot: PropTypes.bool.isRequired,
-    editingClientHeadshots: PropTypes.bool.isRequired,
-    clientProductPreferences: PropTypes.arrayOf(PropTypes.object).isRequired,
-    productPreferences: PropTypes.arrayOf(PropTypes.object).isRequired,
-    fetchingClientProductPreferences: PropTypes.bool.isRequired,
-    fetchingProductPreferences: PropTypes.bool.isRequired,
-    fetchingAddClientProductPreference: PropTypes.bool.isRequired,
-    fetchingRemoveClientProductPreference: PropTypes.bool.isRequired,
-    fetchingAddCustomProductPreference: PropTypes.bool.isRequired,
-    editingClientProductPreferences: PropTypes.bool.isRequired,
     currentClientProfile: PropTypes.shape({
         clientProfileId: PropTypes.number,
         profilePictureUrl: PropTypes.string,
@@ -319,25 +193,6 @@ ClientProfile.defaultProps = {
 export default withRouter(connect(
     mapStateToProps,
     {
-        addClientAllergySensitivity,
-        addCustomAllergySensitivity,
-        disableClientAllergySensitivityEditing,
-        enableClientAllergySensitivityEditing,
-        getAllergiesAndSensitivities,
-        getClientAllergiesAndSensitivities,
-        removeClientAllergySensitivity,
-        addClientHeadshot,
-        disableClientHeadshotEditing,
-        enableClientHeadshotEditing,
-        getClientHeadshots,
-        removeClientHeadshot,
-        addClientProductPreference,
-        addCustomProductPreference,
-        disableClientProductPreferenceEditing,
-        enableClientProductPreferenceEditing,
-        getClientProductPreferences,
-        getProductPreferences,
-        removeClientProductPreference,
         createClientProfile,
         disableClientProfileEditing,
         enableClientProfileEditing,
