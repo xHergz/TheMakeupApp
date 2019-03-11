@@ -174,7 +174,10 @@ EditUserCustomizableProperties.propTypes = {
         displayName: PropTypes.string.isRequired,
         firstName: PropTypes.string.isRequired,
         lastName: PropTypes.string.isRequired,
-        isArtist: PropTypes.bool.isRequired
+        isArtist: PropTypes.bool.isRequired,
+        isClient: PropTypes.bool.isRequired,
+        clientProfileId: PropTypes.number,
+        artistPortfolioId: PropTypes.number
     }).isRequired,
     label: PropTypes.string,
     dropdownLabel: PropTypes.string,

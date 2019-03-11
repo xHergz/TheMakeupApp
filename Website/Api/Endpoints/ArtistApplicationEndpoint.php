@@ -17,6 +17,8 @@
 
         const RESUME_KEY = "resume";
 
+        const SANITIZATION_QUIZ_ANSWERS_KEY = "sanitizationQuizAnswers";
+
         public function get() {
             BadRequest(405);
         }
@@ -31,7 +33,7 @@
 
             // Make sure request has keys
             if (!$apiRequest->HasOnlySpecifiedKeys(self::CLIENT_PROFILE_ID_KEY, self::COVER_LETTER_KEY, self::RESUME_KEY,
-                    self::EXISTING_PORTFOLIO_LINKS_KEY)) {
+                    self::EXISTING_PORTFOLIO_LINKS_KEY, self::SANITIZATION_QUIZ_ANSWERS_KEY)) {
                 $apiRequest->EndRequest(HttpStatus::BAD_REQUEST, "Invalid parameter combination");
             }
 
@@ -39,6 +41,7 @@
             $resumeData = $apiRequest->GetKey(self::RESUME_KEY);
             $coverLetterData = $apiRequest->GetKey(self::COVER_LETTER_KEY);
             $existingPortfolioLinks = $apiRequest->GetKey(self::EXISTING_PORTFOLIO_LINKS_KEY);
+            $sanitizationQuizAnswers = $apiRequest->GetKey(self::SANITIZATION_QUIZ_ANSWERS_KEY);
             // Authorize Session Key Owns Client Profile
             $authorizeSessionForClientResponse = AuthorizeSessionForClientProfile(GetBearerToken(), $clientProfileId);
             if ($authorizeSessionForClientResponse != Errors::SUCCESS) {
@@ -92,6 +95,22 @@
                     echo $jsonResponse;
                     $artistApplicationDal->Close();
                     $apiRequest->EndRequest(HttpStatus::OK, 'Adding portfolio link failed');
+                }
+            }
+
+            // Save all quiz submissions
+            foreach($sanitizationQuizAnswers as $answer) {
+                $questionId = $answer['sanitizationQuizQuestionId'];
+                $answerId = $answer['sanitizationQuizAnswerId'];
+                $addSanitizationQuizSubmissionResponse = $artistApplicationDal->AddSanitizationQuizSubmission(
+                    $newApplicationId, $questionId, $answerId);
+                if ($addSanitizationQuizSubmissionResponse->Status != 0) {
+                    $artistApplicationDal->RollBackTransaction();
+                    $jsonResponse = $artistApplicationDal->EncodeResponse($addExistingLinkResponse);
+                    Log::LogInformation('ArtistApplication PUT Response: ' . $jsonResponse);
+                    echo $jsonResponse;
+                    $artistApplicationDal->Close();
+                    $apiRequest->EndRequest(HttpStatus::OK, 'Adding sanitization quiz submission failed');
                 }
             }
 

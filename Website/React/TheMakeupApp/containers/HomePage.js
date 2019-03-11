@@ -1,3 +1,4 @@
+import faAddressCard from '@fortawesome/fontawesome-free-solid/faAddressCard';
 import faCalendarAlt from '@fortawesome/fontawesome-free-solid/faCalendarAlt';
 import faMapMarkerAlt from '@fortawesome/fontawesome-free-solid/faMapMarkerAlt';
 import faPaintBrush from '@fortawesome/fontawesome-free-solid/faPaintBrush';
@@ -17,6 +18,20 @@ import '../../../Css/HomePage.css';
 class HomePage extends React.Component {
     componentWillMount() {
         this.props.setCurrentPage(PAGES.HOME_PAGE.KEY);
+    }
+
+    renderArtistApplicationLink() {
+        if (this.props.currentSession.isClient && !this.props.currentSession.isArtist) {
+            return (
+                <div className="home-page-tile">
+                    <a href={PAGES.ARTIST_APPLICATION.LINK}>
+                        <FontAwesomeIcon icon={faAddressCard} size="2x" />
+                        <h3>{PAGES.ARTIST_APPLICATION.LABEL}</h3>
+                    </a>
+                </div>
+            );
+        }
+        return null;
     }
 
     render() {
@@ -52,17 +67,34 @@ class HomePage extends React.Component {
                         <h3>{PAGES.SCHEDULE.LABEL}</h3>
                     </a>
                 </div>
+                {this.renderArtistApplicationLink()}
             </div>
         );
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        currentSession: state.sessionReducer.currentSession
+    };
+}
+
 HomePage.propTypes = {
-    setCurrentPage: PropTypes.func.isRequired
+    setCurrentPage: PropTypes.func.isRequired,
+    currentSession: PropTypes.shape({
+        userId: PropTypes.number.isRequired,
+        displayName: PropTypes.string.isRequired,
+        firstName: PropTypes.string.isRequired,
+        lastName: PropTypes.string.isRequired,
+        isArtist: PropTypes.bool.isRequired,
+        isClient: PropTypes.bool.isRequired,
+        clientProfileId: PropTypes.number,
+        artistPortfolioId: PropTypes.number
+    }).isRequired
 };
 
 export default withRouter(connect(
-    null,
+    mapStateToProps,
     {
         setCurrentPage
     }

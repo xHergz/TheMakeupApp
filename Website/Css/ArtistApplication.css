@@ -1,43 +1,19 @@
-.client-profile-container {
+.artist-application-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.client-profile-container > div {
+.application-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
-.client-profile-container > h1 {
-    text-align: center;
-}
-
-.client-profile-display {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #000;
-    padding: 5px;
-    border-radius: 15px;
-    color: #FFF;
-    margin: 5px 0px;
-}
-
-.client-profile-action {
-    display: flex;
-    flex-direction: column;
-    flex: 3;
-}
-
-.profile-picture {
-    object-fit: cover;
-    object-position: 50% 50%;
-    width: 250px;
-    height: 250px;
-    margin: auto;
-    margin-top: 5px;
-    margin-bottom: 5px;
+.application-section > h1 {
+    text-decoration: underline;
 }
 
 /* Smallest devices (phones, Below 600px) */
@@ -57,7 +33,7 @@
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-    .client-profile-container {
+    .artist-application-container {
         max-width: 792px;
         margin: auto;
     }
@@ -65,7 +41,7 @@
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-    .client-profile-container {
+    .artist-application-container {
         max-width: 1000px;
         margin: auto;
     }

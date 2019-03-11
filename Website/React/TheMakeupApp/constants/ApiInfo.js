@@ -9,6 +9,7 @@ const SESSION_KEY_COOKIE = 'tma_session_key';
 
 export const API_ENDPOINTS = {
     ALLERGY_SENSITIVITY: 'allergy-sensitivity',
+    ARTIST_APPLICATION: 'artist-application',
     CLIENT_ALLERGY_SENSITIVITY: 'client-allergy-sensitivity',
     CLIENT_HEADSHOT: 'client-headshot',
     CLIENT_PRODUCT_PREFERENCE: 'client-product-preference',
@@ -18,6 +19,7 @@ export const API_ENDPOINTS = {
     HAIR_COLOURS: 'hair-colours',
     NOTIFICATION: 'notifications',
     PRODUCT_PREFERENCE: 'product-preference',
+    SANITIZATION_QUIZ: 'sanitization-quiz',
     SESSION: 'session',
     SKIN_TONES: 'skin-tones',
     USER: 'user'

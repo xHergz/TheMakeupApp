@@ -90,18 +90,8 @@
         }
 
         public function LogRequest() {
-            $parameterString = '';
-            foreach ($this->_apiRequest as $paramKey => $paramValue) {
-                if ($parameterString != '') {
-                    $parameterString .= ', ';
-                }
-                $valueOut = ($paramValue == null) ? 'null' : $paramValue;
-                if (is_array($valueOut)) {
-                    $valueOut = "[" . implode(", ", $valueOut) . "]";
-                }
-                $parameterString .= "{$paramKey}: '{$valueOut}'";
-            }
-            Log::LogInformation("{$this->_identifier} {$this->_httpMethod} Request with {$parameterString}");
+            $parameters = json_encode($this->_apiRequest);
+            Log::LogInformation("{$this->_identifier} {$this->_httpMethod} Request with {$parameters}");
         }
 
         private function RemoveKey($key) {

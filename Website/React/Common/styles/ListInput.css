@@ -1,0 +1,32 @@
+.list-input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.list-input-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: black;
+    padding: 5px;
+    align-items: center;
+}
+
+.list-input-row:nth-child(odd) {
+    background-color: #EEE;
+}
+
+.list-input-row:nth-child(even) {
+    background-color: #DDD;
+}
+
+.remove-list-input-row {
+    color: #333;
+}
+
+.remove-list-input-row:hover {
+    cursor: pointer;
+    color: #000;
+}
+
