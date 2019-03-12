@@ -12,6 +12,11 @@
         return UploadImage($imageData, $uploadPath);
     }
 
+    function UploadArtistPortfolioImage($imageData, $userId) {
+        $uploadPath = "/images/users/${userId}/portfolio/";
+        return UploadImage($imageData, $uploadPath);
+    }
+
     function UploadArtistApplicationResume($resumeData, $clientProfileId) {
         $uploadPath = "/documents/applications/${clientProfileId}/resumes/";
         return UploadPdf($resumeData, $uploadPath);

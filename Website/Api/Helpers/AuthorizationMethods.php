@@ -178,4 +178,116 @@
         $authorizationDal->Close();
         return Errors::SUCCESS;
     }
+
+    function AuthorizeSessionForArtistPortfolio($sessionKey, $artistPortfolioId) {
+        $authorizationDal = new AuthorizationDal();
+        if (!$authorizationDal->Initialize()) {
+            $authorizationDal->Close();
+            return Errors::DATABASE_INITIALIZATION_ERROR;
+        }
+
+        if (!$authorizationDal->DoesSessionOwnArtistPortfolio($sessionKey, $artistPortfolioId)) {
+            $authorizationDal->Close();
+            return Errors::ARTIST_PORTFOLIO_DOES_NOT_BELONG_TO_SESSION;
+        }
+
+        $authorizationDal->Close();
+        return Errors::SUCCESS;
+    }
+
+    function AuthorizeSessionForArtistPortfolioPicture($sessionKey, $artistPortfolioPictureId) {
+        $authorizationDal = new AuthorizationDal();
+        if (!$authorizationDal->Initialize()) {
+            $authorizationDal->Close();
+            return Errors::DATABASE_INITIALIZATION_ERROR;
+        }
+
+        if (!$authorizationDal->DoesSessionOwnArtistPortfolioPicture($sessionKey, $artistPortfolioPictureId)) {
+            $authorizationDal->Close();
+            return Errors::ARTIST_PORTFOLIO_PICTURE_DOES_NOT_BELONG_TO_SESSION;
+        }
+
+        $authorizationDal->Close();
+        return Errors::SUCCESS;
+    }
+
+    function AuthorizeSessionForArtistQualification($sessionKey, $artistQualificationId) {
+        $authorizationDal = new AuthorizationDal();
+        if (!$authorizationDal->Initialize()) {
+            $authorizationDal->Close();
+            return Errors::DATABASE_INITIALIZATION_ERROR;
+        }
+
+        if (!$authorizationDal->DoesSessionOwnArtistQualification($sessionKey, $artistQualificationId)) {
+            $authorizationDal->Close();
+            return Errors::ARTIST_QUALIFICATION_DOES_NOT_BELONG_TO_SESSION;
+        }
+
+        $authorizationDal->Close();
+        return Errors::SUCCESS;
+    }
+
+    function AuthorizeSessionForArtistMakeoverOffered($sessionKey, $artistMakeoverOfferedId) {
+        $authorizationDal = new AuthorizationDal();
+        if (!$authorizationDal->Initialize()) {
+            $authorizationDal->Close();
+            return Errors::DATABASE_INITIALIZATION_ERROR;
+        }
+
+        if (!$authorizationDal->DoesSessionOwnArtistMakeoverOffered($sessionKey, $artistMakeoverOfferedId)) {
+            $authorizationDal->Close();
+            return Errors::ARTIST_MAKEOVER_OFFERED_DOES_NOT_BELONG_TO_SESSION;
+        }
+
+        $authorizationDal->Close();
+        return Errors::SUCCESS;
+    }
+
+    function AuthorizeSessionForArtistService($sessionKey, $artistServiceId) {
+        $authorizationDal = new AuthorizationDal();
+        if (!$authorizationDal->Initialize()) {
+            $authorizationDal->Close();
+            return Errors::DATABASE_INITIALIZATION_ERROR;
+        }
+
+        if (!$authorizationDal->DoesSessionOwnArtistService($sessionKey, $artistServiceId)) {
+            $authorizationDal->Close();
+            return Errors::ARTIST_SERVICE_DOES_NOT_BELONG_TO_SESSION;
+        }
+
+        $authorizationDal->Close();
+        return Errors::SUCCESS;
+    }
+
+    function AuthorizeSessionForArtistServiceAddon($sessionKey, $artistServiceAddonId) {
+        $authorizationDal = new AuthorizationDal();
+        if (!$authorizationDal->Initialize()) {
+            $authorizationDal->Close();
+            return Errors::DATABASE_INITIALIZATION_ERROR;
+        }
+
+        if (!$authorizationDal->DoesSessionOwnArtistServiceAddon($sessionKey, $artistServiceAddonId)) {
+            $authorizationDal->Close();
+            return Errors::ARTIST_SERVICE_ADDON_DOES_NOT_BELONG_TO_SESSION;
+        }
+
+        $authorizationDal->Close();
+        return Errors::SUCCESS;
+    }
+
+    function AuthorizeSessionForArtistServiceConsultation($sessionKey, $artistServiceConsultationId) {
+        $authorizationDal = new AuthorizationDal();
+        if (!$authorizationDal->Initialize()) {
+            $authorizationDal->Close();
+            return Errors::DATABASE_INITIALIZATION_ERROR;
+        }
+
+        if (!$authorizationDal->DoesSessionOwnArtistServiceConsultation($sessionKey, $artistServiceConsultationId)) {
+            $authorizationDal->Close();
+            return Errors::ARTIST_SERVICE_CONSULTATION_DOES_NOT_BELONG_TO_SESSION;
+        }
+
+        $authorizationDal->Close();
+        return Errors::SUCCESS;
+    }
 ?>

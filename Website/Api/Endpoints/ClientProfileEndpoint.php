@@ -38,7 +38,7 @@
             // Check if session key is valid to get client profile information
             $authorizationResponse = AuthorizeSession(GetBearerToken());
             if ($authorizationResponse != Errors::SUCCESS) {
-                $apiRequest->EndRequest(HttpStatus::UNAUTHORIZED, Errors::GetErrorMessage($authorizationStatus));
+                $apiRequest->EndRequest(HttpStatus::UNAUTHORIZED, Errors::GetErrorMessage($authorizationResponse));
             }
 
             $clientProfileDal = new ClientProfileDal();
@@ -122,7 +122,7 @@
             // Check if session key is valid and owns the user id its creating a profile for
             $authorizationResponse = AuthorizeSessionForUser(GetBearerToken(), $clientProfile->UserId);
             if ($authorizationResponse != Errors::SUCCESS) {
-                $apiRequest->EndRequest(HttpStatus::UNAUTHORIZED, Errors::GetErrorMessage($authorizationStatus));
+                $apiRequest->EndRequest(HttpStatus::UNAUTHORIZED, Errors::GetErrorMessage($authorizationResponse));
             }
 
             $clientProfileDal = new ClientProfileDal();
