@@ -17,7 +17,7 @@ BEGIN
     FROM
         Artist_Makeover_Offered
     WHERE
-        Artist_Makeover_Offered_Id = _artistMakeoverOfferedId
+        Artist_Makeover_Offered_Id = _artistMakeoverOfferedId;
 
     RETURN DoesSessionOwnArtistPortfolio(_sessionKey, artistPortfolioLinkedToMakeoverOffered);
 END

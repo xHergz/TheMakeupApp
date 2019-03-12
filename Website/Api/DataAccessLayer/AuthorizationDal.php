@@ -10,6 +10,13 @@
     define("GetUserIdBySessionKey", "GetUserIdBySessionKey");
     define("GetClientProfileIdBySessionKey", "GetClientProfileIdBySessionKey");
     define("IsUserArtist", "IsUserArtist");
+    define("DoesSessionOwnArtistPortfolio", "DoesSessionOwnArtistPortfolio");
+    define("DoesSessionOwnArtistPortfolioPicture", "DoesSessionOwnArtistPortfolioPicture");
+    define("DoesSessionOwnArtistQualification", "DoesSessionOwnArtistQualification");
+    define("DoesSessionOwnArtistMakeoverOffered", "DoesSessionOwnArtistMakeoverOffered");
+    define("DoesSessionOwnArtistService", "DoesSessionOwnArtistService");
+    define("DoesSessionOwnArtistServiceAddon", "DoesSessionOwnArtistServiceAddon");
+    define("DoesSessionOwnArtistServiceConsultation", "DoesSessionOwnArtistServiceConsultation");
 
     class AuthorizationDal extends DataAccessLayer {
         public function IsSessionKeyValid($sessionKey) {
@@ -78,6 +85,62 @@
                 new DatabaseParameter($userId, PDO::PARAM_STR, '_userId', ParameterDirection::IN)
             );
             return $this->_connectionInfo->ExecuteFunction(IsUserArtist, $parameterArray);
+        }
+
+        public function DoesSessionOwnArtistPortfolio($sessionKey, $artistPortfolioId) {
+            $parameterArray = array(
+                new DatabaseParameter($sessionKey, PDO::PARAM_STR, '_sessionKey', ParameterDirection::IN),
+                new DatabaseParameter($artistPortfolioId, PDO::PARAM_INT, '_artistPortfolioId', ParameterDirection::IN)
+            );
+            return $this->_connectionInfo->ExecuteFunction(DoesSessionOwnArtistPortfolio, $parameterArray);
+        }
+
+        public function DoesSessionOwnArtistPortfolioPicture($sessionKey, $artistPortfolioPictureId) {
+            $parameterArray = array(
+                new DatabaseParameter($sessionKey, PDO::PARAM_STR, '_sessionKey', ParameterDirection::IN),
+                new DatabaseParameter($artistPortfolioPictureId, PDO::PARAM_INT, '_artistPortfolioPictureId', ParameterDirection::IN)
+            );
+            return $this->_connectionInfo->ExecuteFunction(DoesSessionOwnArtistPortfolioPicture, $parameterArray);
+        }
+
+        public function DoesSessionOwnArtistQualification($sessionKey, $artistQualificationId) {
+            $parameterArray = array(
+                new DatabaseParameter($sessionKey, PDO::PARAM_STR, '_sessionKey', ParameterDirection::IN),
+                new DatabaseParameter($artistQualificationId, PDO::PARAM_INT, '_artistQualificationId', ParameterDirection::IN)
+            );
+            return $this->_connectionInfo->ExecuteFunction(DoesSessionOwnArtistQualification, $parameterArray);
+        }
+
+        public function DoesSessionOwnArtistMakeoverOffered($sessionKey, $artistMakeoverOfferedId) {
+            $parameterArray = array(
+                new DatabaseParameter($sessionKey, PDO::PARAM_STR, '_sessionKey', ParameterDirection::IN),
+                new DatabaseParameter($artistMakeoverOfferedId, PDO::PARAM_INT, '_artistMakeoverOfferedId', ParameterDirection::IN)
+            );
+            return $this->_connectionInfo->ExecuteFunction(DoesSessionOwnArtistMakeoverOffered, $parameterArray);
+        }
+
+        public function DoesSessionOwnArtistService($sessionKey, $artistServiceId) {
+            $parameterArray = array(
+                new DatabaseParameter($sessionKey, PDO::PARAM_STR, '_sessionKey', ParameterDirection::IN),
+                new DatabaseParameter($artistServiceId, PDO::PARAM_INT, '_artistServiceId', ParameterDirection::IN)
+            );
+            return $this->_connectionInfo->ExecuteFunction(DoesSessionOwnArtistService, $parameterArray);
+        }
+
+        public function DoesSessionOwnArtistServiceAddon($sessionKey, $artistServiceAddonId) {
+            $parameterArray = array(
+                new DatabaseParameter($sessionKey, PDO::PARAM_STR, '_sessionKey', ParameterDirection::IN),
+                new DatabaseParameter($artistServiceAddonId, PDO::PARAM_INT, '_artistServiceAddonId', ParameterDirection::IN)
+            );
+            return $this->_connectionInfo->ExecuteFunction(DoesSessionOwnArtistServiceAddon, $parameterArray);
+        }
+
+        public function DoesSessionOwnArtistServiceConsultation($sessionKey, $artistServiceConsultationId) {
+            $parameterArray = array(
+                new DatabaseParameter($sessionKey, PDO::PARAM_STR, '_sessionKey', ParameterDirection::IN),
+                new DatabaseParameter($artistServiceConsultationId, PDO::PARAM_INT, '_artistServiceConsultationId', ParameterDirection::IN)
+            );
+            return $this->_connectionInfo->ExecuteFunction(DoesSessionOwnArtistServiceConsultation, $parameterArray);
         }
     }
 ?>

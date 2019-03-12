@@ -19,7 +19,7 @@ BEGIN
         INNER JOIN Artist_Service ON Artist_Service.Artist_Service_Id = Artist_Service_Addon.Artist_Service_Id
         INNER JOIN Artist_Makeover_Offered ON Artist_Makeover_Offered.Artist_Makeover_Offered_Id = Artist_Service.Artist_Makeover_Offered_Id
     WHERE
-        Artist_Service_Addon_Id = _artistServiceAddonId
+        Artist_Service_Addon_Id = _artistServiceAddonId;
 
     RETURN DoesSessionOwnArtistPortfolio(_sessionKey, artistPortfolioLinkedToServiceAddon);
 END

@@ -17,7 +17,7 @@ BEGIN
     FROM
         Artist_Qualification
     WHERE
-        Artist_Qualification_Id = _artistQualificationId
+        Artist_Qualification_Id = _artistQualificationId;
 
     RETURN DoesSessionOwnArtistPortfolio(_sessionKey, artistPortfolioLinkedToQualification);
 END

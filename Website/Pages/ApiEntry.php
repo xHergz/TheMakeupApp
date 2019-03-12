@@ -7,16 +7,26 @@
     require_once '../../private/Api/DataAccessLayer/UserDal.php';
     require_once '../../private/Api/Endpoints/AllergySensitivityEndpoint.php';
     require_once '../../private/Api/Endpoints/ArtistApplicationEndpoint.php';
+    require_once '../../private/Api/Endpoints/ArtistMakeoverOfferedEndpoint.php';
+    require_once '../../private/Api/Endpoints/ArtistPortfolioEndpoint.php';
+    require_once '../../private/Api/Endpoints/ArtistPortfolioPictureEndpoint.php';
+    require_once '../../private/Api/Endpoints/ArtistQualificationEndpoint.php';
+    require_once '../../private/Api/Endpoints/ArtistServiceAddonEndpoint.php';
+    require_once '../../private/Api/Endpoints/ArtistServiceConsultationEndpoint.php';
+    require_once '../../private/Api/Endpoints/ArtistServiceEndpoint.php';
     require_once '../../private/Api/Endpoints/ClientAllergySensitivityEndpoint.php';
     require_once '../../private/Api/Endpoints/ClientHeadshotEndpoint.php';
     require_once '../../private/Api/Endpoints/ClientProductPreferenceEndpoint.php';
     require_once '../../private/Api/Endpoints/ClientProfileEndpoint.php';
     require_once '../../private/Api/Endpoints/ClientReviewsEndpoint.php';
+    require_once '../../private/Api/Endpoints/ConsultationTypeEndpoint.php';
     require_once '../../private/Api/Endpoints/EyeColoursEndpoint.php';
     require_once '../../private/Api/Endpoints/HairColoursEndpoint.php';
+    require_once '../../private/Api/Endpoints/MakeoverTypeEndpoint.php';
     require_once '../../private/Api/Endpoints/NotificationsEndPoint.php';
     require_once '../../private/Api/Endpoints/ProductPreferenceEndpoint.php';
     require_once '../../private/Api/Endpoints/SanitizationQuizEndpoint.php';
+    require_once '../../private/Api/Endpoints/ServiceTypeEndpoint.php';
     require_once '../../private/Api/Endpoints/SessionEndPoint.php';
     require_once '../../private/Api/Endpoints/SkinTonesEndpoint.php';
     require_once '../../private/Api/Endpoints/UserEndPoint.php';
@@ -31,16 +41,26 @@
     $registeredEndpoints = [
         "allergy-sensitivity" => new AllergySensitivityEndpoint(),
         "artist-application" => new ArtistApplicationEndpoint(),
+        "artist-makeover-offered" => new ArtistMakeoverOfferedEndpoint(),
+        "artist-portfolio" => new ArtistPortfolioEndpoint(),
+        "artist-portfolio-picture" => new ArtistPortfolioPictureEndpoint(),
+        "artist-qualification" => new ArtistQualificationEndpoint(),
+        "artist-service-addon" => new ArtistServiceAddonEndpoint(),
+        "artist-service-consultation" => new ArtistServiceConsultationEndpoint(),
+        "artist-service" => new ArtistServiceEndpoint(),
         "client-allergy-sensitivity" => new ClientAllergySensitivityEndpoint(),
         "client-headshot" => new ClientHeadshotEndpoint(),
         "client-product-preference" => new ClientProductPreferenceEndpoint(),
         "client-profile" => new ClientProfileEndpoint(),
         "client-reviews" => new ClientReviewsEndpoint(),
+        "consultation-types" => new ConsultationTypeEndpoint(),
         "eye-colours" => new EyeColoursEndpoint(),
         "hair-colours" => new HairColoursEndpoint(),
+        "makeover-types" => new MakeoverTypeEndpoint(),
         "notifications" => new NotificationsEndpoint(),
         "product-preference" => new ProductPreferenceEndpoint(),
         "sanitization-quiz" => new SanitizationQuizEndpoint(),
+        "service-types" => new ServiceTypeEndpoint(),
         "session" => new SessionEndPoint(),
         "skin-tones" => new SkinTonesEndpoint(),
         "user" => new UserEndPoint()

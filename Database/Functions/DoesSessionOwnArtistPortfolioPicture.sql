@@ -17,7 +17,7 @@ BEGIN
     FROM
         Artist_Portfolio_Picture
     WHERE
-        Artist_Portfolio_Picture_Id = _artistPortfolioPictureId
+        Artist_Portfolio_Picture_Id = _artistPortfolioPictureId;
 
     RETURN DoesSessionOwnArtistPortfolio(_sessionKey, artistPortfolioLinkedToPicture);
 END
