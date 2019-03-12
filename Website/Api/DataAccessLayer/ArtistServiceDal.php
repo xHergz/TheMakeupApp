@@ -11,7 +11,7 @@
     define("GetArtistServices", "GetArtistServices");
     define("GetServiceTypes", "GetServiceTypes");
 
-    class ArtistServiceConsultationDal extends DataAccessLayer {
+    class ArtistServiceDal extends DataAccessLayer {
         public function AddArtistService($artistMakeoverOfferedId, $serviceTypeId, $basePrice) {
             $parameterArray = array(
                 new DatabaseParameter($artistMakeoverOfferedId, PDO::PARAM_INT, '_artistMakeoverOfferedId', ParameterDirection::IN),

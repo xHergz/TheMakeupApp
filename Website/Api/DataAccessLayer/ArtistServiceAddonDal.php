@@ -1,7 +1,7 @@
 <?php
     require_once __DIR__.'/../Common/DataAccessLayer.php';
     require_once __DIR__.'/Dto/ArtistServiceAddonDto.php';
-    require_once __DIR__.'/Response/GetArtistServiceAddonsReponse.php';
+    require_once __DIR__.'/Response/GetArtistServiceAddonsResponse.php';
     require_once __DIR__.'/Response/StatusResponse.php';
 
     define("AddArtistServiceAddon", "AddArtistServiceAddon");
@@ -35,7 +35,7 @@
                 new DatabaseParameter(Status, PDO::PARAM_STR, '_status', ParameterDirection::OUT)
             );
             $procResponse =  $this->_connectionInfo->ExecuteStoredProcedure(GetArtistServiceAddons, 'ArtistServiceAddonDto', $parameterArray);
-            return new GetArtistServiceAddonsReponse($procResponse->Outputs[Status], $procResponse->Results);
+            return new GetArtistServiceAddonsResponse($procResponse->Outputs[Status], $procResponse->Results);
         }
     }
 ?>

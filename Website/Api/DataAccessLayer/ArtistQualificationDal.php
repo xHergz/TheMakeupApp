@@ -1,7 +1,7 @@
 <?php
     require_once __DIR__.'/../Common/DataAccessLayer.php';
     require_once __DIR__.'/Dto/ArtistQualificationDto.php';
-    require_once __DIR__.'/Response/GetArtistQualificationsReponse.php';
+    require_once __DIR__.'/Response/GetArtistQualificationsResponse.php';
     require_once __DIR__.'/Response/StatusResponse.php';
 
     define("AddArtistQualification", "AddArtistQualification");
@@ -35,7 +35,7 @@
                 new DatabaseParameter(Status, PDO::PARAM_STR, '_status', ParameterDirection::OUT)
             );
             $procResponse =  $this->_connectionInfo->ExecuteStoredProcedure(GetArtistQualifications, 'ArtistQualificationDto', $parameterArray);
-            return new GetArtistQualificationsReponse($procResponse->Outputs[Status], $procResponse->Results);
+            return new GetArtistQualificationsResponse($procResponse->Outputs[Status], $procResponse->Results);
         }
     }
 ?>
