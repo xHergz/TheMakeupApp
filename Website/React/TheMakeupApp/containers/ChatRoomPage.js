@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MediaContainer from './MediaContainer'
 import CommunicationContainer from './CommunicationContainer'
 import { connect } from 'react-redux'
-import store from '../store'
+import store from '../store/configureStore'
 import io from 'socket.io-client'
 
 class ChatRoomPage extends Component {

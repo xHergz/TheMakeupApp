@@ -7,6 +7,8 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import styles from '../Common/styles/Chat.css'
 import TheMakeupApp from './containers/TheMakeupApp';
 import configureStore from './store/configureStore';
+import Room from './containers/ChatRoomPage';
+
 
 const store = configureStore();
 
@@ -15,7 +17,7 @@ ReactDOM.render(
         <BrowserRouter>
             <TheMakeupApp>
             <Switch>
-                
+                <Route path="/r/:room" component={Room} />
             </Switch>
             </TheMakeupApp>
         </BrowserRouter>
