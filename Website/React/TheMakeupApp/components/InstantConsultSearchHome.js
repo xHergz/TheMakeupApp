@@ -19,7 +19,7 @@ const InstantSearchHome = props =>
     handleChange: PropTypes.func.isRequired,
     defaultRoomId: PropTypes.string.isRequired,
     roomId: PropTypes.string.isRequired,
-    rooms: PropTypes.array.isRequired
+    //rooms: PropTypes.array.isRequired
 
   };
 
