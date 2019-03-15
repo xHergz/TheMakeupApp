@@ -1,0 +1,48 @@
+.qualification-container {
+    padding: 5px;
+}
+
+.artist-qualifications {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #000;
+    padding: 10px;
+    border-radius: 15px;
+    color: #FFF;
+    margin: 5px 0px;
+}
+
+.artist-qualification {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    color: black;
+}
+
+.artist-qualification:nth-child(odd) {
+    background-color: #FFE3CC;
+}
+
+.artist-qualification:nth-child(even) {
+    background-color: #F2CFB3;
+}
+
+.artist-qualification-description {
+    flex: 4;
+}
+
+.artist-qualification-year-obtained {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.add-qualification-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

@@ -79,10 +79,12 @@
 
         public function HasOnlySpecifiedKeys(...$keys) {
             if ($this->NumberOfParameters() != count($keys)) {
+                Log::LogError("Invalid number of params");
                 return false;
             }
             foreach ($keys as $key) {
                 if (!$this->IsKeySet($key)) {
+                    Log::LogError("{$key} not set");
                     return false;
                 }
             }

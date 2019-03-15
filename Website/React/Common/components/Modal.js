@@ -21,12 +21,9 @@ class Modal extends React.Component {
     }
 
     render() {
-        if (!this.state.open) {
-            return null;
-        }
-        // const modalClass = this.state.open ? "modal-background" : "modal-background modal-hidden";
+        const modalClass = this.state.open ? "modal-background" : "modal-background modal-hidden";
         return (
-            <div className="modal-background">
+            <div className={modalClass}>
                 <div className="modal">
                     <div className="modal-header">
                         <span className="close-button" onClick={this.closeModal}>
