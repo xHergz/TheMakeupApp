@@ -64,6 +64,11 @@ const PAGES = {
         LINK: '/instant-consultation',
         LABEL: 'Instant Consultation'
     },
+    CHATROOM: {
+      KEY: 'CHATROOM',
+      LINK: '/r/:roomId',
+      LABEL: 'Chatroom'
+    },
     LOGOUT: {
         KEY: 'LOGOUT',
         LINK: '/logout',

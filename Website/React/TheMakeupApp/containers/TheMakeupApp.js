@@ -32,6 +32,7 @@ import InstantConsultationSearch from './InstantConsultationSearch';
 import NotFound from './NotFound';
 import Notifications from './Notifications';
 import Schedule from './Schedule';
+import ChatRoomPage from './ChatRoomPage';
 
 import '../../../Css/TheMakeupApp.css';
 
@@ -114,6 +115,7 @@ class TheMakeupApp extends React.Component {
                         <Route exact path={PAGES.CONSULTATION.LINK} component={Consultation} />
                         <Route exact path={PAGES.FUTURE_APPOINTMENT_SEARCH.LINK} component={FutureAppointmentSearch} />
                         <Route exact path={PAGES.INSTANT_CONSULTATION_SEARCH.LINK} component={InstantConsultationSearch} />
+                        <Route exact path={PAGES.CHATROOM.LINK} component={ChatRoomPage} />
                         <Route exact path={PAGES.NOTIFICATIONS.LINK} component={Notifications} />
                         <Route exact path={PAGES.SCHEDULE.LINK} component={Schedule} />
                         <Route component={NotFound} />
