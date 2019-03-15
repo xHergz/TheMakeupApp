@@ -77,13 +77,15 @@ class EditPortfolioBase extends React.Component {
                         placeholderImageUrl={this.props.currentArtistPortfolio.profilePictureUrl}
                         onValueChanged={this.portfolioBaseInputValidityChanged}
                     />
-                    <TextArea
-                        ref={this.biographyInput}
-                        label="Biography"
-                        onValidate={validateBiography}
-                        onValidityChanged={this.portfolioBaseInputValidityChanged}
-                        placeholderText={this.props.currentArtistPortfolio.biography}
-                    />
+                    <div className="artist-portfolio-biography">
+                        <TextArea
+                            ref={this.biographyInput}
+                            label="Biography"
+                            onValidate={validateBiography}
+                            onValidityChanged={this.portfolioBaseInputValidityChanged}
+                            placeholderText={this.props.currentArtistPortfolio.biography}
+                        />
+                    </div>
                 </div>
             </div>
         );
@@ -96,8 +98,8 @@ EditPortfolioBase.propTypes = {
         displayName: PropTypes.string.isRequired,
         firstName: PropTypes.string.isRequired,
         lastName: PropTypes.string.isRequired,
-        isArtist: PropTypes.bool.isRequired,
-        isClient: PropTypes.bool.isRequired,
+        isArtist: PropTypes.number.isRequired,
+        isClient: PropTypes.number.isRequired,
         clientProfileId: PropTypes.number,
         artistPortfolioId: PropTypes.number
     }).isRequired,

@@ -31,7 +31,7 @@ export default function artistServiceAddonReducer(state = initialState, action) 
             return {
                 ...state,
                 fetchingArtistServiceAddons: false,
-                artistServiceAddons: action.payload
+                artistServiceAddons: action.payload === null ? [] : action.payload
             };
         }
         case ARTIST_SERVICE_ADDON_ACTIONS.REQUEST_ADD_ARTIST_SERVICE_ADDON: {

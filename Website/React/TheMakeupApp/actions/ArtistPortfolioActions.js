@@ -42,11 +42,11 @@ export function getArtistPortfolio(displayName) {
     };
 }
 
-export function createArtistPortfolio(userId, profilePicture, biography, displayName) {
+export function createArtistPortfolio(userId, portfolioPicture, biography, displayName) {
     const sessionKey = GetSessionKey();
     const data = {
         userId,
-        profilePicture,
+        portfolioPicture,
         biography
     };
     return (dispatch) => {
@@ -65,10 +65,10 @@ export function createArtistPortfolio(userId, profilePicture, biography, display
     };
 }
 
-export function updateArtistPortfolio(artistPortfolioId, profilePicture, biography, displayName) {
+export function updateArtistPortfolio(artistPortfolioId, portfolioPicture, biography, displayName) {
     const sessionKey = GetSessionKey();
     const data = {
-        profilePicture,
+        portfolioPicture,
         biography
     };
     return (dispatch) => {

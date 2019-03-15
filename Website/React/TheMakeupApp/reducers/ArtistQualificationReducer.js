@@ -31,7 +31,7 @@ export default function artistQualificationReducer(state = initialState, action)
             return {
                 ...state,
                 fetchingArtistQualifications: false,
-                artistQualifications: action.payload
+                artistQualifications: action.payload === null ? [] : action.payload
             };
         }
         case ARTIST_QUALIFICATION_ACTIONS.REQUEST_ADD_ARTIST_QUALIFICATION: {

@@ -60,10 +60,10 @@ export function getServiceTypes() {
     };
 }
 
-export function addArtistService(artistMakeoverOffered, serviceTypeId, price, displayName) {
+export function addArtistService(artistMakeoverOfferedId, serviceTypeId, price, displayName) {
     const sessionKey = GetSessionKey();
     const data = {
-        artistMakeoverOffered,
+        artistMakeoverOfferedId,
         serviceTypeId,
         price
     };

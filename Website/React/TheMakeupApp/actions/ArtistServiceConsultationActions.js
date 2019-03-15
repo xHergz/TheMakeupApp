@@ -50,7 +50,7 @@ export function getConsultationTypes() {
         dispatch(requestConsultationTypes());
         return ApiRequest(getRequest(GetApiUrl(API_ENDPOINTS.CONSULTATION_TYPES), sessionKey), 'getConsultationTypes')
             .then((json) => {
-                dispatch(receivedConsultationTypes(json.serviceTypes));
+                dispatch(receivedConsultationTypes(json.consultationTypes));
             })
             .catch((error) => {
                 console.error(error);

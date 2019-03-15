@@ -35,7 +35,7 @@ export default function artistMakeoverOfferedReducer(state = initialState, actio
             return {
                 ...state,
                 fetchingArtistMakeoversOffered: false,
-                artistMakeoversOffered: action.payload
+                artistMakeoversOffered: action.payload === null ? [] : action.payload
             };
         }
         case ARTIST_MAKEOVER_OFFERED_ACTIONS.REQUEST_MAKEOVER_TYPES: {
@@ -48,7 +48,7 @@ export default function artistMakeoverOfferedReducer(state = initialState, actio
             return {
                 ...state,
                 fetchingMakeoverTypes: false,
-                makeoverTypes: action.payload
+                makeoverTypes: action.payload === null ? [] : action.payload
             };
         }
         case ARTIST_MAKEOVER_OFFERED_ACTIONS.REQUEST_ADD_ARTIST_MAKEOVER_OFFERED: {
@@ -101,11 +101,11 @@ export function receivedArtistMakeoversOffered(artistMakeoversOffered) {
 }
 
 export function requestMakeoverTypes() {
-    return createReducerObject(ARTIST_MAKEOVER_OFFERED_ACTIONS.REQUEST_ARTIST_MAKEOVERS_OFFERED);
+    return createReducerObject(ARTIST_MAKEOVER_OFFERED_ACTIONS.REQUEST_MAKEOVER_TYPES);
 }
 
 export function receivedMakeoverTypes(makeoverTypes) {
-    return createReducerObject(ARTIST_MAKEOVER_OFFERED_ACTIONS.RECEIVED_ARTIST_MAKEOVERS_OFFERED, makeoverTypes);
+    return createReducerObject(ARTIST_MAKEOVER_OFFERED_ACTIONS.RECEIVED_MAKEOVER_TYPES, makeoverTypes);
 }
 
 

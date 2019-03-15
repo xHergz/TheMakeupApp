@@ -1,0 +1,65 @@
+.artist-service-container {
+    padding: 5px;
+}
+
+.makeover-offered {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px;
+    margin: 5px;
+    border: 2px solid black;
+}
+
+.makeover-offered-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0px;
+}
+
+.service {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px;
+    border: 1px solid #888;
+}
+
+.service-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.service-info:nth-child(odd) {
+    background-color: #DDD;
+}
+
+.service-info:nth-child(odd) {
+    background-color: #BBB;
+}
+
+.service-info-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.service-info-row > div > h6 {
+    padding: 5px;
+}
+
+.service-info-label {
+    flex: 1;
+}
+
+.service-add-button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px 0px;
+}

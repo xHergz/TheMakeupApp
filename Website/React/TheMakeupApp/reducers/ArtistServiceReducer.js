@@ -35,7 +35,7 @@ export default function artistServiceReducer(state = initialState, action) {
             return {
                 ...state,
                 fetchingArtistServices: false,
-                artistServices: action.payload
+                artistServices: action.payload === null ? [] : action.payload
             };
         }
         case ARTIST_SERVICE_ACTIONS.REQUEST_SERVICE_TYPES: {
@@ -48,7 +48,7 @@ export default function artistServiceReducer(state = initialState, action) {
             return {
                 ...state,
                 fetchingServiceTypes: false,
-                serviceTypes: action.payload
+                serviceTypes: action.payload === null ? [] : action.payload
             };
         }
         case ARTIST_SERVICE_ACTIONS.REQUEST_ADD_ARTIST_SERVICE: {
@@ -101,11 +101,11 @@ export function receivedArtistServices(artistServices) {
 }
 
 export function requestServiceTypes() {
-    return createReducerObject(ARTIST_SERVICE_ACTIONS.REQUEST_ARTIST_SERVICES);
+    return createReducerObject(ARTIST_SERVICE_ACTIONS.REQUEST_SERVICE_TYPES);
 }
 
 export function receivedServiceTypes(serviceTypes) {
-    return createReducerObject(ARTIST_SERVICE_ACTIONS.RECEIVED_ARTIST_SERVICES, serviceTypes);
+    return createReducerObject(ARTIST_SERVICE_ACTIONS.RECEIVED_SERVICE_TYPES, serviceTypes);
 }
 
 

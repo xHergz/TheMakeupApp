@@ -35,7 +35,7 @@ export default function artistServiceConsultationReducer(state = initialState, a
             return {
                 ...state,
                 fetchingArtistServiceConsultations: false,
-                artistServiceConsultations: action.payload
+                artistServiceConsultations: action.payload === null ? [] : action.payload
             };
         }
         case ARTIST_SERVICE_CONSULTATION_ACTIONS.REQUEST_CONSULTATION_TYPES: {
@@ -48,7 +48,7 @@ export default function artistServiceConsultationReducer(state = initialState, a
             return {
                 ...state,
                 fetchingConsultationTypes: false,
-                consultationTypes: action.payload
+                consultationTypes: action.payload === null ? [] : action.payload
             };
         }
         case ARTIST_SERVICE_CONSULTATION_ACTIONS.REQUEST_ADD_ARTIST_SERVICE_CONSULTATION: {
@@ -101,11 +101,11 @@ export function receivedArtistServiceConsultations(artistServiceConsultations) {
 }
 
 export function requestConsultationTypes() {
-    return createReducerObject(ARTIST_SERVICE_CONSULTATION_ACTIONS.REQUEST_ARTIST_SERVICE_CONSULTATIONS);
+    return createReducerObject(ARTIST_SERVICE_CONSULTATION_ACTIONS.REQUEST_CONSULTATION_TYPES);
 }
 
 export function receivedConsultationTypes(consultationTypes) {
-    return createReducerObject(ARTIST_SERVICE_CONSULTATION_ACTIONS.RECEIVED_ARTIST_SERVICE_CONSULTATIONS, consultationTypes);
+    return createReducerObject(ARTIST_SERVICE_CONSULTATION_ACTIONS.RECEIVED_CONSULTATION_TYPES, consultationTypes);
 }
 
 

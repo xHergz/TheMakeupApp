@@ -31,7 +31,7 @@ export default function artistPortfolioPictureReducer(state = initialState, acti
             return {
                 ...state,
                 fetchingArtistPortfolioPictures: false,
-                artistPortfolioPictures: action.payload
+                artistPortfolioPictures: action.payload === null ? [] : action.payload
             };
         }
         case ARTIST_PORTFOLIO_PICTURE_ACTIONS.REQUEST_ADD_ARTIST_PORTFOLIO_PICTURE: {

@@ -45,10 +45,10 @@ class TheMakeupApp extends React.Component {
 
     componentDidMount() {
         this.props.getSessionInfo();
-        const intervalId = window.setInterval(this.refreshNewNotifications, 5000);
+        /* const intervalId = window.setInterval(this.refreshNewNotifications, 5000);
         this.setState({
             refreshNewNotificationsId: intervalId
-        });
+        }); */
     }
 
     componentWillUnmount() {
@@ -125,8 +125,8 @@ TheMakeupApp.propTypes = {
         displayName: PropTypes.string,
         firstName: PropTypes.string,
         lastName: PropTypes.string,
-        isArtist: PropTypes.bool,
-        isClient: PropTypes.bool.isRequired,
+        isArtist: PropTypes.number.isRequired,
+        isClient: PropTypes.number.isRequired,
         clientProfileId: PropTypes.number,
         artistPortfolioId: PropTypes.number
     }),

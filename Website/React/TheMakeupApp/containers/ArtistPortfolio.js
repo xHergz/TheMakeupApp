@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import Loader from '../../Common/components/Loader';
+import TabContainer from '../../Common/components/TabContainer';
+import TabContent from '../../Common/components/TabContent';
+import TabHeader from '../../Common/components/TabHeader';
+import TabHeaderItem from '../../Common/components/TabHeaderItem';
 import {
     createArtistPortfolio,
     disableArtistPortfolioEditing,
@@ -13,7 +17,24 @@ import {
 } from '../actions/ArtistPortfolioActions';
 import setCurrentPage from '../actions/SiteActions';
 import PortfolioBase from '../components/PortfolioBase';
+import PortfolioPictures from '../components/PortfolioPictures';
+import ArtistServices from '../components/ArtistServices';
 import { GetPortfolioPageKey } from '../constants/UrlInfo';
+
+const TABS = {
+    PORTFOLIO: {
+        KEY: 'PORTFOLIO',
+        LABEL: 'Portfolio'
+    },
+    SERVICES: {
+        KEY: 'SERVICES',
+        LABEL: 'Services'
+    },
+    ABOUT: {
+        KEY: 'ABOUT',
+        LABEL: 'About'
+    }
+};
 
 class ArtistPortfolio extends React.Component {
     constructor(props) {
@@ -37,6 +58,58 @@ class ArtistPortfolio extends React.Component {
         );
     }
 
+    renderTabs() {
+        if (this.props.currentArtistPortfolio == null) {
+            return null;
+        }
+
+        return (
+            <TabContainer>
+                <TabHeader>
+                    <TabHeaderItem
+                        tabLabel={TABS.PORTFOLIO.LABEL}
+                        tabKey={TABS.PORTFOLIO.KEY}
+                        isInitialTab
+                    />
+                    <TabHeaderItem
+                        tabLabel={TABS.SERVICES.LABEL}
+                        tabKey={TABS.SERVICES.KEY}
+                    />
+                    <TabHeaderItem
+                        tabLabel={TABS.ABOUT.LABEL}
+                        tabKey={TABS.ABOUT.KEY}
+                    />
+                </TabHeader>
+                <TabContent
+                    tabKey={TABS.PORTFOLIO.KEY}
+                    isInitialTab
+                >
+                    <PortfolioPictures
+                        currentSession={this.props.currentSession}
+                        artistDisplayName={this.props.match.params.displayName}
+                        currentArtistPortfolio={this.props.currentArtistPortfolio}
+                        ownsArtistPortfolio={this.currentSessionOwnsArtistPortfolio()}
+                    />
+                </TabContent>
+                <TabContent
+                    tabKey={TABS.SERVICES.KEY}
+                >
+                    <ArtistServices
+                        currentSession={this.props.currentSession}
+                        artistDisplayName={this.props.match.params.displayName}
+                        currentArtistPortfolio={this.props.currentArtistPortfolio}
+                        ownsArtistPortfolio={this.currentSessionOwnsArtistPortfolio()}
+                    />
+                </TabContent>
+                <TabContent
+                    tabKey={TABS.ABOUT.KEY}
+                >
+                    About
+                </TabContent>
+            </TabContainer>
+        );
+    }
+
     render() {
         if (this.isFetchingData()) {
             return <Loader />;
@@ -57,6 +130,7 @@ class ArtistPortfolio extends React.Component {
                     onUpdateArtistPortfolio={this.props.updateArtistPortfolio}
                     ownsArtistPortfolio={this.currentSessionOwnsArtistPortfolio()}
                 />
+                {this.renderTabs()}
             </div>
         );
     }
@@ -90,8 +164,8 @@ ArtistPortfolio.propTypes = {
         displayName: PropTypes.string.isRequired,
         firstName: PropTypes.string.isRequired,
         lastName: PropTypes.string.isRequired,
-        isArtist: PropTypes.bool.isRequired,
-        isClient: PropTypes.bool.isRequired,
+        isArtist: PropTypes.number.isRequired,
+        isClient: PropTypes.number.isRequired,
         clientProfileId: PropTypes.number,
         artistPortfolioId: PropTypes.number
     }).isRequired,

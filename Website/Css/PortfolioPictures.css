@@ -1,0 +1,51 @@
+.artist-portfolio-pictures {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.portfolio-picture > img {
+    object-fit: cover;
+    object-position: 50% 50%;
+    width: 150px;
+    height: 150px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.portfolio-picture:hover {
+    cursor: pointer;
+}
+
+.add-portfolio-picture-button {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 10px;
+}
+
+.add-artist-portfolio-picture {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.view-artist-portfolio-image {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.view-artist-portfolio-image > img {
+    object-fit: cover;
+    object-position: 50% 50%;
+    width: 250px;
+    height: 250px;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.view-artist-portfolio-image > h6 {
+    text-align: center;
+}

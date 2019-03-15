@@ -49,6 +49,7 @@ export function addArtistServiceAddon(artistServiceId, description, price, displ
         description,
         price
     };
+    console.log(data);
     return (dispatch) => {
         dispatch(requestAddArtistServiceAddon());
         return ApiRequest(putRequest(GetApiUrl(API_ENDPOINTS.ARTIST_SERVICE_ADDON), data, sessionKey), 'addArtistServiceAddon')
