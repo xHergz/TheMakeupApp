@@ -60,7 +60,10 @@ class MakeoverOffered extends React.Component {
 
     render() {
         return (
-            <div className="makeover-offered" key={this.props.makeoverOffered.artistMakeoverOfferedId}>
+            <div
+                className="makeover-offered"
+                key={this.props.makeoverOffered.artistMakeoverOfferedId}
+            >
                 <div className="makeover-offered-title">
                     <h3>{this.props.makeoverOffered.makeoverTypeDescription}</h3>
                     {this.renderRemoveButton()}

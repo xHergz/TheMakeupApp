@@ -19,6 +19,7 @@ import setCurrentPage from '../actions/SiteActions';
 import PortfolioBase from '../components/PortfolioBase';
 import PortfolioPictures from '../components/PortfolioPictures';
 import ArtistServices from '../components/ArtistServices';
+import Qualifications from '../components/Qualifications';
 import { GetPortfolioPageKey } from '../constants/UrlInfo';
 
 const TABS = {
@@ -104,7 +105,12 @@ class ArtistPortfolio extends React.Component {
                 <TabContent
                     tabKey={TABS.ABOUT.KEY}
                 >
-                    About
+                    <Qualifications
+                        currentSession={this.props.currentSession}
+                        artistDisplayName={this.props.match.params.displayName}
+                        currentArtistPortfolio={this.props.currentArtistPortfolio}
+                        ownsArtistPortfolio={this.currentSessionOwnsArtistPortfolio()}
+                    />
                 </TabContent>
             </TabContainer>
         );

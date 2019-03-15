@@ -73,12 +73,14 @@ class CreatePortfolioBase extends React.Component {
                         placeholderImageUrl="/images/defaultProfilePic.png"
                         onValueChanged={this.portfolioBaseInputValidityChanged}
                     />
-                    <TextArea
-                        ref={this.biographyInput}
-                        label="Biography"
-                        onValidate={validateBiography}
-                        onValidityChanged={this.portfolioBaseInputValidityChanged}
-                    />
+                    <div className="artist-portfolio-biography">
+                        <TextArea
+                            ref={this.biographyInput}
+                            label="Biography"
+                            onValidate={validateBiography}
+                            onValidityChanged={this.portfolioBaseInputValidityChanged}
+                        />
+                    </div>
                 </div>
                 <div className="artist-portfolio-action">
                     {this.renderCreateButton()}

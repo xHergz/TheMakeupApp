@@ -39,13 +39,16 @@ class Service extends React.Component {
         );
     }
 
-    renderServiceInfoRow(id, description, price, deleteMethod) {
+    renderServiceInfoRow(id, description, price, deleteMethod, key) {
         return (
-            <div className="service-info-row" key={id}>
+            <div
+                className="service-info-row"
+                key={`${key}${id}`}
+            >
                 <div className="service-info-label">
                     <h6>{description}</h6>
                 </div>
-                <div>
+                <div className="service-info-detail">
                     <h6>${price}</h6>
                 </div>
                 <div>
@@ -70,7 +73,10 @@ class Service extends React.Component {
 
     render() {
         return (
-            <div className="service" key={this.props.service.artistServiceId}>
+            <div
+                className="service"
+                key={`Service${this.props.service.artistMakeoverOfferedId}${this.props.service.artistServiceId}`}
+            >
                 <div className="service-title">
                     <h3>{this.props.service.serviceTypeDescription}</h3>
                     {this.renderRemoveButton()}
@@ -84,7 +90,8 @@ class Service extends React.Component {
                             serviceConsultation.artistServiceConsultationId,
                             `${serviceConsultation.minuteLength} mins`,
                             serviceConsultation.price,
-                            this.props.onDeleteServiceConsultation
+                            this.props.onDeleteServiceConsultation,
+                            'Consultation'
                         );
                     })}
                 </div>
@@ -100,7 +107,8 @@ class Service extends React.Component {
                             serviceAddon.artistServiceAddonId,
                             serviceAddon.artistServiceAddonDescription,
                             serviceAddon.price,
-                            this.props.onDeleteServiceAddon
+                            this.props.onDeleteServiceAddon,
+                            'Addon'
                         );
                     })}
                 </div>

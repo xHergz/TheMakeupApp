@@ -324,7 +324,7 @@ class ArtistServices extends React.Component {
                     label="Submit"
                     onClickHandler={
                         () => {
-                            this.props.addArtistServiceAddon(
+                            this.props.addArtistServiceConsultation(
                                 this.state.currentServiceTypeId,
                                 this.consultationTypeInput.current.getValue(),
                                 this.serviceConsultationPriceInput.current.getValue(),
@@ -425,7 +425,7 @@ class ArtistServices extends React.Component {
                         onValidate={validatePrice}
                         onValidityChanged={this.addServiceConsultationInputChanged}
                     />
-                    {this.renderSubmitAddServiceButton()}
+                    {this.renderSubmitAddServiceConsultationButton()}
                 </Modal>
             </div>
         );

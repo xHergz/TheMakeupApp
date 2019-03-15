@@ -119,3 +119,10 @@ export function validateDescription(description) {
     }
     return createValidationObject(true);
 }
+
+export function validateNumber(number) {
+    if (!Number.isInteger(Number(number))) {
+        return createValidationObject(false, 'Must be an integer.');
+    }
+    return createValidationObject(true);
+}
