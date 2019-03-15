@@ -4,7 +4,7 @@ CREATE TABLE Makeover_Appointment
     Client_Profile_Id INT NOT NULL,
     Artist_Portfolio_Id INT NOT NULL,
     Consultation_Type_Id INT NOT NULL,
-    Consulation_Price DOUBLE(6, 2) NOT NULL,
+    Consultation_Price DOUBLE(6, 2) NOT NULL,
     Service_Type_Id INT NOT NULL,
     Service_Price DOUBLE(6, 2) NOT NULL,
     Makeover_Type_Id INT NOT NULL,

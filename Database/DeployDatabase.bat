@@ -113,6 +113,8 @@ call:runMySqlFile "./Functions/DoesSessionOwnArtistMakeoverOffered.sql"
 call:runMySqlFile "./Functions/DoesSessionOwnArtistService.sql"
 call:runMySqlFile "./Functions/DoesSessionOwnArtistServiceAddon.sql"
 call:runMySqlFile "./Functions/DoesSessionOwnArtistServiceConsultation.sql"
+call:runMySqlFile "./Functions/DoesMakeoverAppointmentIdExist.sql"
+call:runMySqlFile "./Functions/IsSessionAuthorizedForMakeoverAppointment.sql"
 
 REM Create the Stored Procedures
 call:runMySqlFile "./Stored Procedures/LogSessionCreation.sql"
@@ -186,6 +188,10 @@ call:runMySqlFile "./Stored Procedures/AddArtistServiceConsultation.sql"
 call:runMySqlFile "./Stored Procedures/DeleteArtistServiceConsultation.sql"
 call:runMySqlFile "./Stored Procedures/GetArtistServiceConsultations.sql"
 call:runMySqlFile "./Stored Procedures/GetConsultationTypes.sql"
+call:runMySqlFile "./Stored Procedures/CreateMakeoverAppointment.sql"
+call:runMySqlFile "./Stored Procedures/GetMakeoverAppointment.sql"
+call:runMySqlFile "./Stored Procedures/AddMakeoverAppointmentAddon.sql"
+call:runMySqlFile "./Stored Procedures/GetMakeoverAppointmentAddons.sql"
 
 REM Insert the initial data
 call:runMySqlFile "./Data/SystemConfigurationData.sql"
