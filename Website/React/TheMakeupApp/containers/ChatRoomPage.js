@@ -23,12 +23,10 @@ class ChatRoomPage extends React.Component {
 */
   render() {
       return (
-          <div>
-          /*
-          <div>
+        <div>
         <MediaContainer media={media => this.media = media} socket={this.socket} getUserMedia={this.getUserMedia} />
         <CommunicationContainer socket={this.socket} media={this.media} getUserMedia={this.getUserMedia} />
-      </div>*/
+
               <h1>AppointmentSetup</h1>
           </div>
       );
