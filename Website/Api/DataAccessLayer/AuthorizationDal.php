@@ -17,6 +17,7 @@
     define("DoesSessionOwnArtistService", "DoesSessionOwnArtistService");
     define("DoesSessionOwnArtistServiceAddon", "DoesSessionOwnArtistServiceAddon");
     define("DoesSessionOwnArtistServiceConsultation", "DoesSessionOwnArtistServiceConsultation");
+    define("IsSessionAuthorizedForMakeoverAppointment", "IsSessionAuthorizedForMakeoverAppointment");
 
     class AuthorizationDal extends DataAccessLayer {
         public function IsSessionKeyValid($sessionKey) {
@@ -141,6 +142,14 @@
                 new DatabaseParameter($artistServiceConsultationId, PDO::PARAM_INT, '_artistServiceConsultationId', ParameterDirection::IN)
             );
             return $this->_connectionInfo->ExecuteFunction(DoesSessionOwnArtistServiceConsultation, $parameterArray);
+        }
+
+        public function IsSessionAuthorizedForMakeoverAppointment($sessionKey, $makeoverAppointmentId) {
+            $parameterArray = array(
+                new DatabaseParameter($sessionKey, PDO::PARAM_STR, '_sessionKey', ParameterDirection::IN),
+                new DatabaseParameter($makeoverAppointmentId, PDO::PARAM_INT, '_makeoverAppointmentId', ParameterDirection::IN)
+            );
+            return $this->_connectionInfo->ExecuteFunction(IsSessionAuthorizedForMakeoverAppointment, $parameterArray);
         }
     }
 ?>

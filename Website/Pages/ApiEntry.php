@@ -22,6 +22,8 @@
     require_once '../../private/Api/Endpoints/ConsultationTypeEndpoint.php';
     require_once '../../private/Api/Endpoints/EyeColoursEndpoint.php';
     require_once '../../private/Api/Endpoints/HairColoursEndpoint.php';
+    require_once '../../private/Api/Endpoints/MakeoverAppointmentAddonEndpoint.php';
+    require_once '../../private/Api/Endpoints/MakeoverAppointmentEndpoint.php';
     require_once '../../private/Api/Endpoints/MakeoverTypeEndpoint.php';
     require_once '../../private/Api/Endpoints/NotificationsEndPoint.php';
     require_once '../../private/Api/Endpoints/ProductPreferenceEndpoint.php';
@@ -56,6 +58,8 @@
         "consultation-types" => new ConsultationTypeEndpoint(),
         "eye-colours" => new EyeColoursEndpoint(),
         "hair-colours" => new HairColoursEndpoint(),
+        "makeover-appointment-addon" => new MakeoverAppointmentAddonEndpoint(),
+        "makeover-appointment" => new MakeoverAppointmentEndpoint(),
         "makeover-types" => new MakeoverTypeEndpoint(),
         "notifications" => new NotificationsEndpoint(),
         "product-preference" => new ProductPreferenceEndpoint(),
