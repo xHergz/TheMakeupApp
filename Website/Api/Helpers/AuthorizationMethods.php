@@ -290,4 +290,20 @@
         $authorizationDal->Close();
         return Errors::SUCCESS;
     }
+
+    function AuthorizeSessionForMakeoverAppointment($sessionKey, $makeoverAppointmentId) {
+        $authorizationDal = new AuthorizationDal();
+        if (!$authorizationDal->Initialize()) {
+            $authorizationDal->Close();
+            return Errors::DATABASE_INITIALIZATION_ERROR;
+        }
+
+        if (!$authorizationDal->IsSessionAuthorizedForMakeoverAppointment($sessionKey, $makeoverAppointmentId)) {
+            $authorizationDal->Close();
+            return Errors::SESSION_KEY_NOT_AUTHORIZED_FOR_MAKEOVER_APPOINTMENT;
+        }
+
+        $authorizationDal->Close();
+        return Errors::SUCCESS;
+    }
 ?>
