@@ -14,7 +14,7 @@ class ChatRoomPage extends React.Component {
       video: true
     }).catch(e => alert('getUserMedia() error: ' + e.name))
     this.socket = io.connect('https://localhost:8080');
-    // works up to getting stream for audio / video...
+    // works up to getting stream for audio / video... does not add a chat room to the state
   }
 
 /*  componentDidMount() {
