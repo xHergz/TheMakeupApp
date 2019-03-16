@@ -88,7 +88,8 @@ class Service extends React.Component {
                         this.props.makeoverTypeDescription,
                         this.props.service.serviceTypeId,
                         this.props.service.serviceTypeDescription,
-                        this.props.service.basePrice
+                        this.props.service.basePrice,
+                        this.props.service.artistServiceId
                     );
                 }}
             />

@@ -3,11 +3,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
+import DateInput from '../../Common/components/DateInput';
+import DropdownInput from '../../Common/components/DropdownInput';
+import ListInput from '../../Common/components/ListInput';
 import Loader from '../../Common/components/Loader';
 import { getArtistServiceAddons } from '../actions/ArtistServiceAddonActions';
 import { getArtistServiceConsultations } from '../actions/ArtistServiceConsultationActions';
 import { createMakeoverAppointment } from '../actions/MakeoverAppointmentActions';
 import setCurrentPage from '../actions/SiteActions';
+import FormInfoBlock from '../components/FormInfoBlock';
+import FormInfoDisplay from '../components/FormInfoDisplay';
 import PAGES from '../constants/Pages';
 
 class AppointmentSetup extends React.Component {
@@ -22,6 +27,7 @@ class AppointmentSetup extends React.Component {
             serviceTypeId: urlParams.get('serviceTypeId'),
             serviceTypeDescription: urlParams.get('serviceTypeDescription'),
             servicePrice: urlParams.get('servicePrice'),
+            artistServiceId: urlParams.get('artistServiceId')
         };
     }
 
@@ -32,24 +38,61 @@ class AppointmentSetup extends React.Component {
     }
 
     render() {
+        const consultationsWithPrices = this.props.artistServiceConsultations.filter((consultation) => {
+            return consultation.artistServiceId === this.state.artistServiceId;
+        }).map((consultation) => {
+            return {
+                id: consultation.consultationTypeId,
+                description: `${consultation.minuteLength} ($${consultation.price})`
+            };
+        });
+
+        const addonsWithPrices = this.props.artistServiceAddons.filter((addon) => {
+            return addon.artistServiceId === this.state.artistServiceId;
+        }).map((addon) => {
+            return {
+                id: addon.artistServiceAddonId,
+                description: `${addon.artistServiceAddonDescription} ($${addon.price})`
+            };
+        });
+
         if (this.props.fetchingArtistServiceAddons || this.props.fetchingArtistServiceConsultations) {
             return <Loader />;
         }
 
         return (
             <div className="appointment-setup-form">
-                <div>
-                    <h1>Appointment Setup</h1>
-                </div>
-                <div>
-                    <h5>With Artist: </h5><h6>{this.state.artistDisplayName}</h6>
-                </div>
-                <div>
-                    <h5>Makeover Type: </h5><h6>{this.state.makeoverTypeDescription}</h6>
-                </div>
-                <div>
-                    <h5>Service Type: </h5><h6>{this.state.serviceTypeDescription}</h6>
-                </div>
+                <h1>Appointment Setup</h1>
+                <FormInfoDisplay>
+                    <FormInfoBlock
+                        label="With Artist"
+                        value={this.state.artistDisplayName}
+                    />
+                    <FormInfoBlock
+                        label="Makeover Type"
+                        value={this.state.artistDisplayName}
+                    />
+                    <FormInfoBlock
+                        label="Service Type"
+                        value={this.state.artistDisplayName}
+                    />
+                    <DateInput
+                        label="Appointment Date"
+                    />
+                    <DropdownInput
+                        options={consultationsWithPrices}
+                        valueKey="id"
+                        labelKey="description"
+                        label="Consultation Type"
+                    />
+                    <ListInput
+                        listLabel="Selected Addons"
+                        inputLabel="Available Addons"
+                        listOptions={addonsWithPrices}
+                        listIdKey="id"
+                        listDescriptionKey="description"
+                    />
+                </FormInfoDisplay>
             </div>
         );
     }

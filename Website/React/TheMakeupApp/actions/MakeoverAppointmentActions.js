@@ -31,7 +31,7 @@ import {
 } from './MessageActions';
 
 export function goToMakeoverAppointmentSetup(artistPortfolioId, artistDisplayName, makeoverTypeId, makeoverTypeDescription, serviceTypeId,
-    serviceTypeDescription, servicePrice) {
+    serviceTypeDescription, servicePrice, artistServiceId) {
     const formData = {
         artistPortfolioId,
         artistDisplayName,
@@ -39,7 +39,8 @@ export function goToMakeoverAppointmentSetup(artistPortfolioId, artistDisplayNam
         makeoverTypeDescription,
         serviceTypeId,
         serviceTypeDescription,
-        servicePrice
+        servicePrice,
+        artistServiceId
     };
     return (dispatch) => {
         window.location.href = `${PAGES.APPOINTMENT_SETUP.LINK}?${createQueryString(formData)}`;
