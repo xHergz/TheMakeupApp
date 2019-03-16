@@ -17,6 +17,7 @@ class FormInfoBlock extends React.Component {
                 {this.renderLabel()}
                 <div>
                     <h4>{this.props.value}</h4>
+                    {this.props.children}
                 </div>
             </div>
         );
@@ -24,11 +25,15 @@ class FormInfoBlock extends React.Component {
 }
 
 FormInfoBlock.propTypes = {
+    children: PropTypes.arrayOf(
+        PropTypes.element
+    ),
     label: PropTypes.string,
     value: PropTypes.string.isRequired
 };
 
 FormInfoBlock.defaultProps = {
+    children: null,
     label: null
 };
 

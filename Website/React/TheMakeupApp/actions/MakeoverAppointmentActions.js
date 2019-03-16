@@ -100,7 +100,7 @@ export function getMakeoverAppointmentAddons(makeoverAppointmentId) {
     };
     return (dispatch) => {
         dispatch(requestMakeoverAppointmentAddons());
-        return ApiRequest(getRequest(GetQueryApiUrl(API_ENDPOINTS.MAKEOVER_APPOINTMENT, queryData), sessionKey), 'getMakeoverAppointmentAddons')
+        return ApiRequest(getRequest(GetQueryApiUrl(API_ENDPOINTS.MAKEOVER_APPOINTMENT_ADDON, queryData), sessionKey), 'getMakeoverAppointmentAddons')
             .then((json) => {
                 dispatch(receivedMakeoverAppointmentAddons(json.makeoverAppointmentAddons));
             })

@@ -1,0 +1,54 @@
+.appointment-invoice-table {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: black;
+}
+
+.appointment-invoice-header {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+.appointment-invoice-item-header {
+    flex: 4;
+}
+
+.appointment-invoice-price-header {
+    flex: 1;
+}
+
+.appointment-invoice-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.appointment-invoice-table:nth-child(odd) {
+    background-color: #DDD;
+}
+
+.appointment-invoice-table:nth-child(even) {
+    background-color: #CCC;
+}
+
+.appointment-invoice-item, .appointment-invoice-price {
+    border: 1px solid #AAA;
+    padding: 5px;
+}
+
+.appointment-invoice-item {
+    flex: 4;
+}
+
+.appointment-invoice-price {
+    flex: 1;
+    text-align: center;
+}
+
+.appointment-invoice-total {
+    text-align: right;
+    font-weight: bolder;
+}

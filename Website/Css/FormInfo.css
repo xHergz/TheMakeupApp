@@ -34,6 +34,10 @@
 .form-info-block > div {
     color: black;
     padding: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .form-info-block:nth-child(1) > div {
@@ -71,4 +75,9 @@
 
 .form-info-row:nth-child(odd) {
     background-color: #F2CFB3;
+}
+
+.form-submit-button {
+    display: flex;
+    flex-direction: column;
 }

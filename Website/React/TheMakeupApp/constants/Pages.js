@@ -6,7 +6,7 @@ const PAGES = {
     },
     APPOINTMENT_INFO: {
         KEY: 'APPOINTMENT_INFO',
-        LINK: '/appointment/:appointmentId',
+        LINK: '/appointment/:makeoverAppointmentId',
         LABEL: 'Login'
     },
     APPOINTMENT_SETUP: {

@@ -22,7 +22,6 @@ const initialState = {
 export default function setupMakeoverAppointmentReducer(state = initialState, action) {
     switch (action.type) {
         case SETUP_MAKEOVER_APPOINTMENT_ACTIONS.CREATE_NEW_APPOINTMENT_FORM: {
-            console.log('Create form payload: ', action.payload);
             return {
                 ...state,
                 artistPortfolioId: action.payload.artistPortfolioId,

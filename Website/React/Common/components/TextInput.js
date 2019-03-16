@@ -138,7 +138,11 @@ TextInput.defaultProps = {
     label: '',
     maskInput: false,
     isRequired: false,
-    onValidate: () => { return { isValid: true }; },
+    onValidate: () => {
+        return {
+            isValid: true
+        };
+    },
     defaultValue: '',
     placeholderText: '',
     onValidityChanged: () => {},
