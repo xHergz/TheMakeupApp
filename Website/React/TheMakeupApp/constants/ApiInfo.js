@@ -25,6 +25,8 @@ export const API_ENDPOINTS = {
     CONSULTATION_TYPES: 'consultation-types',
     EYE_COLOURS: 'eye-colours',
     HAIR_COLOURS: 'hair-colours',
+    MAKEOVER_APPOINTMENT_ADDON: 'makeover-appointment-addon',
+    MAKEOVER_APPOINTMENT: 'makeover-appointment',
     MAKEOVER_TYPES: 'makeover-types',
     NOTIFICATION: 'notifications',
     PRODUCT_PREFERENCE: 'product-preference',

@@ -12,7 +12,7 @@ class ListInput extends React.Component {
         super(props);
         this.state = {
             currentList: [],
-            canAdd: false
+            canAdd: !(this.props.listOptions === null)
         };
         this.getValues = this.getValues.bind(this);
         this.addItemToList = this.addItemToList.bind(this);
@@ -106,6 +106,7 @@ class ListInput extends React.Component {
 
         return (
             <DropdownInput
+                ref={this.listInput}
                 options={this.props.listOptions}
                 valueKey={this.props.listIdKey}
                 labelKey={this.props.listDescriptionKey}

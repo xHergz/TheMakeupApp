@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import isNullOrWhiteSpace from '../helpers/stringUtilities';
 
-import '../styles/Input.css'
+import '../styles/Input.css';
 
 class DateInput extends React.Component {
     constructor(props) {
@@ -13,12 +13,76 @@ class DateInput extends React.Component {
             currentValue: props.defaultValue,
             errorMessage: ''
         };
+        this.onInputChanged = this.onInputChanged.bind(this);
+        this.getValue = this.getValue.bind(this);
+        this.updateValidation = this.updateValidation.bind(this);
+        this.changeValidity = this.changeValidity.bind(this);
+        this.changeValue = this.changeValue.bind(this);
+        this.isValid = this.isValid.bind(this);
+        this.isEmpty = this.isEmpty.bind(this);
         this.renderInputLabel = this.renderInputLabel.bind(this);
         this.renderInput = this.renderInput.bind(this);
-        this.onInputChanged = this.onInputChanged.bind(this);
-        this.updateValidation = this.updateValidation.bind(this);
-        this.getValue = this.getValue.bind(this);
-        this.isValid = this.isValid.bind(this);
+    }
+
+    onInputChanged(event) {
+        const inputValue = event.target.value;
+        this.updateValidation(inputValue);
+    }
+
+    getValue() {
+        return this.state.currentValue;
+    }
+
+    updateValidation(value = this.state.currentValue) {
+        const validation = this.props.onValidate(value, this.props.isRequired);
+        if (isNullOrWhiteSpace(value) && this.props.isRequired) {
+            this.changeValidity(false);
+            this.changeValue(value);
+            this.setState({
+                errorMessage: 'Input is Required'
+            });
+        }
+        else if (!validation.isValid) {
+            this.changeValidity(false);
+            this.changeValue(value);
+            this.setState({
+                errorMessage: validation.message
+            });
+        }
+        else if (isNullOrWhiteSpace(value) && !this.props.isRequired) {
+            this.changeValidity(true);
+            this.changeValue(value);
+            this.setState({
+                errorMessage: ''
+            });
+        }
+        else {
+            this.changeValidity(true);
+            this.changeValue(value);
+            this.setState({
+                errorMessage: ''
+            });
+        }
+    }
+
+    changeValidity(valid) {
+        this.setState({
+            isValid: valid
+        }, this.props.onValidityChanged);
+    }
+
+    changeValue(value) {
+        this.setState({
+            currentValue: value
+        }, this.props.onValueChanged);
+    }
+
+    isValid() {
+        return this.state.isValid;
+    }
+
+    isEmpty() {
+        return isNullOrWhiteSpace(this.state.currentValue);
     }
 
     renderInputLabel() {
@@ -38,65 +102,8 @@ class DateInput extends React.Component {
         );
     }
 
-    onInputChanged(event) {
-        const inputValue = event.target.value;
-        this.updateValidation(inputValue);
-    }
-
-    updateValidation(value = this.state.currentValue) {
-        const validation = this.props.onValidate(value);
-        if (isNullOrWhiteSpace(value) && this.props.isRequired) {
-            this.setState({
-                isValid: false,
-                errorMessage: 'Input is Required',
-                currentValue: value
-            })
-        }
-        else if (isNullOrWhiteSpace(value) && !this.props.isRequired) {
-            this.setState({
-                isValid: true,
-                errorMessage: '',
-                currentValue: value
-            })
-        }
-        else if (!validation.isValid) {
-            this.setState({
-                isValid: false,
-                errorMessage: validation.message,
-                currentValue: value
-            })
-        }
-        else {
-            this.setState({
-                isValid: true,
-                errorMessage: '',
-                currentValue: value
-            })
-        }
-    }
-
-    getValue() {
-        return this.state.currentValue;
-    }
-
-    //
-    // FUNCTION		: isValid
-    // DESCRIPTION	:
-    //		This function determines if the input is valid
-    // PARAMETERS	:
-    //		None/Void
-    // RETURNS		:
-    //		bool    : true if valid, false if not
-    //
-    isValid() {
-        if (this.props.isRequired && isNullOrWhiteSpace(this.state.currentValue)){
-            return false;
-        }
-        return this.state.isValid;
-    }
-
     render() {
-        return(
+        return (
             <div className="input-container">
                 <h5>{this.renderInputLabel()}</h5>
                 {this.renderInput()}
@@ -112,14 +119,22 @@ DateInput.propTypes = {
     label: PropTypes.string,
     isRequired: PropTypes.bool,
     onValidate: PropTypes.func,
-    defaultValue: PropTypes.string
+    defaultValue: PropTypes.string,
+    onValidityChanged: PropTypes.func,
+    onValueChanged: PropTypes.func
 };
 
 DateInput.defaultProps = {
     label: '',
     isRequired: false,
-    onValidate: (value) => { return { isValid: true }; },
-    defaultValue: ''
+    onValidate: () => {
+        return {
+            isValid: true
+        };
+    },
+    defaultValue: '',
+    onValidityChanged: () => {},
+    onValueChanged: () => {}
 };
 
 export default DateInput;

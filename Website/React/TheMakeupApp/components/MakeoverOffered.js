@@ -52,7 +52,11 @@ class MakeoverOffered extends React.Component {
                 onDeleteServiceAddon={this.props.onDeleteServiceAddon}
                 onAddServiceConsultation={this.props.onAddServiceConsultation}
                 onDeleteServiceConsultation={this.props.onDeleteServiceConsultation}
+                onRequestAppointment={this.props.onRequestAppointment}
                 currentArtistDisplayName={this.props.currentArtistDisplayName}
+                currentArtistPortfolioId={this.props.currentArtistPortfolioId}
+                makeoverTypeId={this.props.makeoverOffered.makeoverTypeId}
+                makeoverTypeDescription={this.props.makeoverOffered.makeoverTypeDescription}
                 ownsArtistPortfolio={this.props.ownsArtistPortfolio}
             />
         );
@@ -97,7 +101,9 @@ MakeoverOffered.propTypes = {
     onDeleteServiceAddon: PropTypes.func,
     onAddServiceConsultation: PropTypes.func,
     onDeleteServiceConsultation: PropTypes.func,
+    onRequestAppointment: PropTypes.func,
     currentArtistDisplayName: PropTypes.string.isRequired,
+    currentArtistPortfolioId: PropTypes.number.isRequired,
     ownsArtistPortfolio: PropTypes.bool
 };
 
@@ -113,6 +119,7 @@ MakeoverOffered.defaultProps = {
     onDeleteServiceAddon: () => {},
     onAddServiceConsultation: () => {},
     onDeleteServiceConsultation: () => {},
+    onRequestAppointment: () => {},
     ownsArtistPortfolio: false
 };
 

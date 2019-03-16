@@ -14,10 +14,12 @@ import clientHeadshotReducer from './ClientHeadshotReducer';
 import clientProductPreferenceReducer from './ClientProductPreferenceReducer';
 import clientProfileReducer from './ClientProfileReducer';
 import clientReviewReducer from './ClientReviewReducer';
+import makeoverAppointmentReducer from './MakeoverAppointmentReducer';
 import messageReducer from './MessageReducer';
 import notificationReducer from './NotificationReducer';
 import sanitizationQuizReducer from './SanitizationQuizReducer';
 import sessionReducer from './SessionReducer';
+import setupMakeoverAppointmentReducer from './SetupMakeoverAppointmentReducer';
 import siteReducer from './SiteReducer';
 import userReducer from './UserReducer';
 
@@ -35,10 +37,12 @@ const rootReducer = combineReducers({
     clientProductPreferenceReducer,
     clientProfileReducer,
     clientReviewReducer,
+    makeoverAppointmentReducer,
     messageReducer,
     notificationReducer,
     sanitizationQuizReducer,
     sessionReducer,
+    setupMakeoverAppointmentReducer,
     siteReducer,
     userReducer
 });
