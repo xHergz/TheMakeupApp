@@ -19,6 +19,8 @@ BEGIN
     DECLARE CONSULTATION_TYPE_ID_DOES_NOT_EXIST SMALLINT DEFAULT 2050;
 
     DECLARE newAppointmentId INT DEFAULT NULL;
+    DECLARE artistDisplayName VARCHAR(100) DEFAULT NULL;
+    DECLARE clientDisplayName VARCHAR(100) DEFAULT NULL;
 
     CreateMakeoverAppointment:BEGIN
         IF (!DoesClientProfileIdExist(_clientProfileId)) THEN
@@ -71,6 +73,28 @@ BEGIN
                 CURRENT_TIMESTAMP
             );
         SET newAppointmentId = LAST_INSERT_ID();
+
+        SELECT
+            User.Display_Name
+        INTO
+            artistDisplayName
+        FROM
+            Artist_Portfolio
+            INNER JOIN User ON User.User_Id = Artist_Portfolio.User_Id
+        WHERE
+            Artist_Portfolio.Artist_Portfolio_Id = _artistPortfolioId;
+
+        SELECT
+            User.Display_Name
+        INTO
+            clientDisplayName
+        FROM
+            Client_Profile
+            INNER JOIN User ON User.User_Id = Client_Profile.User_Id
+        WHERE
+            Client_Profile.Client_Profile_Id = _clientProfileId;
+
+        CALL AddTaskUserNotification(artistDisplayName, CONCAT(clientDisplayName, ' has requested an appointment with you, click here to view it.'), CONCAT('/appointment/', newAppointmentId), @status);
         SET _status = 0;
     END;
 
