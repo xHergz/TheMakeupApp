@@ -42,6 +42,7 @@ import {
     enableArtistServiceAddonEditing,
     getArtistServiceAddons
 } from '../actions/ArtistServiceAddonActions';
+import { goToMakeoverAppointmentSetup } from '../actions/MakeoverAppointmentActions';
 import MakeoverOffered from './MakeoverOffered';
 
 import '../../../Css/Services.css';
@@ -234,7 +235,9 @@ class ArtistServices extends React.Component {
                 onDeleteServiceAddon={this.props.deleteArtistServiceAddon}
                 onAddServiceConsultation={this.openAddServiceConsultationModal}
                 onDeleteServiceConsultation={this.props.deleteArtistServiceConsultation}
+                onRequestAppointment={this.props.goToMakeoverAppointmentSetup}
                 currentArtistDisplayName={this.props.artistDisplayName}
+                currentArtistPortfolioId={this.props.currentArtistPortfolio.artistPortfolioId}
                 ownsArtistPortfolio={this.props.ownsArtistPortfolio}
             />
         );
@@ -524,6 +527,7 @@ ArtistServices.propTypes = {
     fetchingAddArtistServiceAddon: PropTypes.bool.isRequired,
     fetchingDeleteArtistServiceAddon: PropTypes.bool.isRequired,
     editingArtistServiceAddons: PropTypes.bool.isRequired,
+    goToMakeoverAppointmentSetup: PropTypes.func.isRequired,
     artistDisplayName: PropTypes.string.isRequired,
     currentArtistPortfolio: PropTypes.shape({
         artistPortfolioId: PropTypes.number,
@@ -563,6 +567,7 @@ export default withRouter(connect(
         deleteArtistServiceAddon,
         disableArtistServiceAddonEditing,
         enableArtistServiceAddonEditing,
-        getArtistServiceAddons
+        getArtistServiceAddons,
+        goToMakeoverAppointmentSetup
     }
 )(ArtistServices));

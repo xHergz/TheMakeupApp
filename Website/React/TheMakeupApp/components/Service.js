@@ -11,6 +11,7 @@ class Service extends React.Component {
         this.renderDeleteInfoButton = this.renderDeleteInfoButton.bind(this);
         this.renderServiceInfoRow = this.renderServiceInfoRow.bind(this);
         this.renderAddInfoButton = this.renderAddInfoButton.bind(this);
+        this.renderRequestAppointmentButton = this.renderRequestAppointmentButton.bind(this);
     }
 
     renderRemoveButton() {
@@ -71,6 +72,29 @@ class Service extends React.Component {
         );
     }
 
+    renderRequestAppointmentButton() {
+        if (this.props.ownsArtistPortfolio) {
+            return null;
+        }
+
+        return (
+            <Button
+                label="Request Appointment"
+                onClickHandler={() => {
+                    this.props.onRequestAppointment(
+                        this.props.currentArtistPortfolioId,
+                        this.props.currentArtistDisplayName,
+                        this.props.makeoverTypeId,
+                        this.props.makeoverTypeDescription,
+                        this.props.service.serviceTypeId,
+                        this.props.service.serviceTypeDescription,
+                        this.props.service.basePrice
+                    );
+                }}
+            />
+        );
+    }
+
     render() {
         return (
             <div
@@ -115,6 +139,9 @@ class Service extends React.Component {
                 <div className="service-add-button-container">
                     {this.renderAddInfoButton(() => { this.props.onAddServiceAddon(this.props.service.artistServiceId); })}
                 </div>
+                <div className="service-add-button-container">
+                    {this.renderRequestAppointmentButton()}
+                </div>
             </div>
         );
     }
@@ -126,7 +153,7 @@ Service.propTypes = {
         artistMakeoverOfferedId: PropTypes.number,
         serviceTypeId: PropTypes.number,
         serviceTypeDescription: PropTypes.string,
-        price: PropTypes.number
+        basePrice: PropTypes.number
     }).isRequired,
     serviceAddons: PropTypes.arrayOf(PropTypes.object),
     serviceConsultations: PropTypes.arrayOf(PropTypes.object),
@@ -136,7 +163,11 @@ Service.propTypes = {
     onDeleteServiceAddon: PropTypes.func,
     onAddServiceConsultation: PropTypes.func,
     onDeleteServiceConsultation: PropTypes.func,
+    onRequestAppointment: PropTypes.func,
     currentArtistDisplayName: PropTypes.string.isRequired,
+    currentArtistPortfolioId: PropTypes.number.isRequired,
+    makeoverTypeId: PropTypes.number.isRequired,
+    makeoverTypeDescription: PropTypes.string.isRequired,
     ownsArtistPortfolio: PropTypes.bool
 };
 
@@ -149,6 +180,7 @@ Service.defaultProps = {
     onDeleteServiceAddon: () => {},
     onAddServiceConsultation: () => {},
     onDeleteServiceConsultation: () => {},
+    onRequestAppointment: () => {},
     ownsArtistPortfolio: false
 };
 
