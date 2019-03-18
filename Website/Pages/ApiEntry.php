@@ -27,6 +27,7 @@
     require_once '../../private/Api/Endpoints/MakeoverTypeEndpoint.php';
     require_once '../../private/Api/Endpoints/NotificationsEndpoint.php';
     require_once '../../private/Api/Endpoints/ProductPreferenceEndpoint.php';
+    require_once '../../private/Api/Endpoints/OnlineArtistEndpoint.php';
     require_once '../../private/Api/Endpoints/SanitizationQuizEndpoint.php';
     require_once '../../private/Api/Endpoints/ServiceTypeEndpoint.php';
     require_once '../../private/Api/Endpoints/SessionEndpoint.php';
@@ -62,6 +63,7 @@
         "makeover-appointment" => new MakeoverAppointmentEndpoint(),
         "makeover-types" => new MakeoverTypeEndpoint(),
         "notifications" => new NotificationsEndpoint(),
+        "online-artist" => new OnlineArtistEndpoint(),
         "product-preference" => new ProductPreferenceEndpoint(),
         "sanitization-quiz" => new SanitizationQuizEndpoint(),
         "service-types" => new ServiceTypeEndpoint(),

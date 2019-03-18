@@ -29,7 +29,8 @@ BEGIN
         IsUserArtist(userId) AS Is_Artist,
         IsUserClient(userId) AS Is_Client,
         GetClientProfileIdByDisplayName(Display_Name) AS Client_Profile_Id,
-        GetArtistPortfolioIdByDisplayName(Display_Name) AS Artist_Portfolio_Id
+        GetArtistPortfolioIdByDisplayName(Display_Name) AS Artist_Portfolio_Id,
+        IsArtistOnline(GetArtistPortfolioIdByDisplayName(Display_Name)) AS Is_Artist_Online
     FROM
         User
     WHERE

@@ -50,6 +50,7 @@ call:runMySqlFile "./Tables/ArtistReviewPictureLink.sql"
 call:runMySqlFile "./Tables/ClientReview.sql"
 call:runMySqlFile "./Tables/NotificationType.sql"
 call:runMySqlFile "./Tables/Notification.sql"
+call:runMySqlFile "./Tables/OnlineArtist.sql"
 
 REM Create the Views
 call:runMySqlFile "./Views/FullSessionLog.sql"
@@ -115,6 +116,8 @@ call:runMySqlFile "./Functions/DoesSessionOwnArtistServiceAddon.sql"
 call:runMySqlFile "./Functions/DoesSessionOwnArtistServiceConsultation.sql"
 call:runMySqlFile "./Functions/DoesMakeoverAppointmentIdExist.sql"
 call:runMySqlFile "./Functions/IsSessionAuthorizedForMakeoverAppointment.sql"
+call:runMySqlFile "./Functions/DistanceBetweenCoordinates.sql"
+call:runMySqlFile "./Functions/IsArtistOnline.sql"
 
 REM Create the Stored Procedures
 call:runMySqlFile "./Stored Procedures/LogSessionCreation.sql"
@@ -192,6 +195,9 @@ call:runMySqlFile "./Stored Procedures/CreateMakeoverAppointment.sql"
 call:runMySqlFile "./Stored Procedures/GetMakeoverAppointment.sql"
 call:runMySqlFile "./Stored Procedures/AddMakeoverAppointmentAddon.sql"
 call:runMySqlFile "./Stored Procedures/GetMakeoverAppointmentAddons.sql"
+call:runMySqlFile "./Stored Procedures/SearchOnlineArtists.sql"
+call:runMySqlFile "./Stored Procedures/SetArtistOnline.sql"
+call:runMySqlFile "./Stored Procedures/SetArtistOffline.sql"
 
 REM Insert the initial data
 call:runMySqlFile "./Data/SystemConfigurationData.sql"
