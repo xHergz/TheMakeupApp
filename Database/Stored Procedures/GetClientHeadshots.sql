@@ -29,7 +29,7 @@ BEGIN
     FROM
         Headshot_Type
         LEFT JOIN Client_Headshot ON Headshot_Type.Headshot_Type_Id = Client_Headshot.Headshot_Type_Id
-            AND client_headshot.Client_Profile_Id = clientProfileId;
+            AND Client_Headshot.Client_Profile_Id = clientProfileId;
 END
 $$
 DELIMITER ;

@@ -4,7 +4,7 @@
 	require_once __DIR__.'/Utilities.php';
 	
 	define("WindowsDbConnectionConfig", "C:\Program Files\HerWal\TheMakeupApp\Config\DatabaseConnection.config");
-	define("LinuxDbConnectionConfig", "/etc/HerWal/TheMakeupApp/Config/DatabaseConnection.config");
+	define("LinuxDbConnectionConfig", "/etc/hergbot/TheMakeupApp/DatabaseConnection.config");
 	define("ServerTag", "Server");
 	define("UsernameTag", "Username");
 	define("PasswordTag", "Password");

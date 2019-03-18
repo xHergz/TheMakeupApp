@@ -25,13 +25,13 @@
     require_once '../../private/Api/Endpoints/MakeoverAppointmentAddonEndpoint.php';
     require_once '../../private/Api/Endpoints/MakeoverAppointmentEndpoint.php';
     require_once '../../private/Api/Endpoints/MakeoverTypeEndpoint.php';
-    require_once '../../private/Api/Endpoints/NotificationsEndPoint.php';
+    require_once '../../private/Api/Endpoints/NotificationsEndpoint.php';
     require_once '../../private/Api/Endpoints/ProductPreferenceEndpoint.php';
     require_once '../../private/Api/Endpoints/SanitizationQuizEndpoint.php';
     require_once '../../private/Api/Endpoints/ServiceTypeEndpoint.php';
-    require_once '../../private/Api/Endpoints/SessionEndPoint.php';
+    require_once '../../private/Api/Endpoints/SessionEndpoint.php';
     require_once '../../private/Api/Endpoints/SkinTonesEndpoint.php';
-    require_once '../../private/Api/Endpoints/UserEndPoint.php';
+    require_once '../../private/Api/Endpoints/UserEndpoint.php';
     require_once '../../private/Api/Helpers/AuthorizationMethods.php';
 
     header('Access-Control-Allow-Origin: *');

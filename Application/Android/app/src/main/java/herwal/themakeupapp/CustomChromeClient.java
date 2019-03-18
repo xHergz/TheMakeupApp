@@ -2,23 +2,29 @@ package herwal.themakeupapp;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.webkit.GeolocationPermissions;
+import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.widget.Toast;
 
 public class CustomChromeClient extends WebChromeClient {
     private String geolocationOrigin;
 
     private GeolocationPermissions.Callback geolocationCallback;
 
-    private Activity appActivity;
+    private MainActivity appActivity;
 
-    public CustomChromeClient(Activity creator) {
+    public CustomChromeClient(MainActivity creator) {
         appActivity = creator;
     }
 
@@ -59,5 +65,26 @@ public class CustomChromeClient extends WebChromeClient {
                 }
                 break;
         }
+    }
+
+    public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
+        // make sure there is no existing message
+        if (appActivity.uploadMessage != null) {
+            appActivity.uploadMessage.onReceiveValue(null);
+            appActivity.uploadMessage = null;
+        }
+
+        appActivity.uploadMessage = filePathCallback;
+
+        Intent intent = fileChooserParams.createIntent();
+        try {
+            appActivity.startActivityForResult(intent, MainActivity.REQUEST_SELECT_FILE);
+        } catch (ActivityNotFoundException e) {
+            appActivity.uploadMessage = null;
+            Toast.makeText(appActivity, "Cannot open file chooser", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        return true;
     }
 }
