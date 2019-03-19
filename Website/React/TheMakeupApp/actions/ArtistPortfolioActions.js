@@ -14,6 +14,8 @@ import ApiRequest from '../constants/ApiRequest';
 import {
     requestArtistPortfolio,
     receivedArtistPortfolio,
+    requestArtistPortfolios,
+    receivedArtistPortfolios,
     requestCreateArtistPortfolio,
     receivedCreateArtistPortfolio,
     requestUpdateArtistPortfolio,
@@ -38,6 +40,23 @@ export function getArtistPortfolio(displayName) {
                 console.error(error);
                 dispatch(addErrorMessage(error.message));
                 dispatch(receivedArtistPortfolio(null));
+            });
+    };
+}
+
+export function getArtistPortfolios() {
+    const sessionKey = GetSessionKey();
+    return (dispatch) => {
+        dispatch(requestArtistPortfolios());
+        return ApiRequest(getRequest(GetApiUrl(API_ENDPOINTS.ARTIST_PORTFOLIO), sessionKey), 'getArtistPortfolios')
+            .then((json) => {
+                console.log(json.artistPortfolios);
+                dispatch(receivedArtistPortfolios(json.artistPortfolios));
+            })
+            .catch((error) => {
+                console.error(error);
+                dispatch(addErrorMessage(error.message));
+                dispatch(receivedArtistPortfolios([]));
             });
     };
 }

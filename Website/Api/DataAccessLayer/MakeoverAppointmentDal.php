@@ -4,11 +4,13 @@
     require_once __DIR__.'/Dto/MakeoverAppointmentAddonDto.php';
     require_once __DIR__.'/Response/CreateMakeoverAppointmentResponse.php';
     require_once __DIR__.'/Response/GetMakeoverAppointmentResponse.php';
+    require_once __DIR__.'/Response/GetMakeoverAppointmentsResponse.php';
     require_once __DIR__.'/Response/GetMakeoverAppointmentAddonsResponse.php';
     require_once __DIR__.'/Response/StatusResponse.php';
 
     define("CreateMakeoverAppointment", "CreateMakeoverAppointment");
     define("GetMakeoverAppointment", "GetMakeoverAppointment");
+    define("GetMakeoverAppointments", "GetMakeoverAppointments");
     define("AddMakeoverAppointmentAddon", "AddMakeoverAppointmentAddon");
     define("GetMakeoverAppointmentAddons", "GetMakeoverAppointmentAddons");
 
@@ -38,6 +40,16 @@
             );
             $procResponse = $this->_connectionInfo->ExecuteStoredProcedure(GetMakeoverAppointment, null, $parameterArray);
             return new GetMakeoverAppointmentResponse($procResponse->Outputs[Status], $procResponse->GetSingleRow());
+        }
+
+        public function GetMakeoverAppointments($clientProfileId, $artistPortfolioId) {
+            $parameterArray = array(
+                new DatabaseParameter($clientProfileId, PDO::PARAM_INT, '_clientProfileId', ParameterDirection::IN),
+                new DatabaseParameter($artistPortfolioId, PDO::PARAM_INT, '_artistPortfolioId', ParameterDirection::IN),
+                new DatabaseParameter(Status, PDO::PARAM_STR, '_status', ParameterDirection::OUT)
+            );
+            $procResponse = $this->_connectionInfo->ExecuteStoredProcedure(GetMakeoverAppointments, 'stdClass', $parameterArray);
+            return new GetMakeoverAppointmentsResponse($procResponse->Outputs[Status], $procResponse->Results);
         }
 
         public function AddMakeoverAppointmentAddon($makeoverAppointmentId, $description, $price) {

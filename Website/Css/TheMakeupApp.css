@@ -96,10 +96,48 @@ a {
     background-color: limegreen;
     color: white;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     padding: 5px;
 }
+
+.online-symbol {
+    margin-right: 5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 0 0 white;
+    animation: pulse 2s infinite;
+  }
+  
+  @-webkit-keyframes pulse {
+    0% {
+      -webkit-box-shadow: 0 0 0 0 limegreen
+    }
+    50% {
+        -webkit-box-shadow: 0 0 0 1px white;
+    }
+    100% {
+        -webkit-box-shadow: 0 0 0 2px limegreen;
+    }
+  }
+  @keyframes pulse {
+    0% {
+      -moz-box-shadow: 0 0 0 0 limegreen;
+      box-shadow: 0 0 0 0 limegreen;
+    }
+    50% {
+        -moz-box-shadow: 0 0 0 1px white;
+        box-shadow: 0 0 0 1px white;
+    }
+    100% {
+        -moz-box-shadow: 0 0 0 2px limegreen;
+        box-shadow: 0 0 0 2px limegreen;
+    }
+  }
 
 /* Smallest devices (phones, Below 600px) */
 @media only screen and (max-width: 599px) {

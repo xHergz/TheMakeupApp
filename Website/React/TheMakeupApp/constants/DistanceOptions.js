@@ -14,6 +14,10 @@ const DISTANCE_OPTIONS = [
     {
         distance: 50,
         label: 'Within 50km'
+    },
+    {
+        distance: 9999,
+        label: '50+km away'
     }
 ];
 
