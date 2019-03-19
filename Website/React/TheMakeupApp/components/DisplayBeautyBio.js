@@ -31,7 +31,7 @@ class DisplayBeautyBio extends React.Component {
             <div>
                 <div className="account-info-actions">
                     <div className="account-info-action">
-                        <h1>Beauty Bio</h1>
+                        <h2>Beauty Bio</h2>
                     </div>
                     <div className="account-info-action-spacer" />
                     <div className="account-info-action">

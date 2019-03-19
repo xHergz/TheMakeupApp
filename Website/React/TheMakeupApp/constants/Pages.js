@@ -32,7 +32,7 @@ const PAGES = {
     ASAP_MAKEOVER_SEARCH: {
         KEY: 'ASAP_MAKEOVER_SEARCH',
         LINK: '/asap-makeover',
-        LABEL: 'ASAP Makeover Search'
+        LABEL: 'ASAP Makeover'
     },
     BROWSE_ARTISTS: {
         KEY: 'BROWSE_ARTISTS',
@@ -52,7 +52,7 @@ const PAGES = {
     FUTURE_APPOINTMENT_SEARCH: {
         KEY: 'FUTURE_APPOINTMENT_SEARCH',
         LINK: '/future-appointment',
-        LABEL: 'Future Appointment Search'
+        LABEL: 'Future Appointment'
     },
     HOME_PAGE: {
         KEY: 'HOME_PAGE',
@@ -62,7 +62,7 @@ const PAGES = {
     INSTANT_CONSULTATION_SEARCH: {
         KEY: 'INSTANT_CONSULTATION_SEARCH',
         LINK: '/instant-consultation',
-        LABEL: 'Instant Consultation Search'
+        LABEL: 'Instant Consultation'
     },
     LOGOUT: {
         KEY: 'LOGOUT',

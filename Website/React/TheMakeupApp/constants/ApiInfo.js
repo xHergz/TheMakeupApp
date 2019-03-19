@@ -3,7 +3,7 @@ import {
     getCookie
 } from '../../Common/helpers/browserUtilities';
 
-const API_URL = 'https://api.herwalbooks.xyz';
+const API_URL = 'http://api.themakeupapp.localhost';
 
 const SESSION_KEY_COOKIE = 'tma_session_key';
 

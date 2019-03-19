@@ -70,7 +70,7 @@ class CreateBeautyBio extends React.Component {
     render() {
         return (
             <div>
-                <h1>Create Your Beauty Bio</h1>
+                <h3>Create Your Beauty Bio</h3>
                 <div className="client-profile-display">
                     <ImageInput
                         ref={this.profilePictureInput}
