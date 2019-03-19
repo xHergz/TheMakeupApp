@@ -33,7 +33,9 @@ BEGIN
         Online_Artist.Longitude,
         Online_Artist.Latitude,
         DistanceBetweenCoordinates(_userLongitude, _userLatitude, Online_Artist.Longitude, Online_Artist.Latitude) AS Distance,
-        ROUND(RAND()*5) AS Rating
+        ROUND(RAND()*5) AS Rating,
+        Artist_Service.Artist_Service_Id,
+        Artist_Service.Base_Price
     FROM
         Artist_Portfolio
         INNER JOIN User ON User.User_Id = Artist_Portfolio.User_Id
