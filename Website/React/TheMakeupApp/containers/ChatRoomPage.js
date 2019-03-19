@@ -17,11 +17,17 @@ class ChatRoomPage extends React.Component {
     // works up to getting stream for audio / video... does not add a chat room to the state
   }
 
+//commented out
 /*  componentDidMount() {
     this.props.addRoom();
   }
 */
+//stops here
   render() {
+    console.log(this.socket);
+    console.log(this.getUserMedia);
+    console.log(this.media);
+
       return (
         <div>
         <MediaContainer media={media => this.media = media} socket={this.socket} getUserMedia={this.getUserMedia} />
@@ -33,12 +39,15 @@ class ChatRoomPage extends React.Component {
   }
 }
 
-/*const mapStateToProps = store => ({rooms: new Set([...store.rooms])});
+//commented out
+
+const mapStateToProps = store => ({rooms: new Set([...store.rooms])});
 const mapDispatchToProps = (dispatch, ownProps) => (
     {
       addRoom: () => store.dispatch({ type: 'ADD_ROOM', room: ownProps.match.params.room })
     }
   );
 export default connect(mapStateToProps, mapDispatchToProps)(ChatRoomPage);
-*/
-export default ChatRoomPage;
+
+//stops here
+//export default ChatRoomPage;

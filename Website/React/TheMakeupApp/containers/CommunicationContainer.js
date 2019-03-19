@@ -33,6 +33,8 @@ class CommunicationContainer extends React.Component {
     this.props.media.setState({bridge: 'full'});
   }
   componentDidMount() {
+    console.log('Comments componentDidMount: ');
+    console.log(this);
     const socket = this.props.socket;
     console.log('props', this.props)
     this.setState({video: this.props.video, audio: this.props.audio});
@@ -85,8 +87,10 @@ class CommunicationContainer extends React.Component {
     this.props.media.hangup();
   }
   render(){
+    console.log(this.media);
     return (
       <Communication
+
         {...this.state}
         toggleVideo={this.toggleVideo}
         toggleAudio={this.toggleAudio}

@@ -144,6 +144,8 @@ class MediaBridge extends Component {
     }
   }
   render(){
+    console.log(this.media);
+    console.log(this.getUserMedia)
     return (
       <div className={`media-bridge ${this.state.bridge}`}>
         <video className="remote-video" ref={(ref) => this.remoteVideo = ref} autoPlay></video>

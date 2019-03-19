@@ -49,7 +49,10 @@ const rootReducer = combineReducers({
     sessionReducer,
     setupMakeoverAppointmentReducer,
     siteReducer,
-    userReducer
+    userReducer,
+    audio: audioReducer,
+    video: videoReducer,
+    rooms: roomReducer
 });
 
 export default rootReducer;
