@@ -17,6 +17,7 @@ import clientReviewReducer from './ClientReviewReducer';
 import makeoverAppointmentReducer from './MakeoverAppointmentReducer';
 import messageReducer from './MessageReducer';
 import notificationReducer from './NotificationReducer';
+import onlineArtistReducer from './OnlineArtistReducer';
 import sanitizationQuizReducer from './SanitizationQuizReducer';
 import sessionReducer from './SessionReducer';
 import setupMakeoverAppointmentReducer from './SetupMakeoverAppointmentReducer';
@@ -40,6 +41,7 @@ const rootReducer = combineReducers({
     makeoverAppointmentReducer,
     messageReducer,
     notificationReducer,
+    onlineArtistReducer,
     sanitizationQuizReducer,
     sessionReducer,
     setupMakeoverAppointmentReducer,

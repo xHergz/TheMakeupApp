@@ -38,7 +38,7 @@ export default function makeoverAppointmentReducer(state = initialState, action)
         case MAKEOVER_APPOINTMENT_ACTIONS.RECEIVED_MAKEOVER_APPOINTMENT_ADDONS: {
             return {
                 ...state,
-                currentMakeoverAppointmentAddons: action.payload,
+                currentMakeoverAppointmentAddons: action.payload === null ? [] : action.payload,
                 fetchingMakeoverAppointmentAddons: false
             };
         }

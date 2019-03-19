@@ -177,7 +177,8 @@ PortfolioPictures.propTypes = {
         isArtist: PropTypes.number.isRequired,
         isClient: PropTypes.number.isRequired,
         clientProfileId: PropTypes.number,
-        artistPortfolioId: PropTypes.number
+        artistPortfolioId: PropTypes.number,
+        isArtistOnline: PropTypes.number
     }).isRequired,
     artistPortfolioPictures: PropTypes.arrayOf(PropTypes.object).isRequired,
     fetchingArtistPortfolioPictures: PropTypes.bool.isRequired,

@@ -187,7 +187,8 @@ AppointmentSetup.propTypes = {
         isArtist: PropTypes.number.isRequired,
         isClient: PropTypes.number.isRequired,
         clientProfileId: PropTypes.number,
-        artistPortfolioId: PropTypes.number
+        artistPortfolioId: PropTypes.number,
+        isArtistOnline: PropTypes.number
     }).isRequired,
     fetchingCreateMakeoverAppointment: PropTypes.bool.isRequired,
     artistServiceAddons: PropTypes.arrayOf(PropTypes.object).isRequired,
