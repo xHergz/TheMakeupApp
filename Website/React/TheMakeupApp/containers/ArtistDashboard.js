@@ -60,7 +60,8 @@ class ArtistDashboard extends React.Component {
     }
 
     goOnline(position) {
-        this.props.setArtistOnline(this.props.currentSession.artistPortfolioId, position.longitude, position.latitude);
+        console.log(position);
+        this.props.setArtistOnline(this.props.currentSession.artistPortfolioId, position.coords.longitude, position.coords.latitude);
     }
 
     goOffline() {

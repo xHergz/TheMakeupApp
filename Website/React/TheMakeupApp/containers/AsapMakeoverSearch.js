@@ -107,15 +107,15 @@ class AsapMakeoverSearch extends React.Component {
         this.setState({
             didSearch: true,
             currentPosition: {
-                longitude: currentLocation.longitude,
-                latitude: currentLocation.latitude
+                longitude: currentLocation.coords.longitude,
+                latitude: currentLocation.coords.latitude
             }
         });
         this.props.searchForArtists(
             this.makeoverTypeInput.current.getValue(),
             ASAP_MAKEOVER.SERVICE_TYPE_ID,
-            currentLocation.longitude,
-            currentLocation.latitude,
+            currentLocation.coords.longitude,
+            currentLocation.coords.latitude,
             this.maxDistanceInput.current.getValue()
         );
     }
