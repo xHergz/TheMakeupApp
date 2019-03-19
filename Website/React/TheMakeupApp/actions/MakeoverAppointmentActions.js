@@ -17,10 +17,11 @@ import {
     requestMakeoverAppointment,
     receivedMakeoverAppointment,
     requestMakeoverAppointmentAddons,
-    receivedMakeoverAppointmentAddons
+    receivedMakeoverAppointmentAddons,
+    requestMakeoverAppointments,
+    receivedMakeoverAppointments
 } from '../reducers/MakeoverAppointmentReducer';
 import {
-    createNewMakeoverAppointmentForm,
     makeoverAppointmentFormSubmitted,
     requestCreateMakeoverAppointment,
     receivedCreateMakeoverAppointment
@@ -89,6 +90,26 @@ export function getMakeoverAppointment(makeoverAppointmentId) {
                 console.error(error);
                 dispatch(addErrorMessage(error.message));
                 dispatch(receivedMakeoverAppointment(null));
+            });
+    };
+}
+
+export function getMakeoverAppointments(clientProfileId, artistPortfolioId) {
+    const sessionKey = GetSessionKey();
+    const queryData = {
+        clientProfileId,
+        artistPortfolioId
+    };
+    return (dispatch) => {
+        dispatch(requestMakeoverAppointments());
+        return ApiRequest(getRequest(GetQueryApiUrl(API_ENDPOINTS.MAKEOVER_APPOINTMENT, queryData), sessionKey), 'getMakeoverAppointments')
+            .then((json) => {
+                dispatch(receivedMakeoverAppointments(json.makeoverAppointments));
+            })
+            .catch((error) => {
+                console.error(error);
+                dispatch(addErrorMessage(error.message));
+                dispatch(receivedMakeoverAppointments([]));
             });
     };
 }

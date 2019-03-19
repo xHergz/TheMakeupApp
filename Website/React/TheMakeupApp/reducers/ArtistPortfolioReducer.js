@@ -3,6 +3,8 @@ import { createReducerObject } from '../../Common/helpers/reducerUtilities';
 const ARTIST_PORTFOLIO_ACTIONS = {
     REQUEST_ARTIST_PORTFOLIO: 'REQUEST_ARTIST_PORTFOLIO',
     RECEIVED_ARTIST_PORTFOLIO: 'RECEIVED_ARTIST_PORTFOLIO',
+    REQUEST_ARTIST_PORTFOLIOS: 'REQUEST_ARTIST_PORTFOLIOS',
+    RECEIVED_ARTIST_PORTFOLIOS: 'RECEIVED_ARTIST_PORTFOLIOS',
     REQUEST_CREATE_ARTIST_PORTFOLIO: 'REQUEST_CREATE_ARTIST_PORTFOLIO',
     RECEIVED_CREATE_ARTIST_PORTFOLIO: 'RECEIVED_CREATE_ARTIST_PORTFOLIO',
     REQUEST_UPDATE_ARTIST_PORTFOLIO: 'REQUEST_UPDATE_ARTIST_PORTFOLIO',
@@ -13,7 +15,9 @@ const ARTIST_PORTFOLIO_ACTIONS = {
 
 const initialState = {
     currentArtistPortfolio: null,
+    artistPortfolios: [],
     fetchingArtistPortfolio: false,
+    fetchingArtistPortfolios: false,
     fetchingCreateArtistPortfolio: false,
     fetchingUpdateArtistPortfolio: false,
     editingArtistPortfolio: false
@@ -32,6 +36,19 @@ export default function artistPortfolioReducer(state = initialState, action) {
                 ...state,
                 fetchingArtistPortfolio: false,
                 currentArtistPortfolio: action.payload
+            };
+        }
+        case ARTIST_PORTFOLIO_ACTIONS.REQUEST_ARTIST_PORTFOLIOS: {
+            return {
+                ...state,
+                fetchingArtistPortfolios: true
+            };
+        }
+        case ARTIST_PORTFOLIO_ACTIONS.RECEIVED_ARTIST_PORTFOLIOS: {
+            return {
+                ...state,
+                fetchingArtistPortfolios: false,
+                artistPortfolios: action.payload === null ? [] : action.payload
             };
         }
         case ARTIST_PORTFOLIO_ACTIONS.REQUEST_CREATE_ARTIST_PORTFOLIO: {
@@ -81,6 +98,14 @@ export function requestArtistPortfolio() {
 
 export function receivedArtistPortfolio(artistPortfolio) {
     return createReducerObject(ARTIST_PORTFOLIO_ACTIONS.RECEIVED_ARTIST_PORTFOLIO, artistPortfolio);
+}
+
+export function requestArtistPortfolios() {
+    return createReducerObject(ARTIST_PORTFOLIO_ACTIONS.REQUEST_ARTIST_PORTFOLIOS);
+}
+
+export function receivedArtistPortfolios(artistPortfolios) {
+    return createReducerObject(ARTIST_PORTFOLIO_ACTIONS.RECEIVED_ARTIST_PORTFOLIOS, artistPortfolios);
 }
 
 export function requestCreateArtistPortfolio() {

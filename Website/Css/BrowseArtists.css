@@ -1,0 +1,60 @@
+.artist-portfolio-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #000;
+    padding: 10px;
+    border-radius: 15px;
+    color: #FFF;
+    margin: 5px 0px;
+}
+
+.artist-card:nth-child(odd) {
+    background-color: #FFE3CC;
+}
+
+.artist-card:nth-child(even) {
+    background-color: #F2CFB3;
+}
+
+.artist-card > a {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 5px;
+    border: 1px solid #222;
+    text-decoration: none;
+}
+
+.artist-card-image-container {
+    padding: 5px;
+}
+
+.artist-card-image {
+    object-fit: cover;
+    object-position: 50% 50%;
+    width: 75px;
+    height: 75px;
+}
+
+.artist-card-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    color: black;
+}
+
+.artist-card-info > h6 {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-wrap: none;
+}
+
+.rating {
+    display: flex;
+    flex-direction: row;
+}
+
+.rating-heart {
+    color: red;
+}

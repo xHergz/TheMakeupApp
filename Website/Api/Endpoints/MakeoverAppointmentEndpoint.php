@@ -29,23 +29,45 @@
         public function get() {
             $apiRequest = new ApiRequest($_GET, 'MakeoverAppointment');
             $apiRequest->LogRequest();
-            // This method only supports being called by unique id: ../makeover-appointment/makeoverAppointmentId=""
-            if (!$apiRequest->IsForUniqueId()) {
-                $apiRequest->EndRequest(HttpStatus::NOT_FOUND, 'Request is not for unique id');
-            }
 
-            $makeoverAppointmentId = $apiRequest->GetUniqueId();
-            $authorizationResponse = AuthorizeSessionForMakeoverAppointment(GetBearerToken(), $makeoverAppointmentId);
-            if ($authorizationResponse != Errors::SUCCESS) {
-                $apiRequest->EndRequest(HttpStatus::UNAUTHORIZED, Errors::GetErrorMessage($authorizationResponse));
-            }
+            if ($apiRequest->IsForUniqueId()) {
+                $makeoverAppointmentId = $apiRequest->GetUniqueId();
+                $authorizationResponse = AuthorizeSessionForMakeoverAppointment(GetBearerToken(), $makeoverAppointmentId);
+                if ($authorizationResponse != Errors::SUCCESS) {
+                    $apiRequest->EndRequest(HttpStatus::UNAUTHORIZED, Errors::GetErrorMessage($authorizationResponse));
+                }
 
-            $makeoverAppointmentDal = new MakeoverAppointmentDal();
-            if (!$makeoverAppointmentDal->Initialize()) {
-                $apiRequest->EndRequest(HttpStatus::INTERNAL_SERVER_ERROR, 'Database connection could not be initialized');
+                $makeoverAppointmentDal = new MakeoverAppointmentDal();
+                if (!$makeoverAppointmentDal->Initialize()) {
+                    $apiRequest->EndRequest(HttpStatus::INTERNAL_SERVER_ERROR, 'Database connection could not be initialized');
+                }
+                $response = $makeoverAppointmentDal->GetMakeoverAppointment($makeoverAppointmentId);
             }
+            else {
+                $clientProfileId = $apiRequest->GetKey(self::CLIENT_PROFILE_ID_KEY);
+                $artistPortfolioId = $apiRequest->GetKey(self::ARTIST_PORTFOLIO_ID_KEY);
 
-            $response = $makeoverAppointmentDal->GetMakeoverAppointment($makeoverAppointmentId);
+                if ($clientProfileId != null) {
+                    $authorizeForClientResponse = AuthorizeSessionForClientProfile(GetBearerToken(), $clientProfileId);
+                    if ($authorizeForClientResponse != Errors::SUCCESS) {
+                        $apiRequest->EndRequest(HttpStatus::UNAUTHORIZED, Errors::GetErrorMessage($authorizeForClientResponse));
+                    }
+                }
+
+                if ($artistPortfolioId != null) {
+                    $authorizeForArtistResponse = AuthorizeSessionForArtistPortfolio(GetBearerToken(), $artistPortfolioId);
+                    if ($authorizeForArtistResponse != Errors::SUCCESS) {
+                        $apiRequest->EndRequest(HttpStatus::UNAUTHORIZED, Errors::GetErrorMessage($authorizeForArtistResponse));
+                    }
+                }
+
+                $makeoverAppointmentDal = new MakeoverAppointmentDal();
+                if (!$makeoverAppointmentDal->Initialize()) {
+                    $apiRequest->EndRequest(HttpStatus::INTERNAL_SERVER_ERROR, 'Database connection could not be initialized');
+                }
+
+                $response = $makeoverAppointmentDal->GetMakeoverAppointments($clientProfileId, $artistPortfolioId);
+            }
             $jsonResponse = $makeoverAppointmentDal->EncodeResponse($response);
             Log::LogInformation('MakeoverAppointment GET Response: ' . $jsonResponse);
             echo $jsonResponse;

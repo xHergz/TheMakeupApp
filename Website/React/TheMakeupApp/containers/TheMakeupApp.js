@@ -68,6 +68,7 @@ class TheMakeupApp extends React.Component {
 
         return (
             <div className="online-banner">
+                <div className="online-symbol" />
                 Currently Online
             </div>
         );

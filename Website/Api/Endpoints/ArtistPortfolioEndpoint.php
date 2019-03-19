@@ -21,11 +21,11 @@
             $apiRequest = new ApiRequest($_GET, 'ArtistPortfolio');
             $apiRequest->LogRequest();
             // This method only supports being called by unique id: ../artist-portfolio/displayName=""
-            if (!$apiRequest->IsForUniqueId()) {
-                $apiRequest->EndRequest(HttpStatus::NOT_FOUND, 'Request is not for unique id');
+            // or being empty: ../artist-portfolio
+            if (!$apiRequest->IsForUniqueId() && !$apiRequest->IsEmpty()) {
+                $apiRequest->EndRequest(HttpStatus::NOT_FOUND, 'Request is not for unique id or empty');
             }
 
-            // Check if session key is valid to get client profile information
             $authorizationResponse = AuthorizeSession(GetBearerToken());
             if ($authorizationResponse != Errors::SUCCESS) {
                 $apiRequest->EndRequest(HttpStatus::UNAUTHORIZED, Errors::GetErrorMessage($authorizationResponse));
@@ -36,8 +36,13 @@
                 $apiRequest->EndRequest(HttpStatus::INTERNAL_SERVER_ERROR, 'Database connection could not be initialized');
             }
             
-            $displayName = $apiRequest->GetUniqueId();
-            $response = $artistPortfolioDal->GetArtistPortfolio($displayName);
+            if ($apiRequest->IsForUniqueId()) {
+                $displayName = $apiRequest->GetUniqueId();
+                $response = $artistPortfolioDal->GetArtistPortfolio($displayName);
+            }
+            else {
+                $response = $artistPortfolioDal->GetArtistPortfolios();
+            }
 
             $jsonResponse = $artistPortfolioDal->EncodeResponse($response);
             Log::LogInformation('ArtistPortfolio GET Response: ' . $jsonResponse);

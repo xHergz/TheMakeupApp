@@ -224,8 +224,8 @@ class AsapMakeoverSearch extends React.Component {
             <div className="page-container">
                 <h1 className="page-title">ASAP Makeover Search</h1>
                 <InfoBlock
-                    message="An ASAP Makeover consists of the an Instant Consultation for some preliminary information gathering
-                        for the Artist, and then an in person makeover as soon as the artist can get to your location!"
+                    message={'An ASAP Makeover consists of the an Instant Consultation for some preliminary information gathering '
+                         + 'for the Artist, and then an in person makeover as soon as the artist can get to your location!'}
                 />
                 <DropdownInput
                     ref={this.makeoverTypeInput}

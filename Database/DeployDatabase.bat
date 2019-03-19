@@ -198,6 +198,8 @@ call:runMySqlFile "./Stored Procedures/GetMakeoverAppointmentAddons.sql"
 call:runMySqlFile "./Stored Procedures/SearchOnlineArtists.sql"
 call:runMySqlFile "./Stored Procedures/SetArtistOnline.sql"
 call:runMySqlFile "./Stored Procedures/SetArtistOffline.sql"
+call:runMySqlFile "./Stored Procedures/GetArtistPortfolios.sql"
+call:runMySqlFile "./Stored Procedures/GetMakeoverAppointments.sql"
 
 REM Insert the initial data
 call:runMySqlFile "./Data/SystemConfigurationData.sql"
