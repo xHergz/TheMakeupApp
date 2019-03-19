@@ -19,10 +19,15 @@ const PAGES = {
         LINK: '/apply',
         LABEL: 'Artist Application'
     },
+    ARTIST_DASHBOARD: {
+        KEY: 'ARTIST_DASHBOARD',
+        LINK: '/dashboard',
+        LABEL: 'Artist Dashboard'
+    },
     ARTIST_PORTFOLIO: {
         KEY: 'ARTIST_PORTFOLIO',
         LINK: '/portfolio/:displayName',
-        LABEL: 'Find a Book'
+        LABEL: 'Artist Portfolio'
     },
     ASAP_MAKEOVER_SEARCH: {
         KEY: 'ASAP_MAKEOVER_SEARCH',

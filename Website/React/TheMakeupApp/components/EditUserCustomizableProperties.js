@@ -177,7 +177,8 @@ EditUserCustomizableProperties.propTypes = {
         isArtist: PropTypes.number.isRequired,
         isClient: PropTypes.number.isRequired,
         clientProfileId: PropTypes.number,
-        artistPortfolioId: PropTypes.number
+        artistPortfolioId: PropTypes.number,
+        isArtistOnline: PropTypes.number
     }).isRequired,
     label: PropTypes.string,
     dropdownLabel: PropTypes.string,

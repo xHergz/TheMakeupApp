@@ -221,7 +221,8 @@ Qualifications.propTypes = {
         isArtist: PropTypes.number.isRequired,
         isClient: PropTypes.number.isRequired,
         clientProfileId: PropTypes.number,
-        artistPortfolioId: PropTypes.number
+        artistPortfolioId: PropTypes.number,
+        isArtistOnline: PropTypes.number
     }).isRequired,
     artistQualifications: PropTypes.arrayOf(PropTypes.object).isRequired,
     fetchingArtistQualifications: PropTypes.bool.isRequired,

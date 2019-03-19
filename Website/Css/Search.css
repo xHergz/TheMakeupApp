@@ -1,0 +1,63 @@
+.search-results > h4 {
+    text-align: center;
+}
+
+.search-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px 0px;
+}
+
+.search-result {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 5px;
+    border: 2px solid #222;
+}
+
+.search-result-image-container {
+    padding: 5px;
+}
+
+.search-result-image {
+    object-fit: cover;
+    object-position: 50% 50%;
+    width: 75px;
+    height: 75px;
+}
+
+.search-result-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.search-result-price {
+    padding: 0px 20px;
+    color: green;
+}
+
+.search-result-price, .search-result-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.rating {
+    display: flex;
+    flex-direction: row;
+}
+
+.rating-heart {
+    color: red;
+}
+
+.clickable:hover {
+    cursor: pointer;
+}
+
+.leaflet-container {
+    height: 500px;
+}

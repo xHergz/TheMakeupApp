@@ -3,7 +3,7 @@ import {
     getCookie
 } from '../../Common/helpers/browserUtilities';
 
-const API_URL = 'http://api.themakeupapp.localhost';
+const API_URL = 'https://api.herwalbooks.xyz';
 
 const SESSION_KEY_COOKIE = 'tma_session_key';
 
@@ -29,6 +29,7 @@ export const API_ENDPOINTS = {
     MAKEOVER_APPOINTMENT: 'makeover-appointment',
     MAKEOVER_TYPES: 'makeover-types',
     NOTIFICATION: 'notifications',
+    ONLINE_ARTIST: 'online-artist',
     PRODUCT_PREFERENCE: 'product-preference',
     SANITIZATION_QUIZ: 'sanitization-quiz',
     SESSION: 'session',

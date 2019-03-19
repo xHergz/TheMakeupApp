@@ -20,6 +20,7 @@ import Account from './Account';
 import AppointmentInfo from './AppointmentInfo';
 import AppointmentSetup from './AppointmentSetup';
 import ArtistApplication from './ArtistApplication';
+import ArtistDashboard from './ArtistDashboard';
 import ArtistPortfolio from './ArtistPortfolio';
 import AsapMakeoverSearch from './AsapMakeoverSearch';
 import BrowseArtists from './BrowseArtists';
@@ -41,6 +42,7 @@ class TheMakeupApp extends React.Component {
             refreshNewNotificationsId: null
         };
         this.refreshNewNotifications = this.refreshNewNotifications.bind(this);
+        this.renderOnlineBanner = this.renderOnlineBanner.bind(this);
     }
 
     componentDidMount() {
@@ -57,6 +59,18 @@ class TheMakeupApp extends React.Component {
 
     refreshNewNotifications() {
         this.props.getNumberOfNewNotifications(GetSessionKey(), this.props.currentSession.displayName);
+    }
+
+    renderOnlineBanner() {
+        if (!this.props.currentSession.isArtistOnline) {
+            return null;
+        }
+
+        return (
+            <div className="online-banner">
+                Currently Online
+            </div>
+        );
     }
 
     render() {
@@ -79,6 +93,7 @@ class TheMakeupApp extends React.Component {
                     currentPageKey={this.props.currentPageKey}
                     newNotifications={this.props.newNotifications}
                 />
+                {this.renderOnlineBanner()}
                 <div className="page-content">
                     <ErrorList
                         dismissMessage={this.props.dismissMessage}
@@ -90,6 +105,7 @@ class TheMakeupApp extends React.Component {
                         <Route exact path={PAGES.APPOINTMENT_INFO.LINK} component={AppointmentInfo} />
                         <Route exact path={PAGES.APPOINTMENT_SETUP.LINK} component={AppointmentSetup} />
                         <Route exact path={PAGES.ARTIST_APPLICATION.LINK} component={ArtistApplication} />
+                        <Route exact path={PAGES.ARTIST_DASHBOARD.LINK} component={ArtistDashboard} />
                         <Route exact path={PAGES.ARTIST_PORTFOLIO.LINK} component={ArtistPortfolio} />
                         <Route exact path={PAGES.ASAP_MAKEOVER_SEARCH.LINK} component={AsapMakeoverSearch} />
                         <Route exact path={PAGES.BROWSE_ARTISTS.LINK} component={BrowseArtists} />
@@ -128,7 +144,8 @@ TheMakeupApp.propTypes = {
         isArtist: PropTypes.number.isRequired,
         isClient: PropTypes.number.isRequired,
         clientProfileId: PropTypes.number,
-        artistPortfolioId: PropTypes.number
+        artistPortfolioId: PropTypes.number,
+        isArtistOnline: PropTypes.number
     }),
     dismissMessage: PropTypes.func.isRequired,
     getSessionInfo: PropTypes.func.isRequired,

@@ -1,5 +1,6 @@
 import faAddressCard from '@fortawesome/fontawesome-free-solid/faAddressCard';
 import faCalendarAlt from '@fortawesome/fontawesome-free-solid/faCalendarAlt';
+import faChartLine from '@fortawesome/fontawesome-free-solid/faChartLine';
 import faMapMarkerAlt from '@fortawesome/fontawesome-free-solid/faMapMarkerAlt';
 import faPaintBrush from '@fortawesome/fontawesome-free-solid/faPaintBrush';
 import faSearch from '@fortawesome/fontawesome-free-solid/faSearch';
@@ -32,6 +33,21 @@ class HomePage extends React.Component {
             );
         }
         return null;
+    }
+
+    renderDashboardLink() {
+        if (!this.props.currentSession.isArtist) {
+            return null;
+        }
+
+        return (
+            <div className="home-page-tile">
+                <a href={PAGES.ARTIST_DASHBOARD.LINK}>
+                    <FontAwesomeIcon icon={faChartLine} size="2x" />
+                    <h3>{PAGES.ARTIST_DASHBOARD.LABEL}</h3>
+                </a>
+            </div>
+        );
     }
 
     render() {
@@ -68,6 +84,7 @@ class HomePage extends React.Component {
                     </a>
                 </div>
                 {this.renderArtistApplicationLink()}
+                {this.renderDashboardLink()}
             </div>
         );
     }
@@ -89,7 +106,8 @@ HomePage.propTypes = {
         isArtist: PropTypes.number.isRequired,
         isClient: PropTypes.number.isRequired,
         clientProfileId: PropTypes.number,
-        artistPortfolioId: PropTypes.number
+        artistPortfolioId: PropTypes.number,
+        isArtistOnline: PropTypes.number
     }).isRequired
 };
 
