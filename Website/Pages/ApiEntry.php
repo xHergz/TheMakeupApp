@@ -19,6 +19,7 @@
     require_once '../../private/Api/Endpoints/ClientProductPreferenceEndpoint.php';
     require_once '../../private/Api/Endpoints/ClientProfileEndpoint.php';
     require_once '../../private/Api/Endpoints/ClientReviewsEndpoint.php';
+    require_once '../../private/Api/Endpoints/ConsultationEndpoint.php';
     require_once '../../private/Api/Endpoints/ConsultationTypeEndpoint.php';
     require_once '../../private/Api/Endpoints/EyeColoursEndpoint.php';
     require_once '../../private/Api/Endpoints/HairColoursEndpoint.php';
@@ -56,6 +57,7 @@
         "client-product-preference" => new ClientProductPreferenceEndpoint(),
         "client-profile" => new ClientProfileEndpoint(),
         "client-reviews" => new ClientReviewsEndpoint(),
+        "consultation" => new ConsultationEndpoint(),
         "consultation-types" => new ConsultationTypeEndpoint(),
         "eye-colours" => new EyeColoursEndpoint(),
         "hair-colours" => new HairColoursEndpoint(),

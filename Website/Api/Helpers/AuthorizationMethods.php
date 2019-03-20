@@ -306,4 +306,20 @@
         $authorizationDal->Close();
         return Errors::SUCCESS;
     }
+
+    function AuthorizeSessionForConsultation($sessionKey, $consultationId) {
+        $authorizationDal = new AuthorizationDal();
+        if (!$authorizationDal->Initialize()) {
+            $authorizationDal->Close();
+            return Errors::DATABASE_INITIALIZATION_ERROR;
+        }
+
+        if (!$authorizationDal->IsSessionAuthorizedForConsultation($sessionKey, $consultationId)) {
+            $authorizationDal->Close();
+            return Errors::SESSION_KEY_NOT_AUTHORIZED_FOR_CONSULTATION;
+        }
+
+        $authorizationDal->Close();
+        return Errors::SUCCESS;
+    }
 ?>
