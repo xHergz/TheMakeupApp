@@ -23,9 +23,7 @@ import sessionReducer from './SessionReducer';
 import setupMakeoverAppointmentReducer from './SetupMakeoverAppointmentReducer';
 import siteReducer from './SiteReducer';
 import userReducer from './UserReducer';
-import audioReducer from './AudioReducer';
-import videoReducer from './VideoReducer';
-import roomReducer from './RoomReducer';
+import consultationReducer from './ConsultationReducer';
 
 const rootReducer = combineReducers({
     artistApplicationReducer,
@@ -50,9 +48,7 @@ const rootReducer = combineReducers({
     setupMakeoverAppointmentReducer,
     siteReducer,
     userReducer,
-    audio: audioReducer,
-    video: videoReducer,
-    rooms: roomReducer
+    consultationReducer
 });
 
 export default rootReducer;

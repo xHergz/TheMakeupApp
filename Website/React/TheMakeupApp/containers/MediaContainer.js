@@ -1,34 +1,40 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+
+import {
+  changeMediaBridge,
+  changeMediaUser
+} from '../actions/ConsultationActions';
 
 class MediaBridge extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      bridge: 'nil',
-      user: 'nil'
-    };
-    this.onRemoteHangup = this.onRemoteHangup.bind(this);
-    this.onMessage = this.onMessage.bind(this);
-    this.sendData = this.sendData.bind(this);
-    this.setupDataHandlers = this.setupDataHandlers.bind(this);
-    this.setDescription = this.setDescription.bind(this);
-    this.sendDescription = this.sendDescription.bind(this);
-    this.hangup = this.hangup.bind(this);
-    this.init = this.init.bind(this);
-    this.setDescription = this.setDescription.bind(this);
-  }
+    constructor(props) {
+        super(props);
+        this.onRemoteHangup = this.onRemoteHangup.bind(this);
+        this.onMessage = this.onMessage.bind(this);
+        this.sendData = this.sendData.bind(this);
+        this.setupDataHandlers = this.setupDataHandlers.bind(this);
+        this.setDescription = this.setDescription.bind(this);
+        this.sendDescription = this.sendDescription.bind(this);
+        this.hangup = this.hangup.bind(this);
+        this.init = this.init.bind(this);
+        this.setDescription = this.setDescription.bind(this);
+    }
+
   componentWillMount() {
     // chrome polyfill for connection between the local device and a remote peer
     window.RTCPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection;
     this.props.media(this);
   }
+
   componentDidMount() {
     this.props.getUserMedia
       .then(stream => this.localVideo.srcObject = this.localStream = stream);
     this.props.socket.on('message', this.onMessage);
     this.props.socket.on('hangup', this.onRemoteHangup);
   }
+
   componentWillUnmount() {
     this.props.media(null);
     if (this.localStream !== undefined) {
@@ -37,7 +43,9 @@ class MediaBridge extends Component {
     this.props.socket.emit('leave');
   }
   onRemoteHangup() {
-    this.setState({user: 'host', bridge: 'host-hangup'});
+    // this.setState({user: 'host', bridge: 'host-hangup'});
+    this.props.changeMediaBridge('host-hangup');
+    this.props.changeMediaUser('host');
   }
   onMessage(message) {
       if (message.type === 'offer') {
@@ -83,7 +91,9 @@ class MediaBridge extends Component {
     this.props.socket.send(this.pc.localDescription);
   }
   hangup() {
-    this.setState({user: 'guest', bridge: 'guest-hangup'});
+    // this.setState({user: 'guest', bridge: 'guest-hangup'});
+    this.props.changeMediaBridge('guest-hangup');
+    this.props.changeMediaUser('guest');
     this.pc.close();
     this.props.socket.emit('leave');
   }
@@ -139,24 +149,45 @@ class MediaBridge extends Component {
     this.localStream.getTracks().forEach(track => this.pc.addTrack(track, this.localStream));
     // call if we were the last to connect (to increase
     // chances that everything is set up properly at both ends)
-    if (this.state.user === 'host') {
+    if (this.props.user === 'host') {
       this.props.getUserMedia.then(attachMediaIfReady);
     }
   }
   render(){
-    console.log('Media Container State: ');
-    console.log(this.state);
+    //console.log('Media Container State: ');
+    //console.log(this.state);
+    console.log('Bridge: ', this.props.bridge);
+    console.log('User: ', this.props.user);
     return (
-      <div className={`media-bridge ${this.state.bridge}`}>
+      <div className={`media-bridge ${this.props.bridge}`}>
         <video className="remote-video" ref={(ref) => this.remoteVideo = ref} autoPlay></video>
         <video className="local-video" ref={(ref) => this.localVideo = ref} autoPlay muted></video>
       </div>
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+      user: state.consultationReducer.user,
+      bridge: state.consultationReducer.bridge
+  };
+}
+
 MediaBridge.propTypes = {
   socket: PropTypes.object.isRequired,
   getUserMedia: PropTypes.object.isRequired,
-  media: PropTypes.func.isRequired
-}
-export default MediaBridge;
+  media: PropTypes.func.isRequired,
+  user: PropTypes.string.isRequired,
+  bridge: PropTypes.string.isRequired,
+  changeMediaBridge: PropTypes.func.isRequired,
+  changeMediaUser: PropTypes.func.isRequired
+};
+
+export default withRouter(connect(
+  mapStateToProps,
+  {
+      changeMediaBridge,
+      changeMediaUser
+  }
+)(MediaBridge));
