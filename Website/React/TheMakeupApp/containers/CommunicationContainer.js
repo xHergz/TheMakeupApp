@@ -17,13 +17,15 @@ class CommunicationContainer extends React.Component {
       audio: true,
       video: true
     };
-
+    //bind all the classes to avoid state loss
     this.handleInvitation = this.handleInvitation.bind(this);
     this.handleHangup = this.handleHangup.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.toggleVideo = this.toggleVideo.bind(this);
     this.toggleAudio = this.toggleAudio.bind(this);
     this.send = this.send.bind(this);
+    this.hideAuth = this.hideAuth.bind(this);
+    this.full = this.full.bind(this);
   }
 
   hideAuth() {
@@ -33,14 +35,16 @@ class CommunicationContainer extends React.Component {
     this.props.media.setState({bridge: 'full'});
   }
   componentDidMount() {
-    console.log('Comments componentDidMount: ');
-    console.log(this);
+    console.log('State in CommContainer: ');
+    console.log(this.state);
+
     const socket = this.props.socket;
     console.log('props', this.props)
     this.setState({video: this.props.video, audio: this.props.audio});
 
     socket.on('create', () =>
       this.props.media.setState({user: 'host', bridge: 'create'}));
+      console.log(this.state);
     socket.on('full', this.full);
     socket.on('bridge', role => this.props.media.init());
     socket.on('join', () =>
@@ -87,7 +91,7 @@ class CommunicationContainer extends React.Component {
     this.props.media.hangup();
   }
   render(){
-    console.log(this.media);
+    
     return (
       <Communication
 

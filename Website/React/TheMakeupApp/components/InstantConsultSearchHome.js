@@ -19,8 +19,6 @@ const InstantSearchHome = props =>
     handleChange: PropTypes.func.isRequired,
     defaultRoomId: PropTypes.string.isRequired,
     roomId: PropTypes.string.isRequired,
-    //rooms: PropTypes.array.isRequired
-
   };
 
   const mapStateToProps = store => ({rooms: store.rooms});

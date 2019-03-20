@@ -25,8 +25,9 @@ class ChatRoomPage extends React.Component {
 //stops here
   render() {
     console.log(this.socket);
-    console.log(this.getUserMedia);
-    console.log(this.media);
+  //  console.log(this.getUserMedia);
+    console.log('State in chatroompage:');
+    console.log(this.state);
 
       return (
         <div>

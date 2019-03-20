@@ -5,9 +5,9 @@ class MediaBridge extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      bridge: '',
-      user: ''
-    }
+      bridge: 'nil',
+      user: 'nil'
+    };
     this.onRemoteHangup = this.onRemoteHangup.bind(this);
     this.onMessage = this.onMessage.bind(this);
     this.sendData = this.sendData.bind(this);
@@ -144,8 +144,8 @@ class MediaBridge extends Component {
     }
   }
   render(){
-    console.log(this.media);
-    console.log(this.getUserMedia)
+    console.log('Media Container State: ');
+    console.log(this.state);
     return (
       <div className={`media-bridge ${this.state.bridge}`}>
         <video className="remote-video" ref={(ref) => this.remoteVideo = ref} autoPlay></video>
