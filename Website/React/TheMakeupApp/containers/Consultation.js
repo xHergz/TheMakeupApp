@@ -2,10 +2,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
-import io from 'socket.io-client'
 
-import MediaContainer from './MediaContainer'
-import CommunicationContainer from './CommunicationContainer'
+import ChatRoomPage from './ChatRoomPage';
+
 
 class Consultation extends React.Component {
     componentDidMount() {
@@ -16,10 +15,13 @@ class Consultation extends React.Component {
         // If the call is still fetching, render loader
 
         // If the consultation information is null display Not found
-        
+
         return (
             <div>
                 <h1>Consultation Room: {this.props.match.params.consultationId}</h1>
+                <ChatRoomPage
+                roomID = { 12345 }
+                />
             </div>
         );
     }

@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import {
-  changeMediaBridge,
-  changeMediaUser
+  setConsultationBridge,
+  setConsultationUser
 } from '../actions/ConsultationActions';
 
-class MediaBridge extends Component {
+class MediaBridge extends React.Component {
     constructor(props) {
         super(props);
         this.onRemoteHangup = this.onRemoteHangup.bind(this);
@@ -25,7 +25,7 @@ class MediaBridge extends Component {
   componentWillMount() {
     // chrome polyfill for connection between the local device and a remote peer
     window.RTCPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection;
-    this.props.media(this);
+    this.props.setMedia(this);
   }
 
   componentDidMount() {
@@ -36,7 +36,7 @@ class MediaBridge extends Component {
   }
 
   componentWillUnmount() {
-    this.props.media(null);
+    this.props.setMedia(null);
     if (this.localStream !== undefined) {
       this.localStream.getVideoTracks()[0].stop();
     }
@@ -44,8 +44,8 @@ class MediaBridge extends Component {
   }
   onRemoteHangup() {
     // this.setState({user: 'host', bridge: 'host-hangup'});
-    this.props.changeMediaBridge('host-hangup');
-    this.props.changeMediaUser('host');
+    this.props.setConsultationBridge('host-hangup');
+    this.props.setConsultationUser('host');
   }
   onMessage(message) {
       if (message.type === 'offer') {
@@ -92,8 +92,8 @@ class MediaBridge extends Component {
   }
   hangup() {
     // this.setState({user: 'guest', bridge: 'guest-hangup'});
-    this.props.changeMediaBridge('guest-hangup');
-    this.props.changeMediaUser('guest');
+    this.props.setConsultationBridge('guest-hangup');
+    this.props.setConsultationUser('guest');
     this.pc.close();
     this.props.socket.emit('leave');
   }
@@ -177,17 +177,17 @@ function mapStateToProps(state) {
 MediaBridge.propTypes = {
   socket: PropTypes.object.isRequired,
   getUserMedia: PropTypes.object.isRequired,
-  media: PropTypes.func.isRequired,
+  setMedia: PropTypes.func.isRequired,
   user: PropTypes.string.isRequired,
   bridge: PropTypes.string.isRequired,
-  changeMediaBridge: PropTypes.func.isRequired,
-  changeMediaUser: PropTypes.func.isRequired
+  setConsultationBridge: PropTypes.func.isRequired,
+  setConsultationUser: PropTypes.func.isRequired
 };
 
 export default withRouter(connect(
   mapStateToProps,
   {
-      changeMediaBridge,
-      changeMediaUser
+      setConsultationBridge,
+      setConsultationUser
   }
 )(MediaBridge));

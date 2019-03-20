@@ -18,7 +18,7 @@ export function setConsultationAudio(audio) {
     };
 }
 
-export function setMediaBridge(bridge) {
+export function setConsultationBridge(bridge) {
     return (dispatch) => {
         dispatch(setBridge(bridge));
     };

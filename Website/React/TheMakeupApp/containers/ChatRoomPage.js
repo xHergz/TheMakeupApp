@@ -5,35 +5,42 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import store from '../store/configureStore'
 import io from 'socket.io-client'
-
+import { addConsultationRoom } from '../actions/ConsultationActions';
+import PropTypes from 'prop-types';
 class ChatRoomPage extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      media: null
+    };
     this.getUserMedia = navigator.mediaDevices.getUserMedia({
       audio: true,
       video: true
     }).catch(e => alert('getUserMedia() error: ' + e.name))
     this.socket = io.connect('https://localhost:8080');
     // works up to getting stream for audio / video... does not add a chat room to the state
-    this.mediaContainer = React.createRef();
+    this.setMedia = this.setMedia.bind(this);
+    this.MediaContainer = React.createRef();
   }
 
   componentDidMount() {
-    this.props.addRoom();
+    this.props.addConsultationRoom(this.props.roomID);
+  }
+
+  setMedia(media)
+  {
+    this.setState({media});
   }
 
 //stops here
   render() {
-    console.log(this.socket);
-  //  console.log(this.getUserMedia);
-    console.log('State in chatroompage:');
-    console.log(this.state);
+    console.log(this.MediaContainer);
 
       return (
         <div>
-        <MediaContainer media={media => this.media = media} socket={this.socket} getUserMedia={this.getUserMedia} />
-        <CommunicationContainer socket={this.socket} media={null} getUserMedia={this.getUserMedia} />
+        <MediaContainer ref = {this.MediaContainer} setMedia={this.setMedia} socket={this.socket} getUserMedia={this.getUserMedia} />
+        <CommunicationContainer socket={this.socket} media={this.state.media} getUserMedia={this.getUserMedia} />
 
               <h1>AppointmentSetup</h1>
           </div>
@@ -41,15 +48,12 @@ class ChatRoomPage extends React.Component {
   }
 }
 
-//commented out
 
-const mapStateToProps = store => ({rooms: new Set([...store.rooms])});
-const mapDispatchToProps = (dispatch, ownProps) => (
-    {
-      addRoom: () => store.dispatch({ type: 'ADD_ROOM', room: ownProps.match.params.room })
-    }
-  );
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ChatRoomPage));
 
-//stops here
-//export default ChatRoomPage;
+
+ChatRoomPage.propTypes = {
+  roomID: PropTypes.string.isRequired,
+  addConsultationRoom : PropTypes.func.isRequired
+};
+
+export default withRouter(connect(null, {addConsultationRoom})(ChatRoomPage));

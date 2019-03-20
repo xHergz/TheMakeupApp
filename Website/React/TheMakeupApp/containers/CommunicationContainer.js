@@ -7,8 +7,10 @@ import store from '../store/configureStore';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {
-  changeMediaBridge,
-  changeMediaUser
+  setConsultationUser,
+  setConsultationAudio,
+  setConsultationVideo,
+  setConsultationBridge
 } from '../actions/ConsultationActions';
 
 class CommunicationContainer extends React.Component {
@@ -34,15 +36,15 @@ class CommunicationContainer extends React.Component {
 
   hideAuth() {
     //this.props.media.setState({bridge: 'connecting'});
-    this.props.changeMediaBridge('connecting');
+    this.props.setConsultationBridge('connecting');
   }
   full() {
     this.props.media.setState({bridge: 'full'});
-    this.props.changeMediaBridge('full');
+    this.props.setConsultationBridge('full');
   }
   componentDidMount() {
-    console.log('State in CommContainer: ');
-    console.log(this.state);
+
+
 
     const socket = this.props.socket;
     console.log('props', this.props)
@@ -51,20 +53,20 @@ class CommunicationContainer extends React.Component {
     socket.on('create', () => {
       //this.props.media.setState({user: 'host', bridge: 'create'})
       console.log('Comm Container is creating');
-      this.props.changeMediaBridge('create');
-      this.props.changeMediaUser('host');
+      this.props.setConsultationBridge('create');
+      this.props.setConsultationUser('host');
     });
       console.log(this.state);
     socket.on('full', this.full);
     socket.on('bridge', role => this.props.media.init());
     socket.on('join', () => {
        // this.props.media.setState({user: 'guest', bridge: 'join'})
-       this.props.changeMediaBridge('join');
-       this.props.changeMediaUser('guest');
+       this.props.setConsultationBridge('join');
+       this.props.setConsultationUser('guest');
     });
     socket.on('approve', ({ message, sid }) => {
       // this.props.media.setState({bridge: 'approve'});
-      this.props.changeMediaBridge('approve');
+      this.props.setConsultationBridge('approve');
       this.setState({ message, sid });
     });
     socket.emit('find');
@@ -76,7 +78,8 @@ class CommunicationContainer extends React.Component {
         });
   }
   handleInput(e) {
-    this.setState({[e.target.dataset.ref]: e.target.value});
+    console.log([e.target.dataset.ref], e.target.value);
+    this.setState({message: e.target.value});
   }
   send(e) {
     e.preventDefault();
@@ -94,18 +97,18 @@ class CommunicationContainer extends React.Component {
   toggleVideo() {
     const video = this.localStream.getVideoTracks()[0].enabled = !this.state.video;
     this.setState({video: video});
-    this.props.setVideo(video);
+    this.props.setConsultationVideo(video);
   }
   toggleAudio() {
     const audio = this.localStream.getAudioTracks()[0].enabled = !this.state.audio;
     this.setState({audio: audio});
-    this.props.setAudio(audio);
+    this.props.setConsultationAudio(audio);
   }
   handleHangup() {
     this.props.media.hangup();
   }
   render(){
-    
+
     return (
       <Communication
 
@@ -120,32 +123,31 @@ class CommunicationContainer extends React.Component {
     );
   }
 }
-const mapStateToProps = store => ({video: store.video, audio: store.audio});
-const mapDispatchToProps = dispatch => (
-  {
-    setVideo: boo => store.dispatch({type: 'SET_VIDEO', video: boo}),
-    setAudio: boo => store.dispatch({type: 'SET_AUDIO', audio: boo}),
-    changeMediaBridge,
-    changeMediaUser
-  }
-);
+function mapStateToProps (state) {
+  return{
+    video: state.consultationReducer.video,
+    audio: state.consultationReducer.audio
+  };
+}
 
 CommunicationContainer.propTypes = {
   socket: PropTypes.object.isRequired,
   getUserMedia: PropTypes.object.isRequired,
   audio: PropTypes.bool.isRequired,
   video: PropTypes.bool.isRequired,
-  setVideo: PropTypes.func.isRequired,
-  setAudio: PropTypes.func.isRequired,
+  setConsultationVideo: PropTypes.func.isRequired,
+  setConsultationAudio: PropTypes.func.isRequired,
   media: PropTypes.instanceOf(MediaContainer),
-  changeMediaBridge: PropTypes.func.isRequired,
-  changeMediaUser: PropTypes.func.isRequired
+  setConsultationBridge: PropTypes.func.isRequired,
+  setConsultationUser: PropTypes.func.isRequired
 };
 
 export default withRouter(connect(
   mapStateToProps,
   {
-    changeMediaBridge,
-    changeMediaUser
+    setConsultationUser,
+    setConsultationAudio,
+    setConsultationVideo,
+    setConsultationBridge
   }
 )(CommunicationContainer));
