@@ -34,9 +34,16 @@
     flex-direction: column;
 }
 
+.search-result-additional-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0px 10px;
+}
+
 .search-result-price {
-    padding: 0px 20px;
     color: green;
+    justify-content: right;
 }
 
 .search-result-price, .search-result-actions {
@@ -60,4 +67,35 @@
 
 .leaflet-container {
     height: 500px;
+}
+
+/* Smallest devices (phones, Below 600px) */
+@media only screen and (max-width: 599px) {
+    
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .search-result-additional-info {
+        flex-direction: row;
+    }
+
+    .search-result-price {
+        padding: 0px 20px;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
 }

@@ -10,7 +10,8 @@ class FileInput extends React.Component {
         super(props);
         this.state = {
             currentValue: '',
-            currentFileName: null
+            currentFileName: null,
+            errorMessage: ''
         };
         this.getValue = this.getValue.bind(this);
         this.loadFile = this.loadFile.bind(this);
@@ -31,6 +32,12 @@ class FileInput extends React.Component {
             fileName = file.name;
         }
 
+        if (file.size > this.props.maxSizeKb * 1000) { 
+            this.setState({
+                errorMessage: `File too large. (Max size: ${this.props.maxSizeKb}kb)`
+            });
+            return;
+        }
         reader.addEventListener('load', () => { this.fileLoaded(reader, fileName); }, false);
 
         if (file) {
@@ -41,7 +48,8 @@ class FileInput extends React.Component {
     fileLoaded(reader, fileName) {
         this.setState({
             currentValue: reader.result,
-            currentFileName: fileName
+            currentFileName: fileName,
+            errorMessage: ''
         });
         this.props.onValueChanged();
     }
@@ -66,6 +74,9 @@ class FileInput extends React.Component {
                     label={this.props.label}
                     onClickHandler={this.selectFile}
                 />
+                <div className="input-error">
+                    <h6>{this.state.errorMessage}</h6>
+                </div>
             </div>
         );
     }
@@ -73,12 +84,14 @@ class FileInput extends React.Component {
 
 FileInput.propTypes = {
     label: PropTypes.string,
-    onValueChanged: PropTypes.func
+    onValueChanged: PropTypes.func,
+    maxSizeKb: PropTypes.number
 };
 
 FileInput.defaultProps = {
     label: 'Select Image',
-    onValueChanged: () => {}
+    onValueChanged: () => {},
+    maxSizeKb: 512
 };
 
 export default FileInput;

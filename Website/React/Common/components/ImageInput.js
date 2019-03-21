@@ -9,7 +9,8 @@ class ImageInput extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentValue: ''
+            currentValue: '',
+            errorMessage: ''
         };
         this.getValue = this.getValue.bind(this);
         this.previewImage = this.previewImage.bind(this);
@@ -37,6 +38,13 @@ class ImageInput extends React.Component {
 
         reader.addEventListener('load', () => { this.imageLoaded(reader); }, false);
 
+        if (file.size > this.props.maxSizeKb * 1000) {
+            this.setState({
+                errorMessage: `File too large. (Max size: ${this.props.maxSizeKb}kb)`
+            });
+            return;
+        }
+
         if (file) {
             reader.readAsDataURL(file);
         }
@@ -45,7 +53,8 @@ class ImageInput extends React.Component {
     imageLoaded(reader) {
         this.imagePreview.current.src = reader.result;
         this.setState({
-            currentValue: reader.result
+            currentValue: reader.result,
+            errorMessage: ''
         });
         this.props.onValueChanged();
     }
@@ -74,6 +83,9 @@ class ImageInput extends React.Component {
                     label={this.props.label}
                     onClickHandler={this.selectImage}
                 />
+                <div className="input-error">
+                    <h6>{this.state.errorMessage}</h6>
+                </div>
             </div>
         );
     }
@@ -83,14 +95,16 @@ ImageInput.propTypes = {
     label: PropTypes.string,
     defaultImageUrl: PropTypes.string,
     placeholderImageUrl: PropTypes.string,
-    onValueChanged: PropTypes.func
+    onValueChanged: PropTypes.func,
+    maxSizeKb: PropTypes.number
 };
 
 ImageInput.defaultProps = {
     label: 'Select Image',
     defaultImageUrl: null,
     placeholderImageUrl: '',
-    onValueChanged: () => {}
+    onValueChanged: () => {},
+    maxSizeKb: 512
 };
 
 export default ImageInput;

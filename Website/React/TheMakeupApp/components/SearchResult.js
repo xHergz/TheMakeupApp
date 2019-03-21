@@ -62,14 +62,16 @@ class SearchResult extends React.Component {
                     />
                     {this.renderDistanceLabel()}
                 </div>
-                <div className="search-result-price">
-                    <h3>${this.props.artistResult.basePrice}</h3>
-                </div>
-                <div className="search-result-actions">
-                    <Button
-                        label="Request Appointment"
-                        onClickHandler={this.requestAppointment}
-                    />
+                <div className="search-result-additional-info">
+                    <div className="search-result-price">
+                        <h3>${this.props.artistResult.basePrice}</h3>
+                    </div>
+                    <div className="search-result-actions">
+                        <Button
+                            label="Request Appointment"
+                            onClickHandler={this.requestAppointment}
+                        />
+                    </div>
                 </div>
             </div>
         );

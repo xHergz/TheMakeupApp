@@ -44,8 +44,12 @@
                 $response = $makeoverAppointmentDal->GetMakeoverAppointment($makeoverAppointmentId);
             }
             else {
-                $clientProfileId = $apiRequest->GetKey(self::CLIENT_PROFILE_ID_KEY);
-                $artistPortfolioId = $apiRequest->GetKey(self::ARTIST_PORTFOLIO_ID_KEY);
+                $clientProfileId = $apiRequest->GetKey(self::CLIENT_PROFILE_ID_KEY) == "null" ? null : $apiRequest->GetKey(self::CLIENT_PROFILE_ID_KEY);
+                $artistPortfolioId = $apiRequest->GetKey(self::ARTIST_PORTFOLIO_ID_KEY) == "null" ? null : $apiRequest->GetKey(self::ARTIST_PORTFOLIO_ID_KEY);
+
+                if ($artistPortfolioId == "null") {
+                    Log::LogInformation('Artist Portfolio Id is null string');
+                }
 
                 if ($clientProfileId != null) {
                     $authorizeForClientResponse = AuthorizeSessionForClientProfile(GetBearerToken(), $clientProfileId);

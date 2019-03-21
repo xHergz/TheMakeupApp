@@ -135,7 +135,13 @@
                 $apiRequest->EndRequest(HttpStatus::BAD_REQUEST, 'Invalid Parameters: ' . implode(', ', $clientProfile->GetCreateErrors()));
             }
             // Upload the profile picture
-            $profilePictureUrl = UploadClientProfileImage($apiRequest->GetKey(self::PROFILE_PICTURE_KEY), $clientProfile->UserId);
+            $profilePictureData = $apiRequest->GetKey(self::PROFILE_PICTURE_KEY);
+            if ($profilePictureData == null || $profilePictureData == '') {
+                $profilePictureUrl = '/images/defaultProfilePic.png';
+            }
+            else {
+                $profilePictureUrl = UploadClientProfileImage($profilePictureData, $clientProfile->UserId);
+            }
             if ($profilePictureUrl == null) {
                 $apiRequest->EndRequest(HttpStatus::INTERNAL_SERVER_ERROR, 'Failed to upload the client profile picture');
             }

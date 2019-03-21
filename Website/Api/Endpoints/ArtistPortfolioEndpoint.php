@@ -79,7 +79,10 @@
             }
 
             // Validate artist portfolio information
-            if (!Validation::ValidateBiography($biography)) {
+            if ($biography == "") {
+                $biography = null;
+            }
+            else if (!Validation::ValidateBiography($biography)) {
                 $apiRequest->EndRequest(HttpStatus::BAD_REQUEST, 'Invalid Biography');
             }
             $profilePictureUrl = null;
@@ -105,7 +108,6 @@
             }
 
             $userId = $apiRequest->GetKey(self::USER_ID_KEY);
-            $profilePicture = $apiRequest->GetKey(self::PROFILE_PICTURE_KEY);
             $biography = $apiRequest->GetKey(self::BIOGRAPHY_KEY);
 
             // Check if session key is valid and owns the user id its creating a profile for
@@ -124,7 +126,13 @@
                 $apiRequest->EndRequest(HttpStatus::BAD_REQUEST, 'Invalid Biography');
             }
             // Upload the profile picture
-            $profilePictureUrl = UploadArtistPortfolioImage($profilePicture, $userId);
+            $profilePictureData = $apiRequest->GetKey(self::PROFILE_PICTURE_KEY);
+            if ($profilePictureData == null || $profilePictureData == '') {
+                $profilePictureUrl = '/images/defaultProfilePic.png';
+            }
+            else {
+                $profilePictureUrl = UploadClientProfileImage($profilePictureData, $clientProfile->UserId);
+            }
             if ($profilePictureUrl == null) {
                 $apiRequest->EndRequest(HttpStatus::INTERNAL_SERVER_ERROR, 'Failed to upload the artist portfolio picture');
             }

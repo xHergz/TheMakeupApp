@@ -53,7 +53,8 @@ class AsapMakeoverSearch extends React.Component {
             currentPosition: {
                 longitude: null,
                 latitude: null
-            }
+            },
+            gettingLocation: false
         };
         this.displayGeolocationError = this.displayGeolocationError.bind(this);
         this.getCurrentLocation = this.getCurrentLocation.bind(this);
@@ -74,16 +75,26 @@ class AsapMakeoverSearch extends React.Component {
     }
 
     getCurrentLocation() {
+        this.setState({
+            gettingLocation: true,
+            didSearch: false
+        });
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(this.searchArtists, this.displayGeolocationError);
         }
         else {
             this.props.addErrorMessage('Could not get geolocation');
+            this.setState({
+                gettingLocation: false
+            });
         }
     }
 
     displayGeolocationError(error) {
         let message = '';
+        this.setState({
+            gettingLocation: false
+        });
         switch (error.code) {
             case error.PERMISSION_DENIED:
                 message = 'User denied the request for Geolocation.';
@@ -109,7 +120,8 @@ class AsapMakeoverSearch extends React.Component {
             currentPosition: {
                 longitude: currentLocation.coords.longitude,
                 latitude: currentLocation.coords.latitude
-            }
+            },
+            gettingLocation: false
         });
         this.props.searchForArtists(
             this.makeoverTypeInput.current.getValue(),
@@ -130,7 +142,7 @@ class AsapMakeoverSearch extends React.Component {
     }
 
     renderSearchButton() {
-        if (this.props.fetchingSearchOnlineArtists) {
+        if (this.props.fetchingSearchOnlineArtists || this.state.gettingLocation) {
             return <Loader />;
         }
 
