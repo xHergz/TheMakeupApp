@@ -160,13 +160,14 @@ class MediaBridge extends React.Component {
     console.log('User: ', this.props.user);
     return (
       <div className={`media-bridge ${this.props.bridge}`}>
-        <video className="remote-video" ref={(ref) => this.remoteVideo = ref} autoPlay></video>
-        <video className="local-video" ref={(ref) => this.localVideo = ref} autoPlay muted></video>
+        <video className="local-video" ref={(ref) => this.localVideo = ref} autoPlay muted>
+        </video>
+        <video className="remote-video" ref={(ref) => this.remoteVideo = ref} autoPlay>
+        </video>
       </div>
     );
   }
 }
-
 function mapStateToProps(state) {
   return {
       user: state.consultationReducer.user,
