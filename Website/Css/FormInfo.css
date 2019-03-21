@@ -60,6 +60,10 @@
     background-color: #CC9466;
 }
 
+.form-info-block:nth-child(6) > div {
+    background-color: #Bf804C;
+}
+
 .form-info-row {
     display: flex;
     flex-direction: row;

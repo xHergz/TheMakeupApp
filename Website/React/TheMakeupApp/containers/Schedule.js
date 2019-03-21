@@ -48,7 +48,7 @@ class Schedule extends React.Component {
 
         return (
             <div className="page-container">
-                <h1 className="page-title">Your Schedule</h1>
+                <h1 className="page-title">My Schedule</h1>
                 <div className="scheduled-appointments-list">
                     {this.renderAppointments()}
                 </div>

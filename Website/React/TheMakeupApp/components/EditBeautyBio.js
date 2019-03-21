@@ -77,6 +77,7 @@ class EditBeautyBio extends React.Component {
                     </div>
                 </div>
                 <FormInfoDisplay>
+                    <h3 className="section-title">Edit Your Beauty Bio</h3>
                     <ImageInput
                         ref={this.profilePictureInput}
                         label="Select a Profile Picture"
@@ -86,6 +87,7 @@ class EditBeautyBio extends React.Component {
                     <TextArea
                         ref={this.biographyInput}
                         label="Biography"
+                        rows={6}
                         onValidate={validateBiography}
                         onValidityChanged={this.beautyBioInputValidityChanged}
                         placeholderText={this.props.currentClientProfile.biography}

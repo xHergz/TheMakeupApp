@@ -42,15 +42,14 @@ class DisplayHeadshots extends React.Component {
         return (
             <div>
                 <div className="form-info-actions">
-                    <div className="form-info-action">
-                        <h1>Headshots</h1>
-                    </div>
+                    <div className="form-info-action" />
                     <div className="form-info-action-spacer" />
                     <div className="form-info-action">
                         {this.renderEditButton()}
                     </div>
                 </div>
                 <FormInfoDisplay>
+                    <h3 className="section-title">Headshots</h3>
                     <div className="headshots-container">
                         {this.props.clientHeadshots.map((headshot) => { return DisplayHeadshots.renderHeadshot(headshot); })}
                     </div>

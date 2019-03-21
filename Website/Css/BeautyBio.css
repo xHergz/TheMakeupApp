@@ -1,33 +1,6 @@
-.client-profile-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
 .client-profile-container > div {
     margin-top: 10px;
     margin-bottom: 10px;
-}
-
-.client-profile-container > h1 {
-    text-align: center;
-}
-
-.client-profile-display {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #000;
-    padding: 5px;
-    border-radius: 15px;
-    color: #FFF;
-    margin: 5px 0px;
-}
-
-.client-profile-action {
-    display: flex;
-    flex-direction: column;
-    flex: 3;
 }
 
 .profile-picture {
@@ -57,16 +30,10 @@
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-    .client-profile-container {
-        max-width: 792px;
-        margin: auto;
-    }
+
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-    .client-profile-container {
-        max-width: 1000px;
-        margin: auto;
-    }
+
 }

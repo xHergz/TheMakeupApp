@@ -92,6 +92,17 @@ a {
     text-align: center;
 }
 
+.section-title {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.none-message {
+    text-align: center;
+    font-style: italic;
+    color: #CCC;
+}
+
 .online-banner {
     background-color: limegreen;
     color: white;
