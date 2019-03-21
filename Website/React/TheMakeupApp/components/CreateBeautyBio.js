@@ -7,6 +7,7 @@ import ImageInput from '../../Common/components/ImageInput';
 import Loader from '../../Common/components/Loader';
 import TextArea from '../../Common/components/TextArea';
 import { validateBiography } from '../../Common/helpers/validationUtilities';
+import FormInfoDisplay from './FormInfoDisplay';
 
 import '../../../Css/BeautyBio.css';
 
@@ -70,8 +71,8 @@ class CreateBeautyBio extends React.Component {
     render() {
         return (
             <div>
-                <h3>Create Your Beauty Bio</h3>
-                <div className="client-profile-display">
+                <FormInfoDisplay>
+                    <h3 className="section-title">Create Your Beauty Bio</h3>
                     <ImageInput
                         ref={this.profilePictureInput}
                         label="Select a Profile Picture"
@@ -81,6 +82,7 @@ class CreateBeautyBio extends React.Component {
                     <TextArea
                         ref={this.biographyInput}
                         label="Biography"
+                        rows={6}
                         onValidate={validateBiography}
                         onValidityChanged={this.beautyBioInputValidityChanged}
                     />
@@ -105,7 +107,7 @@ class CreateBeautyBio extends React.Component {
                         valueKey="skinToneId"
                         labelKey="skinToneDescription"
                     />
-                </div>
+                </FormInfoDisplay>
                 <div className="client-profile-action">
                     {this.renderCreateButton()}
                 </div>

@@ -63,7 +63,7 @@ class ClientProfile extends React.Component {
         }
 
         return (
-            <div className="page-container">
+            <div className="page-container client-profile-container">
                 <h1 className="page-title">{this.props.match.params.displayName}&#39;s Client Profile</h1>
                 <BeautyBio
                     currentSession={this.props.currentSession}

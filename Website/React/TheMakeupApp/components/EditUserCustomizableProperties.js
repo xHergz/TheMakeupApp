@@ -109,7 +109,7 @@ class EditUserCustomizableProperties extends React.Component {
 
     renderUserCustomizableProperties() {
         if (this.props.userProperties === null) {
-            return <h4>- None -</h4>;
+            return <h6 className="none-message">- None -</h6>;
         }
 
         return (
@@ -125,9 +125,7 @@ class EditUserCustomizableProperties extends React.Component {
         return (
             <div>
                 <div className="form-info-actions">
-                    <div className="form-info-action">
-                        <h1>{this.props.label}</h1>
-                    </div>
+                    <div className="form-info-action" />
                     <div className="form-info-action-spacer" />
                     <div className="form-info-action">
                         <Button
@@ -142,6 +140,7 @@ class EditUserCustomizableProperties extends React.Component {
                     </div>
                 </div>
                 <FormInfoDisplay>
+                    <h3 className="section-title">{this.props.label}</h3>
                     {this.renderUserCustomizableProperties()}
                     <div className="add-user-customizable-property">
                         <DropdownInput

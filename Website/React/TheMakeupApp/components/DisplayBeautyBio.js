@@ -29,16 +29,15 @@ class DisplayBeautyBio extends React.Component {
 
         return (
             <div>
-                <div className="account-info-actions">
-                    <div className="account-info-action">
-                        <h2>Beauty Bio</h2>
-                    </div>
-                    <div className="account-info-action-spacer" />
-                    <div className="account-info-action">
+                <div className="form-info-actions">
+                    <div className="form-info-action" />
+                    <div className="form-info-action-spacer" />
+                    <div className="form-info-action">
                         {this.renderEditButton()}
                     </div>
                 </div>
                 <FormInfoDisplay>
+                    <h3 className="section-title">Beauty Bio</h3>
                     <img
                         className="profile-picture"
                         src={this.props.currentClientProfile.profilePictureUrl}

@@ -74,7 +74,8 @@ class Notifications extends React.Component {
             return <Loader />;
         }
         return (
-            <div className="notifications-container">
+            <div className="page-container">
+                <h1 className="page-title">My Notifications</h1>
                 <div className="notifications">
                     {this.props.notifications.sort((a, b) => { return Notifications.compareNotifications(a, b); })
                         .map((notification) => { return Notifications.renderNotification(notification); })}

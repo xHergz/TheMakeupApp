@@ -48,6 +48,7 @@ class EditHeadshots extends React.Component {
         const inputRef = React.createRef();
         return (
             <div className="headshot-container">
+                <h4>{headshot.headshotTypeDescription}</h4>
                 <ImageInput
                     ref={inputRef}
                     label="Select a Picture"
@@ -94,9 +95,7 @@ class EditHeadshots extends React.Component {
         return (
             <div>
                 <div className="form-info-actions">
-                    <div className="form-info-action">
-                        <h1>Edit Headshots</h1>
-                    </div>
+                    <div className="form-info-action" />
                     <div className="form-info-action-spacer" />
                     <div className="form-info-action">
                         <Button
@@ -107,6 +106,7 @@ class EditHeadshots extends React.Component {
                     </div>
                 </div>
                 <FormInfoDisplay>
+                    <h3 className="section-title">Edit Headshots</h3>
                     <div className="headshots-container">
                         {this.props.clientHeadshots.map((headshot) => { return this.renderHeadshot(headshot); })}
                     </div>
