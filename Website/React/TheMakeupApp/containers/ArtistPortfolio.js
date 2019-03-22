@@ -122,8 +122,8 @@ class ArtistPortfolio extends React.Component {
         }
 
         return (
-            <div className="artist-portfolio-container">
-                <h1>{this.props.match.params.displayName}&#39;s Artist Portfolio</h1>
+            <div className="page-container">
+                <h1 className="page-title">{this.props.match.params.displayName}&#39;s Artist Portfolio</h1>
                 <PortfolioBase
                     currentSession={this.props.currentSession}
                     currentArtistPortfolio={this.props.currentArtistPortfolio}

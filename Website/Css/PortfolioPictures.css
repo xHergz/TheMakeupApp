@@ -4,13 +4,16 @@
     flex-wrap: wrap;
 }
 
+.portfolio-picture {
+    margin: 5px;
+    border: 1px solid #999;
+}
+
 .portfolio-picture > img {
     object-fit: cover;
     object-position: 50% 50%;
     width: 150px;
     height: 150px;
-    margin-top: 5px;
-    margin-bottom: 5px;
 }
 
 .portfolio-picture:hover {
@@ -19,9 +22,17 @@
 
 .add-portfolio-picture-button {
     position: fixed;
-    bottom: 0;
-    right: 0;
-    padding: 10px;
+    bottom: 25px;
+    right: 25px;
+}
+
+.add-portfolio-picture-button > button {
+    border-radius: 50%;
+    width: 55px;
+    font-size: 24px;
+    text-align: center;
+    padding-bottom: 4px;
+    height: 55px;
 }
 
 .add-artist-portfolio-picture {
@@ -48,4 +59,20 @@
 
 .view-artist-portfolio-image > h6 {
     text-align: center;
+}
+
+.no-portfolio-pictures {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    color: #777;
+    padding: 50px;
+}
+
+.no-portfolio-pictures > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }

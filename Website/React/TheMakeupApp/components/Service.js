@@ -3,6 +3,7 @@ import React from 'react';
 
 import '../../../Css/Services.css';
 import Button from '../../Common/components/Button';
+import WarningBlock from './WarningBlock';
 
 class Service extends React.Component {
     constructor(props) {
@@ -10,6 +11,8 @@ class Service extends React.Component {
         this.renderRemoveButton = this.renderRemoveButton.bind(this);
         this.renderDeleteInfoButton = this.renderDeleteInfoButton.bind(this);
         this.renderServiceInfoRow = this.renderServiceInfoRow.bind(this);
+        this.renderServiceConsultations = this.renderServiceConsultations.bind(this);
+        this.renderServiceAddons = this.renderServiceAddons.bind(this);
         this.renderAddInfoButton = this.renderAddInfoButton.bind(this);
         this.renderRequestAppointmentButton = this.renderRequestAppointmentButton.bind(this);
     }
@@ -57,6 +60,42 @@ class Service extends React.Component {
                 </div>
             </div>
         );
+    }
+
+    renderServiceConsultations() {
+        if (this.props.serviceConsultations.length === 0) {
+            return (
+                <WarningBlock
+                    message="You have no consultations configured for this service, so it won't be shown to clients!"
+                />
+            );
+        }
+
+        return this.props.serviceConsultations.map((serviceConsultation) => {
+            return this.renderServiceInfoRow(
+                serviceConsultation.artistServiceConsultationId,
+                `${serviceConsultation.minuteLength} mins`,
+                serviceConsultation.price,
+                this.props.onDeleteServiceConsultation,
+                'Consultation'
+            );
+        });
+    }
+
+    renderServiceAddons() {
+        if (this.props.serviceAddons.length === 0) {
+            return <h6 className="none-message-dark">None</h6>;
+        }
+
+        return this.props.serviceAddons.map((serviceAddon) => {
+            return this.renderServiceInfoRow(
+                serviceAddon.artistServiceAddonId,
+                serviceAddon.artistServiceAddonDescription,
+                serviceAddon.price,
+                this.props.onDeleteServiceAddon,
+                'Addon'
+            );
+        });
     }
 
     renderAddInfoButton(addMethod) {
@@ -110,15 +149,7 @@ class Service extends React.Component {
                     <h5>Consultations</h5>
                 </div>
                 <div className="service-info">
-                    {this.props.serviceConsultations.map((serviceConsultation) => {
-                        return this.renderServiceInfoRow(
-                            serviceConsultation.artistServiceConsultationId,
-                            `${serviceConsultation.minuteLength} mins`,
-                            serviceConsultation.price,
-                            this.props.onDeleteServiceConsultation,
-                            'Consultation'
-                        );
-                    })}
+                    {this.renderServiceConsultations()}
                 </div>
                 <div className="service-add-button-container">
                     {this.renderAddInfoButton(() => { this.props.onAddServiceConsultation(this.props.service.artistServiceId); })}
@@ -127,15 +158,7 @@ class Service extends React.Component {
                     <h5>Addons</h5>
                 </div>
                 <div className="service-info">
-                    {this.props.serviceAddons.map((serviceAddon) => {
-                        return this.renderServiceInfoRow(
-                            serviceAddon.artistServiceAddonId,
-                            serviceAddon.artistServiceAddonDescription,
-                            serviceAddon.price,
-                            this.props.onDeleteServiceAddon,
-                            'Addon'
-                        );
-                    })}
+                    {this.renderServiceAddons()}
                 </div>
                 <div className="service-add-button-container">
                     {this.renderAddInfoButton(() => { this.props.onAddServiceAddon(this.props.service.artistServiceId); })}

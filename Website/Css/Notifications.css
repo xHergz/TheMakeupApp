@@ -92,19 +92,28 @@
     padding: 0px 5px;
 }
 
-.info-block {
+.info-block, .warning-block {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     padding: 10px;
-    background-color: skyblue;
-    border: 2px solid royalblue;
     border-radius: 15px;
     margin: 5px 0px;
+    color: black;
 }
 
-.info-block > h6 {
+.info-block {
+    background-color: skyblue;
+    border: 2px solid royalblue;
+}
+
+.warning-block {
+    background-color: yellow;
+    border: 2px solid goldenrod;
+}
+
+.info-block > h6, .warning-block > h6 {
     flex: 1;
     margin-left: 10px;
 }

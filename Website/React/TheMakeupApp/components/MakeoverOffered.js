@@ -3,6 +3,7 @@ import React from 'react';
 
 import Button from '../../Common/components/Button';
 import Service from './Service';
+import WarningBlock from './WarningBlock';
 
 import '../../../Css/Services.css';
 
@@ -12,6 +13,7 @@ class MakeoverOffered extends React.Component {
         this.renderRemoveButton = this.renderRemoveButton.bind(this);
         this.renderAddServiceButton = this.renderAddServiceButton.bind(this);
         this.renderService = this.renderService.bind(this);
+        this.renderServices = this.renderServices.bind(this);
     }
 
     renderRemoveButton() {
@@ -62,6 +64,33 @@ class MakeoverOffered extends React.Component {
         );
     }
 
+    renderServices() {
+        if (this.props.makeoverServices.length === 0) {
+            return (
+                <WarningBlock
+                    message="You have no services configured for this makeover type, so it won't be shown to clients!"
+                />
+            );
+        }
+
+        if (this.props.ownsArtistPortfolio) {
+            return this.props.makeoverServices.map((service) => { return this.renderService(service); });
+        }
+
+        const completeServices = this.props.makeoverServices.filter((service) => {
+            const serviceConsultations = this.props.makeoverServiceConsultations.filter((consultation) => {
+                return consultation.artistServiceId === service.artistServiceId;
+            });
+            return serviceConsultations.length > 0 && service.artistMakeoverOfferedId === this.props.makeoverOffered.artistMakeoverOfferedId;
+        });
+
+        if (completeServices.length === 0) {
+            return null;
+        }
+
+        return completeServices.map((service) => { return this.renderService(service); });
+    }
+
     render() {
         return (
             <div
@@ -73,7 +102,7 @@ class MakeoverOffered extends React.Component {
                     {this.renderRemoveButton()}
                 </div>
                 <div>
-                    {this.props.makeoverServices.map((service) => { return this.renderService(service); })}
+                    {this.renderServices()}
                 </div>
                 <div className="service-add-button-container">
                     {this.renderAddServiceButton()}

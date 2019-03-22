@@ -14,6 +14,18 @@ BEGIN
             LEAVE DeleteArtistService;
         END IF;
 
+        -- Delete All Addons for the service
+        DELETE FROM
+            Artist_Service_Addon
+        WHERE
+            Artist_Service_Id = _artistServiceId;
+
+        -- Delete All Consultations for the service
+        DELETE FROM
+            Artist_Service_Consultation
+        WHERE
+            Artist_Service_Id = _artistServiceId;
+
         -- Delete the entry
         DELETE FROM
             Artist_Service

@@ -1,9 +1,10 @@
+import faFrown from '@fortawesome/fontawesome-free-regular/faFrown';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import ConfirmModal from '../../Common/components/ConfirmModal';
 import Loader from '../../Common/components/Loader';
 import Modal from '../../Common/components/Modal';
 import {
@@ -32,7 +33,10 @@ class PortfolioPictures extends React.Component {
         this.addPortfolioPictureChanged = this.addPortfolioPictureChanged.bind(this);
         this.uploadPicture = this.uploadPicture.bind(this);
         this.renderPicture = this.renderPicture.bind(this);
+        this.renderPictures = this.renderPictures.bind(this);
         this.renderAddButton = this.renderAddButton.bind(this);
+        this.renderUploadButton = this.renderUploadButton.bind(this);
+        this.renderRemoveButton = this.renderRemoveButton.bind(this);
         this.addPictureInput = React.createRef();
         this.addPictureModal = React.createRef();
         this.viewPictureModal = React.createRef();
@@ -60,6 +64,9 @@ class PortfolioPictures extends React.Component {
     uploadPicture() {
         this.props.addArtistPortfolioPicture(this.props.currentArtistPortfolio.artistPortfolioId, this.addPictureInput.current.getValue(),
             1, this.props.artistDisplayName);
+        this.setState({
+            canAddPicture: false
+        });
     }
 
     viewImage(picture) {
@@ -84,10 +91,26 @@ class PortfolioPictures extends React.Component {
         );
     }
 
+    renderPictures() {
+        if (this.props.artistPortfolioPictures.length === 0) {
+            return (
+                <div className="no-portfolio-pictures">
+                    <div>
+                        <FontAwesomeIcon icon={faFrown} size="9x" />
+                    </div>
+                    <h6 className="none-message-dark">No Portfolio Pictures Uploaded Yet</h6>
+                </div>
+            );
+        }
+
+        return this.props.artistPortfolioPictures.map((picture) => { return this.renderPicture(picture); });
+    }
+
     renderAddButton() {
         if (!this.props.ownsArtistPortfolio) {
             return null;
         }
+
         return (
             <div className="add-portfolio-picture-button">
                 <Button
@@ -98,10 +121,29 @@ class PortfolioPictures extends React.Component {
         );
     }
 
+    renderUploadButton() {
+        if (this.props.fetchingAddArtistPortfolioPicture) {
+            return <Loader />;
+        }
+
+        return (
+            <Button
+                label="Upload Portfolio Picture"
+                onClickHandler={this.uploadPicture}
+                disabled={!this.state.canAddPicture}
+            />
+        );
+    }
+
     renderRemoveButton(pictureId) {
         if (!this.props.ownsArtistPortfolio) {
             return null;
         }
+
+        if (this.props.fetchingDeleteArtistPortfolioPicture) {
+            return <Loader />;
+        }
+
         return (
             <Button
                 label="Delete Picture"
@@ -121,7 +163,7 @@ class PortfolioPictures extends React.Component {
 
         return (
             <div className="artist-portfolio-pictures">
-                {this.props.artistPortfolioPictures.map((picture) => { return this.renderPicture(picture); })}
+                {this.renderPictures()}
                 {this.renderAddButton()}
                 <Modal
                     ref={this.addPictureModal}
@@ -133,11 +175,7 @@ class PortfolioPictures extends React.Component {
                             placeholderImageUrl="/images/defaultProfilePic.png"
                             onValueChanged={this.addPortfolioPictureChanged}
                         />
-                        <Button
-                            label="Upload Portfolio Picture"
-                            onClickHandler={this.uploadPicture}
-                            disabled={!this.state.canAddPicture}
-                        />
+                        {this.renderUploadButton()}
                     </div>
                 </Modal>
                 <Modal
