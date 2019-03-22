@@ -87,7 +87,7 @@ class CreatePortfolioBase extends React.Component {
                         </div>
                     </div>
                 </FormInfoDisplay>
-                <div className="artist-portfolio-action">
+                <div className="form-info-action">
                     {this.renderCreateButton()}
                 </div>
             </div>

@@ -108,7 +108,7 @@ class CreateBeautyBio extends React.Component {
                         labelKey="skinToneDescription"
                     />
                 </FormInfoDisplay>
-                <div className="client-profile-action">
+                <div className="form-info-action">
                     {this.renderCreateButton()}
                 </div>
             </div>

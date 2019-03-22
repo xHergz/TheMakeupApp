@@ -247,7 +247,11 @@ class ArtistServices extends React.Component {
 
     renderMakeoversOffered() {
         if (this.props.artistMakeoversOffered.length === 0) {
-            return <h6 className="none-message">Sorry, I&#39;m Currently Not Offering Any Services!</h6>;
+            return (
+                <WarningBlock
+                    message="Sorry, I'm not offering any services right now!"
+                />
+            );
         }
 
         if (this.props.ownsArtistPortfolio) {
@@ -255,20 +259,14 @@ class ArtistServices extends React.Component {
         }
 
         const completeServices = this.props.artistMakeoversOffered.filter((makeover) => {
-            console.log('Makeover:', makeover);
             const makeoverServices = this.props.artistServices.filter((service) => {
-                console.log('Service:', service);
                 const serviceConsultations = this.props.artistServiceConsultations.filter((consultation) => {
                     return consultation.artistServiceId === service.artistServiceId;
                 });
-                console.log('Service Consultations:', serviceConsultations);
                 return serviceConsultations.length > 0 && service.artistMakeoverOfferedId === makeover.artistMakeoverOfferedId;
             });
-            console.log('Makeover Services:', makeoverServices);
             return makeoverServices.length > 0;
         });
-
-        console.log('Complete Service:', completeServices);
 
         if (completeServices.length === 0) {
             return (
