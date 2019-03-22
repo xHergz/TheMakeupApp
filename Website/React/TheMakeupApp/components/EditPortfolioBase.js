@@ -6,6 +6,7 @@ import ImageInput from '../../Common/components/ImageInput';
 import Loader from '../../Common/components/Loader';
 import TextArea from '../../Common/components/TextArea';
 import { validateBiography } from '../../Common/helpers/validationUtilities';
+import FormInfoDisplay from './FormInfoDisplay';
 
 import '../../../Css/Portfolio.css';
 
@@ -58,35 +59,39 @@ class EditPortfolioBase extends React.Component {
     render() {
         return (
             <div>
-                <div className="artist-portfolio-actions">
-                    <div className="artist-portfolio-action">
+                <div className="form-info-actions">
+                    <div className="form-info-action">
                         <Button
                             label="Cancel"
                             onClickHandler={this.props.onCancelEditArtistPortfolio}
                         />
                     </div>
-                    <div className="artist-portfolio-action-spacer" />
-                    <div className="artist-portfolio-action">
+                    <div className="form-info-action-spacer" />
+                    <div className="form-info-action">
                         {this.renderUpdateButton()}
                     </div>
                 </div>
-                <div className="artist-portfolio-display">
-                    <ImageInput
-                        ref={this.profilePictureInput}
-                        label="Select a Profile Picture"
-                        placeholderImageUrl={this.props.currentArtistPortfolio.profilePictureUrl}
-                        onValueChanged={this.portfolioBaseInputValidityChanged}
-                    />
-                    <div className="artist-portfolio-biography">
-                        <TextArea
-                            ref={this.biographyInput}
-                            label="Biography"
-                            onValidate={validateBiography}
-                            onValidityChanged={this.portfolioBaseInputValidityChanged}
-                            placeholderText={this.props.currentArtistPortfolio.biography}
+                <FormInfoDisplay>
+                    <h3 className="section-title">Edit Your Artist Portfolio</h3>
+                    <div className="artist-portfolio-display">
+                        <ImageInput
+                            ref={this.profilePictureInput}
+                            label="Select a Profile Picture"
+                            placeholderImageUrl={this.props.currentArtistPortfolio.profilePictureUrl}
+                            onValueChanged={this.portfolioBaseInputValidityChanged}
                         />
+                        <div className="artist-portfolio-biography">
+                            <TextArea
+                                ref={this.biographyInput}
+                                label="Biography"
+                                rows={6}
+                                onValidate={validateBiography}
+                                onValidityChanged={this.portfolioBaseInputValidityChanged}
+                                placeholderText={this.props.currentArtistPortfolio.biography}
+                            />
+                        </div>
                     </div>
-                </div>
+                </FormInfoDisplay>
             </div>
         );
     }

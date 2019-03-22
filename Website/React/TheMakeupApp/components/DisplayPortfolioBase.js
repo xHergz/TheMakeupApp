@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Button from '../../Common/components/Button';
+import FormInfoDisplay from './FormInfoDisplay';
 
 import '../../../Css/Portfolio.css';
 
@@ -27,28 +28,29 @@ class DisplayPortfolioBase extends React.Component {
 
         return (
             <div>
-                <div className="artist-portfolio-actions">
-                    <div className="artist-portfolio-action">
-                        <h1>Artist Portfolio</h1>
-                    </div>
-                    <div className="artist-portfolio-action-spacer" />
-                    <div className="artist-portfolio-action">
+                <div className="form-info-actions">
+                    <div className="form-info-action" />
+                    <div className="form-info-action-spacer" />
+                    <div className="form-info-action">
                         {this.renderEditButton()}
                     </div>
                 </div>
-                <div className="artist-portfolio-display">
-                    <img
-                        className="profile-picture"
-                        src={this.props.currentArtistPortfolio.profilePictureUrl}
-                        alt="Profile Pic"
-                    />
-                    <div className="artist-portfolio-biography">
-                        <h3>Biography:</h3>
-                        <div className="biography-content">
-                            {this.props.currentArtistPortfolio.biography}
+                <FormInfoDisplay>
+                    <h3 className="section-title">Artist Portfolio</h3>
+                    <div className="artist-portfolio-display">
+                        <img
+                            className="profile-picture"
+                            src={this.props.currentArtistPortfolio.profilePictureUrl}
+                            alt="Profile Pic"
+                        />
+                        <div className="artist-portfolio-biography">
+                            <h3>Biography:</h3>
+                            <div className="biography-content">
+                                {this.props.currentArtistPortfolio.biography}
+                            </div>
                         </div>
                     </div>
-                </div>
+                </FormInfoDisplay>
             </div>
         );
     }

@@ -1,33 +1,7 @@
-.artist-portfolio-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.artist-portfolio-actions {
-    display: flex;
-    flex-direction: row;
-}
-
-.artist-portfolio-action {
-    display: flex;
-    flex-direction: column;
-    flex: 3;
-}
-
-.artist-portfolio-action-spacer {
-    flex: 1;
-}
-
 .artist-portfolio-display {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: #000;
-    padding: 10px;
-    border-radius: 15px;
-    color: #FFF;
-    margin: 5px 0px;
 }
 
 .artist-portfolio-display.input-input:nth-of-type(2) {

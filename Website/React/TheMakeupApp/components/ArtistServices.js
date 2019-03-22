@@ -44,6 +44,7 @@ import {
 } from '../actions/ArtistServiceAddonActions';
 import { goToMakeoverAppointmentSetup } from '../actions/MakeoverAppointmentActions';
 import MakeoverOffered from './MakeoverOffered';
+import WarningBlock from './WarningBlock';
 
 import '../../../Css/Services.css';
 import TextInput from '../../Common/components/TextInput';
@@ -71,6 +72,7 @@ class ArtistServices extends React.Component {
         this.renderEditButton = this.renderEditButton.bind(this);
         this.renderAddMakeoverOfferedButton = this.renderAddMakeoverOfferedButton.bind(this);
         this.renderMakeoverOffered = this.renderMakeoverOffered.bind(this);
+        this.renderMakeoversOffered = this.renderMakeoversOffered.bind(this);
         this.renderSubmitAddMakeoverOfferedButton = this.renderSubmitAddMakeoverOfferedButton.bind(this);
         this.renderSubmitAddServiceButton = this.renderSubmitAddServiceButton.bind(this);
         this.renderSubmitAddServiceAddonButton = this.renderSubmitAddServiceAddonButton.bind(this);
@@ -243,6 +245,41 @@ class ArtistServices extends React.Component {
         );
     }
 
+    renderMakeoversOffered() {
+        if (this.props.artistMakeoversOffered.length === 0) {
+            return <h6 className="none-message">Sorry, I&#39;m Currently Not Offering Any Services!</h6>;
+        }
+
+        if (this.props.ownsArtistPortfolio) {
+            return this.props.artistMakeoversOffered.map((makeover) => { return this.renderMakeoverOffered(makeover); });
+        }
+
+        const completeServices = this.props.artistMakeoversOffered.filter((makeover) => {
+            console.log('Makeover:', makeover);
+            const makeoverServices = this.props.artistServices.filter((service) => {
+                console.log('Service:', service);
+                const serviceConsultations = this.props.artistServiceConsultations.filter((consultation) => {
+                    return consultation.artistServiceId === service.artistServiceId;
+                });
+                console.log('Service Consultations:', serviceConsultations);
+                return serviceConsultations.length > 0 && service.artistMakeoverOfferedId === makeover.artistMakeoverOfferedId;
+            });
+            console.log('Makeover Services:', makeoverServices);
+            return makeoverServices.length > 0;
+        });
+
+        console.log('Complete Service:', completeServices);
+
+        if (completeServices.length === 0) {
+            return (
+                <WarningBlock
+                    message="Sorry, I'm not offering any services right now!"
+                />
+            );
+        }
+        return completeServices.map((makeover) => { return this.renderMakeoverOffered(makeover); });
+    }
+
     renderSubmitAddMakeoverOfferedButton() {
         if (this.props.fetchingAddArtistMakeoverOffered) {
             return <Loader />;
@@ -360,7 +397,7 @@ class ArtistServices extends React.Component {
                     </div>
                 </div>
                 <div className="artist-makeovers-offered">
-                    {this.props.artistMakeoversOffered.map((makeover) => { return this.renderMakeoverOffered(makeover); })}
+                    {this.renderMakeoversOffered()}
                     <div className="service-add-button-container">
                         {this.renderAddMakeoverOfferedButton()}
                     </div>

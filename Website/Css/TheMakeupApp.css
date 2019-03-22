@@ -94,13 +94,18 @@ a {
 
 .section-title {
     text-align: center;
-    padding-bottom: 10px;
 }
 
 .none-message {
     text-align: center;
     font-style: italic;
     color: #CCC;
+}
+
+.none-message-dark {
+    text-align: center;
+    font-style: italic;
+    color: #333;
 }
 
 .online-banner {

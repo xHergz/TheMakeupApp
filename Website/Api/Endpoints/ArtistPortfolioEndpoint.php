@@ -131,7 +131,7 @@
                 $profilePictureUrl = '/images/defaultProfilePic.png';
             }
             else {
-                $profilePictureUrl = UploadClientProfileImage($profilePictureData, $clientProfile->UserId);
+                $profilePictureUrl = UploadClientProfileImage($profilePictureData, $userId);
             }
             if ($profilePictureUrl == null) {
                 $apiRequest->EndRequest(HttpStatus::INTERNAL_SERVER_ERROR, 'Failed to upload the artist portfolio picture');

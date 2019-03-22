@@ -31,6 +31,7 @@ class Qualifications extends React.Component {
         this.addQualification = this.addQualification.bind(this);
         this.renderDeleteQualificationButton = this.renderDeleteQualificationButton.bind(this);
         this.renderQualification = this.renderQualification.bind(this);
+        this.renderQualifications = this.renderQualifications.bind(this);
         this.renderAddButton = this.renderAddButton.bind(this);
         this.renderEditButton = this.renderEditButton.bind(this);
         this.renderSubmitQualificationButton = this.renderSubmitQualificationButton.bind(this);
@@ -98,6 +99,14 @@ class Qualifications extends React.Component {
                 </div>
             </div>
         );
+    }
+
+    renderQualifications() {
+        if (this.props.artistQualifications.length === 0) {
+            return <h6 className="none-message">None</h6>;
+        }
+
+        return this.props.artistQualifications.map((qualification) => { return this.renderQualification(qualification); });
     }
 
     renderAddButton() {
@@ -174,7 +183,7 @@ class Qualifications extends React.Component {
                     </div>
                 </div>
                 <div className="artist-qualifications">
-                    {this.props.artistQualifications.map((qualification) => { return this.renderQualification(qualification); })}
+                    {this.renderQualifications()}
                 </div>
                 {this.renderAddButton()}
                 <Modal

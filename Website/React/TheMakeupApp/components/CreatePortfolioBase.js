@@ -7,6 +7,8 @@ import Loader from '../../Common/components/Loader';
 import TextArea from '../../Common/components/TextArea';
 import { validateBiography } from '../../Common/helpers/validationUtilities';
 
+import FormInfoDisplay from './FormInfoDisplay';
+
 import '../../../Css/Portfolio.css';
 
 class CreatePortfolioBase extends React.Component {
@@ -65,23 +67,26 @@ class CreatePortfolioBase extends React.Component {
     render() {
         return (
             <div>
-                <h1>Create Your Artist Portfolio</h1>
-                <div className="artist-portfolio-display">
-                    <ImageInput
-                        ref={this.profilePictureInput}
-                        label="Select a Profile Picture"
-                        placeholderImageUrl="/images/defaultProfilePic.png"
-                        onValueChanged={this.portfolioBaseInputValidityChanged}
-                    />
-                    <div className="artist-portfolio-biography">
-                        <TextArea
-                            ref={this.biographyInput}
-                            label="Biography"
-                            onValidate={validateBiography}
-                            onValidityChanged={this.portfolioBaseInputValidityChanged}
+                <FormInfoDisplay>
+                    <h3 className="section-title">Create Your Artist Portfolio</h3>
+                    <div className="artist-portfolio-display">
+                        <ImageInput
+                            ref={this.profilePictureInput}
+                            label="Select a Profile Picture"
+                            placeholderImageUrl="/images/defaultProfilePic.png"
+                            onValueChanged={this.portfolioBaseInputValidityChanged}
                         />
+                        <div className="artist-portfolio-biography">
+                            <TextArea
+                                ref={this.biographyInput}
+                                label="Biography"
+                                rows={6}
+                                onValidate={validateBiography}
+                                onValidityChanged={this.portfolioBaseInputValidityChanged}
+                            />
+                        </div>
                     </div>
-                </div>
+                </FormInfoDisplay>
                 <div className="artist-portfolio-action">
                     {this.renderCreateButton()}
                 </div>
