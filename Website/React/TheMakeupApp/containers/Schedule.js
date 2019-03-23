@@ -35,7 +35,7 @@ class Schedule extends React.Component {
 
     renderAppointments() {
         if (this.props.makeoverAppointments.length === 0) {
-            return <h4>- No appointments scheduled! -</h4>;
+            return <h6 className="none-message">- No appointments scheduled! -</h6>;
         }
 
         return this.props.makeoverAppointments.map((appointment) => { return this.renderAppointmentCard(appointment); });

@@ -30,8 +30,8 @@ BEGIN
         INNER JOIN Service_Type ON Service_Type.Service_Type_Id = Makeover_Appointment.Service_Type_Id
         INNER JOIN Makeover_Type ON Makeover_Type.Makeover_Type_Id = Makeover_Appointment.Makeover_Type_Id
     WHERE
-        (Makeover_Appointment.Client_Profile_Id = _clientProfileId OR _clientProfileId IS NULL)
-        OR (Makeover_Appointment.Artist_Portfolio_Id = _artistPortfolioId OR _artistPortfolioId IS NULL);
+        (Makeover_Appointment.Client_Profile_Id = _clientProfileId)
+        OR (Makeover_Appointment.Artist_Portfolio_Id = _artistPortfolioId);
 END
 $$
 DELIMITER ;

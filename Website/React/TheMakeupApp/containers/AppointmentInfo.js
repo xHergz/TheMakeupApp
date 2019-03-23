@@ -80,8 +80,8 @@ class AppointmentInfo extends React.Component {
         const appointmentTotal = this.props.currentMakeoverAppointment.servicePrice + this.props.currentMakeoverAppointment.consultationPrice
             + this.sumUpAddonPrices();
         return (
-            <div className="appointment-info">
-                <h1>Appointment #{this.props.match.params.makeoverAppointmentId}</h1>
+            <div className="page-container">
+                <h1 className="page-title">Appointment #{this.props.match.params.makeoverAppointmentId}</h1>
                 <FormInfoDisplay>
                     <FormInfoBlock
                         label="Artist"

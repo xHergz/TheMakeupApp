@@ -1,3 +1,4 @@
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -26,7 +27,8 @@ class ArtistCard extends React.Component {
             >
                 <a href={`/appointment/${this.props.appointment.makeoverAppointmentId}`}>
                     <div className="appointment-card-info">
-                        <h3>Appointment Date: {this.props.appointment.appointmentDate}</h3>
+                        <h3>{moment(this.props.appointment.appointmentDate, 'YYYY-MM-DD HH:mm:ss').format('MMM Do, YYYY @ LT')}</h3>
+                        <h5>Appointment #{this.props.appointment.makeoverAppointmentId}</h5>
                         <h6>{`${this.getClientName()} scheduled an appointment with ${this.getArtistName()} for a ${this.props.appointment.makeoverTypeDescription} ${this.props.appointment.serviceTypeDescription}`}</h6>
                     </div>
                 </a>
