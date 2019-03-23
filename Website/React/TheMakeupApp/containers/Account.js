@@ -28,16 +28,19 @@ class Account extends React.Component {
         }
 
         return (
-            <AccountInfo
-                currentUser={this.props.currentUser}
-                editingUser={this.props.editingUser}
-                fetchingDeactivateUser={this.props.fetchingDeactivateUser}
-                fetchingUpdateUser={this.props.fetchingUpdateUser}
-                onCancelEditUser={this.props.cancelUserEditing}
-                onDeactivateUser={this.props.deactivateUser}
-                onEditUser={this.props.enableUserEditing}
-                onUpdateUser={this.props.updateUser}
-            />
+            <div>
+                <h1 className="page-title">My Account</h1>
+                <AccountInfo
+                    currentUser={this.props.currentUser}
+                    editingUser={this.props.editingUser}
+                    fetchingDeactivateUser={this.props.fetchingDeactivateUser}
+                    fetchingUpdateUser={this.props.fetchingUpdateUser}
+                    onCancelEditUser={this.props.cancelUserEditing}
+                    onDeactivateUser={this.props.deactivateUser}
+                    onEditUser={this.props.enableUserEditing}
+                    onUpdateUser={this.props.updateUser}
+                />
+            </div>
         );
     }
 }

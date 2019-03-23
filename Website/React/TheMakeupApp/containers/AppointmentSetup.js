@@ -120,8 +120,8 @@ class AppointmentSetup extends React.Component {
         }
 
         return (
-            <div className="appointment-setup-form">
-                <h1>Appointment Setup</h1>
+            <div className="page-container">
+                <h1 className="page-title">Appointment Setup</h1>
                 <FormInfoDisplay>
                     <FormInfoBlock
                         label="With Artist"
