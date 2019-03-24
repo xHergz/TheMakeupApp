@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 
 import Button from '../../Common/components/Button';
 import Loader from '../../Common/components/Loader';
+import { createConsultation } from '../actions/ConsultationActions';
 import {
     getMakeoverAppointment,
     getMakeoverAppointmentAddons
@@ -58,11 +59,20 @@ class AppointmentInfo extends React.Component {
             return null;
         }
 
+        if (this.props.fetchingCreateConsultation) {
+            return <Loader />;
+        }
+
         return (
             <div className="form-submit-button">
                 <Button
                     label="Create Instant Consultation Room"
-                    onClickHandler={() => { console.log('Create room'); }}
+                    onClickHandler={() => {
+                        this.props.createConsultation(
+                            this.props.currentMakeoverAppointment.clientProfileId,
+                            this.props.currentMakeoverAppointment.artistPortfolioId
+                        );
+                    }}
                 />
             </div>
         );
@@ -144,7 +154,8 @@ function mapStateToProps(state) {
         currentMakeoverAppointment: state.makeoverAppointmentReducer.currentMakeoverAppointment,
         currentMakeoverAppointmentAddons: state.makeoverAppointmentReducer.currentMakeoverAppointmentAddons,
         fetchingMakeoverAppointment: state.makeoverAppointmentReducer.fetchingMakeoverAppointment,
-        fetchingMakeoverAppointmentAddons: state.makeoverAppointmentReducer.fetchingMakeoverAppointmentAddons
+        fetchingMakeoverAppointmentAddons: state.makeoverAppointmentReducer.fetchingMakeoverAppointmentAddons,
+        fetchingCreateConsultation: state.consultationReducer.fetchingCreateConsultation
     };
 }
 
@@ -152,6 +163,7 @@ AppointmentInfo.propTypes = {
     setCurrentPage: PropTypes.func.isRequired,
     getMakeoverAppointment: PropTypes.func.isRequired,
     getMakeoverAppointmentAddons: PropTypes.func.isRequired,
+    createConsultation: PropTypes.func.isRequired,
     currentSession: PropTypes.shape({
         userId: PropTypes.number.isRequired,
         displayName: PropTypes.string.isRequired,
@@ -186,7 +198,8 @@ AppointmentInfo.propTypes = {
     }),
     currentMakeoverAppointmentAddons: PropTypes.arrayOf(PropTypes.object).isRequired,
     fetchingMakeoverAppointment: PropTypes.bool.isRequired,
-    fetchingMakeoverAppointmentAddons: PropTypes.bool.isRequired
+    fetchingMakeoverAppointmentAddons: PropTypes.bool.isRequired,
+    fetchingCreateConsultation: PropTypes.bool.isRequired
 };
 
 AppointmentInfo.defaultProps = {
@@ -198,6 +211,7 @@ export default withRouter(connect(
     {
         getMakeoverAppointment,
         getMakeoverAppointmentAddons,
+        createConsultation,
         setCurrentPage
     }
 )(AppointmentInfo));

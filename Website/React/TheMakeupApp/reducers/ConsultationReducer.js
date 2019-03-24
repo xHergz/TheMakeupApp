@@ -5,7 +5,11 @@ const ROOM_ACTIONS = {
     SET_AUDIO: 'SET_AUDIO',
     SET_BRIDGE: 'SET_BRIDGE',
     SET_USER: 'SET_USER',
-    SET_VIDEO: 'SET_VIDEO'
+    SET_VIDEO: 'SET_VIDEO',
+    REQUEST_CONSULTATION: 'REQUEST_CONSULTATION',
+    RECEIVED_CONSULTATION: 'RECEIVED_CONSULTATION',
+    REQUEST_CREATE_CONSULTATION: 'REQUEST_CREATE_CONSULTATION',
+    RECEIVED_CREATE_CONSULTATION: 'RECEIVED_CREATE_CONSULTATION'
 };
 
 const initialState = {
@@ -13,7 +17,10 @@ const initialState = {
     bridge: '',
     rooms: [],
     user: '',
-    video: null
+    video: null,
+    currentConsultation: null,
+    fetchingConsultation: false,
+    fetchingCreateConsultation: false
 };
 
 export default function consultationReducer(state = initialState, action) {
@@ -51,6 +58,31 @@ export default function consultationReducer(state = initialState, action) {
                 video: action.payload
             };
         }
+        case ROOM_ACTIONS.REQUEST_CONSULTATION: {
+            return {
+                ...state,
+                fetchingConsultation: true
+            };
+        }
+        case ROOM_ACTIONS.RECEIVED_CONSULTATION: {
+            return {
+                ...state,
+                fetchingConsultation: false,
+                currentConsultation: action.payload
+            };
+        }
+        case ROOM_ACTIONS.REQUEST_CREATE_CONSULTATION: {
+            return {
+                ...state,
+                fetchingCreateConsultation: true
+            };
+        }
+        case ROOM_ACTIONS.RECEIVED_CREATE_CONSULTATION: {
+            return {
+                ...state,
+                fetchingCreateConsultation: false
+            };
+        }
         default:
             return state;
     }
@@ -74,4 +106,20 @@ export function setUser(user) {
 
 export function setVideo(video) {
     return createReducerObject(ROOM_ACTIONS.SET_VIDEO, video);
+}
+
+export function requestConsultation() {
+    return createReducerObject(ROOM_ACTIONS.REQUEST_CONSULTATION);
+}
+
+export function receivedConsultation(consultation) {
+    return createReducerObject(ROOM_ACTIONS.RECEIVED_CONSULTATION, consultation);
+}
+
+export function requestCreateConsultation() {
+    return createReducerObject(ROOM_ACTIONS.REQUEST_CREATE_CONSULTATION);
+}
+
+export function receivedCreateConsultation() {
+    return createReducerObject(ROOM_ACTIONS.RECEIVED_CREATE_CONSULTATION);
 }

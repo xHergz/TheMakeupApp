@@ -3,9 +3,13 @@ import {
     getCookie
 } from '../../Common/helpers/browserUtilities';
 
-const API_URL = 'http://api.themakeupapp.localhost';
-
 const SESSION_KEY_COOKIE = 'tma_session_key';
+
+const PRODUCTION_BUILD = false;
+
+const API_URL = PRODUCTION_BUILD ? 'https://api.herwalbooks.xyz' : 'http://api.themakeupapp.localhost';
+
+export const WEB_RTC_SERVER_URL = PRODUCTION_BUILD ? 'https://159.203.6.18:8080' : 'https://localhost:8080';
 
 export const API_ENDPOINTS = {
     ALLERGY_SENSITIVITY: 'allergy-sensitivity',
@@ -22,6 +26,7 @@ export const API_ENDPOINTS = {
     CLIENT_PRODUCT_PREFERENCE: 'client-product-preference',
     CLIENT_PROFILE: 'client-profile',
     CLIENT_REVIEWS: 'client-reviews',
+    CONSULTATION: 'consultation',
     CONSULTATION_TYPES: 'consultation-types',
     EYE_COLOURS: 'eye-colours',
     HAIR_COLOURS: 'hair-colours',
