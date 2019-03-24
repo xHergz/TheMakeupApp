@@ -23,6 +23,7 @@ import sessionReducer from './SessionReducer';
 import setupMakeoverAppointmentReducer from './SetupMakeoverAppointmentReducer';
 import siteReducer from './SiteReducer';
 import userReducer from './UserReducer';
+import consultationReducer from './ConsultationReducer';
 
 const rootReducer = combineReducers({
     artistApplicationReducer,
@@ -46,7 +47,8 @@ const rootReducer = combineReducers({
     sessionReducer,
     setupMakeoverAppointmentReducer,
     siteReducer,
-    userReducer
+    userReducer,
+    consultationReducer
 });
 
 export default rootReducer;

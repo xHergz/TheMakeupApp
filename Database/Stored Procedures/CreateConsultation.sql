@@ -63,7 +63,7 @@ BEGIN
         WHERE
             Client_Profile.Client_Profile_Id = _clientProfileId;
 
-        CALL AddTaskUserNotification(artistDisplayName, CONCAT('You have setup a consultation with ', clientDisplayName, ', click here to join.'), CONCAT('/appointment/', newConsultationId), @status);
+        CALL AddTaskUserNotification(artistDisplayName, CONCAT('You have setup a consultation with ', clientDisplayName, ', click here to join.'), CONCAT('/consultation/', newConsultationId), @status);
         CALL AddTaskUserNotification(clientDisplayName, CONCAT(artistDisplayName, ' has setup a consultation with you, click here to join.'), CONCAT('/consultation/', newConsultationId), @status);
         SET _status = 0;
     END;

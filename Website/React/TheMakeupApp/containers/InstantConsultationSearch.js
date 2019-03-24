@@ -29,6 +29,9 @@ import PAGES from '../constants/Pages';
 import '../../../Css/Search.css';
 import SearchResult from '../components/SearchResult';
 
+//for testing purposes
+import InstantSearchHome from '../components/InstantConsultSearchHome';
+
 const INSTANT_CONSULTATION = {
     SERVICE_TYPE_ID: 1,
     SERVICE_TYPE_DESCRIPTION: 'Instant Consultation'
@@ -46,7 +49,35 @@ const TABS = {
 };
 
 class InstantConsultationSearch extends React.Component {
-    constructor(props) {
+
+  constructor(props) {
+    super(props);
+    this.defaultRoomId = String(new Date() - new Date().setHours(0, 0, 0, 0));
+    this.state = { roomId: this.defaultRoomId };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(e) {
+    this.setState({ roomId: e.target.value });
+  }
+
+  render(){
+    return (
+      <InstantSearchHome
+        defaultRoomId={this.defaultRoomId}
+        roomId={this.state.roomId}
+        handleChange={this.handleChange}
+      />
+    );
+  }
+}
+
+InstantConsultationSearch.contextTypes = {
+  router: PropTypes.object
+};
+
+export default InstantConsultationSearch;
+  /*  constructor(props) {
         super(props);
         this.state = {
             didSearch: false,
@@ -305,3 +336,4 @@ export default withRouter(connect(
         setCurrentPage
     }
 )(InstantConsultationSearch));
+*/
