@@ -9,7 +9,7 @@ const PRODUCTION_BUILD = false;
 
 const API_URL = PRODUCTION_BUILD ? 'https://api.herwalbooks.xyz' : 'http://api.themakeupapp.localhost';
 
-export const WEB_RTC_SERVER_URL = PRODUCTION_BUILD ? 'https://159.203.6.18:8080' : 'https://localhost:8080';
+export const WEB_RTC_SERVER_URL = PRODUCTION_BUILD ? 'https://webrtc.herwalbooks.xyz:8080' : 'https://localhost:8080';
 
 export const API_ENDPOINTS = {
     ALLERGY_SENSITIVITY: 'allergy-sensitivity',
