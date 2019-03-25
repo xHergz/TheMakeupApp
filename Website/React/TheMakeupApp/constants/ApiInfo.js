@@ -7,7 +7,7 @@ const SESSION_KEY_COOKIE = 'tma_session_key';
 
 const PRODUCTION_BUILD = false;
 
-const API_URL = PRODUCTION_BUILD ? 'https://api.herwalbooks.xyz' : 'http://api.themakeupapp.localhost';
+const API_URL = PRODUCTION_BUILD ? 'https://api.herwalbooks.xyz' : 'https://api.themakeupapp.localhost';
 
 export const WEB_RTC_SERVER_URL = PRODUCTION_BUILD ? 'https://webrtc.herwalbooks.xyz:8080' : 'https://localhost:8080';
 

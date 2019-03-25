@@ -1,0 +1,15 @@
+{
+    "short_name": "The Makeup App",
+    "name": "The Makeup App",
+    "icons": [
+      {
+        "src": "/images/ic_tma.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      }
+    ],
+    "start_url": "/",
+    "display": "standalone",
+    "orientation": "portrait"
+}
+  

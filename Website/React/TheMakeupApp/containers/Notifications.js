@@ -56,7 +56,7 @@ class Notifications extends React.Component {
 
     renderLoadMoreNotifications() {
         if (!this.props.canFetchMoreNotifications) {
-            return <h6>No more Notifications</h6>;
+            return <h6 className="none-message-dark">No more Notifications</h6>;
         }
         if (this.props.isFetchingMoreNotifications) {
             return <Loader />;
