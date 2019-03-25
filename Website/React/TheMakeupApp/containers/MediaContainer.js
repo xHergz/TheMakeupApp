@@ -28,7 +28,7 @@ class MediaBridge extends React.Component {
 
     componentWillMount() {
         // chrome polyfill for connection between the local device and a remote peer
-        window.RTCPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection;
+        window.RTCPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection || window.mozRTCPeerConnection;
         this.props.setMedia(this);
     }
 

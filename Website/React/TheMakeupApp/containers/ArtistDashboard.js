@@ -18,6 +18,9 @@ import Button from '../../Common/components/Button';
 class ArtistDashboard extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            gettingLocation: false
+        };
         this.displayGeolocationError = this.displayGeolocationError.bind(this);
         this.getCurrentLocation = this.getCurrentLocation.bind(this);
         this.goOnline = this.goOnline.bind(this);
@@ -30,15 +33,24 @@ class ArtistDashboard extends React.Component {
     }
 
     getCurrentLocation() {
+        this.setState({
+            gettingLocation: true
+        });
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(this.goOnline, this.displayGeolocationError);
         }
         else {
             this.props.addErrorMessage('Could not get geolocation');
+            this.setState({
+                gettingLocation: false
+            });
         }
     }
 
     displayGeolocationError(error) {
+        this.setState({
+            gettingLocation: false
+        });
         let message = '';
         switch (error.code) {
             case error.PERMISSION_DENIED:
@@ -60,8 +72,10 @@ class ArtistDashboard extends React.Component {
     }
 
     goOnline(position) {
-        console.log(position);
         this.props.setArtistOnline(this.props.currentSession.artistPortfolioId, position.coords.longitude, position.coords.latitude);
+        this.setState({
+            gettingLocation: false
+        });
     }
 
     goOffline() {
@@ -70,6 +84,10 @@ class ArtistDashboard extends React.Component {
 
     renderOnlineButton() {
         if (!this.props.currentSession.isArtistOnline) {
+            if (this.state.gettingLocation) {
+                return <Loader />;
+            }
+
             return (
                 <Button
                     label="Go Online"

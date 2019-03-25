@@ -12,6 +12,7 @@ IF %ERRORLEVEL%==0 (
     xcopy ".\Scripts" "C:\xampp\htdocs\TheMakeupApp\public\scripts\" /s /e
     xcopy ".\Templates" "C:\xampp\htdocs\TheMakeupApp\private\Templates\" /s /e
     copy ".\.htaccess" "C:\xampp\htdocs\TheMakeupApp\public\.htaccess"
+    copy ".\manifest.json" "C:\xampp\htdocs\TheMakeupApp\public\manifest.json"
 ) ELSE (
     echo NPM Build Failed. Website Not Deployed.
 )
