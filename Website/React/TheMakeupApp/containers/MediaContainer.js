@@ -106,6 +106,7 @@ class MediaBridge extends React.Component {
         this.props.setConsultationUser('guest');
         this.pc.close();
         this.props.socket.emit('leave');
+        window.location.href = '/';
     }
 
     init() {

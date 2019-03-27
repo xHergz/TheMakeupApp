@@ -29,7 +29,8 @@ class Consultation extends React.Component {
             <div className="page-container">
                 <h1 className="page-title">Consultation Room: {this.props.match.params.consultationId}</h1>
                 <ChatRoomPage
-                    roomI={this.props.currentConsultation.roomId}
+                    roomId={this.props.currentConsultation.roomId}
+                    displayName={this.props.currentSession.displayName}
                 />
             </div>
         );
@@ -38,6 +39,7 @@ class Consultation extends React.Component {
 
 function mapStateToProps(state) {
     return {
+        currentSession: state.sessionReducer.currentSession,
         fetchingConsultation: state.consultationReducer.fetchingConsultation,
         currentConsultation: state.consultationReducer.currentConsultation
     };
@@ -48,6 +50,17 @@ Consultation.propTypes = {
         params: PropTypes.shape({
             consultationId: PropTypes.string.isRequired
         })
+    }).isRequired,
+    currentSession: PropTypes.shape({
+        userId: PropTypes.number.isRequired,
+        displayName: PropTypes.string.isRequired,
+        firstName: PropTypes.string.isRequired,
+        lastName: PropTypes.string.isRequired,
+        isArtist: PropTypes.number.isRequired,
+        isClient: PropTypes.number.isRequired,
+        clientProfileId: PropTypes.number,
+        artistPortfolioId: PropTypes.number,
+        isArtistOnline: PropTypes.number
     }).isRequired,
     getConsultation: PropTypes.func.isRequired,
     fetchingConsultation: PropTypes.bool.isRequired,

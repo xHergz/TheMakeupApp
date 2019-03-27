@@ -166,7 +166,6 @@ input[type=text] {
     border: none;
     color: white;
     font-size: 0.8em;
-    margin: 0 5px 20px 5px;
     width: 8em;
     line-height: 3ex;
     padding: 1ex 0.7em;
@@ -215,4 +214,28 @@ input[type=text] {
 }
 .established + .auth .hangup-button {
     display: flex;
+}
+
+#message-form {
+    display: flex;
+}
+
+#message-form > input {
+    height: 35px;
+}
+
+.received-message {
+    padding: 5px;
+    text-align: center;
+}
+
+.waiting > p, .request-access > p, .grant-access > p {
+    text-align: center;
+    font-weight: bold;
+}
+
+.grant-access-buttons {
+    display: flex;
+    justify-content: space-around;
+    padding: 5px;
 }
