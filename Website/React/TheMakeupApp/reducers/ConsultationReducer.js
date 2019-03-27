@@ -13,11 +13,11 @@ const ROOM_ACTIONS = {
 };
 
 const initialState = {
-    audio: null,
+    audio: false,
     bridge: '',
     rooms: [],
     user: '',
-    video: null,
+    video: false,
     currentConsultation: null,
     fetchingConsultation: false,
     fetchingCreateConsultation: false

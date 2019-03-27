@@ -39,7 +39,7 @@ class ChatRoomPage extends React.Component {
         return (
             <div id="consultation-chat-room">
                 <MediaContainer setMedia={this.setMedia} socket={this.socket} getUserMedia={this.getUserMedia} />
-                <CommunicationContainer socket={this.socket} media={this.state.media} getUserMedia={this.getUserMedia} />
+                <CommunicationContainer socket={this.socket} media={this.state.media} getUserMedia={this.getUserMedia} displayName={this.props.displayName} />
             </div>
         );
     }
@@ -47,6 +47,7 @@ class ChatRoomPage extends React.Component {
 
 ChatRoomPage.propTypes = {
     roomId: PropTypes.string.isRequired,
+    displayName: PropTypes.string.isRequired,
     addConsultationRoom: PropTypes.func.isRequired
 };
 

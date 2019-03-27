@@ -27,6 +27,7 @@ class CommunicationContainer extends React.Component {
         this.toggleVideo = this.toggleVideo.bind(this);
         this.toggleAudio = this.toggleAudio.bind(this);
         this.send = this.send.bind(this);
+        this.sendMessage = this.sendMessage.bind(this);
         this.hideAuth = this.hideAuth.bind(this);
         this.full = this.full.bind(this);
     }
@@ -81,6 +82,14 @@ class CommunicationContainer extends React.Component {
 
     send(e) {
         e.preventDefault();
+        this.setState((prevState) => {
+            return {
+                message: `[${this.props.displayName}]: ${prevState.message}`
+            };
+        }, this.sendMessage);
+    }
+
+    sendMessage() {
         this.props.socket.emit('auth', this.state);
         this.hideAuth();
     }
@@ -137,7 +146,8 @@ CommunicationContainer.propTypes = {
     setConsultationAudio: PropTypes.func.isRequired,
     media: PropTypes.instanceOf(MediaContainer).isRequired,
     setConsultationBridge: PropTypes.func.isRequired,
-    setConsultationUser: PropTypes.func.isRequired
+    setConsultationUser: PropTypes.func.isRequired,
+    displayName: PropTypes.string.isRequired
 };
 
 export default withRouter(connect(
