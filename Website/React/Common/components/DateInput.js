@@ -105,7 +105,7 @@ class DateInput extends React.Component {
     render() {
         return (
             <div className="input-container">
-                <h5>{this.renderInputLabel()}</h5>
+                <h3>{this.renderInputLabel()}</h3>
                 {this.renderInput()}
                 <div className="input-error">
                     <h6>{this.state.errorMessage}</h6>

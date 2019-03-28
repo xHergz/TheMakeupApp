@@ -33,7 +33,7 @@ class BrowseArtists extends React.Component {
 
     renderPortfolios() {
         if (this.props.artistPortfolios.length === 0) {
-            return <h4>- No Artists Registered! -</h4>;
+            return <h4 className="none-message">- No Artists Registered! -</h4>;
         }
 
         return this.props.artistPortfolios.map((portfolio) => { return this.renderPortfolioCard(portfolio); });

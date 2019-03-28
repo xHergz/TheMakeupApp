@@ -1,3 +1,4 @@
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
@@ -93,6 +94,10 @@ class AppointmentInfo extends React.Component {
             <div className="page-container">
                 <h1 className="page-title">Appointment #{this.props.match.params.makeoverAppointmentId}</h1>
                 <FormInfoDisplay>
+                    <FormInfoBlock
+                        label="Appointment Date"
+                        value={moment(this.props.currentMakeoverAppointment.appointmentDate, 'YYYY-MM-DD HH:mm:ss').format('MMM Do, YYYY @ LT')}
+                    />
                     <FormInfoBlock
                         label="Artist"
                         value={this.props.currentMakeoverAppointment.artistPortfolioDisplayName}
