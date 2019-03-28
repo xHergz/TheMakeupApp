@@ -12,7 +12,8 @@ class ListInput extends React.Component {
         super(props);
         this.state = {
             currentList: [],
-            canAdd: !(this.props.listOptions === null)
+            canAdd: !(this.props.listOptions === null),
+            currentId: 0
         };
         this.getValues = this.getValues.bind(this);
         this.addItemToList = this.addItemToList.bind(this);
@@ -30,27 +31,33 @@ class ListInput extends React.Component {
 
     addItemToList(value) {
         this.setState((prevState) => {
+            const selectedOption = this.props.listOptions.find((option) => { return option[this.props.listIdKey] === Number(value); });
             const newItem = {
-                id: prevState.currentList.length,
-                value
+                id: prevState.currentId,
+                value,
+                label: selectedOption === null ? null : selectedOption[this.props.listDescriptionKey]
             };
             const newList = [
                 ...prevState.currentList
             ];
             newList.push(newItem);
             return {
-                currentList: newList
+                currentList: newList,
+                currentId: prevState.currentId + 1
             };
         });
         this.props.onListChanged();
     }
 
     removeItemFromList(id) {
+        console.log('Removing id: ', id);
         this.setState((prevState) => {
             const newList = [
                 ...prevState.currentList
             ];
-            newList.splice(id, 1);
+            const removalIndex = newList.findIndex((item) => { return item.id === id; });
+            console.log('Removal Index: ', removalIndex);
+            newList.splice(removalIndex, 1);
             return {
                 currentList: newList
             };
@@ -74,7 +81,7 @@ class ListInput extends React.Component {
     renderListRow(item) {
         return (
             <div className="list-input-row">
-                <h6>{item.value}</h6>
+                <h6>{item.label}</h6>
                 <div
                     className="remove-list-input-row"
                     onClick={() => { this.removeItemFromList(item.id); }}
@@ -87,7 +94,7 @@ class ListInput extends React.Component {
 
     renderList() {
         if (this.state.currentList.length === 0) {
-            return <h4>None</h4>;
+            return <h4 className="none-message">None</h4>;
         }
 
         return this.state.currentList.map((item) => { return this.renderListRow(item); });

@@ -69,6 +69,8 @@ export function createMakeoverAppointment(clientProfileId, artistPortfolioId, co
                 dispatch(receivedCreateMakeoverAppointment());
                 dispatch(addSuccessMessage('Successfully Created Makeover Appointment'));
                 dispatch(makeoverAppointmentFormSubmitted());
+                const newAppointmentId = json.newMakeoverAppointmentId;
+                window.location.href = `/appointment/${newAppointmentId}`;
             })
             .catch((error) => {
                 console.error(error);

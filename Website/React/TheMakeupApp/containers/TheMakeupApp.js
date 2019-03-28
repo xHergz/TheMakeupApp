@@ -36,11 +36,14 @@ import ChatRoomPage from './ChatRoomPage';
 
 import '../../../Css/TheMakeupApp.css';
 
+const MAX_NUMBER_OF_REFRESHES = 20;
+
 class TheMakeupApp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            refreshNewNotificationsId: null
+            refreshNewNotificationsId: null,
+            refreshCalls: 0
         };
         this.refreshNewNotifications = this.refreshNewNotifications.bind(this);
         this.renderOnlineBanner = this.renderOnlineBanner.bind(this);
@@ -48,10 +51,10 @@ class TheMakeupApp extends React.Component {
 
     componentDidMount() {
         this.props.getSessionInfo();
-        /* const intervalId = window.setInterval(this.refreshNewNotifications, 5000);
+        const intervalId = window.setInterval(this.refreshNewNotifications, 30000);
         this.setState({
             refreshNewNotificationsId: intervalId
-        }); */
+        });
     }
 
     componentWillUnmount() {
@@ -59,7 +62,17 @@ class TheMakeupApp extends React.Component {
     }
 
     refreshNewNotifications() {
-        this.props.getNumberOfNewNotifications(GetSessionKey(), this.props.currentSession.displayName);
+        if (this.state.refreshCalls > MAX_NUMBER_OF_REFRESHES) {
+            window.clearInterval(this.state.refreshNewNotificationsId);
+        }
+        else {
+            this.props.getNumberOfNewNotifications(GetSessionKey(), this.props.currentSession.displayName);
+            this.setState((prevState) => {
+                return {
+                    refreshCalls: prevState.refreshCalls + 1
+                };
+            });
+        }
     }
 
     renderOnlineBanner() {

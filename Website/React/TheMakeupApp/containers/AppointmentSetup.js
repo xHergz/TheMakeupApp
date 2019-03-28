@@ -1,3 +1,4 @@
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
@@ -30,11 +31,12 @@ class AppointmentSetup extends React.Component {
             serviceTypeDescription: urlParams.get('serviceTypeDescription'),
             servicePrice: urlParams.get('servicePrice'),
             artistServiceId: Number(urlParams.get('artistServiceId')),
-            canSubmitAppointment: false
+            canSubmitAppointment: true
         };
         this.appointmentSetupInputChanged = this.appointmentSetupInputChanged.bind(this);
         this.submitAppointmentSetup = this.submitAppointmentSetup.bind(this);
         this.renderSubmitButton = this.renderSubmitButton.bind(this);
+        this.renderAddons = this.renderAddons.bind(this);
         this.appointmentDateInput = React.createRef();
         this.consultationTypeInput = React.createRef();
         this.addonsInput = React.createRef();
@@ -96,6 +98,34 @@ class AppointmentSetup extends React.Component {
         );
     }
 
+    renderAddons() {
+        const addonsWithPrices = this.props.artistServiceAddons.filter((addon) => {
+            return addon.artistServiceId === this.state.artistServiceId;
+        }).map((addon) => {
+            return {
+                id: addon.artistServiceAddonId,
+                description: `${addon.artistServiceAddonDescription} ($${addon.price})`
+            };
+        });
+
+        if (addonsWithPrices.length === 0) {
+            return (
+                <h4 className="none-message">No addons available</h4>
+            );
+        }
+
+        return (
+            <ListInput
+                ref={this.addonsInput}
+                listLabel="Selected Addons"
+                inputLabel="Available Addons"
+                listOptions={addonsWithPrices}
+                listIdKey="id"
+                listDescriptionKey="description"
+            />
+        );
+    }
+
     render() {
         const consultationsWithPrices = this.props.artistServiceConsultations.filter((consultation) => {
             return consultation.artistServiceId === this.state.artistServiceId;
@@ -103,15 +133,6 @@ class AppointmentSetup extends React.Component {
             return {
                 id: consultation.consultationTypeId,
                 description: `${consultation.minuteLength} ($${consultation.price})`
-            };
-        });
-
-        const addonsWithPrices = this.props.artistServiceAddons.filter((addon) => {
-            return addon.artistServiceId === this.state.artistServiceId;
-        }).map((addon) => {
-            return {
-                id: addon.artistServiceAddonId,
-                description: `${addon.artistServiceAddonDescription} ($${addon.price})`
             };
         });
 
@@ -138,6 +159,7 @@ class AppointmentSetup extends React.Component {
                     <DateInput
                         ref={this.appointmentDateInput}
                         label="Appointment Date"
+                        defaultValue={moment().format('YYYY-MM-DD')}
                         onValidate={validateDate}
                         onValidityChanged={this.appointmentSetupInputChanged}
                     />
@@ -148,14 +170,7 @@ class AppointmentSetup extends React.Component {
                         labelKey="description"
                         label="Consultation Type"
                     />
-                    <ListInput
-                        ref={this.addonsInput}
-                        listLabel="Selected Addons"
-                        inputLabel="Available Addons"
-                        listOptions={addonsWithPrices}
-                        listIdKey="id"
-                        listDescriptionKey="description"
-                    />
+                    {this.renderAddons()}
                 </FormInfoDisplay>
                 {this.renderSubmitButton()}
             </div>

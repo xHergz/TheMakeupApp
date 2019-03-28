@@ -147,7 +147,7 @@
             $makeoverAppointmentDal->CommitTransaction();
 
             // Return status response
-            $fullApiResponse = (object) ['status' => 0];
+            $fullApiResponse = (object) ['status' => 0, 'newMakeoverAppointmentId' => $newAppointmentId];
             $jsonResponse = $makeoverAppointmentDal->EncodeResponse($fullApiResponse);
             Log::LogInformation('MakeoverAppointment PUT Response: ' . $jsonResponse);
             echo $jsonResponse;
