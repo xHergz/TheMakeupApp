@@ -50,7 +50,6 @@ export function getArtistPortfolios() {
         dispatch(requestArtistPortfolios());
         return ApiRequest(getRequest(GetApiUrl(API_ENDPOINTS.ARTIST_PORTFOLIO), sessionKey), 'getArtistPortfolios')
             .then((json) => {
-                console.log(json.artistPortfolios);
                 dispatch(receivedArtistPortfolios(json.artistPortfolios));
             })
             .catch((error) => {

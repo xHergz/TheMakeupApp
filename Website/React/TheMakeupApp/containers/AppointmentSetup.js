@@ -69,7 +69,9 @@ class AppointmentSetup extends React.Component {
                     && consultation.consultationTypeId === consultationTypeId;
             }
         ).price;
-        const addonIds = this.addonsInput.current.getValues().map((id) => { return Number(id); });
+        const addonIds = this.addonsInput.current !== null
+            ? this.addonsInput.current.getValues().map((id) => { return Number(id); })
+            : [];
         const addons = this.props.artistServiceAddons.filter((addon) => { return addonIds.includes(addon.artistServiceAddonId); })
             .map((addon) => {
                 return {

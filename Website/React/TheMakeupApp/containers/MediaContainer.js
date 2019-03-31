@@ -81,7 +81,6 @@ class MediaBridge extends React.Component {
     setupDataHandlers() {
         this.dc.onmessage = (e) => {
             const msg = JSON.parse(e.data);
-            console.log(`received message over data channel: ${msg}`);
         };
         this.dc.onclose = () => {
             this.remoteStream.getVideoTracks()[0].stop();
