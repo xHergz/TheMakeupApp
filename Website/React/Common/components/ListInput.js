@@ -31,11 +31,13 @@ class ListInput extends React.Component {
 
     addItemToList(value) {
         this.setState((prevState) => {
-            const selectedOption = this.props.listOptions.find((option) => { return option[this.props.listIdKey] === Number(value); });
+            const selectedOption = this.props.listOptions !== null
+                ? this.props.listOptions.find((option) => { return option[this.props.listIdKey] === Number(value); })
+                : null;
             const newItem = {
                 id: prevState.currentId,
                 value,
-                label: selectedOption === null ? null : selectedOption[this.props.listDescriptionKey]
+                label: selectedOption === null ? value : selectedOption[this.props.listDescriptionKey]
             };
             const newList = [
                 ...prevState.currentList
@@ -50,13 +52,11 @@ class ListInput extends React.Component {
     }
 
     removeItemFromList(id) {
-        console.log('Removing id: ', id);
         this.setState((prevState) => {
             const newList = [
                 ...prevState.currentList
             ];
             const removalIndex = newList.findIndex((item) => { return item.id === id; });
-            console.log('Removal Index: ', removalIndex);
             newList.splice(removalIndex, 1);
             return {
                 currentList: newList

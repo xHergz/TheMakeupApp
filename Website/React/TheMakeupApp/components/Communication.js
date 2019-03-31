@@ -26,7 +26,6 @@ class Communication extends React.Component {
 
     toggleFullScreen() {
         ToggleFullScreen();
-        console.log(IsFullScreen());
         this.setState({
             fullscreen: IsFullScreen() === undefined
         });
