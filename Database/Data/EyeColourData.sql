@@ -1,6 +1,7 @@
 INSERT INTO Eye_Colour (Description) VALUES
-('Black'),
+('Amber'),
 ('Blue'),
 ('Brown'),
 ('Hazel'),
+('Gray'),
 ('Green');

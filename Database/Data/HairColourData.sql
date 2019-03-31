@@ -1,6 +1,10 @@
 INSERT INTO Hair_Colour (Description) VALUES
 ('Black'),
 ('Dark Brown'),
+('Brown'),
 ('Light Brown'),
 ('Blonde'),
-('Red');
+('Auburn'),
+('Red'),
+('Grey'),
+('White');

@@ -1,11 +1,6 @@
 INSERT INTO Sanitization_Quiz_Question (Question) VALUES
-('Question #1'),
-('Question #2'),
-('Question #3'),
-('Question #4'),
-('Question #5'),
-('Question #6'),
-('Question #7'),
-('Question #8'),
-('Question #9'),
-('Question #10');
+('How do you sanitize eye and lip pencils?'),
+('What product do you NOT use disposal wands for?'),
+('How often should you clean your sponges?'),
+('How often should you DEEP clean your brushes?'),
+('How do you sanitize your cream products?');
