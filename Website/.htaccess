@@ -1,7 +1,12 @@
 RewriteEngine On
 
+# Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Prepend www. if there is no subdomain specified
 RewriteCond %{HTTP_HOST} ^[^.]+\.[^.]+$
-RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [L]
+RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [L]
 
 # Redirect any api.<url>/<endpoint> to the /pages/ApiEntry.php file with the appropriate end point argument
 RewriteCond %{HTTP_HOST} ^api\.(.*)$
