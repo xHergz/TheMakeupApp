@@ -1,0 +1,2573 @@
+{
+	"info": {
+		"_postman_id": "ace8496e-27e4-4dd7-96e1-c8d175b1af20",
+		"name": "TheMakeupApp API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Client Profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "23cb1822-4137-11e9-babd-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/client-profile/Test",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"client-profile",
+						"Test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Client Profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "23cb1822-4137-11e9-babd-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "userId",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "profilePicture",
+							"value": "data:image/jpeg;base64,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",
+							"type": "text"
+						},
+						{
+							"key": "biography",
+							"value": "Hello World",
+							"type": "text"
+						},
+						{
+							"key": "eyeColourId",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "hairColourId",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "skinToneId",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/client-profile",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"client-profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Client Profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "23cb1822-4137-11e9-babd-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "profilePicture",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "biography",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "eyeColourId",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "hairColourId",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "skinToneId",
+							"value": "2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/client-profile/1",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"client-profile",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Client Headshots",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "23cb1822-4137-11e9-babd-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/client-headshot?displayName=Test",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"client-headshot"
+					],
+					"query": [
+						{
+							"key": "displayName",
+							"value": "Test"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Client Headshot",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "23cb1822-4137-11e9-babd-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "clientProfileId",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "picture",
+							"value": "data:image/jpeg;base64,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",
+							"type": "text"
+						},
+						{
+							"key": "headshotTypeId",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/client-headshot",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"client-headshot"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Client Headshot",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "23cb1822-4137-11e9-babd-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/client-headshot/1",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"client-headshot",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Client Allergies And Sensitivities",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "23cb1822-4137-11e9-babd-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/client-allergy-sensitivity?displayName=Test",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"client-allergy-sensitivity"
+					],
+					"query": [
+						{
+							"key": "displayName",
+							"value": "Test"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Client Allergy Sensitivity",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "23cb1822-4137-11e9-babd-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "clientProfileId",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "allergySensitivityId",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/client-allergy-sensitivity",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"client-allergy-sensitivity"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Client Allergy Sensitivity",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "23cb1822-4137-11e9-babd-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/client-allergy-sensitivity?clientProfileId=1&allergySensitivityId=1",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"client-allergy-sensitivity"
+					],
+					"query": [
+						{
+							"key": "clientProfileId",
+							"value": "1"
+						},
+						{
+							"key": "allergySensitivityId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Allergies And Sensitivities",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "23cb1822-4137-11e9-babd-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/allergy-sensitivity?displayName=Test",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"allergy-sensitivity"
+					],
+					"query": [
+						{
+							"key": "displayName",
+							"value": "Test"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Custom Allergy Sensitivity",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "23cb1822-4137-11e9-babd-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "clientProfileId",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Bullshit",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/allergy-sensitivity",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"allergy-sensitivity"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Client Product Preferences",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "23cb1822-4137-11e9-babd-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/client-product-preference?displayName=Test",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"client-product-preference"
+					],
+					"query": [
+						{
+							"key": "displayName",
+							"value": "Test"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Client Product Preference",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "23cb1822-4137-11e9-babd-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "clientProfileId",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "productPreferenceId",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/client-product-preference",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"client-product-preference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Client Product Preference",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "23cb1822-4137-11e9-babd-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/client-product-preference?clientProfileId=1&productPreferenceId=1",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"client-product-preference"
+					],
+					"query": [
+						{
+							"key": "clientProfileId",
+							"value": "1"
+						},
+						{
+							"key": "productPreferenceId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product Preferences",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "23cb1822-4137-11e9-babd-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/product-preference?displayName=Test",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"product-preference"
+					],
+					"query": [
+						{
+							"key": "displayName",
+							"value": "Test"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Custom Product Preference",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "23cb1822-4137-11e9-babd-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "clientProfileId",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Blue",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/product-preference",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"product-preference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Eye Colours",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "23cb1822-4137-11e9-babd-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/eye-colours",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"eye-colours"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Hair Colours",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "23cb1822-4137-11e9-babd-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/hair-colours",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"hair-colours"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Skin Tones",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "23cb1822-4137-11e9-babd-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/skin-tones",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"skin-tones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Client Reviews",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "3892f2e0-4137-11e9-babd-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/client-reviews?displayName=Test",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"client-reviews"
+					],
+					"query": [
+						{
+							"key": "displayName",
+							"value": "Test"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Client Review",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "3892f2e0-4137-11e9-babd-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "rating",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "review",
+							"value": "Updated review",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/client-reviews/1",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"client-reviews",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Client Review",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "3892f2e0-4137-11e9-babd-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "clientProfileId",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "artistPortfolioId",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "rating",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "review",
+							"value": "A Review",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/client-reviews",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"client-reviews"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Client Review",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "3892f2e0-4137-11e9-babd-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/client-reviews/1",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"client-reviews",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Sanitization Quiz",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eb76b51e-42bb-11e9-9e96-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/sanitization-quiz",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"sanitization-quiz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Artist Application",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eb76b51e-42bb-11e9-9e96-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"clientProfileId\": 1,\n    \"resume\": \"data:application/pdf;base64,JVBERi0xLjcNCiW1tbW1DQoxIDAgb2JqDQo8PC9UeXBlL0NhdGFsb2cvUGFnZXMgMiAwIFIvTGFuZyhlbi1DQSkgL1N0cnVjdFRyZWVSb290IDEwIDAgUi9NYXJrSW5mbzw8L01hcmtlZCB0cnVlPj4vTWV0YWRhdGEgMjAgMCBSL1ZpZXdlclByZWZlcmVuY2VzIDIxIDAgUj4+DQplbmRvYmoNCjIgMCBvYmoNCjw8L1R5cGUvUGFnZXMvQ291bnQgMS9LaWRzWyAzIDAgUl0gPj4NCmVuZG9iag0KMyAwIG9iag0KPDwvVHlwZS9QYWdlL1BhcmVudCAyIDAgUi9SZXNvdXJjZXM8PC9Gb250PDwvRjEgNSAwIFI+Pi9FeHRHU3RhdGU8PC9HUzcgNyAwIFIvR1M4IDggMCBSPj4vUHJvY1NldFsvUERGL1RleHQvSW1hZ2VCL0ltYWdlQy9JbWFnZUldID4+L01lZGlhQm94WyAwIDAgNjEyIDc5Ml0gL0NvbnRlbnRzIDQgMCBSL0dyb3VwPDwvVHlwZS9Hcm91cC9TL1RyYW5zcGFyZW5jeS9DUy9EZXZpY2VSR0I+Pi9UYWJzL1MvU3RydWN0UGFyZW50cyAwPj4NCmVuZG9iag0KNCAwIG9iag0KPDwvRmlsdGVyL0ZsYXRlRGVjb2RlL0xlbmd0aCAxMzI+Pg0Kc3RyZWFtDQp4nC2MsQrCQBBE+4X9hynV4m73iJ4HIUUuMSgEFA8sxFJTKaj/D67iFAPDPB78HnXtx7ztIE2Dtst4MomTb5IGCFbWMQW8rkynBR5MbWHyG4WqkwrlxqTGCRQxOAkVoiS3tOdu3HCMmN7mxPRb6/8amM4zzC8oO6bejAcm9GPGB3fjHKoNCmVuZHN0cmVhbQ0KZW5kb2JqDQo1IDAgb2JqDQo8PC9UeXBlL0ZvbnQvU3VidHlwZS9UcnVlVHlwZS9OYW1lL0YxL0Jhc2VGb250L0JDREVFRStDYWxpYnJpL0VuY29kaW5nL1dpbkFuc2lFbmNvZGluZy9Gb250RGVzY3JpcHRvciA2IDAgUi9GaXJzdENoYXIgMzIvTGFzdENoYXIgMzIvV2lkdGhzIDE4IDAgUj4+DQplbmRvYmoNCjYgMCBvYmoNCjw8L1R5cGUvRm9udERlc2NyaXB0b3IvRm9udE5hbWUv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dHRwOi8vbnMuYWRvYmUuY29tL3BkZi8xLjMvIj4KPHBkZjpQcm9kdWNlcj5NaWNyb3NvZnTCriBXb3JkIGZvciBPZmZpY2UgMzY1PC9wZGY6UHJvZHVjZXI+PC9yZGY6RGVzY3JpcHRpb24+CjxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iPgo8ZGM6Y3JlYXRvcj48cmRmOlNlcT48cmRmOmxpPkp1c3RpbiBIZXJnb3R0PC9yZGY6bGk+PC9yZGY6U2VxPjwvZGM6Y3JlYXRvcj48L3JkZjpEZXNjcmlwdGlvbj4KPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyI+Cjx4bXA6Q3JlYXRvclRvb2w+TWljcm9zb2Z0wq4gV29yZCBmb3IgT2ZmaWNlIDM2NTwveG1wOkNyZWF0b3JUb29sPjx4bXA6Q3JlYXRlRGF0ZT4yMDE5LTAzLTEwVDA5OjA3OjUyLTA0OjAwPC94bXA6Q3JlYXRlRGF0ZT48eG1wOk1vZGlmeURhdGU+MjAxOS0wMy0xMFQwOTowNzo1Mi0wNDowMDwveG1wOk1vZGlmeURhdGU+PC9yZGY6RGVzY3JpcHRpb24+CjxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiICB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyI+Cjx4bXBNTTpEb2N1bWVudElEPnV1aWQ6NDc3MThBRkUtOEFDOS00MzA5LTkzMkYtMDgyMENBNzAzOUZFPC94bXBNTTpEb2N1bWVudElEPjx4bXBNTTpJbnN0YW5jZUlEPnV1aWQ6NDc3MThBRkUtOEFDOS00MzA5LTkzMkYtMDgyMENBNzAzOUZFPC94bXBNTTpJbnN0YW5jZUlEPjwvcmRmOkRlc2NyaXB0aW9uPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKPC9yZGY6UkRGPjwveDp4bXBtZXRhPjw/eHBhY2tldCBlbmQ9InciPz4NCmVuZHN0cmVhbQ0KZW5kb2JqDQoyMSAwIG9iag0KPDwvRGlzcGxheURvY1RpdGxlIHRydWU+Pg0KZW5kb2JqDQoyMiAwIG9iag0KPDwvVHlwZS9YUmVmL1NpemUgMjIvV1sgMSA0IDJdIC9Sb290IDEgMCBSL0luZm8gOSAwIFIvSURbPEZFOEE3MTQ3Qzk4QTA5NDM5MzJGMDgyMENBNzAzOUZFPjxGRThBNzE0N0M5OEEwOTQzOTMyRjA4MjBDQTcwMzlGRT5dIC9GaWx0ZXIvRmxhdGVEZWNvZGUvTGVuZ3RoIDg0Pj4NCnN0cmVhbQ0KeJwtyzEaQEAMhNFJdpfasVAqFTrXcBufA+jdROkaK2akyCuSH4ip1WJ3wMcubmIP8ZOkmeRBbCJuztxFElkUYeL/bKIrF/N2FCuZerIcwAvHzwrmDQplbmRzdHJlYW0NCmVuZG9iag0KeHJlZg0KMCAyMw0KMDAwMDAwMDAxMCA2NTUzNSBmDQowMDAwMDAwMDE3IDAwMDAwIG4NCjAwMDAwMDAxNjYgMDAwMDAgbg0KMDAwMDAwMDIyMiAwMDAwMCBuDQowMDAwMDAwNDg2IDAwMDAwIG4NCjAwMDAwMDA2OTIgMDAwMDAgbg0KMDAwMDAwMDg1OSAwMDAwMCBuDQowMDAwMDAxMDk4IDAwMDAwIG4NCjAwMDAwMDExNTEgMDAwMDAgbg0KMDAwMDAwMTIwNCAwMDAwMCBuDQowMDAwMDAwMDExIDY1NTM1IGYNCjAwMDAwMDAwMTIgNjU1MzUgZg0KMDAwMDAwMDAxMyA2NTUzNSBmDQowMDAwMDAwMDE0IDY1NTM1IGYNCjAwMDAwMDAwMTUgNjU1MzUgZg0KMDAwMDAwMDAxNiA2NTUzNSBmDQowMDAwMDAwMDE3IDY1NTM1IGYNCjAwMDAwMDAwMDAgNjU1MzUgZg0KMDAwMDAwMTg2NyAwMDAwMCBuDQowMDAwMDAxODk0IDAwMDAwIG4NCjAwMDAwMjEzMjEgMDAwMDAgbg0KMDAwMDAyNDQ4OCAwMDAwMCBuDQowMDAwMDI0NTMzIDAwMDAwIG4NCnRyYWlsZXINCjw8L1NpemUgMjMvUm9vdCAxIDAgUi9JbmZvIDkgMCBSL0lEWzxGRThBNzE0N0M5OEEwOTQzOTMyRjA4MjBDQTcwMzlGRT48RkU4QTcxNDdDOThBMDk0MzkzMkYwODIwQ0E3MDM5RkU+XSA+Pg0Kc3RhcnR4cmVmDQoyNDgxNg0KJSVFT0YNCnhyZWYNCjAgMA0KdHJhaWxlcg0KPDwvU2l6ZSAyMy9Sb290IDEgMCBSL0luZm8gOSAwIFIvSURbPEZFOEE3MTQ3Qzk4QTA5NDM5MzJGMDgyMENBNzAzOUZFPjxGRThBNzE0N0M5OEEwOTQzOTMyRjA4MjBDQTcwMzlGRT5dIC9QcmV2IDI0ODE2L1hSZWZTdG0gMjQ1MzM+Pg0Kc3RhcnR4cmVmDQoyNTQzMg0KJSVFT0Y=\",\n    \"coverLetter\": \"data:application/pdf;base64,JVBERi0xLjcNCiW1tbW1DQoxIDAgb2JqDQo8PC9UeXBlL0NhdGFsb2cvUGFnZXMgMiAwIFIvTGFuZyhlbi1DQSkgL1N0cnVjdFRyZWVSb290IDEwIDAgUi9NYXJrSW5mbzw8L01hcmtlZCB0cnVlPj4vTWV0YWRhdGEgMjAgMCBSL1ZpZXdlclByZWZlcmVuY2VzIDIxIDAgUj4+DQplbmRvYmoNCjIgMCBvYmoNCjw8L1R5cGUvUGFnZXMvQ291bnQgMS9LaWRzWyAzIDAgUl0gPj4NCmVuZG9iag0KMyAwIG9iag0KPDwvVHlwZS9QYWdlL1BhcmVudCAyIDAgUi9SZXNvdXJjZXM8PC9Gb250PDwvRjEgNSAwIFI+Pi9FeHRHU3RhdGU8PC9HUzcgNyAwIFIvR1M4IDggMCBSPj4vUHJvY1NldFsvUERGL1RleHQvSW1hZ2VCL0ltYWdlQy9JbWFnZUldID4+L01lZGlhQm94WyAwIDAgNjEyIDc5Ml0gL0NvbnRlbnRzIDQgMCBSL0dyb3VwPDwvVHlwZS9Hcm91cC9TL1RyYW5zcGFyZW5jeS9DUy9EZXZpY2VSR0I+Pi9UYWJzL1MvU3RydWN0UGFyZW50cyAwPj4NCmVuZG9iag0KNCAwIG9iag0KPDwvRmlsdGVyL0ZsYXRlRGVjb2RlL0xlbmd0aCAxMzI+Pg0Kc3RyZWFtDQp4nC2MsQrCQBBE+4X9hynV4m73iJ4HIUUuMSgEFA8sxFJTKaj/D67iFAPDPB78HnXtx7ztIE2Dtst4MomTb5IGCFbWMQW8rkynBR5MbWHyG4WqkwrlxqTGCRQxOAkVoiS3tOdu3HCMmN7mxPRb6/8amM4zzC8oO6bejAcm9GPGB3fjHKoNCmVuZHN0cmVhbQ0KZW5kb2JqDQo1IDAgb2JqDQo8PC9UeXBlL0ZvbnQvU3VidHlwZS9UcnVlVHlwZS9OYW1lL0YxL0Jhc2VGb250L0JDREVFRStDYWxpYnJpL0VuY29kaW5nL1dpbkFuc2lFbmNvZGluZy9Gb250RGVzY3JpcHRvciA2IDAgUi9GaXJzdENoYXIgMzIvTGFzdENoYXIgMzIvV2lkdGhzIDE4IDAgUj4+DQplbmRvYmoNCjYgMCBvYmoNCjw8L1R5cGUvRm9udERlc2NyaXB0b3IvRm9udE5hbWUv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dHRwOi8vbnMuYWRvYmUuY29tL3BkZi8xLjMvIj4KPHBkZjpQcm9kdWNlcj5NaWNyb3NvZnTCriBXb3JkIGZvciBPZmZpY2UgMzY1PC9wZGY6UHJvZHVjZXI+PC9yZGY6RGVzY3JpcHRpb24+CjxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iPgo8ZGM6Y3JlYXRvcj48cmRmOlNlcT48cmRmOmxpPkp1c3RpbiBIZXJnb3R0PC9yZGY6bGk+PC9yZGY6U2VxPjwvZGM6Y3JlYXRvcj48L3JkZjpEZXNjcmlwdGlvbj4KPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyI+Cjx4bXA6Q3JlYXRvclRvb2w+TWljcm9zb2Z0wq4gV29yZCBmb3IgT2ZmaWNlIDM2NTwveG1wOkNyZWF0b3JUb29sPjx4bXA6Q3JlYXRlRGF0ZT4yMDE5LTAzLTEwVDA5OjA3OjUyLTA0OjAwPC94bXA6Q3JlYXRlRGF0ZT48eG1wOk1vZGlmeURhdGU+MjAxOS0wMy0xMFQwOTowNzo1Mi0wNDowMDwveG1wOk1vZGlmeURhdGU+PC9yZGY6RGVzY3JpcHRpb24+CjxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiICB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyI+Cjx4bXBNTTpEb2N1bWVudElEPnV1aWQ6NDc3MThBRkUtOEFDOS00MzA5LTkzMkYtMDgyMENBNzAzOUZFPC94bXBNTTpEb2N1bWVudElEPjx4bXBNTTpJbnN0YW5jZUlEPnV1aWQ6NDc3MThBRkUtOEFDOS00MzA5LTkzMkYtMDgyMENBNzAzOUZFPC94bXBNTTpJbnN0YW5jZUlEPjwvcmRmOkRlc2NyaXB0aW9uPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKPC9yZGY6UkRGPjwveDp4bXBtZXRhPjw/eHBhY2tldCBlbmQ9InciPz4NCmVuZHN0cmVhbQ0KZW5kb2JqDQoyMSAwIG9iag0KPDwvRGlzcGxheURvY1RpdGxlIHRydWU+Pg0KZW5kb2JqDQoyMiAwIG9iag0KPDwvVHlwZS9YUmVmL1NpemUgMjIvV1sgMSA0IDJdIC9Sb290IDEgMCBSL0luZm8gOSAwIFIvSURbPEZFOEE3MTQ3Qzk4QTA5NDM5MzJGMDgyMENBNzAzOUZFPjxGRThBNzE0N0M5OEEwOTQzOTMyRjA4MjBDQTcwMzlGRT5dIC9GaWx0ZXIvRmxhdGVEZWNvZGUvTGVuZ3RoIDg0Pj4NCnN0cmVhbQ0KeJwtyzEaQEAMhNFJdpfasVAqFTrXcBufA+jdROkaK2akyCuSH4ip1WJ3wMcubmIP8ZOkmeRBbCJuztxFElkUYeL/bKIrF/N2FCuZerIcwAvHzwrmDQplbmRzdHJlYW0NCmVuZG9iag0KeHJlZg0KMCAyMw0KMDAwMDAwMDAxMCA2NTUzNSBmDQowMDAwMDAwMDE3IDAwMDAwIG4NCjAwMDAwMDAxNjYgMDAwMDAgbg0KMDAwMDAwMDIyMiAwMDAwMCBuDQowMDAwMDAwNDg2IDAwMDAwIG4NCjAwMDAwMDA2OTIgMDAwMDAgbg0KMDAwMDAwMDg1OSAwMDAwMCBuDQowMDAwMDAxMDk4IDAwMDAwIG4NCjAwMDAwMDExNTEgMDAwMDAgbg0KMDAwMDAwMTIwNCAwMDAwMCBuDQowMDAwMDAwMDExIDY1NTM1IGYNCjAwMDAwMDAwMTIgNjU1MzUgZg0KMDAwMDAwMDAxMyA2NTUzNSBmDQowMDAwMDAwMDE0IDY1NTM1IGYNCjAwMDAwMDAwMTUgNjU1MzUgZg0KMDAwMDAwMDAxNiA2NTUzNSBmDQowMDAwMDAwMDE3IDY1NTM1IGYNCjAwMDAwMDAwMDAgNjU1MzUgZg0KMDAwMDAwMTg2NyAwMDAwMCBuDQowMDAwMDAxODk0IDAwMDAwIG4NCjAwMDAwMjEzMjEgMDAwMDAgbg0KMDAwMDAyNDQ4OCAwMDAwMCBuDQowMDAwMDI0NTMzIDAwMDAwIG4NCnRyYWlsZXINCjw8L1NpemUgMjMvUm9vdCAxIDAgUi9JbmZvIDkgMCBSL0lEWzxGRThBNzE0N0M5OEEwOTQzOTMyRjA4MjBDQTcwMzlGRT48RkU4QTcxNDdDOThBMDk0MzkzMkYwODIwQ0E3MDM5RkU+XSA+Pg0Kc3RhcnR4cmVmDQoyNDgxNg0KJSVFT0YNCnhyZWYNCjAgMA0KdHJhaWxlcg0KPDwvU2l6ZSAyMy9Sb290IDEgMCBSL0luZm8gOSAwIFIvSURbPEZFOEE3MTQ3Qzk4QTA5NDM5MzJGMDgyMENBNzAzOUZFPjxGRThBNzE0N0M5OEEwOTQzOTMyRjA4MjBDQTcwMzlGRT5dIC9QcmV2IDI0ODE2L1hSZWZTdG0gMjQ1MzM+Pg0Kc3RhcnR4cmVmDQoyNTQzMg0KJSVFT0Y=\",\n    \"existingPortfolioLinks\": [\n        \"link1\",\n        \"link2\",\n        \"link3\"\n    ],\n    \"sanitizationQuizAnswers\": [\n    \t{\n    \t\t\"sanitizationQuizQuestionId\": 1,\n    \t\t\"sanitizationQuizAnswerId\": 1\n    \t}\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/artist-application",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"artist-application"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Artist Portfolio",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "0fd09380-44f8-11e9-9e96-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/artist-portfolio/Artist",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"artist-portfolio",
+						"Artist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Artist Portfolio",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "0fd09380-44f8-11e9-9e96-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "userId",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "portfolioPicture",
+							"value": "data:image/jpeg;base64,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",
+							"type": "text"
+						},
+						{
+							"key": "biography",
+							"value": "Hello World",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/artist-portfolio",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"artist-portfolio"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Artist Portfolio",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "0fd09380-44f8-11e9-9e96-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "biography",
+							"value": "Hello World2",
+							"type": "text"
+						},
+						{
+							"key": "portfolioPicture",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/artist-portfolio/3",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"artist-portfolio",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Artist Portfolio Pictures",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "be7c09cb-4667-11e9-9e96-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/artist-portfolio-picture/Artist",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"artist-portfolio-picture",
+						"Artist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Artist Portfolio Picture",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "0fd09380-44f8-11e9-9e96-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "artistPortfolioId",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"value": "data:image/jpeg;base64,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",
+							"type": "text"
+						},
+						{
+							"key": "makeoverTypeId",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/artist-portfolio-picture",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"artist-portfolio-picture"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Artist Portfolio Picture",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "0fd09380-44f8-11e9-9e96-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/artist-portfolio-picture/4",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"artist-portfolio-picture",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Artist Qualifications",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "7633606e-4731-11e9-9e96-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/artist-qualification/Artist",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"artist-qualification",
+						"Artist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Artist Qualification",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "7633606e-4731-11e9-9e96-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "artistPortfolioId",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "yearObtained",
+							"value": "2019",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Graduated",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/artist-qualification",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"artist-qualification"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Artist Qualification",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "0fd09380-44f8-11e9-9e96-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/artist-qualification/3",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"artist-qualification",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Artist Makeovers Offered",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "be7c09cb-4667-11e9-9e96-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/artist-makeover-offered/Artist",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"artist-makeover-offered",
+						"Artist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Artist Makeover Offered",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "0fd09380-44f8-11e9-9e96-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "artistPortfolioId",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "makeoverTypeId",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/artist-makeover-offered",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"artist-makeover-offered"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Artist Makeover Offered",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "0fd09380-44f8-11e9-9e96-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/artist-makeover-offered/3",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"artist-makeover-offered",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Artist Services",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "be7c09cb-4667-11e9-9e96-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/artist-service/Artist",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"artist-service",
+						"Artist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Artist Service",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "0fd09380-44f8-11e9-9e96-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "artistMakeoverOfferedId",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "serviceTypeId",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "30.14",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/artist-service",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"artist-service"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Artist Service",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "0fd09380-44f8-11e9-9e96-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/artist-service/3",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"artist-service",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Artist Service Addons",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "be7c09cb-4667-11e9-9e96-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/artist-service-addon/Artist",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"artist-service-addon",
+						"Artist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Artist Service Addon",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "be7c09cb-4667-11e9-9e96-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "artistServiceId",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Lashes",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "30.14",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/artist-service-addon",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"artist-service-addon"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Artist Service Addon",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "0fd09380-44f8-11e9-9e96-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/artist-service-addon/2",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"artist-service-addon",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Artist Service Consultations",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "be7c09cb-4667-11e9-9e96-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/artist-service-consultation/Artist",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"artist-service-consultation",
+						"Artist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Artist Service Consultation",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "be7c09cb-4667-11e9-9e96-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "artistServiceId",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "consultationTypeId",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "30.14",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/artist-service-consultation",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"artist-service-consultation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Artist Service Consultation",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "0fd09380-44f8-11e9-9e96-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/artist-service-consultation/2",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"artist-service-consultation",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Consultation Types",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "be7c09cb-4667-11e9-9e96-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/consultation-types",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"consultation-types"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Makeover Types",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "0bbd72c2-49c7-11e9-a96c-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/makeover-types",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"makeover-types"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Service Types",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "0fd09380-44f8-11e9-9e96-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/service-types",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"service-types"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Makeover Appointment",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "ae190597-475f-11e9-9e96-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/makeover-appointment/2",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"makeover-appointment",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Makeover Appointment",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "ae190597-475f-11e9-9e96-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"clientProfileId\":1,\n\t\"artistPortfolioId\":\"1\",\n\t\"consultationTypeId\":1,\n\t\"consultationPrice\":10,\n\t\"serviceTypeId\":\"1\",\n\t\"servicePrice\":\"10\",\n\t\"makeoverTypeId\":\"1\",\n\t\"appointmentDate\":\"2019-03-28\",\n\t\"addons\":[]\n}"
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/makeover-appointment",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"makeover-appointment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Makeover Appointment Addons",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "ae190597-475f-11e9-9e96-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/makeover-appointment-addon?makeoverAppointmentId=2",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"makeover-appointment-addon"
+					],
+					"query": [
+						{
+							"key": "makeoverAppointmentId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Online Artist",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "c9d6c9a4-49b3-11e9-a96c-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/online-artist?makeoverTypeId=1&serviceTypeId=2&longitude=43.497900&latitude=-80.526924&maxDistance=25",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"online-artist"
+					],
+					"query": [
+						{
+							"key": "makeoverTypeId",
+							"value": "1"
+						},
+						{
+							"key": "serviceTypeId",
+							"value": "2"
+						},
+						{
+							"key": "longitude",
+							"value": "43.497900"
+						},
+						{
+							"key": "latitude",
+							"value": "-80.526924"
+						},
+						{
+							"key": "maxDistance",
+							"value": "25"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Online Artist",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "0bbd72c2-49c7-11e9-a96c-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "artistPortfolioId",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "longitude",
+							"value": "43.524022",
+							"type": "text"
+						},
+						{
+							"key": "latitude",
+							"value": "-80.659795",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/online-artist",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"online-artist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Online Artist",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "0bbd72c2-49c7-11e9-a96c-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/online-artist?artistPortfolioId=1",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"online-artist"
+					],
+					"query": [
+						{
+							"key": "artistPortfolioId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Artist Portfolios",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "f45cb6a7-4a79-11e9-a96c-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/artist-portfolio",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"artist-portfolio"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Makeover Appointments",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "f45cb6a7-4a79-11e9-a96c-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/makeover-appointment?clientProfileId=1",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"makeover-appointment"
+					],
+					"query": [
+						{
+							"key": "clientProfileId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Consultation",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "765429c1-4b2c-11e9-a96c-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/consultation/2",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"consultation",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Consultation",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "765429c1-4b2c-11e9-a96c-3ca82ab42edf",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "clientProfileId",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "artistPortfolioId",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://api.themakeupapp.localhost/consultation",
+					"protocol": "http",
+					"host": [
+						"api",
+						"themakeupapp",
+						"localhost"
+					],
+					"path": [
+						"consultation"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
